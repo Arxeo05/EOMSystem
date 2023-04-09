@@ -11,8 +11,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
-import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { SideNavComponent } from './components/home/side-nav/side-nav.component';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
+import { ProgramViewComponent } from './components/home/program-view/program-view.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DashboardComponent } from './components/home/dashboard/dashboard.compon
     HomeComponent,
     SideNavComponent,
     DashboardComponent,
+    ProgramViewComponent,
   ],
   imports: [
     BrowserModule,

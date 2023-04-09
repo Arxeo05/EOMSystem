@@ -5,6 +5,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TokenService } from './services/token.service';
 import { HomeComponent } from './components/home/home.component';
+import { ProgramViewComponent } from './components/home/program-view/program-view.component';
+import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 
 function logGuard() {
   const token = inject(TokenService);
@@ -28,7 +30,11 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: HomeComponent
+    component: DashboardComponent
+  },
+  {
+    path: 'dashboard/program/:id',
+    component: ProgramViewComponent
   }
 ];
 
