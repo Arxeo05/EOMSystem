@@ -1,12 +1,15 @@
+.content {
+  display: flex;
+  margin-bottom: 100px;
+  background-color: whitesmoke;
+}
+
 .flex-container {
   display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 100px;
-}
-.content {
+  flex-direction: column;
   border-radius: 10px;
-  width: 80%;
+  width: 100%;
+  margin: 0px 150px 0px 100px;
 }
 
 h5 {
