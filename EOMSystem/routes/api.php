@@ -53,15 +53,19 @@ Route::middleware('auth')->group( function(){
 
 });
 //UserModel routes
+Route::get('users/pending',[AuthController::class, 'pendingUsers']);
 Route::post('signup/',[AuthController::class, 'signup']);
 Route::post('login', [AuthController::class,'login']);
-Route::get('users',[AuthController::class,'getUsers']);
+
 Route::get('user/{id}',[AuthController::class,'getUserById']);
 Route::post('user/edit/{id}',[AuthController::class, 'editUser']);
 Route::post('user/delete/{id}',[AuthController::class, 'deleteUser']);
+Route::get('users',[AuthController::class,'getUsers']);
+Route::post('me', [AuthController::class, 'me']);
 
 Route::group(['middleware' => 'api',], function ($router) {
     // Route::post('logout', 'AuthController@logout');
     // Route::post('refresh', 'AuthController@refresh');
-    // Route::post('me', 'AuthController@me');
+
 });
+

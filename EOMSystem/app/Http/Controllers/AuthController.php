@@ -18,7 +18,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth:api', ['except' => ['login']]);
+       // $this->middleware('auth:api', ['except' => ['login']]);
     }
 
     /**
@@ -26,6 +26,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+
     public function login(Request $request)
     {
 
@@ -42,6 +43,7 @@ class AuthController extends Controller
     }
 
     public function editUser(Request $request,$id){
+
         $request->validate([
             'photo'=>'required|max:1999'
         ]);
@@ -99,6 +101,17 @@ class AuthController extends Controller
         return response()->json($user);
     }
 
+    public function pendingUsers(){
+
+        if(auth()->user()->role == '1'){
+            return 'error';
+        }
+        $user = DB::table('users')
+        ->where('status', '=', 'pending')
+        ->get();
+        return response()->json($user);
+    }
+
     public function signup(Request $request){
         $validated = $request->validate([
             'name'=>'required',
@@ -138,8 +151,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me()
-    {
+    public function me(){
         return response()->json(auth()->user());
     }
 
