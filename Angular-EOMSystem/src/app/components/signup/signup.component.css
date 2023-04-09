@@ -1,0 +1,24 @@
+.card{
+    background-color: transparent;
+    color: white;
+    border-style: none;
+}
+.con2{
+    height: 100vh;
+    width: auto;
+}
+a{
+    color: white;
+    text-decoration: underline;
+}
+a:hover{
+    color: red;
+    text-decoration: underline;
+}
+.img2{
+    height: 70px;
+    width: 70px;
+}
+h6{
+    color: white;
+}

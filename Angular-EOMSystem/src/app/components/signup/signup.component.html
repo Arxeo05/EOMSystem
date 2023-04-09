@@ -1,7 +1,8 @@
-<div class="col-8">
-  <div class="card">
-    <div class="card-header">Sign-Up</div>
-    <div class="card-body">
+<div class="con2 col-sm-3 position-absolute top-0 end-0">
+  <div class="card bg-dark p-2">
+    <div class="card-body p-3 d-flex justify-content-center flex-column align-items-center">
+      <a class="navbar-brand" routerLink="/"><img src="../../assets/images/bsulogo.png" class="img2" alt="bsu"></a>
+      <h5 class="text-center mb-5 mt-3">Sign Up</h5>
       <form #registerForm="ngForm" (ngSubmit)="signupUser()">
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
@@ -110,6 +111,7 @@
             required
           />
         </div>
+        <div class="d-grid gap-2 mt-4">
         <button
           type="submit"
           class="btn btn-primary"
@@ -117,6 +119,7 @@
         >
           Submit
         </button>
+      </div>
       </form>
     </div>
   </div>

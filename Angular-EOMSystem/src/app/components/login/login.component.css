@@ -1,0 +1,27 @@
+.card{
+    background-color: transparent;
+    color: white;
+    border-style: none;
+}
+h5{
+    margin-bottom: 20px;
+}
+@media(max-width: 850px){
+    .card{
+        max-height: 100vh;
+        font-size: 10px;
+    }
+    h5 {
+        font-size: 15px;
+        margin-bottom: 3px;
+    }
+    .form-control{
+        max-height: 5vh;
+        min-width: 5vw;
+    }
+    .btn{
+        max-height: 7vh;
+        min-width: 5vw;
+    }
+    
+}
