@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
     ProfileComponent,
     HomeComponent,
     SideNavComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
