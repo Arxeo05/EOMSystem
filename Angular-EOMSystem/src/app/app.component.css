@@ -1,0 +1,6 @@
+.content {
+  display: flex;
+  margin-bottom: 100px;
+  background-color: whitesmoke;
+  border: 1px solid black;
+}

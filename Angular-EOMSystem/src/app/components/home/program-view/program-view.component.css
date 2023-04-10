@@ -15,18 +15,7 @@ app-side-nav {
   background-color: white;
 }
 
-.details {
-  border-right: 1px solid gray;
-  padding-right: 5px;
-}
-
-.files {
-  padding-left: 5px;
-  border-left: 1px solid gray;
-}
-
-.line {
-  width: 100%;
-  border: 1px solid gray;
+button {
+  margin: 2px;
 }
 
