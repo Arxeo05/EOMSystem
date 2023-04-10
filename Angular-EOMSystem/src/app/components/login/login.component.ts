@@ -32,7 +32,7 @@ export class LoginComponent {
   handleResponse(data: any) {
     this.token.handle(data.access_token);
     this.auth.changeAuthStatus(true);
-    this.router.navigateByUrl('profile');
+    this.router.navigateByUrl('dashboard');
   }
   handleError(error: any) {
     this.error = error.error.error;

@@ -29,11 +29,13 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
   },
   {
     path: 'dashboard/program/:id',
-    component: ProgramViewComponent
+    component: ProgramViewComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
   }
 ];
 
