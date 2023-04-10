@@ -18,10 +18,16 @@ class ProgramsController extends Controller
     // ProgramModel
 
     public function getPrograms(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         return response()->json(Program::all(),200);
     }
 
     public function getProgramById($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $program = DB::table('programs')
         ->where('id', '=', $id)
         ->get();
@@ -32,6 +38,9 @@ class ProgramsController extends Controller
     }
 
     public function searchPrograms($query){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $program = Program::select('*')->where('title','like','%'.$query.'%')
         ->orWhere('place','like','%'.$query.'%')
         ->orWhere('lead','like','%'.$query.'%')->get();
@@ -45,11 +54,16 @@ class ProgramsController extends Controller
     }
 
     public function filterPrograms($filterBy, $direction){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         return response()->json(Program::select('*')->orderBy($filterBy,$direction)->get());
     }
 
     public function addProgram(Request $request){
-
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $request->validate([
             'title'=>'required',
             'start-date'=>'required',
@@ -64,32 +78,50 @@ class ProgramsController extends Controller
     }
 
     public function editProgram(Request $request, $id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $program = Program::find($id);
         $program->update($request->all());
         return response()->json($program,200);
     }
 
     public function deleteProgram($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         return Program::destroy($id);
     }
 
     // //ProgramMembersModel
     public function addMember(Request $request, $uid){
-            $request->validate([
-                'program_id'=>'required',
-            ]);
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $request->validate([
+            'program_id'=>'required',
+        ]);
 
-            $memberProgram = new member_program;
+        $memberProgram = new member_program;
 
-            $memberProgram->program_id = $request->input('program_id');
-            $memberProgram->user_id = $uid;
-            $memberProgram->save();
+        $memberProgram->program_id = $request->input('program_id');
+        $memberProgram->user_id = $uid;
+        $memberProgram->save();
 
         return response()->json('Success');
     }
 
+    public function deleteMember($pid,$uid){
+        $member = DB::table('member_program')->where('program_id','=',$pid)
+        ->where('member_id','=',$uid)->delete();
+        return response()->json(['message'=>'Record Deleted']);
+    }
+
     //ProgramPartnerModel
     public function addPartner(Request $request){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $request->validate([
             'name'=>'required',
             'program_id'=>'required',
@@ -105,6 +137,9 @@ class ProgramsController extends Controller
     }
 
     public function getPartnerByProgram($pid){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $result = DB::table('program_partners')
         ->where('program_id', '=', $pid)
         ->get();
@@ -115,17 +150,26 @@ class ProgramsController extends Controller
     }
 
     public function updatePartner(Request $request, $id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $partner = ProgramPartners::find($id);
         $partner->update($request->all());
         return response()->json($partner,200);
     }
 
     public function deletePartner($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         return ProgramPartners::destroy($id);
     }
 
      //ProgramParticipantModel
      public function addParticipant(Request $request){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $request->validate([
             'name'=>'required',
             'program_id'=>'required',
@@ -135,6 +179,9 @@ class ProgramsController extends Controller
     }
 
     public function getParticipantByProgram($pid){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $result = DB::table('program_participants')
         ->where('program_id', '=', $pid)
         ->get();
@@ -145,17 +192,26 @@ class ProgramsController extends Controller
     }
 
     public function updateParticipant(Request $request, $id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $participant = ProgramParticipants::find($id);
         $participant->update($request->all());
         return response()->json($participant,200);
     }
 
     public function deleteParticipant($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         return ProgramParticipants::destroy($id);
     }
 
     //Program Files
     public function addFile(Request $request,$pid){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $file = new ProgramFiles;
 
         $request->validate([
@@ -179,6 +235,9 @@ class ProgramsController extends Controller
     }
 
     public function getFileByProgram($pid){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $result = DB::table('program_files')
         ->where('program_id', '=', $pid)
         ->get();
@@ -189,6 +248,9 @@ class ProgramsController extends Controller
     }
 
     public function updateFile(Request $request, $id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $file = ProgramFiles::find($id);
 
         if($request->hasFile('file')){
@@ -217,12 +279,15 @@ class ProgramsController extends Controller
     }
 
     public function deleteFile($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $file = ProgramFiles::findOrFail($id);
         $file_name = $file->file;
         $file_path = public_path('storage/program_files/'.$file_name);
 
         unlink($file_path);
         $file->delete();
-        return $file->file.' deleted.';
+        return response()->json(['message'=>$file->file.' deleted.']);
     }
 }

@@ -26,7 +26,8 @@ class User extends Authenticatable implements JWTSubject
         'college',
         'department',
         'photo',
-        'status'
+        'status',
+        'role'
     ];
 
     public function programs(){
@@ -69,7 +70,10 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'id'=>$this->id,
+            'role'=>$this->role
+        ];
     }
     public function setPasswordAttribute($value){
         return $this->attributes['password'] = bcrypt($value);
