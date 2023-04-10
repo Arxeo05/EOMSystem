@@ -4,9 +4,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TokenService } from './services/token.service';
-import { HomeComponent } from './components/home/home.component';
-import { ProgramViewComponent } from './components/home/program-view/program-view.component';
-import { DashboardComponent } from './components/home/dashboard/dashboard.component';
+import { ProgramViewComponent } from './components/program-view/program-view.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 function logGuard() {
   const token = inject(TokenService);
