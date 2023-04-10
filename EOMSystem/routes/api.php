@@ -29,7 +29,7 @@ Route::delete('programs/{id}',[ProgramsController::class, 'deleteProgram']);
 Route::post('members/{uid}',[ProgramsController::class, 'addMember']);
 Route::get('members/{pid}',[ProgramsController::class, 'getMemberByProgram']);
 Route::post('members/{id}',[ProgramsController::class, 'updateMember']);
-Route::post('members/delete/{id}',[ProgramsController::class, 'deleteMember']);
+Route::post('members/delete/{pid}/{uid}',[ProgramsController::class, 'deleteMember']);
 
 //Program-participants routes
 Route::post('participant/',[ProgramsController::class, 'addParticipant']);

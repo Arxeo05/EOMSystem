@@ -43,7 +43,9 @@ class AuthController extends Controller
     }
 
     public function editUser(Request $request,$id){
-
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $request->validate([
             'photo'=>'required|max:1999'
         ]);
@@ -78,6 +80,9 @@ class AuthController extends Controller
     }
 
     public function deleteUser($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $user = User::findOrFail($id);
         $fileName = $user->photo;
         $file_path = public_path('storage/userPhoto/'.$fileName);
@@ -88,10 +93,16 @@ class AuthController extends Controller
     }
 
     public function getUsers(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         return response()->json(User::all(),200);
     }
 
     public function getUserById($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $user = DB::table('users')
         ->where('id', '=', $id)
         ->get();
@@ -152,6 +163,9 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function me(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         return response()->json(auth()->user());
     }
 
