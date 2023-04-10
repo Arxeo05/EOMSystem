@@ -8,9 +8,10 @@ import { BackendService } from '../../services/backend.service';
 })
 export class ProfileComponent implements OnInit {
   constructor(private backend: BackendService) {}
+  test: any;
   ngOnInit(): void {
     this.backend.me().subscribe({
-      next: (data) => console.log(data),
+      next: (data) => (this.test = data),
       error: (error) => console.log(error),
     });
   }
