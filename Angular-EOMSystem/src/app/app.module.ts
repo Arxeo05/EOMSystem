@@ -14,6 +14,7 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProgramViewComponent } from './components/program-view/program-view.component';
 import { CreateProgramComponent } from './components/create-program/create-program.component';
+import { ManagePartnersComponent } from './components/manage-partners/manage-partners.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CreateProgramComponent } from './components/create-program/create-progr
     DashboardComponent,
     ProgramViewComponent,
     CreateProgramComponent,
+    ManagePartnersComponent,
   ],
   imports: [
     BrowserModule,

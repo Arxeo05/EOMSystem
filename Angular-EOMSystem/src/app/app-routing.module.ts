@@ -7,6 +7,7 @@ import { TokenService } from './services/token.service';
 import { ProgramViewComponent } from './components/program-view/program-view.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateProgramComponent } from './components/create-program/create-program.component';
+import { ManagePartnersComponent } from './components/manage-partners/manage-partners.component';
 
 function logGuard() {
   const token = inject(TokenService);
@@ -36,6 +37,11 @@ const routes: Routes = [
   {
     path: 'create-program',
     component: CreateProgramComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
+    path: 'manage-partners',
+    component: ManagePartnersComponent,
     canActivate: [() => inject(TokenService).loggedIn()],
   },
   {
