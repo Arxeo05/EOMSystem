@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Program extends Model
@@ -21,6 +23,11 @@ class Program extends Model
         'additionalDetail'
     ];
 
+    public function leader(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function participants(): HasMany
     {
         return $this->hasMany(ProgramParticipants::class);
@@ -36,7 +43,7 @@ class Program extends Model
         return $this->hasMany(ProgramFiles::class);
     }
 
-    public function members(){
-        return $this->belongsTo(User::class,'member_program','program_id','member_id');
+    public function members(): BelongsToMany{
+        return $this->belongsToMany(User::class,'member_program','program_id','member_id');
     }
 }
