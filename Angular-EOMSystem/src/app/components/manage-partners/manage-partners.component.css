@@ -11,23 +11,25 @@
   background-color: white;
 }
 
-.card {
+.title-container {
   margin-top: 10px;
-}
-
-.card-body {
   display: flex;
-  justify-content: space-between;
 }
 
-.label-container {
-  margin: 0px 10px 0px 10px;
-  text-align: center;
-  flex-basis: 20%;
+h3 {
+  margin-left: 10px;
 }
 
-.img-container {
-  border: 1px solid black;
-  flex-basis: 80%;
-  margin: 0px 10px 0px 10px;
+.file-container {
+  display: flex;
+}
+
+.date-container {
+  display: flex;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
 }

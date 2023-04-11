@@ -19,11 +19,13 @@ h5 {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  border: 1px solid black;
 }
 
 .card {
   border: 1px solid black;
   margin: 20px 20px 20px 20px;
+  width: 15%;
   height: 300px;
 }
 

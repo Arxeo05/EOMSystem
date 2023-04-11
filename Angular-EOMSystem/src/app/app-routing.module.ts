@@ -45,13 +45,13 @@ const routes: Routes = [
     canActivate: [() => inject(TokenService).loggedIn()],
   },
   {
-    path: 'manage-partners',
-    component: ManagePartnersComponent,
+    path: 'dashboard/program/:id',
+    component: ProgramViewComponent,
     canActivate: [() => inject(TokenService).loggedIn()],
   },
   {
-    path: 'dashboard/program/:id',
-    component: ProgramViewComponent,
+    path: 'dashboard/program/:id/manage-partners',
+    component: ManagePartnersComponent,
     canActivate: [() => inject(TokenService).loggedIn()],
   },
 ];
