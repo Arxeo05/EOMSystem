@@ -1,11 +1,54 @@
 <section class="content">
 
-<app-side-nav></app-side-nav>
-<div>
-<h1>{{ test.email }}</h1>
-<h1>{{ test.name }}</h1>
-<h1>{{ test.college }}</h1>
-<h1>{{ test.department }}</h1>
-<h1>{{ test.birthday }}</h1>
-</div>
+  <app-side-nav></app-side-nav>
+  <div class="container">
+    <h3>Profile Management</h3>
+    <form>
+      <br>
+      <div class="profile-container">
+        <div class="profile">
+          <img src="#" alt="Profile">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="name" value="{{test.name}}">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="email" value="{{test.email}}">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label for="college" class="col-sm-2 col-form-label">College</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="college" value="{{test.college}}">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label for="department" class="col-sm-2 col-form-label">Department</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="department" value="{{test.department}}">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label for="birthday" class="col-sm-2 col-form-label">Birthday</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="birthday" value="{{test.birthday}}">
+        </div>
+      </div>
+      <br>
+      <div class="button-container">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+    </form>
+  </div>
 </section>
