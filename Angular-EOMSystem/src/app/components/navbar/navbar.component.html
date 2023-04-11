@@ -1,10 +1,13 @@
-<nav class="navbar bg-light">
+<nav class="navbar bg-light" *ngIf="loggedIn">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">EOMS</a>
     <div>
       <a class="navbar-brand" routerLink="login" *ngIf="!loggedIn">Log-In</a>
       <a class="navbar-brand" routerLink="signup" *ngIf="!loggedIn">Sign-Up</a>
       <a class="navbar-brand" routerLink="profile" *ngIf="loggedIn">Profile</a>
+      <a class="navbar-brand" routerLink="dashboard" *ngIf="loggedIn"
+        >Programs</a
+      >
       <a class="navbar-brand" href="#" (click)="logout($event)" *ngIf="loggedIn"
         >Log-Out</a
       >

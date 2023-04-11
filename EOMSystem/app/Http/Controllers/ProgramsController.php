@@ -8,6 +8,7 @@ use App\Models\ProgramFiles;
 use App\Models\ProgramParticipants;
 use App\Models\ProgramPartners;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,10 +19,10 @@ class ProgramsController extends Controller
     // ProgramModel
 
     public function getPrograms(){
-        if(!auth()->user()){
-            return response()->json(['message'=>'You must login']);
+        if(Auth::check()){
+            return response()->json(Program::all(),200);
         }
-        return response()->json(Program::all(),200);
+        return response()->json(['message'=>'You must login']);
     }
 
     public function getProgramById($id){
@@ -94,6 +95,12 @@ class ProgramsController extends Controller
     }
 
     // //ProgramMembersModel
+    public function getMemberByProgram($pid){
+        $program = Program::find($pid);
+
+        $members = $program->members()->get();
+        return response()->json($members);
+    }
     public function addMember(Request $request, $uid){
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);

@@ -40,4 +40,58 @@ export class BackendService implements OnInit {
     );
     return this.http.post('http://127.0.0.1:8000/api/me', null, { headers });
   }
+  programs() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/programs', { headers });
+  }
+  programsById(id: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/programs/${id}`, {
+      headers,
+    });
+  }
+  programLeader(pid: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/programLeader/${pid}`, {
+      headers,
+    });
+  }
+  programMember(pid: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/members/${pid}`, {
+      headers,
+    });
+  }
+
+  programPartners(pid: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/partner/${pid}`, {
+      headers,
+    });
+  }
+
+  programParticipants(pid: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/participant/${pid}`, {
+      headers,
+    });
+  }
 }

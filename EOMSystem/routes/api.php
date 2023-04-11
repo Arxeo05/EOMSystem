@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('programLeader/{pid}',[AuthController::class,'programLeadr']);
+
 // Program related Routes
 Route::get('programs',[ProgramsController::class, 'getPrograms']);
 Route::get('programs/{id}',[ProgramsController::class, 'getProgramById']);
