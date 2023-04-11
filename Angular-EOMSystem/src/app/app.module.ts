@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProgramViewComponent } from './components/program-view/program-view.component';
+import { CreateProgramComponent } from './components/create-program/create-program.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ProgramViewComponent } from './components/program-view/program-view.com
     SideNavComponent,
     DashboardComponent,
     ProgramViewComponent,
+    CreateProgramComponent,
   ],
   imports: [
     BrowserModule,

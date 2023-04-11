@@ -11,7 +11,16 @@
   background-color: white;
 }
 
-button {
-  margin: 2px;
+.date-container {
+  display: flex;
 }
 
+.participants-container {
+  display: flex;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
