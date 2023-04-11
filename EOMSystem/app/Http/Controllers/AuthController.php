@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Program;
 
 class AuthController extends Controller
 {
@@ -155,6 +156,12 @@ class AuthController extends Controller
         $user->photo = $fileNameToStore;
         $user->save();
         return response()->json(['message'=>'User Created'],200);
+    }
+
+    public function programLeadr($pid){
+
+        $leader = Program::find($pid);
+        return response()->json($leader->leader->name);
     }
 
     /**

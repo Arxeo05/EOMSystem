@@ -1,14 +1,13 @@
 <section class="content">
   <app-side-nav></app-side-nav>
-  <div class="container">
-    <h4>Extension Program Title</h4>
+  <div class="container" *ngFor="let program of programs">
+    <h4>{{ program.title }}</h4>
 
-    <br>
+    <br />
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Place</th>
-          <th scope="col">Details</th>
           <th scope="col">Prgoram Lead</th>
           <th scope="col">Program Flow</th>
           <th scope="col">Additional Details</th>
@@ -17,11 +16,11 @@
       </thead>
       <tbody>
         <tr>
-          <td>Philippine Arena</td>
-          <td>Mark</td>
-          <td>BSU</td>
-          <td>@mdo</td>
-          <td>@fat</td>
+          <td>{{ program.place }}</td>
+          <td>{{ programLeader }}</td>
+          <td>{{ program.flow }}</td>
+          <td>{{ program.additionalDetail }}</td>
+
           <td>
             <button type="button" class="btn btn-success">Add</button>
             <button type="button" class="btn btn-primary">Update</button>
@@ -39,8 +38,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>BSU</td>
+        <tr *ngFor="let member of programMembers">
+          <td>{{ member.name }}</td>
           <td>
             <button type="button" class="btn btn-success">Add</button>
             <button type="button" class="btn btn-primary">Update</button>
@@ -58,8 +57,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>FEU</td>
+        <tr *ngFor="let partner of programPartners">
+          <td>{{ partner.name }}</td>
           <td>
             <button type="button" class="btn btn-success">Add</button>
             <button type="button" class="btn btn-primary">Update</button>
@@ -77,8 +76,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Alumni</td>
+        <tr *ngFor="let participant of programParticipants">
+          <td>{{ participant.name }}</td>
           <td>
             <button type="button" class="btn btn-success">Add</button>
             <button type="button" class="btn btn-primary">Update</button>
@@ -98,27 +97,7 @@
       <tbody>
         <tr>
           <td>
-            <input class="form-control" type="file" id="formFile">
-          </td>
-          <td>
-            <button type="button" class="btn btn-success">Add</button>
-            <button type="button" class="btn btn-primary">Update</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="form-control" type="file" id="formFile">
-          </td>
-          <td>
-            <button type="button" class="btn btn-success">Add</button>
-            <button type="button" class="btn btn-primary">Update</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="form-control" type="file" id="formFile">
+            <input class="form-control" type="file" id="formFile" />
           </td>
           <td>
             <button type="button" class="btn btn-success">Add</button>
@@ -128,8 +107,5 @@
         </tr>
       </tbody>
     </table>
-
   </div>
-
-
 </section>

@@ -13,6 +13,11 @@ function logGuard() {
 }
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
+  {
     path: 'login',
     component: LoginComponent,
     canActivate: [logGuard],
@@ -36,7 +41,7 @@ const routes: Routes = [
     path: 'dashboard/program/:id',
     component: ProgramViewComponent,
     canActivate: [() => inject(TokenService).loggedIn()],
-  }
+  },
 ];
 
 @NgModule({

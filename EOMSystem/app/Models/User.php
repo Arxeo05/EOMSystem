@@ -5,9 +5,11 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -30,8 +32,13 @@ class User extends Authenticatable implements JWTSubject
         'role'
     ];
 
-    public function programs(){
-        return $this->belongsTo(Program::class,'member_program','member_id','program_id');
+    public function programs(): BelongsToMany{
+        return $this->belongsToMany(Program::class,'member_program','member_id','program_id');
+    }
+
+    public function assignedPrograms(): HasMany
+    {
+        return $this->hasMany(Program::class);
     }
 
     /**

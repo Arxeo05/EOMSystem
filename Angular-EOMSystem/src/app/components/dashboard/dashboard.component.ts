@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BackendService } from '../../services/backend.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent {
-
+export class DashboardComponent implements OnInit {
+  constructor(private backend: BackendService) {}
+  programs: any;
+  ngOnInit(): void {
+    this.backend.programs().subscribe({
+      next: (data) => (this.programs = data),
+    });
+  }
 }
