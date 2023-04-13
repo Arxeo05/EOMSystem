@@ -15,6 +15,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProgramViewComponent } from './components/program-view/program-view.component';
 import { CreateProgramComponent } from './components/create-program/create-program.component';
 import { ManagePartnersComponent } from './components/manage-partners/manage-partners.component';
+import { AddMemberComponent } from './components/add-member/add-member.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ManagePartnersComponent } from './components/manage-partners/manage-par
     ProgramViewComponent,
     CreateProgramComponent,
     ManagePartnersComponent,
+    AddMemberComponent,
   ],
   imports: [
     BrowserModule,

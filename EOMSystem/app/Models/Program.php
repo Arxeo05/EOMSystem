@@ -15,10 +15,10 @@ class Program extends Model
     public $timestamps = false;
     protected $fillable = [
         'title',
-        'start-date',
-        'end-date',
+        'startDate',
+        'endDate',
         'place',
-        'lead',
+        'leaderId',
         'flow',
         'additionalDetail'
     ];

@@ -28,7 +28,7 @@ Route::put('programs/edit/{id}',[ProgramsController::class, 'editProgram']);
 Route::delete('programs/{id}',[ProgramsController::class, 'deleteProgram']);
 
 //Program-members routes
-Route::post('members/{uid}',[ProgramsController::class, 'addMember']);
+Route::post('members/{pid}',[ProgramsController::class, 'addMember']);
 Route::get('members/{pid}',[ProgramsController::class, 'getMemberByProgram']);
 Route::post('members/{id}',[ProgramsController::class, 'updateMember']);
 Route::post('members/delete/{pid}/{uid}',[ProgramsController::class, 'deleteMember']);
@@ -41,8 +41,9 @@ Route::post('participant/delete/{id}',[ProgramsController::class, 'deletePartici
 
 //Program-partners routes
 Route::post('partners/',[ProgramsController::class, 'addPartner']);
-Route::get('partner/{pid}',[ProgramsController::class, 'getPartnerByProgram']);
-Route::post('partner/{id}',[ProgramsController::class, 'updatePartner']);
+Route::get('program-partner/{pid}',[ProgramsController::class, 'getPartnerByProgram']);
+Route::get('partner/{pid}',[ProgramsController::class, 'getPartnerById']);
+Route::post('partner/update/{id}',[ProgramsController::class, 'updatePartner']);
 Route::post('partner/delete/{id}',[ProgramsController::class, 'deletePartner']);
 
 //Program-files routes

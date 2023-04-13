@@ -1,0 +1,20 @@
+<form #memberForm="ngForm" (ngSubmit)="addMember()">
+  <div class="form-group">
+    <label for="leaderId">Program Member</label>
+    <select
+      class="form-control"
+      id="userId"
+      name="userId"
+      [(ngModel)]="form.userId"
+      requred
+    >
+      <option [ngValue]="null" [disabled]="true">Select Program Member</option>
+      <option *ngFor="let member of memberChoices" value="{{ member.id }}">
+        {{ member.name }}
+      </option>
+    </select>
+  </div>
+  <div class="button-container">
+    <button type="submit" class="btn btn-primary">Add Member</button>
+  </div>
+</form>

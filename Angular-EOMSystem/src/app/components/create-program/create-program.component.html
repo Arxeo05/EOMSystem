@@ -3,55 +3,100 @@
   <div class="container">
     <h3>Create Extenstion Program</h3>
 
-    <form>
+    <form #programForm="ngForm" (ngSubmit)="createProgram()">
       <div class="form-group">
-        <label for="extension-program-title">Extension Program Title</label>
-        <input type="text" class="form-control" id="extension-program-title"
-          placeholder="Enter Extension Program Title">
+        <label for="title">Extension Program Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          placeholder="Enter Extension Program Title"
+          [(ngModel)]="form.title"
+          required
+        />
       </div>
-      <br>
+      <br />
       <div class="date-container">
         <div class="form-group">
-          <label for="start-date">Start Date</label>
-          <input type="date" class="form-control" id="start-date">
+          <label for="startDate">Start Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="startDate"
+            name="startDate"
+            [(ngModel)]="form.startDate"
+            required
+          />
         </div>
         <div class="form-group">
-          <label for="end-date">End Date</label>
-          <input type="date" class="form-control" id="end-date">
+          <label for="endDate">End Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="endDate"
+            name="endDate"
+            [(ngModel)]="form.endDate"
+            required
+          />
         </div>
       </div>
-      <br>
+      <br />
       <div class="form-group">
         <label for="place">Place</label>
-        <input type="text" class="form-control" id="place" placeholder="Place">
+        <input
+          type="text"
+          class="form-control"
+          id="place"
+          name="place"
+          placeholder="Place"
+          [(ngModel)]="form.place"
+          required
+        />
       </div>
-      <br>
       <div class="form-group">
-        <label for="program-details">Program Details</label>
-        <textarea class="form-control" id="program-details" rows="3"></textarea>
-      </div>
-      <br>
-      <div class="form-group">
-        <label for="program-lead">Program Lead</label>
-        <select class="form-control" id="program-lead">
-          <option>CICT Dean</option>
-          <option>CIT Dean</option>
-          <option>Director</option>
-          <option>Student Council</option>
-          <option>Bulsu Organization</option>
+        <label for="leaderId">Program Lead</label>
+        <select
+          class="form-control"
+          id="leaderId"
+          name="leaderId"
+          [(ngModel)]="form.leaderId"
+          requred
+        >
+          <option [ngValue]="null" [disabled]="true">
+            Select Program Leader
+          </option>
+          <option *ngFor="let leader of leaderChoices" value="{{ leader.id }}">
+            {{ leader.name }}
+          </option>
         </select>
       </div>
-      <br>
+      <br />
       <div class="form-group">
-        <label for="program-flow">Program Flow</label>
-        <input type="text" class="form-control" id="program-flow" placeholder="Program Flow">
+        <label for="flow">Program Flow</label>
+        <input
+          type="text"
+          class="form-control"
+          id="flow"
+          name="flow"
+          placeholder="Program Flow"
+          [(ngModel)]="form.flow"
+          required
+        />
       </div>
-      <br>
+      <br />
       <div class="form-group">
-        <label for="additional-program-details">Additional Program Details</label>
-        <textarea class="form-control" id="additional-program-details" rows="3"></textarea>
+        <label for="additionalDetail">Additional Program Details</label>
+        <textarea
+          class="form-control"
+          id="additionalDetail"
+          name="additionalDetail"
+          rows="3"
+          [(ngModel)]="form.additionalDetail"
+          required
+        ></textarea>
       </div>
-      <br>
+      <br />
       <div class="button-container">
         <button type="submit" class="btn btn-primary">Create</button>
       </div>

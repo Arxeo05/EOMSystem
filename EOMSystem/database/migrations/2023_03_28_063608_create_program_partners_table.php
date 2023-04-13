@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('program_partners', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('program_id');
-            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
+            $table->unsignedBigInteger('programId');
+            $table->foreign('programId')->references('id')->on('programs')->onDelete('cascade');
             $table->string('name');
             $table->string('address');
             $table->string('contactPerson');
             $table->string('contactNumber');
             $table->string('MoaFile');
-            $table->dateTime('startPartnership');
-            $table->dateTime('endPartnership');
+            $table->date('startPartnership');
+            $table->date('endPartnership');
             $table->timestamps();
         });
     }
