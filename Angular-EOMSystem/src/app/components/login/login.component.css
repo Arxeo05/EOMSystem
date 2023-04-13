@@ -1,5 +1,4 @@
 .card{
-<<<<<<< HEAD
     height: 100vh;
     color: white;
 
@@ -21,34 +20,6 @@ p{
     .btn{
         min-height: 5vh;
         font-size: 10px;
-=======
-    background-color: transparent;
-    color: white;
-    border-style: none;
-}
-.con2{
-    height: 100vh;
-}
-h5{
-    margin-bottom: 20px;
-}
-@media(max-width: 850px){
-    .card{
-        max-height: 100vh;
-        font-size: 10px;
-    }
-    h5 {
-        font-size: 15px;
-        margin-bottom: 3px;
-    }
-    .form-control{
-        max-height: 5vh;
-        min-width: 5vw;
-    }
-    .btn{
-        max-height: 7vh;
-        min-width: 5vw;
->>>>>>> 1bdd05230b2afcc7af9f805ebc7b9f20f10a2fca
     }
     
 }

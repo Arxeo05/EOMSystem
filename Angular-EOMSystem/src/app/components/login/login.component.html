@@ -1,16 +1,10 @@
-<<<<<<< HEAD
 <div class="container1 d-flex align-items-end flex-column">
   <div class="card bg-dark">
     <div class="card-header">
       <img src="../../../assets/images/bsulogo.png" style="width:20%; height:auto; max-width:300px;"/>
       <br><h6 class="p-2">Log-In</h6>
     </div>
-=======
-<div class="col-md-8 h-100 w-100 mt-5">
-  <div class="card">
->>>>>>> 1bdd05230b2afcc7af9f805ebc7b9f20f10a2fca
     <div class="card-body">
-      <h5 class="text-center">Login</h5>
       <form #loginForm="ngForm" (ngSubmit)="submitLogin()">
         <div class="alert alert-danger" role="alert" [hidden]="!error">
           {{ error }}
@@ -37,19 +31,13 @@
             required
           />
         </div>
-        <div class="d-grid gap-2 mt-4">
         <button
           type="submit"
           class="btn btn-primary"
           [disabled]="!loginForm.valid"
         >
-<<<<<<< HEAD
           Log-In
-=======
-          <h6 class="text-center">Submit</h6>
->>>>>>> 1bdd05230b2afcc7af9f805ebc7b9f20f10a2fca
         </button>
-      </div>
       </form>
       <p>Need an account?</p>
       <a routerLink="/signup">Register</a>
