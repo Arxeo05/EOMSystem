@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container1 d-flex align-items-end flex-column">
   <div class="card bg-dark">
     <div class="card-header">
@@ -8,6 +9,17 @@
       <form #registerForm="ngForm" (ngSubmit)="signupUser()">
         <div class="row">
         <div class="col mb-3">
+=======
+<div class="con2 col-sm-3 position-absolute top-0 end-0">
+  <div class="card bg-dark p-2">
+    <div class="card-body p-3 d-flex justify-content-center flex-column align-items-center mb-4">
+      <a class="navbar-brand" routerLink="/"><img src="../../assets/images/bsulogo.png" class="img2" alt="bsu"></a>
+      <h5 class="text-center mb-3 mt-3">Sign Up</h5>
+      <h6 class="text-center mb-3" style="padding: 1px;">Have an account? <a class="navbar-brand mb-2" routerLink="/">Log in</a></h6>
+      <form #registerForm="ngForm" (ngSubmit)="signupUser()">
+        <div class="mb-3 row justify-content-between">
+        <div class="mb-3 col-6">
+>>>>>>> 1bdd05230b2afcc7af9f805ebc7b9f20f10a2fca
           <label for="name" class="form-label">Name</label>
           <input
             type="text"
@@ -21,7 +33,11 @@
         <div class="alert alert-danger" role="alert" [hidden]="!error.name">
           {{ error.name }}
         </div>
+<<<<<<< HEAD
         <div class="col mb-3">
+=======
+        <div class="mb-3 col-6">
+>>>>>>> 1bdd05230b2afcc7af9f805ebc7b9f20f10a2fca
           <label for="birth" class="form-label">Birthday</label>
           <input
             type="date"
@@ -35,7 +51,7 @@
         <div class="alert alert-danger" role="alert" [hidden]="!error.birthday">
           {{ error.birthday }}
         </div>
-        <div class="mb-3">
+        <div class="mb-3 col-6">
           <label for="college" class="form-label">College</label>
           <input
             type="text"
@@ -49,7 +65,7 @@
         <div class="alert alert-danger" role="alert" [hidden]="!error.college">
           {{ error.college }}
         </div>
-        <div class="mb-3">
+        <div class="mb-3 col-6">
           <label for="department" class="form-label">Department</label>
           <input
             type="text"
@@ -67,7 +83,8 @@
         >
           {{ error.department }}
         </div>
-        <div class="mb-3">
+               
+        <div class="mb-3 col-6 ">
           <label for="email" class="form-label">Email address</label>
           <input
             type="email"
@@ -81,7 +98,11 @@
         <div class="alert alert-danger" role="alert" [hidden]="!error.email">
           {{ error.email }}
         </div>
+<<<<<<< HEAD
         <div class="col mb-3">
+=======
+          <div class="col-6">
+>>>>>>> 1bdd05230b2afcc7af9f805ebc7b9f20f10a2fca
           <label for="password" class="form-label">Password</label>
           <input
             type="password"
@@ -92,7 +113,12 @@
             required
           />
         </div>
+<<<<<<< HEAD
         <div class="col mb-3">
+=======
+      
+        <div class="mb-3 col-6">
+>>>>>>> 1bdd05230b2afcc7af9f805ebc7b9f20f10a2fca
           <label for="cpassword" class="form-label">Confirm Password</label>
           <input
             type="password"
@@ -103,7 +129,7 @@
             required
           />
         </div>
-        <div class="mb-3">
+        <div class="mb-3 col-6">
           <label for="photo" class="form-label">Photo</label>
           <input
             type="file"
@@ -114,14 +140,20 @@
             required
           />
         </div>
+<<<<<<< HEAD
       </div>
+=======
+        <div class="d-grid gap-2 mt-4">
+>>>>>>> 1bdd05230b2afcc7af9f805ebc7b9f20f10a2fca
         <button
           type="submit"
           class="btn btn-primary"
           [disabled]="!registerForm.valid"
         >
-          Submit
+          <h5 class="sub">Submit</h5>
         </button>
+      </div>
+      </div>
       </form>
       <p class="pt-3">Already have an account?
       <a routerLink="/login" style="color:skyblue;">Log-In here</a></p>

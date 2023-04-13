@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .content {
   display: flex;
   margin-bottom: 100px;
@@ -10,4 +11,16 @@
   background-size: cover;
   width: 100%;
   text-align: center;
+=======
+.img1{
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+}
+@media(maxwidth: 850px){
+    .img1{
+        height: 100vh;
+        width: auto;
+    }
+>>>>>>> 1bdd05230b2afcc7af9f805ebc7b9f20f10a2fca
 }

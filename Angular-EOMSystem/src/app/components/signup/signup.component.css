@@ -1,4 +1,5 @@
 .card{
+<<<<<<< HEAD
     height: 100vh;
     color: white;
     width: 40vw;
@@ -33,4 +34,68 @@
     p{
         margin-top: -10px;
     }
+=======
+    background-color: transparent;
+    color: white;
+    border-style: none;
+}
+.con2{
+    width: 50vw;
+}
+h5{
+    margin-bottom: 20px;
+}
+h5.sub{
+    margin-bottom: -.1px;
+}
+
+a{
+    color: white;
+    text-decoration: underline;
+}
+a:hover{
+    color: red;
+    text-decoration: underline;
+}
+.img2{
+    height: 70px;
+    width: 70px;
+}
+h6{
+    color: white;
+}
+@media(max-width: 850px){
+    .card{
+        max-height: 100vh;
+        font-size: 10px;
+    }
+    .card-body{
+        margin-top: -15px;
+    }
+    .con2{
+        max-height: 100vh;
+        width: 70vw;
+    }
+    .img2{
+        height: 40px;
+        width: 40px;
+    }
+    h5 {
+        font-size: 10px;
+        margin-bottom: 3px;
+    }
+    h6 {
+        font-size: 10px;
+    }
+    .form-control{
+        max-height: 5vh;
+        min-width: 5vw;
+    }
+    .btn{
+        max-height: 6vh;
+        max-width: 100vw;
+        margin-top: -1.5rem;
+    }
+    
+>>>>>>> 1bdd05230b2afcc7af9f805ebc7b9f20f10a2fca
 }
