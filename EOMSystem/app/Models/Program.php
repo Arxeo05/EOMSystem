@@ -44,6 +44,6 @@ class Program extends Model
     }
 
     public function members(): BelongsToMany{
-        return $this->belongsToMany(User::class,'member_program','program_id','member_id');
+        return $this->belongsToMany(User::class,'member_programs','programId','memberId');
     }
 }

@@ -20,7 +20,8 @@ class ProgramsController extends Controller
 
     public function getPrograms(){
         if(Auth::check()){
-            return response()->json(Program::all(),200);
+            $program = Program::all();
+            return response()->json($program);
         }
         return response()->json(['message'=>'You must login']);
     }
@@ -148,7 +149,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $result = DB::table('program_partners')
-        ->where('program_id', '=', $pid)
+        ->where('programId', '=', $pid)
         ->get();
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);
@@ -203,7 +204,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $result = DB::table('program_participants')
-        ->where('program_id', '=', $pid)
+        ->where('programId', '=', $pid)
         ->get();
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);
@@ -259,7 +260,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $result = DB::table('program_files')
-        ->where('program_id', '=', $pid)
+        ->where('programId', '=', $pid)
         ->get();
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);

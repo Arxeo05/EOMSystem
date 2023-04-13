@@ -25,6 +25,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->integer('role')->default('0');
+            $table->string('status')->default('pending');
+            $table->string('photo');
         });
     }
 
