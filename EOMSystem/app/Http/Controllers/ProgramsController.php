@@ -20,7 +20,8 @@ class ProgramsController extends Controller
 
     public function getPrograms(){
         if(Auth::check()){
-            return response()->json(Program::all(),200);
+            $program = Program::all();
+            return response()->json($program);
         }
         return response()->json(['message'=>'You must login']);
     }
@@ -67,10 +68,10 @@ class ProgramsController extends Controller
         }
         $request->validate([
             'title'=>'required',
-            'start-date'=>'required',
-            'end-date'=>'required',
+            'startDate'=>'required',
+            'endDate'=>'required',
             'place'=>'required',
-            'leader_id'=>'required',
+            'leaderId'=>'required',
             'flow'=>'required',
             'additionalDetail'=>'required',
         ]);
@@ -101,18 +102,18 @@ class ProgramsController extends Controller
         $members = $program->members()->get();
         return response()->json($members);
     }
-    public function addMember(Request $request, $uid){
+    public function addMember(Request $request, $pid){
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
         $request->validate([
-            'program_id'=>'required',
+            'userId'=>'required',
         ]);
 
         $memberProgram = new member_program;
 
-        $memberProgram->program_id = $request->input('program_id');
-        $memberProgram->user_id = $uid;
+        $memberProgram->memberId = $request->input('userId');
+        $memberProgram->programId = $pid;
         $memberProgram->save();
 
         return response()->json('Success');
@@ -148,12 +149,25 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $result = DB::table('program_partners')
-        ->where('program_id', '=', $pid)
+        ->where('programId', '=', $pid)
         ->get();
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);
         }
         return response()->json($result);
+    }
+
+    public function getPartnerById($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $program = DB::table('program_partners')
+        ->where('id', '=', $id)
+        ->get();
+        if(is_null($program)){
+            return response()->json(['message'=>'Query not found']);
+        }
+        return response()->json($program);
     }
 
     public function updatePartner(Request $request, $id){
@@ -190,7 +204,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $result = DB::table('program_participants')
-        ->where('program_id', '=', $pid)
+        ->where('programId', '=', $pid)
         ->get();
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);
@@ -236,7 +250,7 @@ class ProgramsController extends Controller
         }
 
         $file->title = $fileName;
-        $file->program_id = $pid;
+        $file->programId = $pid;
         $file->file = $fileNameToStore;
         $file->save();
     }
@@ -246,7 +260,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $result = DB::table('program_files')
-        ->where('program_id', '=', $pid)
+        ->where('programId', '=', $pid)
         ->get();
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);

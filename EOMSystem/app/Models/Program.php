@@ -15,10 +15,10 @@ class Program extends Model
     public $timestamps = false;
     protected $fillable = [
         'title',
-        'start-date',
-        'end-date',
+        'startDate',
+        'endDate',
         'place',
-        'lead',
+        'leaderId',
         'flow',
         'additionalDetail'
     ];
@@ -44,6 +44,6 @@ class Program extends Model
     }
 
     public function members(): BelongsToMany{
-        return $this->belongsToMany(User::class,'member_program','program_id','member_id');
+        return $this->belongsToMany(User::class,'member_programs','programId','memberId');
     }
 }

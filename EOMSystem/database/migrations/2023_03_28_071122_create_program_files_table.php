@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('program_files', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('program_id');
-            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
+            $table->unsignedBigInteger('programId');
+            $table->foreign('programId')->references('id')->on('programs')->onDelete('cascade');
             $table->string('title');
             $table->string('file');
             $table->timestamps();

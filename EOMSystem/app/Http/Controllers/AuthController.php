@@ -97,7 +97,8 @@ class AuthController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
-        return response()->json(User::all(),200);
+        $users = User::all();
+        return response()->json($users);
     }
 
     public function getUserById($id){
@@ -125,15 +126,15 @@ class AuthController extends Controller
     }
 
     public function signup(Request $request){
-        $validated = $request->validate([
+        $user = new User;
+        $request->validate([
             'name'=>'required',
             'email'=>'required|email|unique:users',
             'password'=>'required|min:8',
             'password_confirmation'=>'required|same:password',
-            'birthday'=>'required',
             'college'=>'required',
             'department'=>'required',
-            'photo'=>'required|mimes:jpeg,png,bmp,tiff|max:1999'
+            // 'photo'=>'mimes: jpeg,jpg,png|nullable|max:1999'
         ]);
 
         if($request->hasFile('photo')){
@@ -143,10 +144,9 @@ class AuthController extends Controller
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
             $path = $request->file('photo')->storeAs('public/userPhoto',$fileNameToStore);
         }else{
-            return 'error';
+            $fileNameToStore = 'noimage.jpg';
         }
 
-        $user = new User;
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = $request->input('password');
@@ -173,7 +173,7 @@ class AuthController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
-        return response()->json(auth()->user());
+        return response()->json([auth()->user()]);
     }
 
     /**

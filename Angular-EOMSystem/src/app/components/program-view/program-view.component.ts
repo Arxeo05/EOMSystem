@@ -12,6 +12,7 @@ export class ProgramViewComponent implements OnInit {
   programMembers: any;
   programPartners: any;
   programParticipants: any;
+  programFiles: any;
 
   constructor(private backend: BackendService, private route: ActivatedRoute) {}
   ngOnInit(): void {
@@ -25,6 +26,7 @@ export class ProgramViewComponent implements OnInit {
     this.programMember(id);
     this.programPartner(id);
     this.programParticipant(id);
+    this.programFile(id);
   }
   programsById(id: number): void {
     this.backend.programsById(id).subscribe({
@@ -45,6 +47,12 @@ export class ProgramViewComponent implements OnInit {
   programParticipant(pid: number) {
     this.backend.programParticipants(pid).subscribe({
       next: (data) => (this.programParticipants = data),
+    });
+  }
+
+  programFile(pid: number) {
+    this.backend.programFiles(pid).subscribe({
+      next: (data) => (this.programFiles = data),
     });
   }
 }

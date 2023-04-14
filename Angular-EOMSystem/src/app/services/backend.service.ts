@@ -16,20 +16,20 @@ export class BackendService implements OnInit {
   }
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+      'content-type': 'applicatison/json',
     }),
   };
   signup(data: any): Observable<any> {
     return this.http.post<any>(
       'http://127.0.0.1:8000/api/signup',
-      JSON.stringify(data),
+      data,
       this.httpOptions
     );
   }
   login(data: any): Observable<any> {
     return this.http.post<any>(
       'http://127.0.0.1:8000/api/login',
-      JSON.stringify(data),
+      data,
       this.httpOptions
     );
   }
@@ -46,6 +46,19 @@ export class BackendService implements OnInit {
       'Bearer ' + localStorage.getItem('token')
     );
     return this.http.get('http://127.0.0.1:8000/api/programs', { headers });
+  }
+
+  createProgram(data: any): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+      .set('Content-Type', 'application/json');
+    return this.http.post<any>(
+      'http://127.0.0.1:8000/api/programs',
+      JSON.stringify(data),
+      {
+        headers,
+      }
+    );
   }
   programsById(id: number) {
     const headers = new HttpHeaders().set(
@@ -80,7 +93,7 @@ export class BackendService implements OnInit {
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    return this.http.get(`http://127.0.0.1:8000/api/partner/${pid}`, {
+    return this.http.get(`http://127.0.0.1:8000/api/program-partner/${pid}`, {
       headers,
     });
   }
@@ -91,6 +104,49 @@ export class BackendService implements OnInit {
       'Bearer ' + localStorage.getItem('token')
     );
     return this.http.get(`http://127.0.0.1:8000/api/participant/${pid}`, {
+      headers,
+    });
+  }
+
+  programFiles(pid: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/file/${pid}`, {
+      headers,
+    });
+  }
+
+  //partners
+  partnerById(id: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/partner/${id}`, {
+      headers,
+    });
+  }
+
+  //users
+  allUsers() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/users`, {
+      headers,
+    });
+  }
+
+  //progmembers
+  addMember(pid: number, data:any): Observable<any>{
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.post<any>(`http://127.0.0.1:8000/api/members/${pid}`, data,{
       headers,
     });
   }

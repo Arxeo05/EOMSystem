@@ -30,6 +30,7 @@
       </tbody>
     </table>
 
+    <button class="btn btn-primary" routerLink="add-partner">Add Member</button>
     <table class="table">
       <thead>
         <tr>
@@ -61,7 +62,13 @@
           <td>{{ partner.name }}</td>
           <td>
             <button type="button" class="btn btn-success">Add</button>
-            <button type="button" class="btn btn-primary" routerLink="/dashboard/program/2/manage-partners">Update</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              routerLink="/dashboard/program/manage-partners/{{ partner.id }}"
+            >
+              Update
+            </button>
             <button type="button" class="btn btn-danger">Delete</button>
           </td>
         </tr>
@@ -95,9 +102,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let file of programFiles">
           <td>
-            <input class="form-control" type="file" id="formFile" />
+            <h5>{{ file.title }}</h5>
           </td>
           <td>
             <button type="button" class="btn btn-success">Add</button>

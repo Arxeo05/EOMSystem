@@ -1,10 +1,14 @@
 <section class="content">
   <app-side-nav></app-side-nav>
   <div class="container">
-    <h5>Assigned Programs</h5>
-
-    <div class="card-container" *ngFor="let program of programs">
-      <div class="card">
+    <h5>All Programs</h5>
+    <div class="con">
+      <button class="btn btn-primary" routerLink="/create-program">
+        Add Program
+      </button>
+    </div>
+    <div class="card-container">
+      <div class="card"  *ngFor="let program of programs">
         <div class="card-body">
           <div class="img-container">
             <img src="#" alt="image" />
@@ -19,6 +23,12 @@
             >
               View
             </button>
+          </div>
+          <div>
+            <button class="btn btn-primary" routerLink="">Edit</button>
+          </div>
+          <div>
+            <button class="btn btn-primary" routerLink="">Delete</button>
           </div>
         </div>
       </div>

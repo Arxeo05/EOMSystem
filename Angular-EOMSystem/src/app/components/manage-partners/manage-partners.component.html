@@ -1,53 +1,85 @@
 <div class="content">
   <app-side-nav></app-side-nav>
-  <div class="container">
+  <div class="container" *ngFor="let partner of partners">
     <div class="title-container">
-      <button type="button" class="btn btn-outline-primary" routerLink="/dashboard/program/2">Back</button>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        routerLink="/dashboard/program/2"
+      >
+        Back
+      </button>
       <h3>Partner Details</h3>
     </div>
 
     <form>
-      <br>
+      <br />
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Partner Name">
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Partner Name"
+          value="{{ partner.name }}"
+        />
       </div>
-      <br>
+      <br />
       <div class="form-group">
         <label for="address">Address</label>
-        <input type="text" class="form-control" id="address" placeholder="Partner Address">
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          placeholder="Partner Address"
+          value="{{ partner.address }}"
+        />
       </div>
-      <br>
+      <br />
       <div class="form-group">
         <label for="contact-person">Contact Person</label>
-        <input type="text" class="form-control" id="contact-person" placeholder="Partner Contact Person">
+        <input
+          type="text"
+          class="form-control"
+          id="contact-person"
+          placeholder="Partner Contact Person"
+          value="{{ partner.contactPerson }}"
+        />
       </div>
-      <br>
+      <br />
       <div class="form-group">
         <label for="contact-number">Contact Number</label>
-        <input type="tel" class="form-control" id="contact-number" placeholder="Partner Contact Number">
+        <input
+          type="tel"
+          class="form-control"
+          id="contact-number"
+          placeholder="Partner Contact Number"
+          value="{{ partner.contactNumber }}"
+        />
       </div>
-      <br>
+      <br />
       <div class="form-group">
         <label for="moa-file">MOA File</label>
         <div class="file-container">
-          <input type="file" class="form-control" id="moa-file">
+          <h4>{{ partner.MoaFile }}</h4>
           <button type="button" class="btn btn-primary">Download</button>
           <button type="button" class="btn btn-primary">Print</button>
         </div>
       </div>
-      <br>
+      <br />
       <div class="date-container">
+        <label>Partnership Start Date: </label>
         <div class="form-group">
-          <label for="start-date">Start Date</label>
-          <input type="date" class="form-control" id="start-date">
-        </div>
-        <div class="form-group">
-          <label for="end-date">Expiration Date</label>
-          <input type="date" class="form-control" id="end-date">
+          <p>|{{ partner.startPartnership }}</p>
         </div>
       </div>
-      <br>
+      <div class="date-container">
+        <label>Partnership Expiration Date: </label>
+        <div class="form-group">
+          <p>|{{ partner.endPartnership }}</p>
+        </div>
+      </div>
+      <br />
       <div class="button-container">
         <button type="submit" class="btn btn-primary">Renew</button>
       </div>
