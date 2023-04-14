@@ -1,13 +1,22 @@
-<div class="col-8">
-  <div class="card">
-    <div class="card-header">Sign-Up</div>
+<div class="container1 d-flex align-items-end flex-column">
+  <div class="card bg-dark">
+    <div class="card-header">
+      <img src="../../../assets/images/bsulogo.png" style="width:10%; height:auto; max-width:300px;"/>
+      <br><h6 class="pt-4">Sign-Up</h6>
+    </div>
     <div class="card-body">
+<<<<<<< HEAD
       <form
         #registerForm="ngForm"
         (ngSubmit)="signupUser()"
         enctype="multipart/form-data"
       >
         <div class="mb-3">
+=======
+      <form #registerForm="ngForm" (ngSubmit)="signupUser()">
+        <div class="row">
+        <div class="col mb-3">
+>>>>>>> dc8627aefb12be49cfa1b11fface1ffa6655fc32
           <label for="name" class="form-label">Name</label>
           <input
             type="text"
@@ -20,8 +29,12 @@
         </div>
         <!-- <div class="alert alert-danger" role="alert" [hidden]="!error.name">
           {{ error.name }}
+        </div>
+        <div class="col mb-3">
+
         </div> -->
         <div class="mb-3">
+
           <label for="birth" class="form-label">Birthday</label>
           <input
             type="date"
@@ -80,6 +93,8 @@
         </div>
         <!-- <div class="alert alert-danger" role="alert" [hidden]="!error.email">
           {{ error.email }}
+        </div>
+        <div class="col mb-3">
         </div> -->
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
@@ -92,7 +107,7 @@
             required
           />
         </div>
-        <div class="mb-3">
+        <div class="col mb-3">
           <label for="cpassword" class="form-label">Confirm Password</label>
           <input
             type="password"
@@ -114,6 +129,11 @@
             required
           />
         </div>
+<<<<<<< HEAD
+=======
+      </div>
+        </div> -->
+>>>>>>> dc8627aefb12be49cfa1b11fface1ffa6655fc32
         <button
           type="submit"
           class="btn btn-primary"
@@ -122,8 +142,8 @@
           Submit
         </button>
       </form>
-      <p>Already have an account?</p>
-      <a routerLink="/login">Log-In here</a>
+      <p class="pt-3">Already have an account?
+      <a routerLink="/login" style="color:skyblue;">Log-In here</a></p>
     </div>
   </div>
 </div>
