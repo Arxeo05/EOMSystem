@@ -1,0 +1,25 @@
+.card{
+    height: 100vh;
+    color: white;
+
+}
+.card-header{
+    border-style: none;
+}
+p{
+    margin-top: 10px;
+}
+@media (max-width: 750px){
+    .card{
+        font-size: 10px;
+    }
+    .form-control{
+        min-height: 5vh;
+        width: 100%;
+    }
+    .btn{
+        min-height: 5vh;
+        font-size: 10px;
+    }
+    
+}
