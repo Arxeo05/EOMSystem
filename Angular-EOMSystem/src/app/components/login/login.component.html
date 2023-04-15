@@ -1,6 +1,9 @@
-<div class="col-8">
-  <div class="card">
-    <div class="card-header">Log-In</div>
+<div class="container1 d-flex align-items-end flex-column">
+  <div class="card bg-dark">
+    <div class="card-header">
+      <img src="../../../assets/images/bsulogo.png" style="width:20%; height:auto; max-width:300px;"/>
+      <br><h6 class="p-2">Log-In</h6>
+    </div>
     <div class="card-body">
       <form #loginForm="ngForm" (ngSubmit)="submitLogin()">
         <div class="alert alert-danger" role="alert" [hidden]="!error">

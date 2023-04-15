@@ -4,3 +4,10 @@
   background-color: whitesmoke;
   border: 1px solid black;
 }
+.background {
+  min-height: 100vh;
+  background: url('../assets/images/bsu.jpg');
+  background-size: cover;
+  width: 100%;
+  text-align: center;
+}

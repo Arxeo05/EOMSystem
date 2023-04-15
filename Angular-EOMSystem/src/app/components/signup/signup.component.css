@@ -1,0 +1,36 @@
+.card{
+    height: 100vh;
+    color: white;
+    width: 40vw;
+    font-size: 0.9rem;
+
+}
+.card-header{
+    border-style: none;
+}
+@media (max-width: 850px){
+    img{
+        width: 20%;
+    }
+    .card{
+        font-size: 10px;
+        width: 60vw;
+    }
+    .card-body{
+        margin-top: -20px;
+    }
+    .form-control{
+        height: 4vh;
+        width: 100%;
+    }
+    .btn{
+        height: 4vh;
+        font-size: 10px;
+    }
+    h6{
+        font-size: 11px;
+    }
+    p{
+        margin-top: -10px;
+    }
+}

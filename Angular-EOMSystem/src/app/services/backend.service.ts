@@ -16,15 +16,11 @@ export class BackendService implements OnInit {
   }
   httpOptions = {
     headers: new HttpHeaders({
-      'content-type': 'applicatison/json',
+      'content-type': 'application/json',
     }),
   };
   signup(data: any): Observable<any> {
-    return this.http.post<any>(
-      'http://127.0.0.1:8000/api/signup',
-      data,
-      this.httpOptions
-    );
+    return this.http.post<any>('http://127.0.0.1:8000/api/signup', data);
   }
   //laravel notify function at ProgramsController.php
   // notify(): Observable<any> {
@@ -148,13 +144,17 @@ export class BackendService implements OnInit {
   }
 
   //progmembers
-  addMember(pid: number, data:any): Observable<any>{
+  addMember(pid: number, data: any): Observable<any> {
     const headers = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    return this.http.post<any>(`http://127.0.0.1:8000/api/members/${pid}`, data,{
-      headers,
-    });
+    return this.http.post<any>(
+      `http://127.0.0.1:8000/api/members/${pid}`,
+      data,
+      {
+        headers,
+      }
+    );
   }
 }
