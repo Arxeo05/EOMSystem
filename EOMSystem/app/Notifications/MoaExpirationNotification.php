@@ -10,15 +10,16 @@ use Illuminate\Notifications\Notification;
 class MoaExpirationNotification extends Notification
 {
     use Queueable;
-
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    //name that is getting passed
+    public $name;
+    public function __construct($name)
     {
-        //
+        $this->name=$name;
     }
 
     /**
@@ -53,9 +54,9 @@ class MoaExpirationNotification extends Notification
      * @return array
      */
     public function toArray($notifiable)
-    {
+    {   //saves this returned value to notifications table's data column.
         return [
-            //
+            'data'=>'You have 30 days remaining of partnership with'.$this->name.''
         ];
     }
 }

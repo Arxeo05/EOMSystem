@@ -51,12 +51,12 @@ const routes: Routes = [
     canActivate: [() => inject(TokenService).loggedIn()],
   },
   {
-    path: 'dashboard/program/manage-partners/:id',
+    path: 'dashboard/program/:id/manage-partners',
     component: ManagePartnersComponent,
     canActivate: [() => inject(TokenService).loggedIn()],
   },
   {
-    path: 'dashboard/program/:id/add-partner',
+    path: 'dashboard/program/:id/add-member',
     component: AddMemberComponent,
     canActivate: [() => inject(TokenService).loggedIn()],
   },

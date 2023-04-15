@@ -26,6 +26,13 @@ export class BackendService implements OnInit {
       this.httpOptions
     );
   }
+  //laravel notify function at ProgramsController.php
+  // notify(): Observable<any> {
+  //   return this.http.get<any>(
+  //     'http://127.0.0.1:8000/api/notify',
+  //     this.httpOptions
+  //   );
+  // }
   login(data: any): Observable<any> {
     return this.http.post<any>(
       'http://127.0.0.1:8000/api/login',
