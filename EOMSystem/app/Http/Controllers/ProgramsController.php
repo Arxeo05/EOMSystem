@@ -15,7 +15,12 @@ use App\Models\ArchievedProgramFiles;
 use App\Models\ArchievedUsers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+<<<<<<< HEAD
 use Carbon\Carbon;
+=======
+use App\Notifications\MoaExpirationNotification;
+
+>>>>>>> a88b41d07c4d88325eee59cbd7bc73c34ce3a221
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -341,5 +346,12 @@ class ProgramsController extends Controller
         unlink($file_path);
         $file->delete();
         return response()->json(['message'=>$file->file.' deleted.']);
+    }
+
+    //should access the name of the user and pass that name to the notification
+    public function notify(Request $request) {
+        $user = User::first();
+        $user->name = $request->name;
+        $user->notify(new MoaExpirationNotification($user->name));
     }
 }

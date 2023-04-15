@@ -67,6 +67,9 @@ Route::post('user/delete/{id}',[AuthController::class, 'deleteUser']);
 Route::get('users',[AuthController::class,'getUsers']);
 Route::post('me', [AuthController::class, 'me']);
 
+//Trying out notification
+Route::get('/notify',[ProgramsController::class,'notify']);
+
 Route::group(['middleware' => 'api',], function ($router) {
     // Route::post('logout', 'AuthController@logout');
     // Route::post('refresh', 'AuthController@refresh');
