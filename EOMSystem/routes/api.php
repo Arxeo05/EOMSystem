@@ -25,7 +25,7 @@ Route::get('programs/search/{query}',[ProgramsController::class, 'searchPrograms
 Route::get('programs/filter/{filterBy}/{direction}',[ProgramsController::class, 'filterPrograms']);
 Route::post('programs',[ProgramsController::class, 'addProgram']);
 Route::put('programs/edit/{id}',[ProgramsController::class, 'editProgram']);
-Route::delete('programs/{id}',[ProgramsController::class, 'deleteProgram']);
+Route::post('programs/delete/{id}',[ProgramsController::class, 'deleteProgram']);
 
 //Program-members routes
 Route::post('members/{pid}',[ProgramsController::class, 'addMember']);
@@ -45,6 +45,7 @@ Route::get('program-partner/{pid}',[ProgramsController::class, 'getPartnerByProg
 Route::get('partner/{pid}',[ProgramsController::class, 'getPartnerById']);
 Route::post('partner/update/{id}',[ProgramsController::class, 'updatePartner']);
 Route::post('partner/delete/{id}',[ProgramsController::class, 'deletePartner']);
+Route::get('partner/moa/expiring',[ProgramsController::class, 'expiringMoa']);
 
 //Program-files routes
 Route::post('files/{pid}',[ProgramsController::class, 'addFile']);

@@ -7,9 +7,15 @@ use App\Models\member_program;
 use App\Models\ProgramFiles;
 use App\Models\ProgramParticipants;
 use App\Models\ProgramPartners;
+use App\Models\ArchievedPrograms;
+use App\Models\ArchievedMemberPrograms;
+use App\Models\ArchievedProgramParticipants;
+use App\Models\ArchievedProgramPartners;
+use App\Models\ArchievedProgramFiles;
+use App\Models\ArchievedUsers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -92,7 +98,25 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
-        return Program::destroy($id);
+
+        $program = DB::table('programs')
+        ->where('id', '=', $id)
+        ->first();
+
+        $aprogram = new ArchievedPrograms;
+        $aprogram->id = $program->id;
+        $aprogram->title = $program->title;
+        $aprogram->startDate = $program->startDate;
+        $aprogram->endDate = $program->endDate;
+        $aprogram->place = $program->place;
+        $aprogram->leaderId = $program->leaderId;
+        $aprogram->flow = $program->flow;
+        $aprogram->additionalDetail = $program->additionalDetail;
+        $aprogram->save();
+
+        $program->delete();
+
+        return response()->json(['message'=>'Deleted Successfully']);
     }
 
     // //ProgramMembersModel
@@ -184,6 +208,13 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         return ProgramPartners::destroy($id);
+    }
+
+    public function expiringMoa(){
+
+        $today = Carbon::now()->toDateString();
+        $expiration = Carbon::now()->addDay(30)->toDateString();
+        return ProgramPartners::whereBetween('endPartnership', [$today, $expiration])->get();
     }
 
      //ProgramParticipantModel

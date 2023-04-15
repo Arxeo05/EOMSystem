@@ -1,23 +1,31 @@
-
 <nav class="navbar bg-light" *ngIf="loggedIn">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">EOMS</a>
-<div class="con1 col-sm-3 position-absolute top-0 end-0">
-  <div class="con3 bg-dark p-2">
-      <div class="p-3 d-flex justify-content-center flex-column align-items-center ">
-    <a class="navbar-brand" routerLink="/"><img src="../../assets/images/bsulogo.png" class="img2" alt="bsu"></a>
-    <div>
-      <app-login></app-login>
-      <h6 class="mt-3">Don't have an account? <a class="navbar-brand mt-3 ml-4" routerLink="signup" *ngIf="!loggedIn">Sign Up</a></h6>
-      <a class="navbar-brand" routerLink="profile" *ngIf="loggedIn">Profile</a>
-      <a class="navbar-brand" routerLink="dashboard" *ngIf="loggedIn"
-        >Programs</a
-      >
-      <a class="navbar-brand" href="#" (click)="logout($event)" *ngIf="loggedIn"
-        >Log-Out</a
-      >
+    <div class="con1 col-sm-3 position-absolute top-0 end-0">
+      <div class="con3 bg-dark p-2">
+        <div
+          class="p-3 d-flex justify-content-center flex-column align-items-center"
+        >
+          <a class="navbar-brand" routerLink="/"
+            ><img src="../../assets/images/bsulogo.png" class="img2" alt="bsu"
+          /></a>
+          <div>
+            <a class="navbar-brand" routerLink="profile" *ngIf="loggedIn"
+              >Profile</a
+            >
+            <a class="navbar-brand" routerLink="dashboard" *ngIf="loggedIn"
+              >Programs</a
+            >
+            <a
+              class="navbar-brand"
+              href="#"
+              (click)="logout($event)"
+              *ngIf="loggedIn"
+              >Log-Out</a
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  </div>
-  </div>
-
+</nav>
