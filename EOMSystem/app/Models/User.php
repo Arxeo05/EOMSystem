@@ -33,7 +33,7 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     public function programs(): BelongsToMany{
-        return $this->belongsToMany(Program::class,'member_programs','member_id','program_id');
+        return $this->belongsToMany(Program::class,'member_programs','memberId','programId');
     }
 
     public function assignedPrograms(): HasMany

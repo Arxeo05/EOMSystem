@@ -9,12 +9,20 @@
           <a class="navbar-brand" routerLink="/"
             ><img src="../../assets/images/bsulogo.png" class="img2" alt="bsu"
           /></a>
-          <div>
+          <div
+            class="p-3 d-flex justify-content-center flex-column align-items-center"
+          >
             <a class="navbar-brand" routerLink="profile" *ngIf="loggedIn"
               >Profile</a
             >
             <a class="navbar-brand" routerLink="dashboard" *ngIf="loggedIn"
               >Programs</a
+            >
+            <a class="navbar-brand" routerLink="user/all-users" *ngIf="loggedIn"
+              >Users</a
+            >
+            <a class="navbar-brand" routerLink="announcements" *ngIf="loggedIn"
+              >Announcements</a
             >
             <a
               class="navbar-brand"

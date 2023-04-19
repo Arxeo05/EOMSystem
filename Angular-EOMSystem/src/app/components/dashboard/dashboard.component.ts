@@ -8,20 +8,28 @@ import { BackendService } from '../../services/backend.service';
 })
 export class DashboardComponent implements OnInit {
   constructor(private backend: BackendService) {}
-  programs: any;
+  programs: any[] = [];
   notification: any;
   ngOnInit(): void {
     this.backend.programs().subscribe({
-      next: (data) => (this.programs = data),
+      next: (data) => (this.programs = Object.values(data)),
     });
     this.notify(true);
   }
 
   notify(boolean: Boolean): any {
-    const announcement = document.getElementById("announcement");
+    const announcement = document.getElementById('announcement');
     if (!boolean) {
       announcement?.remove();
     }
-    return  this.notification = "You have 30 days remaining before your partnership with BSU expires";
+    return (this.notification =
+      'You have 30 days remaining before your partnership with BSU expires');
+  }
+
+  deleteProgram(id: number) {
+    this.backend.deleteProgram(id).subscribe({
+      next: (data) => console.log(data),
+      error: (error) => console.log(error),
+    });
   }
 }

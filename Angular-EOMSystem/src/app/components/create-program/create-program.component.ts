@@ -19,7 +19,7 @@ export class CreateProgramComponent implements OnInit {
   leaderChoices: any;
 
   constructor(private backend: BackendService) {}
-  error: any = [];
+  error: any[] = [];
   ngOnInit(): void {
     this.backend.allUsers().subscribe({
       next: (data: any) => (this.leaderChoices = data),

@@ -11,7 +11,6 @@
           <th scope="col">Prgoram Lead</th>
           <th scope="col">Program Flow</th>
           <th scope="col">Additional Details</th>
-          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -20,12 +19,6 @@
           <td>{{ programLeader }}</td>
           <td>{{ program.flow }}</td>
           <td>{{ program.additionalDetail }}</td>
-
-          <td>
-            <button type="button" class="btn btn-success">Add</button>
-            <button type="button" class="btn btn-primary">Update</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </td>
         </tr>
       </tbody>
     </table>
@@ -42,39 +35,65 @@
         <tr *ngFor="let member of programMembers">
           <td>{{ member.name }}</td>
           <td>
-            <button type="button" class="btn btn-success">Add</button>
-            <button type="button" class="btn btn-primary">Update</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteMember(program.id, member.id)"
+            >
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
-
+    <button type="button" class="btn btn-success" routerLink="add-partner">
+      Add Partner
+    </button>
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Program Partners</th>
+          <th scope="col">Address</th>
+          <th scope="col">Contact Person</th>
+          <th scope="col">Contact Number</th>
+          <th scope="col">Moa File</th>
+          <th scope="col">Start of partnership</th>
+          <th scope="col">End of partnership</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let partner of programPartners">
           <td>{{ partner.name }}</td>
+          <td>{{ partner.address }}</td>
+          <td>{{ partner.contactPerson }}</td>
+          <td>{{ partner.contactNumber }}</td>
+          <td>{{ partner.MoaFile }}</td>
+          <td>{{ partner.startPartnership }}</td>
+          <td>{{ partner.endPartnership }}</td>
+
           <td>
-            <button type="button" class="btn btn-success">Add</button>
             <button
               type="button"
               class="btn btn-primary"
-              routerLink="/dashboard/program/manage-partners/{{ partner.id }}"
+              routerLink="/dashboard/program/{{ partner.id }}/manage-partners"
             >
               Update
             </button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deletePartner(partner.id)"
+            >
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
-
+    <button type="button" class="btn btn-success" routerLink="add-participant">
+      Add Participant
+    </button>
     <table class="table">
       <thead>
         <tr>
@@ -86,17 +105,33 @@
         <tr *ngFor="let participant of programParticipants">
           <td>{{ participant.name }}</td>
           <td>
-            <button type="button" class="btn btn-success">Add</button>
-            <button type="button" class="btn btn-primary">Update</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              routerLink="/dashboard/program/{{
+                participant.id
+              }}/edit-participant"
+            >
+              Update
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteParticipant(participant.id)"
+            >
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
-
+    <button type="button" class="btn btn-success" routerLink="add-file">
+      Add File
+    </button>
     <table class="table">
       <thead>
         <tr>
+          <th scope="col">File Names</th>
           <th scope="col">Files</th>
           <th scope="col">Action</th>
         </tr>
@@ -104,12 +139,26 @@
       <tbody>
         <tr *ngFor="let file of programFiles">
           <td>
-            <h5>{{ file.title }}</h5>
+            <p>{{ file.title }}</p>
           </td>
           <td>
-            <button type="button" class="btn btn-success">Add</button>
-            <button type="button" class="btn btn-primary">Update</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <p>{{ file.file }}</p>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary"
+              routerLink="/dashboard/program/{{ file.id }}/edit-file"
+            >
+              Update
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteFile(file.id)"
+            >
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>

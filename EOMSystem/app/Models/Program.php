@@ -25,7 +25,7 @@ class Program extends Model
 
     public function leader(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'leaderId','id');
     }
 
     public function participants(): HasMany

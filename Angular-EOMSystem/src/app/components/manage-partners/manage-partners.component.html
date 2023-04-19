@@ -1,18 +1,14 @@
 <div class="content">
   <app-side-nav></app-side-nav>
-  <div class="container" *ngFor="let partner of partners">
+  <div class="container">
     <div class="title-container">
-      <button
-        type="button"
-        class="btn btn-outline-primary"
-        routerLink="/dashboard/program/2"
-      >
+      <button type="button" class="btn btn-outline-primary" (click)="goBack()">
         Back
       </button>
       <h3>Partner Details</h3>
     </div>
 
-    <form>
+    <form #partnerForm="ngForm" (ngSubmit)="editPartner()">
       <br />
       <div class="form-group">
         <label for="name">Name</label>
@@ -20,8 +16,10 @@
           type="text"
           class="form-control"
           id="name"
+          name="name"
           placeholder="Partner Name"
-          value="{{ partner.name }}"
+          [(ngModel)]="form.name"
+          required
         />
       </div>
       <br />
@@ -31,8 +29,10 @@
           type="text"
           class="form-control"
           id="address"
+          name="address"
           placeholder="Partner Address"
-          value="{{ partner.address }}"
+          [(ngModel)]="form.address"
+          required
         />
       </div>
       <br />
@@ -41,9 +41,11 @@
         <input
           type="text"
           class="form-control"
-          id="contact-person"
+          id="contactPerson"
+          name="contactPerson"
           placeholder="Partner Contact Person"
-          value="{{ partner.contactPerson }}"
+          [(ngModel)]="form.contactPerson"
+          required
         />
       </div>
       <br />
@@ -52,32 +54,52 @@
         <input
           type="tel"
           class="form-control"
-          id="contact-number"
+          id="contactNumber"
+          name="contactNumber"
           placeholder="Partner Contact Number"
-          value="{{ partner.contactNumber }}"
+          [(ngModel)]="form.contactNumber"
+          required
         />
       </div>
       <br />
       <div class="form-group">
         <label for="moa-file">MOA File</label>
         <div class="file-container">
-          <h4>{{ partner.MoaFile }}</h4>
-          <button type="button" class="btn btn-primary">Download</button>
-          <button type="button" class="btn btn-primary">Print</button>
+          <input
+            type="file"
+            class="form-control"
+            id="MoaFile"
+            name="MoaFile"
+            [(ngModel)]="form.MoaFile"
+            required
+            (change)="onFileChange($event)"
+          />
         </div>
       </div>
       <br />
       <div class="date-container">
         <label>Partnership Start Date: </label>
-        <div class="form-group">
-          <p>|{{ partner.startPartnership }}</p>
-        </div>
+        <div class="form-group"></div>
+        <input
+          type="date"
+          class="form-control"
+          id="startPartnership"
+          name="startPartnership"
+          [(ngModel)]="form.startPartnership"
+          required
+        />
       </div>
       <div class="date-container">
         <label>Partnership Expiration Date: </label>
-        <div class="form-group">
-          <p>|{{ partner.endPartnership }}</p>
-        </div>
+        <div class="form-group"></div>
+        <input
+          type="date"
+          class="form-control"
+          id="endPartnership"
+          name="endPartnership"
+          [(ngModel)]="form.endPartnership"
+          required
+        />
       </div>
       <br />
       <div class="button-container">

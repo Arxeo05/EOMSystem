@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('programLeader/{pid}',[AuthController::class,'programLeadr']);
 
 // Program related Routes
-Route::get('programs',[ProgramsController::class, 'getPrograms']);
+
 Route::get('programs/{id}',[ProgramsController::class, 'getProgramById']);
 Route::get('programs/search/{query}',[ProgramsController::class, 'searchPrograms']);
 Route::get('programs/filter/{filterBy}/{direction}',[ProgramsController::class, 'filterPrograms']);
@@ -34,13 +34,13 @@ Route::post('members/{id}',[ProgramsController::class, 'updateMember']);
 Route::post('members/delete/{pid}/{uid}',[ProgramsController::class, 'deleteMember']);
 
 //Program-participants routes
-Route::post('participant/',[ProgramsController::class, 'addParticipant']);
+Route::post('participant/{pid}',[ProgramsController::class, 'addParticipant']);
 Route::get('participant/{pid}',[ProgramsController::class, 'getParticipantByProgram']);
-Route::post('participant/{id}',[ProgramsController::class, 'updateParticipant']);
+Route::post('participant/edit/{id}',[ProgramsController::class, 'updateParticipant']);
 Route::post('participant/delete/{id}',[ProgramsController::class, 'deleteParticipant']);
 
 //Program-partners routes
-Route::post('partners/',[ProgramsController::class, 'addPartner']);
+Route::post('partners/{pid}',[ProgramsController::class, 'addPartner']);
 Route::get('program-partner/{pid}',[ProgramsController::class, 'getPartnerByProgram']);
 Route::get('partner/{pid}',[ProgramsController::class, 'getPartnerById']);
 Route::post('partner/update/{id}',[ProgramsController::class, 'updatePartner']);
@@ -67,12 +67,25 @@ Route::post('user/delete/{id}',[AuthController::class, 'deleteUser']);
 Route::get('users',[AuthController::class,'getUsers']);
 Route::post('me', [AuthController::class, 'me']);
 
+Route::get('leaderof',[ProgramsController::class,'programByLeader']);
+Route::get('memberof',[ProgramsController::class,'programsByMember']);
 //Trying out notification
 Route::get('/notify',[ProgramsController::class,'notify']);
+
+
+//for dashboard
+Route::get('activeprograms/count',[ProgramsController::class,'upcomingProgramsCount']);
+Route::get('pastprograms/count',[ProgramsController::class,'pastProgramsCount']);
+Route::get('expiredmoa/count',[ProgramsController::class,'expiredMoaCount']);
+Route::get('activemoa/count',[ProgramsController::class,'activeMoaCount']);
 
 Route::group(['middleware' => 'api',], function ($router) {
     // Route::post('logout', 'AuthController@logout');
     // Route::post('refresh', 'AuthController@refresh');
 
+});
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('programs',[ProgramsController::class, 'getPrograms']);
 });
 

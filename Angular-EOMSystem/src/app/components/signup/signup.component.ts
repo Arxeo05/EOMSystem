@@ -8,23 +8,43 @@ import { BackendService } from '../../services/backend.service';
 })
 export class SignupComponent {
   public form = {
-    name: null,
-    birthday: null,
-    college: null,
-    department: null,
-    email: null,
-    password: null,
-    password_confirmation: null,
+    name: '',
+    birthday: '',
+    college: '',
+    department: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
     photo: null,
   };
 
   constructor(private backend: BackendService) {}
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.form.photo = event.target.files[0];
+    } else {
+      this.form.photo = null;
+    }
+  }
   error: any = [];
   signupUser() {
-    console.log(this.form);
-    return this.backend.signup(this.form).subscribe({
+    const formData = new FormData();
+    formData.append('name', this.form.name);
+    formData.append('birthday', this.form.birthday);
+    formData.append('college', this.form.college);
+    formData.append('department', this.form.department);
+    formData.append('email', this.form.email);
+    formData.append('password', this.form.password);
+    formData.append('password_confirmation', this.form.password_confirmation);
+    if (this.form.photo) {
+      formData.append('photo', this.form.photo);
+    }
+
+    return this.backend.signup(formData).subscribe({
       next: (data) => console.log(data),
-      error: (error) => this.handleError(error),
+      error: (error) => {
+        this.handleError(error);
+      },
     });
   }
   handleError(error: any) {

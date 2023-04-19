@@ -8,19 +8,11 @@ use App\Models\ProgramFiles;
 use App\Models\ProgramParticipants;
 use App\Models\ProgramPartners;
 use App\Models\ArchievedPrograms;
-use App\Models\ArchievedMemberPrograms;
-use App\Models\ArchievedProgramParticipants;
-use App\Models\ArchievedProgramPartners;
-use App\Models\ArchievedProgramFiles;
-use App\Models\ArchievedUsers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-<<<<<<< HEAD
 use Carbon\Carbon;
-=======
 use App\Notifications\MoaExpirationNotification;
 
->>>>>>> a88b41d07c4d88325eee59cbd7bc73c34ce3a221
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -104,9 +96,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
 
-        $program = DB::table('programs')
-        ->where('id', '=', $id)
-        ->first();
+        $program =Program::find($id);
 
         $aprogram = new ArchievedPrograms;
         $aprogram->id = $program->id;
@@ -149,28 +139,46 @@ class ProgramsController extends Controller
     }
 
     public function deleteMember($pid,$uid){
-        $member = DB::table('member_program')->where('program_id','=',$pid)
-        ->where('member_id','=',$uid)->delete();
+        $member = DB::table('member_programs')->where('programId','=',$pid)
+        ->where('memberId','=',$uid)->delete();
         return response()->json(['message'=>'Record Deleted']);
     }
 
     //ProgramPartnerModel
-    public function addPartner(Request $request){
+    public function addPartner(Request $request,$pid){
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
         $request->validate([
             'name'=>'required',
-            'program_id'=>'required',
-            'adress'=>'required',
+            'address'=>'required',
             'contactPerson'=>'required',
             'contactNumber'=>'required|min:11',
-            'MoaFile'=>'required',
+            'MoaFile'=>'required|mimes:pdf,docx|max:1999',
             'startPartnership'=>'required',
             'endPartnership'=>'required',
         ]);
 
-    return response()->json(ProgramPartners::create($request->all()));
+        if($request->hasFile('MoaFile')){
+            $fileNameWithExt = $request->file('MoaFile')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('MoaFile')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            $path = $request->file('MoaFile')->storeAs('public/moa_files',$fileNameToStore);
+        }else{
+            return response()->json('Problem uploading file');
+        }
+            $partner = new ProgramPartners;
+            $partner->programId = $pid;
+            $partner->name = $request->input('name');
+            $partner->address = $request->input('address');
+            $partner->contactPerson = $request->input('contactPerson');
+            $partner->contactNumber = $request->input('contactNumber');
+            $partner->MoaFile = $fileNameToStore;
+            $partner->startPartnership = $request->input('startPartnership');
+            $partner->endPartnership = $request->input('endPartnership');
+            $partner->save();
+        return response()->json(['message'=>'Partner added ']);
     }
 
     public function getPartnerByProgram($pid){
@@ -203,9 +211,40 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
-        $partner = ProgramPartners::find($id);
-        $partner->update($request->all());
-        return response()->json($partner,200);
+        $file = ProgramPartners::find($id);
+
+        $request->validate([
+            'name'=>'required',
+            'address'=>'required',
+            'contactPerson'=>'required',
+            'contactNumber'=>'required|min:11',
+            'MoaFile'=>'required|mimes:pdf,docx|max:1999',
+            'startPartnership'=>'required',
+            'endPartnership'=>'required',
+        ]);
+
+        if($request->hasFile('MoaFile')){
+            $file_name = $file->MoaFile;
+            $file_path = public_path('storage/moa_files/'.$file_name);
+            unlink($file_path);
+            $file->delete();
+
+            $fileNameWithExt = $request->file('MoaFile')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('MoaFile')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            $path = $request->file('MoaFile')->storeAs('public/moa_files',$fileNameToStore);
+        }else{
+            return 'file too large';
+        }
+            $file->name = $request->input('name');
+            $file->address = $request->input('address');
+            $file->contactPerson = $request->input('contactPerson');
+            $file->contactNumber = $request->input('contactNumber');
+            $file->MoaFile = $fileNameToStore;
+            $file->startPartnership = $request->input('startPartnership');
+            $file->endPartnership = $request->input('endPartnership');
+            $file->save();
     }
 
     public function deletePartner($id){
@@ -216,23 +255,25 @@ class ProgramsController extends Controller
     }
 
     public function expiringMoa(){
-
         $today = Carbon::now()->toDateString();
         $expiration = Carbon::now()->addDay(30)->toDateString();
         return ProgramPartners::whereBetween('endPartnership', [$today, $expiration])->get();
     }
 
      //ProgramParticipantModel
-     public function addParticipant(Request $request){
+     public function addParticipant(Request $request,$pid){
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
         $request->validate([
             'name'=>'required',
-            'program_id'=>'required',
         ]);
+        $participant = new ProgramParticipants;
+        $participant->name = $request->input('name');
+        $participant->programId = $pid;
+        $participant->save();
 
-    return response()->json(ProgramParticipants::create($request->all()));
+        return response()->json(['message'=>'Participant Added']);
     }
 
     public function getParticipantByProgram($pid){
@@ -289,6 +330,7 @@ class ProgramsController extends Controller
         $file->programId = $pid;
         $file->file = $fileNameToStore;
         $file->save();
+        return response()->json(['message'=>'File Added']);
     }
 
     public function getFileByProgram($pid){
@@ -353,5 +395,68 @@ class ProgramsController extends Controller
         $user = User::first();
         $user->name = $request->name;
         $user->notify(new MoaExpirationNotification($user->name));
+    }
+
+    //Faculty related functions
+    public function programByLeader(){
+        $user = auth()->user();
+        if ($user) {
+            $userId = $user->id;
+            $leaderOf = DB::table('programs')
+            ->where('leaderId', '=', $userId)->get();
+            return response()->json($leaderOf);
+        } else {
+            return response()->json(['message'=>'You must login']);
+        }
+    }
+    public function programsByMember(){
+
+        $user = auth()->user();
+        if ($user) {
+            $userId = $user->id;
+            $member = User::find($userId);
+            $programs = $member->programs()->get();
+            return response()->json($programs);
+        } else {
+            return response()->json(['message'=>'You must login']);
+        }
+    }
+
+    //for dashboard
+    public function upcomingProgramsCount(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $currentDate = Carbon::now();
+        $results = Program::whereDate('endDate', '>', $currentDate->toDateString())->count();
+
+        return response()->json($results);
+    }
+    public function pastProgramsCount(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $currentDate = Carbon::now();
+        $results = Program::whereDate('endDate', '<', $currentDate->toDateString())->count();
+
+        return response()->json($results);
+    }
+    public function expiredMoaCount(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $currentDate = Carbon::now();
+        $results = ProgramPartners::whereDate('endPartnership', '<', $currentDate->toDateString())->count();
+
+        return response()->json($results);
+    }
+    public function activeMoaCount(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $currentDate = Carbon::now();
+        $results = ProgramPartners::whereDate('endPartnership', '>', $currentDate->toDateString())->count();
+
+        return response()->json($results);
     }
 }

@@ -16,6 +16,15 @@ import { ProgramViewComponent } from './components/program-view/program-view.com
 import { CreateProgramComponent } from './components/create-program/create-program.component';
 import { ManagePartnersComponent } from './components/manage-partners/manage-partners.component';
 import { AddMemberComponent } from './components/add-member/add-member.component';
+import { EditProgramComponent } from './components/edit-program/edit-program.component';
+import { AddPartnerComponent } from './components/add-partner/add-partner.component';
+import { AddParticipantComponent } from './components/add-participant/add-participant.component';
+import { EditParticipantComponent } from './components/edit-participant/edit-participant.component';
+import { AddFileComponent } from './components/add-file/add-file.component';
+import { EditFileComponent } from './components/edit-file/edit-file.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { AllUsersComponent } from './components/all-users/all-users.component';
+import { AnnouncementsComponent } from './components/announcements/announcements.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +39,15 @@ import { AddMemberComponent } from './components/add-member/add-member.component
     CreateProgramComponent,
     ManagePartnersComponent,
     AddMemberComponent,
+    EditProgramComponent,
+    AddPartnerComponent,
+    AddParticipantComponent,
+    EditParticipantComponent,
+    AddFileComponent,
+    EditFileComponent,
+    EditUserComponent,
+    AllUsersComponent,
+    AnnouncementsComponent,
   ],
   imports: [
     BrowserModule,

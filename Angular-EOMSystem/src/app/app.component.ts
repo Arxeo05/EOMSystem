@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { BackendService } from './services/backend.service';
 import Swal from 'sweetalert2';
 
@@ -7,14 +7,11 @@ import Swal from 'sweetalert2';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit{
-
-  constructor(
-    private backend: BackendService
-  ) {}
+export class AppComponent implements OnInit {
+  constructor(private backend: BackendService) {}
 
   title = 'Angular-EOMSystem';
-  notification = ''
+  notification = '';
 
   ngOnInit(): void {
     //subscribing to laravel notify function but it returns null value
@@ -25,6 +22,5 @@ export class AppComponent implements OnInit{
     //   }
     // })
     // Swal.fire('Hi','Hey There!', 'success');
-
   }
 }

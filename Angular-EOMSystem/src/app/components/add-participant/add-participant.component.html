@@ -1,0 +1,40 @@
+<div class="container1 d-flex align-items-end flex-column">
+  <div class="card">
+    <div class="card-header">
+      <br />
+      <h6 class="pt-4">Add Program Participant</h6>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <form #partnerForm="ngForm" (ngSubmit)="addParticipant()">
+          <div class="row">
+            <div class="col mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                [(ngModel)]="form.name"
+                required
+              />
+            </div>
+            <div class="alert alert-danger" role="alert" [hidden]="!error.name">
+              {{ error.name }}
+            </div>
+            <div class="col mb-3"></div>
+
+            <div class="col mb-3"></div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!partnerForm.valid"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

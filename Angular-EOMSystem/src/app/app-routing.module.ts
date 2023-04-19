@@ -9,7 +9,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateProgramComponent } from './components/create-program/create-program.component';
 import { ManagePartnersComponent } from './components/manage-partners/manage-partners.component';
 import { AddMemberComponent } from './components/add-member/add-member.component';
-
+import { EditProgramComponent } from './components/edit-program/edit-program.component';
+import { AddPartnerComponent } from './components/add-partner/add-partner.component';
+import { AddParticipantComponent } from './components/add-participant/add-participant.component';
+import { EditParticipantComponent } from './components/edit-participant/edit-participant.component';
+import { AddFileComponent } from './components/add-file/add-file.component';
+import { EditFileComponent } from './components/edit-file/edit-file.component';
+import { AllUsersComponent } from './components/all-users/all-users.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { AnnouncementsComponent } from './components/announcements/announcements.component';
 function logGuard() {
   const token = inject(TokenService);
   return !token.loggedIn();
@@ -51,6 +59,11 @@ const routes: Routes = [
     canActivate: [() => inject(TokenService).loggedIn()],
   },
   {
+    path: 'dashboard/program/edit/:id',
+    component: EditProgramComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
     path: 'dashboard/program/:id/manage-partners',
     component: ManagePartnersComponent,
     canActivate: [() => inject(TokenService).loggedIn()],
@@ -58,6 +71,46 @@ const routes: Routes = [
   {
     path: 'dashboard/program/:id/add-member',
     component: AddMemberComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
+    path: 'dashboard/program/:id/add-partner',
+    component: AddPartnerComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
+    path: 'dashboard/program/:id/add-participant',
+    component: AddParticipantComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
+    path: 'dashboard/program/:id/edit-participant',
+    component: EditParticipantComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
+    path: 'dashboard/program/:id/add-file',
+    component: AddFileComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
+    path: 'dashboard/program/:id/edit-file',
+    component: EditFileComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
+    path: 'user/all-users',
+    component: AllUsersComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
+    path: 'user/all-users/edit-user/:id',
+    component: EditUserComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
+    path: 'announcements',
+    component: AnnouncementsComponent,
     canActivate: [() => inject(TokenService).loggedIn()],
   },
 ];

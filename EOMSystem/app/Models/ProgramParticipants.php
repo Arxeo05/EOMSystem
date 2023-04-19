@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProgramParticipants extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'name'
+    ];
 }

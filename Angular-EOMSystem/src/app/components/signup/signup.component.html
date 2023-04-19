@@ -9,143 +9,159 @@
       <h6 class="pt-4">Sign-Up</h6>
     </div>
     <div class="card-body">
-      <form
-        #registerForm="ngForm"
-        (ngSubmit)="signupUser()"
-        enctype="multipart/form-data"
-      >
-        <div class="mb-3">
-          <form #registerForm="ngForm" (ngSubmit)="signupUser()">
-            <div class="row">
-              <div class="col mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  name="name"
-                  [(ngModel)]="form.name"
-                  required
-                />
-              </div>
-              <!-- <div class="alert alert-danger" role="alert" [hidden]="!error.name">
-          {{ error.name }}
-        </div>
-        <div class="col mb-3">
-
-        </div> -->
-              <div class="mb-3">
-                <label for="birth" class="form-label">Birthday</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="birth"
-                  name="birth"
-                  [(ngModel)]="form.birthday"
-                  required
-                />
-              </div>
-              <!-- <div class="alert alert-danger" role="alert" [hidden]="!error.birthday">
-          {{ error.birthday }}
-        </div> -->
-              <div class="mb-3">
-                <label for="college" class="form-label">College</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="college"
-                  name="college"
-                  [(ngModel)]="form.college"
-                  required
-                />
-              </div>
-              <!-- <div class="alert alert-danger" role="alert" [hidden]="!error.college">
-          {{ error.college }}
-        </div> -->
-              <div class="mb-3">
-                <label for="department" class="form-label">Department</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="department"
-                  name="department"
-                  [(ngModel)]="form.department"
-                  required
-                />
-              </div>
-              <!-- <div
-          class="alert alert-danger"
-          role="alert"
-          [hidden]="!error.department"
-        >
-          {{ error.department }}
-        </div> -->
-              <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  [(ngModel)]="form.email"
-                  required
-                />
-              </div>
-              <!-- <div class="alert alert-danger" role="alert" [hidden]="!error.email">
-          {{ error.email }}
-        </div>
-        <div class="col mb-3">
-        </div> -->
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  [(ngModel)]="form.password"
-                  required
-                />
-              </div>
-              <div class="col mb-3">
-                <label for="cpassword" class="form-label"
-                  >Confirm Password</label
-                >
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password_confirmation"
-                  name="password"
-                  [(ngModel)]="form.password_confirmation"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="photo" class="form-label">Photo</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="photo"
-                  name="photo"
-                  [(ngModel)]="form.photo"
-                  required
-                />
-              </div>
+      <div class="mb-3">
+        <form #registerForm="ngForm" (ngSubmit)="signupUser()">
+          <div class="row">
+            <div class="col mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                [(ngModel)]="form.name"
+                required
+              />
             </div>
-            <button
-              type="submit"
-              class="btn btn-primary"
-              [disabled]="!registerForm.valid"
+            <div class="alert alert-danger" role="alert" [hidden]="!error.name">
+              {{ error.name }}
+            </div>
+            <div class="col mb-3"></div>
+            <div class="mb-3">
+              <label for="birth" class="form-label">Birthday</label>
+              <input
+                type="date"
+                class="form-control"
+                id="birth"
+                name="birth"
+                [(ngModel)]="form.birthday"
+                required
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              [hidden]="!error.birthday"
             >
-              Submit
-            </button>
-          </form>
-          <p class="pt-3">
-            Already have an account?
-            <a routerLink="/login" style="color: skyblue">Log-In here</a>
-          </p>
-        </div>
-      </form>
+              {{ error.birthday }}
+            </div>
+            <div class="mb-3">
+              <label for="college" class="form-label">College</label>
+              <input
+                type="text"
+                class="form-control"
+                id="college"
+                name="college"
+                [(ngModel)]="form.college"
+                required
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              [hidden]="!error.college"
+            >
+              {{ error.college }}
+            </div>
+            <div class="mb-3">
+              <label for="department" class="form-label">Department</label>
+              <input
+                type="text"
+                class="form-control"
+                id="department"
+                name="department"
+                [(ngModel)]="form.department"
+                required
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              [hidden]="!error.department"
+            >
+              {{ error.department }}
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                [(ngModel)]="form.email"
+                required
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              [hidden]="!error.email"
+            >
+              {{ error.email }}
+            </div>
+            <div class="col mb-3"></div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                [(ngModel)]="form.password"
+                required
+              />
+            </div>
+            <div class="col mb-3">
+              <label for="cpassword" class="form-label">Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password_confirmation"
+                name="password"
+                [(ngModel)]="form.password_confirmation"
+                required
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              [hidden]="!error.password"
+            >
+              {{ error.password }}
+            </div>
+            <div class="mb-3">
+              <label for="photo" class="form-label">Photo</label>
+              <input
+                type="file"
+                class="form-control"
+                id="photo"
+                name="photo"
+                [(ngModel)]="form.photo"
+                required
+                (change)="onFileChange($event)"
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              [hidden]="!error.photo"
+            >
+              {{ error.photo }}
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!registerForm.valid"
+          >
+            Submit
+          </button>
+        </form>
+        <p class="pt-3">
+          Already have an account?
+          <a routerLink="/login" style="color: skyblue">Log-In here</a>
+        </p>
+      </div>
     </div>
   </div>
 </div>

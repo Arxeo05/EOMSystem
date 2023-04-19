@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class ProgramPartners extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'address',
+        'contactPerson',
+        'contactNumber',
+        'startPartnership',
+        'startPartnership',
+        'MoaFile'
+    ];
 }

@@ -1,0 +1,16 @@
+<form #fileForm="ngForm" (ngSubmit)="editFile()">
+  <div class="form-group">
+    <label for="file">Program File</label>
+    <input
+      type="file"
+      id="file"
+      name="file"
+      [(ngModel)]="form.file"
+      required
+      (change)="onFileChange($event)"
+    />
+  </div>
+  <div class="button-container">
+    <button type="submit" class="btn btn-primary">Update File</button>
+  </div>
+</form>

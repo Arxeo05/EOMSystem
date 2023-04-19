@@ -1,6 +1,6 @@
 <div class="announcement" id="announcement">
   <p>
-    <a href="#"> {{notification}}. Click here to renew</a>
+    <a href="#"> {{ notification }}. Click here to renew</a>
   </p>
 </div>
 <section class="content">
@@ -13,7 +13,7 @@
       </button>
     </div>
     <div class="card-container">
-      <div class="card"  *ngFor="let program of programs">
+      <div class="card" *ngFor="let program of programs">
         <div class="card-body">
           <div class="img-container">
             <img src="#" alt="image" />
@@ -30,10 +30,17 @@
             </button>
           </div>
           <div>
-            <button class="btn btn-primary" routerLink="">Edit</button>
+            <button
+              class="btn btn-primary"
+              routerLink="/dashboard/program/edit/{{ program.id }}"
+            >
+              Edit
+            </button>
           </div>
           <div>
-            <button class="btn btn-primary" routerLink="">Delete</button>
+            <button class="btn btn-primary" (click)="deleteProgram(program.id)">
+              Delete
+            </button>
           </div>
         </div>
       </div>

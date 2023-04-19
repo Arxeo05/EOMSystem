@@ -55,4 +55,25 @@ export class ProgramViewComponent implements OnInit {
       next: (data) => (this.programFiles = data),
     });
   }
+
+  deleteMember(pid: number, uid: number) {
+    this.backend.deleteMember(pid, uid).subscribe({
+      next: (data) => console.log(data),
+    });
+  }
+  deletePartner(id: number) {
+    this.backend.deletePartner(id).subscribe({
+      next: (data) => console.log(data),
+    });
+  }
+  deleteParticipant(id: number) {
+    this.backend.deleteParticipant(id).subscribe({
+      next: (data) => console.log(data),
+    });
+  }
+  deleteFile(id: number) {
+    this.backend.deleteFile(id).subscribe({
+      next: (data) => console.log(data),
+    });
+  }
 }

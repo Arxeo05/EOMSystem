@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->date('startDate');
-            $table->date('endDate');
+            $table->dateTime('startDate');
+            $table->dateTime('endDate');
             $table->string('place');
-            $table->unsignedBigInteger('leaderId');
-            $table->foreign('leaderId')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('leaderId')->nullable();
+            $table->foreign('leaderId')->references('id')->on('users')->onDelete('set null');
             $table->longText('flow');
             $table->longText('additionalDetail');
         });
