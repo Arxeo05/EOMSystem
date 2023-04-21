@@ -18,10 +18,16 @@
             <a class="navbar-brand" routerLink="dashboard" *ngIf="loggedIn"
               >Programs</a
             >
-            <a class="navbar-brand" routerLink="user/all-users" *ngIf="loggedIn"
+            <a
+              class="navbar-brand"
+              routerLink="user/all-users"
+              *ngIf="loggedIn ? (isAdmin ? true : false) : false"
               >Users</a
             >
-            <a class="navbar-brand" routerLink="announcements" *ngIf="loggedIn"
+            <a
+              class="navbar-brand"
+              routerLink="announcements"
+              *ngIf="loggedIn ? (isAdmin ? true : false) : false"
               >Announcements</a
             >
             <a

@@ -17,7 +17,7 @@ export class ManagePartnersComponent implements OnInit {
     contactNumber: '',
     MoaFile: null,
     startPartnership: '',
-    endPartnership: 'null',
+    endPartnership: '',
   };
   partners: any;
   constructor(

@@ -79,6 +79,20 @@ class AuthController extends Controller
         return response()->json(['message'=>'Account Updated']);
     }
 
+    public function updateUserPassword(Request $request, $id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $request->validate([
+            'password'=>'required|min:8',
+            'password_confirmation'=>'required|same:password',
+        ]);
+        $user = User::find($id);
+        $user->password = $request->input('password');
+        $user->save();
+        return response()->json(['message'=>'Password set successfully']);
+    }
+
     public function deleteUser($id){
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
@@ -176,6 +190,14 @@ class AuthController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         return response()->json([auth()->user()]);
+    }
+
+    public function userRole(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $user = auth()->user()->role;
+        return response()->json(['role'=>$user]);
     }
 
     /**

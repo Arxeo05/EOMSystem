@@ -1,0 +1,58 @@
+<div class="content">
+  <app-side-nav></app-side-nav>
+  <div class="container">
+    <div class="title-container">
+      <button type="button" class="btn btn-outline-primary" (click)="goBack()">
+        Back
+      </button>
+      <h3>Partner Details</h3>
+    </div>
+
+    <form #partnerForm="ngForm" (ngSubmit)="renewPartner()">
+      <br />
+      <div class="form-group">
+        <label for="moa-file">MOA File</label>
+        <div class="file-container">
+          <input
+            type="file"
+            class="form-control"
+            id="MoaFile"
+            name="MoaFile"
+            [(ngModel)]="form.MoaFile"
+            required
+            (change)="onFileChange($event)"
+          />
+        </div>
+      </div>
+      <br />
+      <div class="date-container">
+        <label>Partnership Start Date: </label>
+        <div class="form-group"></div>
+        <input
+          type="date"
+          class="form-control"
+          id="startPartnership"
+          name="startPartnership"
+          [(ngModel)]="form.startPartnership"
+          required
+        />
+      </div>
+      <div class="date-container">
+        <label>Partnership Expiration Date: </label>
+        <div class="form-group"></div>
+        <input
+          type="date"
+          class="form-control"
+          id="endPartnership"
+          name="endPartnership"
+          [(ngModel)]="form.endPartnership"
+          required
+        />
+      </div>
+      <br />
+      <div class="button-container">
+        <button type="submit" class="btn btn-primary">Renew</button>
+      </div>
+    </form>
+  </div>
+</div>

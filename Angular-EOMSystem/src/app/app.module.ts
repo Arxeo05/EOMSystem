@@ -25,6 +25,8 @@ import { EditFileComponent } from './components/edit-file/edit-file.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { AnnouncementsComponent } from './components/announcements/announcements.component';
+import { MoaRenewComponent } from './components/moa-renew/moa-renew.component';
+import { UpdateUserPasswordComponent } from './components/update-user-password/update-user-password.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { AnnouncementsComponent } from './components/announcements/announcements
     EditUserComponent,
     AllUsersComponent,
     AnnouncementsComponent,
+    MoaRenewComponent,
+    UpdateUserPasswordComponent,
   ],
   imports: [
     BrowserModule,

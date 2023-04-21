@@ -28,3 +28,10 @@
   justify-content: flex-end;
   margin-bottom: 20px;
 }
+.circular-image {
+  display: block;
+  width: 100px; /* adjust as needed */
+  height: 100px; /* adjust as needed */
+  object-fit: cover;
+  border-radius: 50%;
+}

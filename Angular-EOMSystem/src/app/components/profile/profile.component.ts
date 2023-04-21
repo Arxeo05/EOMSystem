@@ -7,11 +7,25 @@ import { BackendService } from '../../services/backend.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(private backend: BackendService) {}
   infos: any[] = [];
+  photoUrl: string = '';
+
+  constructor(private backend: BackendService) {}
   ngOnInit(): void {
     this.backend.me().subscribe({
-      next: (data) => (this.infos = Object.values(data)),
+      next: (data) => {
+        console.log(data);
+        this.infos = Object.values(data);
+        this.backend.userPhoto(data[0].photo).subscribe({
+          next: (data) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(data);
+            reader.onloadend = () => {
+              this.photoUrl = reader.result as string;
+            };
+          },
+        });
+      },
       error: (error) => console.log(error),
     });
   }

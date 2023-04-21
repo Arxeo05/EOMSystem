@@ -45,6 +45,18 @@ export class BackendService implements OnInit {
       headers,
     });
   }
+  userPhoto(filename: string): Observable<Blob> {
+    return this.http.get(`http://127.0.0.1:8000/api/user/photo/${filename}`, {
+      responseType: 'blob',
+    });
+  }
+  userRole(): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/userRole', { headers });
+  }
   programs() {
     const headers = new HttpHeaders().set(
       'Authorization',
@@ -193,6 +205,11 @@ export class BackendService implements OnInit {
       }
     );
   }
+  getMoa(filename: string) {
+    return this.http.get(`http://localhost:8000/api/partner/moa/${filename}`, {
+      responseType: 'blob',
+    });
+  }
 
   //users
   allUsers() {
@@ -226,6 +243,18 @@ export class BackendService implements OnInit {
       {
         headers,
       }
+    );
+  }
+  updateUserPassowrd(data: any, id: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    return this.http.post<any>(
+      `http://127.0.0.1:8000/api/user/update-password/${id}`,
+      data,
+      { headers }
     );
   }
 
@@ -325,6 +354,11 @@ export class BackendService implements OnInit {
       headers,
     });
   }
+  getFile(filename: string) {
+    return this.http.get(`http://localhost:8000/api/files/${filename}`, {
+      responseType: 'blob',
+    });
+  }
 
   //announcements
   expiringMoa() {
@@ -333,6 +367,39 @@ export class BackendService implements OnInit {
       'Bearer ' + localStorage.getItem('token')
     );
     return this.http.get(`http://127.0.0.1:8000/api/partner/moa/expiring`, {
+      headers,
+    });
+  }
+  renewPartner(data: any, id: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.post(
+      `http://127.0.0.1:8000/api/partner/moa/renew/${id}`,
+      data,
+      {
+        headers,
+      }
+    );
+  }
+
+  //faculty related
+  programByLeader() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/leaderof`, {
+      headers,
+    });
+  }
+  programBymember() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/memberof`, {
       headers,
     });
   }

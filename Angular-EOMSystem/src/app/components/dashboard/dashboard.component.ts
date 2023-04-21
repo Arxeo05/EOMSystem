@@ -8,13 +8,31 @@ import { BackendService } from '../../services/backend.service';
 })
 export class DashboardComponent implements OnInit {
   constructor(private backend: BackendService) {}
+
+  isAdmin = false;
   programs: any[] = [];
   notification: any;
+
+  //faculty properties
+  leadPrograms: any[] = [];
+  memberPrograms: any[] = [];
+
   ngOnInit(): void {
     this.backend.programs().subscribe({
       next: (data) => (this.programs = Object.values(data)),
     });
     this.notify(true);
+    this.backend.userRole().subscribe((data: { role: number }) => {
+      if (data.role === 1) {
+        this.isAdmin = true;
+      }
+    });
+    this.backend.programByLeader().subscribe((data) => {
+      this.leadPrograms = Object.values(data);
+    });
+    this.backend.programBymember().subscribe((data) => {
+      this.memberPrograms = Object.values(data);
+    });
   }
 
   notify(boolean: Boolean): any {

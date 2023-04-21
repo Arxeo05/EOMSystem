@@ -1,7 +1,8 @@
 <section class="content">
   <app-side-nav></app-side-nav>
   <div class="container" *ngFor="let program of programs">
-    <h4>{{ program.title }}</h4>
+    <button>HELLO</button>
+    <h4 id="title">{{ program.title }}</h4>
 
     <br />
     <table class="table">
@@ -23,7 +24,9 @@
       </tbody>
     </table>
 
-    <button class="btn btn-primary" routerLink="add-member">Add Member</button>
+    <button class="btn btn-primary" routerLink="add-member" *ngIf="isAdmin">
+      Add Member
+    </button>
     <table class="table">
       <thead>
         <tr>
@@ -39,6 +42,7 @@
               type="button"
               class="btn btn-danger"
               (click)="deleteMember(program.id, member.id)"
+              *ngIf="isAdmin"
             >
               Delete
             </button>
@@ -46,7 +50,12 @@
         </tr>
       </tbody>
     </table>
-    <button type="button" class="btn btn-success" routerLink="add-partner">
+    <button
+      type="button"
+      class="btn btn-success"
+      routerLink="add-partner"
+      *ngIf="isAdmin"
+    >
       Add Partner
     </button>
     <table class="table">
@@ -63,12 +72,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let partner of programPartners">
+        <tr *ngFor="let partner of programPartners; let i = index">
           <td>{{ partner.name }}</td>
           <td>{{ partner.address }}</td>
           <td>{{ partner.contactPerson }}</td>
           <td>{{ partner.contactNumber }}</td>
-          <td>{{ partner.MoaFile }}</td>
+          <td>
+            <a (click)="partnerMoa(i)" [href]="moaFile" target="_blank">{{
+              partner.MoaFile
+            }}</a>
+          </td>
           <td>{{ partner.startPartnership }}</td>
           <td>{{ partner.endPartnership }}</td>
 
@@ -77,6 +90,7 @@
               type="button"
               class="btn btn-primary"
               routerLink="/dashboard/program/{{ partner.id }}/manage-partners"
+              *ngIf="isAdmin"
             >
               Update
             </button>
@@ -84,6 +98,7 @@
               type="button"
               class="btn btn-danger"
               (click)="deletePartner(partner.id)"
+              *ngIf="isAdmin"
             >
               Delete
             </button>
@@ -91,7 +106,12 @@
         </tr>
       </tbody>
     </table>
-    <button type="button" class="btn btn-success" routerLink="add-participant">
+    <button
+      type="button"
+      class="btn btn-success"
+      routerLink="add-participant"
+      *ngIf="isAdmin"
+    >
       Add Participant
     </button>
     <table class="table">
@@ -111,6 +131,7 @@
               routerLink="/dashboard/program/{{
                 participant.id
               }}/edit-participant"
+              *ngIf="isAdmin"
             >
               Update
             </button>
@@ -118,6 +139,7 @@
               type="button"
               class="btn btn-danger"
               (click)="deleteParticipant(participant.id)"
+              *ngIf="isAdmin"
             >
               Delete
             </button>
@@ -125,7 +147,12 @@
         </tr>
       </tbody>
     </table>
-    <button type="button" class="btn btn-success" routerLink="add-file">
+    <button
+      type="button"
+      class="btn btn-success"
+      routerLink="add-file"
+      *ngIf="isAdmin"
+    >
       Add File
     </button>
     <table class="table">
@@ -137,18 +164,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let file of programFiles">
+        <tr *ngFor="let file of programFiles; let i = index">
           <td>
             <p>{{ file.title }}</p>
           </td>
           <td>
-            <p>{{ file.file }}</p>
+            <a (click)="programFilelink(i)" [href]="fileUrl" target="_blank">{{
+              file.file
+            }}</a>
           </td>
           <td>
             <button
               type="button"
               class="btn btn-primary"
               routerLink="/dashboard/program/{{ file.id }}/edit-file"
+              *ngIf="isAdmin"
             >
               Update
             </button>
@@ -156,6 +186,7 @@
               type="button"
               class="btn btn-danger"
               (click)="deleteFile(file.id)"
+              *ngIf="isAdmin"
             >
               Delete
             </button>

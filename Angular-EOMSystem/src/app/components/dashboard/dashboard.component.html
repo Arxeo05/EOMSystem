@@ -5,7 +5,7 @@
 </div>
 <section class="content">
   <app-side-nav></app-side-nav>
-  <div class="container">
+  <div class="container" *ngIf="isAdmin">
     <h5>All Programs</h5>
     <div class="con">
       <button class="btn btn-primary" routerLink="/create-program">
@@ -40,6 +40,53 @@
           <div>
             <button class="btn btn-primary" (click)="deleteProgram(program.id)">
               Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- faculty dashboard -->
+  <div class="container" *ngIf="!isAdmin">
+    <h5>Programs you lead</h5>
+    <div class="con"></div>
+    <div class="card-container">
+      <div class="card" *ngFor="let program of leadPrograms">
+        <div class="card-body">
+          <div class="img-container">
+            <img src="#" alt="image" />
+          </div>
+          <div>
+            <label class="title">{{ program.title }}</label>
+          </div>
+          <div>
+            <button
+              class="btn btn-primary"
+              routerLink="/dashboard/program/{{ program.id }}"
+            >
+              View
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h5>Programs you are member of</h5>
+    <div class="card-container">
+      <div class="card" *ngFor="let program of memberPrograms">
+        <div class="card-body">
+          <div class="img-container">
+            <img src="#" alt="image" />
+          </div>
+          <div>
+            <label class="title">{{ program.title }}</label>
+          </div>
+          <div>
+            <button
+              class="btn btn-primary"
+              routerLink="/dashboard/program/{{ program.id }}"
+            >
+              View
             </button>
           </div>
         </div>

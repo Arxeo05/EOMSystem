@@ -260,6 +260,36 @@ class ProgramsController extends Controller
         return ProgramPartners::whereBetween('endPartnership', [$today, $expiration])->get();
     }
 
+    public function renewMoa(Request $request, $id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $file = ProgramPartners::find($id);
+        $request->validate([
+            'MoaFile'=>'required|mimes:pdf,docx|max:1999',
+            'startPartnership'=>'required',
+            'endPartnership'=>'required',
+        ]);
+        if($request->hasFile('MoaFile')){
+            $file_name = $file->MoaFile;
+            $file_path = public_path('storage/moa_files/'.$file_name);
+            unlink($file_path);
+            $file->delete();
+
+            $fileNameWithExt = $request->file('MoaFile')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('MoaFile')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            $path = $request->file('MoaFile')->storeAs('public/moa_files',$fileNameToStore);
+        }else{
+            return 'file too large';
+        }
+            $file->MoaFile = $fileNameToStore;
+            $file->startPartnership = $request->input('startPartnership');
+            $file->endPartnership = $request->input('endPartnership');
+            $file->save();
+    }
+
      //ProgramParticipantModel
      public function addParticipant(Request $request,$pid){
         if(!auth()->user()){
@@ -343,7 +373,7 @@ class ProgramsController extends Controller
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);
         }
-        return response()->json($result);
+        return $result;
     }
 
     public function updateFile(Request $request, $id){

@@ -17,7 +17,14 @@
           <td>{{ exmoa.MoaFile }}</td>
           <td>{{ exmoa.startPartnership }}</td>
           <td>{{ exmoa.endPartnership }}</td>
-          <td><button class="btn btn-primary">Renew</button></td>
+          <td>
+            <button
+              class="btn btn-primary"
+              routerLink="/partner/renew/{{ exmoa.id }}"
+            >
+              Renew
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

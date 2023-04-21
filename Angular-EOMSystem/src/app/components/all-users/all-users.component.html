@@ -29,6 +29,13 @@
           </button>
           <button
             type="button"
+            class="btn btn-secondary"
+            routerLink="update-password/{{ user.id }}"
+          >
+            Set Password
+          </button>
+          <button
+            type="button"
             class="btn btn-danger"
             (click)="deleteUser(user.id)"
           >
