@@ -1,0 +1,12 @@
+p {
+  font-size: 12px;
+  font-weight: bolder;
+}
+#header {
+  text-align: left;
+  color: blueviolet;
+}
+
+h5 {
+  text-align: center;
+}

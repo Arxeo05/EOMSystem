@@ -8,6 +8,7 @@ use App\Models\ProgramFiles;
 use App\Models\ProgramParticipants;
 use App\Models\ProgramPartners;
 use App\Models\ArchievedPrograms;
+use App\Models\ProgramFlow;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -75,7 +76,6 @@ class ProgramsController extends Controller
             'endDate'=>'required',
             'place'=>'required',
             'leaderId'=>'required',
-            'flow'=>'required',
             'additionalDetail'=>'required',
         ]);
         $program = Program::create($request->all());
@@ -333,6 +333,52 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         return ProgramParticipants::destroy($id);
+    }
+
+    //Program flow
+
+    public function deleteFlow($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        return ProgramFlow::destroy($id);
+    }
+    public function getFlowByProgram($pid){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $result = DB::table('program_flows')
+        ->where('programId', '=', $pid)
+        ->get();
+        if(is_null($result)){
+            return response()->json(['message'=>'Query not found']);
+        }
+        return response()->json($result);
+    }
+
+    public function addFlow(Request $request, $pid){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $request->validate([
+            'flows.*.event'=>'required',
+            'flows.*.remarks'=>'required',
+            'flows.*.time'=>'required',
+        ]);
+        $flows = $request->input('flows',[]);
+        foreach ($flows as $flow) {
+            $event = $flow['event'];
+            $remarks = $flow['remarks'];
+            $time = $flow['time'];
+
+            $newFlow = new ProgramFlow;
+            $newFlow->programId = $pid;
+            $newFlow->event = $event;
+            $newFlow->remarks = $remarks;
+            $newFlow->time = $time;
+            $newFlow->save();
+        }
+        return response()->json(['message'=>'Flow Added']);
     }
 
     //Program Files

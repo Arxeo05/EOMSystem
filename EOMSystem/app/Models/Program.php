@@ -33,6 +33,11 @@ class Program extends Model
         return $this->hasMany(ProgramParticipants::class);
     }
 
+    public function flows(): HasMany
+    {
+        return $this->hasMany(ProgramFlow::class);
+    }
+
     public function partners(): HasMany
     {
         return $this->hasMany(ProgramPartners::class);

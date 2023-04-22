@@ -584,6 +584,7 @@ class ComposerStaticInit0f6cf43ea1111623800021dd5599d017
         'App\\Models\\ArchievedPrograms' => __DIR__ . '/../..' . '/app/Models/ArchievedPrograms.php',
         'App\\Models\\Program' => __DIR__ . '/../..' . '/app/Models/Program.php',
         'App\\Models\\ProgramFiles' => __DIR__ . '/../..' . '/app/Models/ProgramFiles.php',
+        'App\\Models\\ProgramFlow' => __DIR__ . '/../..' . '/app/Models/ProgramFlow.php',
         'App\\Models\\ProgramParticipants' => __DIR__ . '/../..' . '/app/Models/ProgramParticipants.php',
         'App\\Models\\ProgramPartners' => __DIR__ . '/../..' . '/app/Models/ProgramPartners.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',

@@ -40,6 +40,10 @@ Route::get('participant/{pid}',[ProgramsController::class, 'getParticipantByProg
 Route::post('participant/edit/{id}',[ProgramsController::class, 'updateParticipant']);
 Route::post('participant/delete/{id}',[ProgramsController::class, 'deleteParticipant']);
 
+//Program-flows routes
+Route::post('flow/{pid}',[ProgramsController::class, 'addFlow']);
+Route::get('program-flow/{pid}',[ProgramsController::class, 'getFlowByProgram']);
+Route::post('flow/delete/{id}',[ProgramsController::class, 'deleteFlow']);
 //Program-partners routes
 Route::post('partners/{pid}',[ProgramsController::class, 'addPartner']);
 Route::get('program-partner/{pid}',[ProgramsController::class, 'getPartnerByProgram']);

@@ -1,0 +1,17 @@
+<form (submit)="onSubmit()">
+  <div *ngFor="let flow of flows; let i = index">
+    <label>Event:</label>
+    <input type="text" name="event" [(ngModel)]="flow.event" />
+
+    <label>Remarks:</label>
+    <input type="text" name="remarks" [(ngModel)]="flow.remarks" />
+
+    <label>Time:</label>
+    <input type="time" name="time" [(ngModel)]="flow.time" />
+
+    <button type="button" (click)="removeUser(i)" *ngIf="i > 0">Remove</button>
+  </div>
+
+  <button type="button" (click)="addUser()">Add Item</button>
+  <button type="submit">Submit</button>
+</form>

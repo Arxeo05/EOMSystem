@@ -25,6 +25,7 @@ return array(
     'App\\Models\\ArchievedPrograms' => $baseDir . '/app/Models/ArchievedPrograms.php',
     'App\\Models\\Program' => $baseDir . '/app/Models/Program.php',
     'App\\Models\\ProgramFiles' => $baseDir . '/app/Models/ProgramFiles.php',
+    'App\\Models\\ProgramFlow' => $baseDir . '/app/Models/ProgramFlow.php',
     'App\\Models\\ProgramParticipants' => $baseDir . '/app/Models/ProgramParticipants.php',
     'App\\Models\\ProgramPartners' => $baseDir . '/app/Models/ProgramPartners.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

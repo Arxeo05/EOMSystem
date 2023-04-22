@@ -1,16 +1,17 @@
 <section class="content">
   <app-side-nav></app-side-nav>
   <div class="container" *ngFor="let program of programs">
-    <button>HELLO</button>
     <h4 id="title">{{ program.title }}</h4>
 
     <br />
+    <button class="btn btn-primary" routerLink="terminal-report">
+      Terminal Report
+    </button>
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Place</th>
           <th scope="col">Prgoram Lead</th>
-          <th scope="col">Program Flow</th>
           <th scope="col">Additional Details</th>
         </tr>
       </thead>
@@ -18,8 +19,38 @@
         <tr>
           <td>{{ program.place }}</td>
           <td>{{ programLeader }}</td>
-          <td>{{ program.flow }}</td>
           <td>{{ program.additionalDetail }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="btn btn-primary" routerLink="add-flow" *ngIf="isAdmin">
+      Add Flow
+    </button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Event</th>
+          <th scope="col">Remarks</th>
+          <th scope="col">Time</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flow of programFlows">
+          <td>{{ flow.event }}</td>
+          <td>{{ flow.remarks }}</td>
+          <td>{{ flow.time }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteFlow(flow.id)"
+              *ngIf="isAdmin"
+            >
+              Delete
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -78,9 +109,12 @@
           <td>{{ partner.contactPerson }}</td>
           <td>{{ partner.contactNumber }}</td>
           <td>
-            <a (click)="partnerMoa(i)" [href]="moaFile" target="_blank">{{
-              partner.MoaFile
-            }}</a>
+            <a
+              (click)="partnerMoa($event, i)"
+              [href]="moaFile"
+              target="_blank"
+              >{{ partner.MoaFile }}</a
+            >
           </td>
           <td>{{ partner.startPartnership }}</td>
           <td>{{ partner.endPartnership }}</td>
@@ -169,9 +203,12 @@
             <p>{{ file.title }}</p>
           </td>
           <td>
-            <a (click)="programFilelink(i)" [href]="fileUrl" target="_blank">{{
-              file.file
-            }}</a>
+            <a
+              (click)="programFilelink($event, i)"
+              [href]="fileUrl"
+              target="_blank"
+              >{{ file.file }}</a
+            >
           </td>
           <td>
             <button

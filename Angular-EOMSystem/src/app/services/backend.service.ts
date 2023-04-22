@@ -323,6 +323,36 @@ export class BackendService implements OnInit {
     );
   }
 
+  //Flow
+  programFlow(pid: number) {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+      .set('Content-Type', 'application/json');
+    return this.http.get(`http://127.0.0.1:8000/api/program-flow/${pid}`, {
+      headers,
+    });
+  }
+  addFlow(data: any, pid: number): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+      .set('Content-Type', 'application/json');
+    return this.http.post<any>(
+      `http://127.0.0.1:8000/api/flow/${pid}`,
+      JSON.stringify(data),
+      {
+        headers,
+      }
+    );
+  }
+  deleteFlow(id: number) {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+      .set('Content-Type', 'application/json');
+    return this.http.post(`http://127.0.0.1:8000/api/flow/delete/${id}`, null, {
+      headers,
+    });
+  }
+
   //Files
   addFile(data: any, pid: number): Observable<any> {
     const headers = new HttpHeaders().set(

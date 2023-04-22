@@ -12,7 +12,6 @@ export class CreateProgramComponent implements OnInit {
     endDate: null,
     place: null,
     leaderId: null,
-    flow: null,
     additionalDetail: null,
   };
 

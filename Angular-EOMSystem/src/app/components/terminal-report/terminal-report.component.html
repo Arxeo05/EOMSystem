@@ -1,0 +1,52 @@
+<div id="myHtmlElement">
+  <p id="header">Extension Communty Involvment Terminal Report</p>
+  <div *ngFor="let program of programs">
+    <div>
+      <p><b>Name of Activity/Project: </b>{{ program.title }}</p>
+      <p><b>Date of the Activity: </b>{{ program.startDate }}</p>
+      <p><b>Place of the Activity: </b>{{ program.place }}</p>
+    </div>
+    <br />
+    <h5>Faculty involved:</h5>
+    <div *ngFor="let member of programMembers">
+      <p>{{ member.name }}</p>
+    </div>
+    <h5>Beneficiaries:</h5>
+    <div *ngFor="let participant of programParticipants">
+      <p>{{ participant.name }}</p>
+    </div>
+    <h5>Report on the flow of the activity</h5>
+    <div>
+      <p>
+        As part of the University Extension Service, the faculty member <br />
+        participated in {{ program.title }}.
+      </p>
+      <p>
+        This event happened on {{ program.startDate }}. <br />
+        The program flow is as follows
+      </p>
+    </div>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Event</th>
+            <th scope="col">Remarks</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let flow of programFlows">
+            <td>{{ flow.event }}</td>
+            <td>{{ flow.remarks }}</td>
+            <td>{{ flow.time }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-primary" (click)="onGeneratePDF()">
+  Download Report
+</button>

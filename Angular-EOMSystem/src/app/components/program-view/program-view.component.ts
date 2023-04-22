@@ -1,8 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
-import { ActivatedRoute } from '@angular/router';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-program-view',
   templateUrl: './program-view.component.html',
@@ -14,10 +12,15 @@ export class ProgramViewComponent implements AfterViewInit {
   programMembers: any;
   programPartners: any;
   programParticipants: any;
+  programFlows: any;
   programFiles: any[] = [];
   isAdmin: boolean = false;
 
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   ngAfterViewInit(): void {
     this.backend.userRole().subscribe((data: { role: number }) => {
       if (data.role === 1) {
@@ -35,15 +38,22 @@ export class ProgramViewComponent implements AfterViewInit {
     this.programPartner(id);
     this.programParticipant(id);
     this.programFile(id);
+    this.programFlow(id);
   }
   programsById(id: number): void {
     this.backend.programsById(id).subscribe({
-      next: (data) => (this.programs = data),
+      next: (data) => (this.programs = Object.values(data)),
     });
   }
   programMember(pid: number) {
     this.backend.programMember(pid).subscribe({
       next: (data) => (this.programMembers = data),
+    });
+  }
+
+  programFlow(pid: number) {
+    this.backend.programFlow(pid).subscribe({
+      next: (data) => (this.programFlows = Object.values(data)),
     });
   }
 
@@ -56,17 +66,22 @@ export class ProgramViewComponent implements AfterViewInit {
   }
 
   moaFile: string = '';
-  partnerMoa(index: number) {
+  partnerMoa(event: MouseEvent, index: number) {
+    event.preventDefault();
     this.backend.getMoa(this.programPartners[index].MoaFile).subscribe({
       next: (data) => {
         this.moaFile = window.URL.createObjectURL(data);
+        const link = document.createElement('a');
+        link.href = this.moaFile;
+        link.target = '_blank';
+        link.click();
       },
     });
   }
 
   programParticipant(pid: number) {
     this.backend.programParticipants(pid).subscribe({
-      next: (data) => (this.programParticipants = data),
+      next: (data) => (this.programParticipants = Object.values(data)),
     });
   }
 
@@ -78,10 +93,15 @@ export class ProgramViewComponent implements AfterViewInit {
     });
   }
   fileUrl: string = '';
-  programFilelink(index: number) {
+  programFilelink(event: MouseEvent, index: number) {
+    event.preventDefault();
     this.backend.getFile(this.programFiles[index].file).subscribe({
       next: (data) => {
         this.fileUrl = window.URL.createObjectURL(data);
+        const link = document.createElement('a');
+        link.href = this.fileUrl;
+        link.target = '_blank';
+        link.click();
       },
     });
   }
@@ -101,27 +121,14 @@ export class ProgramViewComponent implements AfterViewInit {
       next: (data) => console.log(data),
     });
   }
+  deleteFlow(id: number) {
+    this.backend.deleteFlow(id).subscribe({
+      next: (data) => console.log(data),
+    });
+  }
   deleteFile(id: number) {
     this.backend.deleteFile(id).subscribe({
       next: (data) => console.log(data),
     });
   }
-  // reportData: any = 'FUCK ME'; // Replace with your report data
-
-  // downloadPDF() {
-  //   const reportElement = document.getElementById('title');
-
-  //   // Compile the HTML template with Handlebars
-
-  //   // Generate a PDF document from the rendered HTML
-  //   if (reportElement instanceof HTMLElement) {
-  //     html2canvas(reportElement).then((canvas) => {
-  //       const doc = new jsPDF();
-  //       doc.text('HELLO', 10, 20); // Add the report data as text to the PDF
-  //       doc.save('report.pdf');
-  //     });
-  //   } else {
-  //     console.error('Report element not found');
-  //   }
-  // }
 }

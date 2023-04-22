@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('place');
             $table->unsignedBigInteger('leaderId')->nullable();
             $table->foreign('leaderId')->references('id')->on('users')->onDelete('set null');
-            $table->longText('flow');
             $table->longText('additionalDetail');
         });
     }

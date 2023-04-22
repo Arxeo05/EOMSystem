@@ -21,6 +21,8 @@ import { AnnouncementsComponent } from './components/announcements/announcements
 import { MoaRenewComponent } from './components/moa-renew/moa-renew.component';
 import { UpdateUserPasswordComponent } from './components/update-user-password/update-user-password.component';
 import { RoleGuardGuard } from './role-guard.guard';
+import { AddFlowComponent } from './components/add-flow/add-flow.component';
+import { TerminalReportComponent } from './components/terminal-report/terminal-report.component';
 
 function logGuard() {
   const token = inject(TokenService);
@@ -79,6 +81,11 @@ const routes: Routes = [
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
   {
+    path: 'dashboard/program/:id/terminal-report',
+    component: TerminalReportComponent,
+    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+  },
+  {
     path: 'dashboard/program/:id/add-member',
     component: AddMemberComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
@@ -96,6 +103,11 @@ const routes: Routes = [
   {
     path: 'dashboard/program/:id/edit-participant',
     component: EditParticipantComponent,
+    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+  },
+  {
+    path: 'dashboard/program/:id/add-flow',
+    component: AddFlowComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
   {
