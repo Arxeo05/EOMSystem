@@ -1,4 +1,4 @@
-<nav class="navbar bg-light" *ngIf="loggedIn">
+<!-- <nav class="navbar bg-light" *ngIf="loggedIn">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">EOMS</a>
     <div class="con1 col-sm-3 position-absolute top-0 end-0">
@@ -42,4 +42,80 @@
       </div>
     </div>
   </div>
-</nav>
+</nav> -->
+
+
+<nav class="navbar" *ngIf="loggedIn">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/"><img src="../../../assets/images/CICT.png" style="width:10%; height:auto; max-width:300px; margin-right: 20px;"/>EOMS</a>
+    <div class="d-flex me-2">
+    <a class="nav-link  p-4" routerLink="profile" *ngIf="loggedIn">Profile</a>
+    <a class="nav-link p-4" routerLink="dashboard" *ngIf="loggedIn"
+      >Programs</a
+    >
+    <a
+              class="navbar-link p-4"
+              routerLink="user/all-users"
+              *ngIf="loggedIn ? (isAdmin ? true : false) : false"
+              >Users</a
+            >
+            <a
+              class="navbar-link p-4"
+              routerLink="announcements"
+              *ngIf="loggedIn ? (isAdmin ? true : false) : false"
+              >Announcements</a
+            >
+
+    <a class="nav-link p-4" href="#" (click)="logout($event)" *ngIf="loggedIn"
+      >Log-Out</a
+    >
+    
+    </div>
+  </div>
+
+<!-- <nav class="navbar bg-light" *ngIf="loggedIn">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">EOMS</a>
+    <div class="con1 col-sm-3 position-absolute top-0 end-0">
+      <div class="con3 bg-dark p-2">
+        <div
+          class="p-3 d-flex justify-content-center flex-column align-items-center"
+        >
+          <a class="navbar-brand" routerLink="/"
+            ><img src="../../assets/images/bsulogo.png" class="img2" alt="bsu"
+          /></a>
+          <div
+            class="p-3 d-flex justify-content-center flex-column align-items-center"
+          >
+            <a class="navbar-brand" routerLink="profile" *ngIf="loggedIn"
+              >Profile</a
+            >
+            <a class="navbar-brand" routerLink="dashboard" *ngIf="loggedIn"
+              >Programs</a
+            >
+            <a
+              class="navbar-brand"
+              routerLink="user/all-users"
+              *ngIf="loggedIn ? (isAdmin ? true : false) : false"
+              >Users</a
+            >
+            <a
+              class="navbar-brand"
+              routerLink="announcements"
+              *ngIf="loggedIn ? (isAdmin ? true : false) : false"
+              >Announcements</a
+            >
+            <a
+              class="navbar-brand"
+              href="#"
+              (click)="logout($event)"
+              *ngIf="loggedIn"
+              >Log-Out</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav> -->
+

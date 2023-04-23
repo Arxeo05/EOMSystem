@@ -30,6 +30,10 @@ import { UpdateUserPasswordComponent } from './components/update-user-password/u
 import { AddFlowComponent } from './components/add-flow/add-flow.component';
 import { TerminalReportComponent } from './components/terminal-report/terminal-report.component';
 import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import * as more from 'highcharts/highcharts-more.src';
+import * as exporting from 'highcharts/modules/exporting.src';
 
 @NgModule({
   declarations: [
@@ -65,8 +69,10 @@ import { EditUserProfileComponent } from './components/edit-user-profile/edit-us
     NgbModule,
     FormsModule,
     HttpClientModule,
+    FontAwesomeModule,
+    ChartModule,
   ],
-  providers: [],
+  providers: [{ provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting ] }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

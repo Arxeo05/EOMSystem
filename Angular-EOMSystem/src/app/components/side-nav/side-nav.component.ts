@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faBook, faCoffee, faDashboard } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-side-nav',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent {
-
+  faDashboard = faDashboard;
+  faBook = faBook;
 }

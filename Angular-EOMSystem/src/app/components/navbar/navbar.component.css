@@ -1,13 +1,22 @@
-.con3{
-    height: 100vh;
-    width: auto;
+
+.navbar{
+    height: 70px;
+    background-color: rgb(11, 109, 190);
+    color: #FFF;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 5px 5px 5px #939393;
 }
 a{
-    color: white;
-    text-decoration: underline;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }
 a:hover{
-    color: red;
+    color: #113c60;;
+    text-decoration: underline;
+}
+a:active{
+    color: rgb(130, 105, 244);
     text-decoration: underline;
 }
 .img2{
@@ -17,6 +26,7 @@ a:hover{
 h6{
     color: white;
 }
+
 @media(max-width: 850px){
     .con3{
         height: 100vh;
