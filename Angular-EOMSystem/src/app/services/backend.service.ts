@@ -45,9 +45,31 @@ export class BackendService implements OnInit {
       headers,
     });
   }
+  editUserprofile(data: any): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.post<any>(
+      'http://127.0.0.1:8000/api/me/update-profile',
+      data,
+      {
+        headers,
+      }
+    );
+  }
   userPhoto(filename: string): Observable<Blob> {
     return this.http.get(`http://127.0.0.1:8000/api/user/photo/${filename}`, {
       responseType: 'blob',
+    });
+  }
+  userById(id: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/user/${id}`, {
+      headers,
     });
   }
   userRole(): Observable<any> {
@@ -137,6 +159,16 @@ export class BackendService implements OnInit {
       'Bearer ' + localStorage.getItem('token')
     );
     return this.http.get(`http://127.0.0.1:8000/api/program-partner/${pid}`, {
+      headers,
+    });
+  }
+
+  getPArticipantById(id: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/getparticipant/${id}`, {
       headers,
     });
   }

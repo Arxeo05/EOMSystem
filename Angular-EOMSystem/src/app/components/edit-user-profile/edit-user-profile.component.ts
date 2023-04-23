@@ -1,40 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
-import { ActivatedRoute } from '@angular/router';
+
 @Component({
-  selector: 'app-edit-user',
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css'],
+  selector: 'app-edit-user-profile',
+  templateUrl: './edit-user-profile.component.html',
+  styleUrls: ['./edit-user-profile.component.css'],
 })
-export class EditUserComponent implements OnInit {
-  formValues: any;
+export class EditUserProfileComponent implements OnInit {
+  profileValues: any;
   public form = {
     name: '',
     birthday: '',
     college: '',
     department: '',
     email: '',
-    status: '',
     photo: null,
   };
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  constructor(private backend: BackendService) {}
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.backend.userById(id).subscribe({
+    this.backend.me().subscribe({
       next: (data) => {
-        this.formValues = Object.values(data);
-        this.form.name = this.formValues[0].name;
-        this.form.birthday = this.formValues[0].birthday;
-        this.form.college = this.formValues[0].college;
-        this.form.department = this.formValues[0].department;
-        this.form.email = this.formValues[0].email;
-        this.form.status = this.formValues[0].status;
-        this.form.photo = this.formValues[0].photo;
+        this.profileValues = Object.values(data);
+        this.form.name = this.profileValues[0].name;
+        this.form.birthday = this.profileValues[0].birthday;
+        this.form.college = this.profileValues[0].college;
+        this.form.department = this.profileValues[0].department;
+        this.form.email = this.profileValues[0].email;
+      },
+      error: (error) => {
+        this.error = Object.values(error);
       },
     });
   }
-
-  id = Number(this.route.snapshot.paramMap.get('id'));
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       this.form.photo = event.target.files[0];
@@ -50,12 +47,11 @@ export class EditUserComponent implements OnInit {
     formData.append('college', this.form.college);
     formData.append('department', this.form.department);
     formData.append('email', this.form.email);
-    formData.append('status', this.form.status);
     if (this.form.photo) {
       formData.append('photo', this.form.photo);
     }
 
-    return this.backend.editUser(formData, this.id).subscribe({
+    return this.backend.editUserprofile(formData).subscribe({
       next: (data) => console.log(data),
       error: (error) => {
         this.handleError(error);

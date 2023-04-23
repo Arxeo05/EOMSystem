@@ -319,6 +319,19 @@ class ProgramsController extends Controller
         return response()->json($result);
     }
 
+    public function getParticipantByID($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $result = DB::table('program_participants')
+        ->where('id', '=', $id)
+        ->get();
+        if(is_null($result)){
+            return response()->json(['message'=>'Query not found']);
+        }
+        return response()->json($result);
+    }
+
     public function updateParticipant(Request $request, $id){
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);

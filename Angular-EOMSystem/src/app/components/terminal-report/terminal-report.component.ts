@@ -54,7 +54,7 @@ export class TerminalReportComponent implements OnInit {
       callback: function (doc) {
         doc.save('terminal-report.pdf');
       },
-      margin: [10, 10, 10, 10],
+      margin: [15, 15, 15, 15],
       autoPaging: 'text',
       x: 0,
       y: 0,

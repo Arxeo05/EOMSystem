@@ -23,6 +23,7 @@ import { UpdateUserPasswordComponent } from './components/update-user-password/u
 import { RoleGuardGuard } from './role-guard.guard';
 import { AddFlowComponent } from './components/add-flow/add-flow.component';
 import { TerminalReportComponent } from './components/terminal-report/terminal-report.component';
+import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
 
 function logGuard() {
   const token = inject(TokenService);
@@ -48,6 +49,11 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
+    path: 'profile/edit-profile',
+    component: EditUserProfileComponent,
     canActivate: [() => inject(TokenService).loggedIn()],
   },
   {

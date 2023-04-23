@@ -10,6 +10,7 @@ import { take } from 'rxjs';
   styleUrls: ['./manage-partners.component.css'],
 })
 export class ManagePartnersComponent implements OnInit {
+  formValues: any;
   public form = {
     name: '',
     address: '',
@@ -34,15 +35,19 @@ export class ManagePartnersComponent implements OnInit {
   }
   id = Number(this.route.snapshot.paramMap.get('id'));
   ngOnInit(): void {
-    this.partnerById(this.id);
-  }
-  partnerById(id: number) {
-    this.backend
-      .partnerById(id)
-      .pipe(take(1))
-      .subscribe({
-        next: (data) => (this.partners = data),
-      });
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.backend.partnerById(id).subscribe({
+      next: (data) => {
+        this.formValues = Object.values(data);
+        this.form.name = this.formValues[0].name;
+        this.form.address = this.formValues[0].address;
+        this.form.contactPerson = this.formValues[0].contactPerson;
+        this.form.contactNumber = this.formValues[0].contactNumber;
+        this.form.MoaFile = this.formValues[0].MoaFile;
+        this.form.startPartnership = this.formValues[0].startPartnership;
+        this.form.endPartnership = this.formValues[0].endPartnership;
+      },
+    });
   }
 
   error: any = [];

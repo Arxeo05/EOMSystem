@@ -1,33 +1,41 @@
-<div id="myHtmlElement">
-  <p id="header">Extension Communty Involvment Terminal Report</p>
+<div id="myHtmlElement" style="margin: auto; width: 50%">
+  <h6 id="header" style="text-align: center; font-weight: bolder">
+    Extension Communty Involvment Terminal Report
+  </h6>
   <div *ngFor="let program of programs">
     <div>
-      <p><b>Name of Activity/Project: </b>{{ program.title }}</p>
-      <p><b>Date of the Activity: </b>{{ program.startDate }}</p>
-      <p><b>Place of the Activity: </b>{{ program.place }}</p>
+      <p style="font-size: 12px">
+        <b>Name of Activity/Project: </b>{{ program.title }}
+      </p>
+      <p style="font-size: 12px">
+        <b>Date of the Activity: </b>{{ program.startDate }}
+      </p>
+      <p style="font-size: 12px">
+        <b>Place of the Activity: </b>{{ program.place }}
+      </p>
     </div>
     <br />
-    <h5>Faculty involved:</h5>
+    <h5 style="text-align: center">Faculty involved:</h5>
     <div *ngFor="let member of programMembers">
       <p>{{ member.name }}</p>
     </div>
-    <h5>Beneficiaries:</h5>
+    <h5 style="text-align: center">Beneficiaries:</h5>
     <div *ngFor="let participant of programParticipants">
       <p>{{ participant.name }}</p>
     </div>
-    <h5>Report on the flow of the activity</h5>
+    <h5 style="text-align: center">Report on the flow of the activity</h5>
     <div>
-      <p>
+      <p style="font-size: 12px">
         As part of the University Extension Service, the faculty member <br />
         participated in {{ program.title }}.
       </p>
-      <p>
+      <p style="font-size: 12px">
         This event happened on {{ program.startDate }}. <br />
         The program flow is as follows
       </p>
     </div>
     <div>
-      <table class="table">
+      <table class="table" style="width: 50%">
         <thead>
           <tr>
             <th scope="col">Event</th>

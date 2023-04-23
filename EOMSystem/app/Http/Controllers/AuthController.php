@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use Illuminate\Support\Facades\Redis;
 
 class AuthController extends Controller
 {
@@ -54,7 +55,7 @@ class AuthController extends Controller
         if($request->hasFile('photo')){
             $file_name = $user->photo;
             $file_path = public_path('storage/userPhoto/'.$file_name);
-            if(File::exists(public_path('user_photos/'.$file_name))){
+            if(File::exists(public_path('storage/userPhoto'.$file_name))){
                 unlink($file_path);
                 $user->delete();
             }
@@ -190,6 +191,42 @@ class AuthController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         return response()->json([auth()->user()]);
+    }
+
+    public function updateProfile(Request $request){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $request->validate([
+            'photo'=>'required|max:1999'
+        ]);
+        $user = User::find(Auth::id());
+
+        if($request->hasFile('photo')){
+            $file_name = $user->photo;
+            $file_path = public_path('storage/userPhoto/'.$file_name);
+            if(File::exists(public_path('storage/userPhoto/'.$file_name))){
+                unlink($file_path);
+                $user->delete();
+            }
+            $fileNameWithExt = $request->file('photo')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            $path = $request->file('photo')->storeAs('public/userPhoto',$fileNameToStore);
+        }else{
+            return 'error';
+        }
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->birthday = $request->input('birthday');
+        $user->college = $request->input('college');
+        $user->department = $request->input('department');
+        $user->photo = $fileNameToStore;
+        $user->save();
+
+        return response()->json(['message'=>'Account Updated']);
     }
 
     public function userRole(){

@@ -1,0 +1,133 @@
+<div class="container1 d-flex align-items-end flex-column">
+  <div class="card bg-dark">
+    <div class="card-header">
+      <img
+        src="../../../assets/images/bsulogo.png"
+        style="width: 10%; height: auto; max-width: 300px"
+      />
+      <br />
+      <h6 class="pt-4">Edit User</h6>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <form #userForm="ngForm" (ngSubmit)="editUser()">
+          <div class="row">
+            <div class="col mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                [(ngModel)]="form.name"
+                required
+              />
+            </div>
+            <div class="alert alert-danger" role="alert" [hidden]="!error.name">
+              {{ error.name }}
+            </div>
+            <div class="col mb-3"></div>
+            <div class="mb-3">
+              <label for="birth" class="form-label">Birthday</label>
+              <input
+                type="date"
+                class="form-control"
+                id="birthday"
+                name="birthday"
+                [(ngModel)]="form.birthday"
+                required
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              [hidden]="!error.birthday"
+            >
+              {{ error.birthday }}
+            </div>
+            <div class="mb-3">
+              <label for="college" class="form-label">College</label>
+              <input
+                type="text"
+                class="form-control"
+                id="college"
+                name="college"
+                [(ngModel)]="form.college"
+                required
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              [hidden]="!error.college"
+            >
+              {{ error.college }}
+            </div>
+            <div class="mb-3">
+              <label for="department" class="form-label">Department</label>
+              <input
+                type="text"
+                class="form-control"
+                id="department"
+                name="department"
+                [(ngModel)]="form.department"
+                required
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              [hidden]="!error.department"
+            >
+              {{ error.department }}
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                [(ngModel)]="form.email"
+                required
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              [hidden]="!error.email"
+            >
+              {{ error.email }}
+            </div>
+            <div class="mb-3">
+              <label for="photo" class="form-label">Photo</label>
+              <input
+                type="file"
+                class="form-control"
+                id="photo"
+                name="photo"
+                [(ngModel)]="form.photo"
+                required
+                (change)="onFileChange($event)"
+              />
+            </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              [hidden]="!error.photo"
+            >
+              {{ error.photo }}
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!userForm.valid"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

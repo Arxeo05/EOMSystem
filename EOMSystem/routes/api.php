@@ -37,6 +37,7 @@ Route::post('members/delete/{pid}/{uid}',[ProgramsController::class, 'deleteMemb
 //Program-participants routes
 Route::post('participant/{pid}',[ProgramsController::class, 'addParticipant']);
 Route::get('participant/{pid}',[ProgramsController::class, 'getParticipantByProgram']);
+Route::get('getparticipant/{id}',[ProgramsController::class, 'getParticipantByID']);
 Route::post('participant/edit/{id}',[ProgramsController::class, 'updateParticipant']);
 Route::post('participant/delete/{id}',[ProgramsController::class, 'deleteParticipant']);
 
@@ -97,6 +98,8 @@ Route::post('user/edit/{id}',[AuthController::class, 'editUser']);
 Route::post('user/delete/{id}',[AuthController::class, 'deleteUser']);
 Route::get('users',[AuthController::class,'getUsers']);
 Route::post('me', [AuthController::class, 'me']);
+Route::post('me/update-profile', [AuthController::class, 'updateProfile']);
+
 Route::get('user/photo/{filename}', function ($filename) {
     $path = storage_path('app/public/userPhoto/' . $filename);
     if (!File::exists($path)) {
