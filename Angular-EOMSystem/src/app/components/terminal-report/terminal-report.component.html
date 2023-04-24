@@ -1,4 +1,4 @@
-<div id="myHtmlElement" style="margin: auto; width: 50%">
+<div class="container" id="myHtmlElement" style="margin: auto; width: 50%">
   <h6 id="header" style="text-align: center; font-weight: bolder">
     Extension Communty Involvment Terminal Report
   </h6>
@@ -35,7 +35,7 @@
       </p>
     </div>
     <div>
-      <table class="table" style="width: 50%">
+      <table class="table">
         <thead>
           <tr>
             <th scope="col">Event</th>
@@ -53,8 +53,9 @@
       </table>
     </div>
   </div>
+  <button class="btn btn-primary" (click)="onGeneratePDF()">
+    Download Report
+  </button>
 </div>
 
-<button class="btn btn-primary" (click)="onGeneratePDF()">
-  Download Report
-</button>
+
