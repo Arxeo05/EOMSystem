@@ -69,6 +69,16 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  onSearchInputChange() {
+    if (this.searchValue === '') {
+      this.backend.programs().subscribe({
+        next: (data) => (this.programs = Object.values(data)),
+      });
+    } else {
+      this.search();
+    }
+  }
+
   notify(boolean: Boolean): any {
     const announcement = document.getElementById('announcement');
     if (!boolean) {

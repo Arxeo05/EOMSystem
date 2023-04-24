@@ -8,6 +8,7 @@
         name="search"
         id="search"
         [(ngModel)]="searchValue"
+        (input)="onSearchInputChange()"
       />
       <button (click)="search()">Search</button>
 
