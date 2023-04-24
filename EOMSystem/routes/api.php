@@ -21,6 +21,7 @@ Route::get('programLeader/{pid}',[AuthController::class,'programLeadr']);
 
 // Program related Routes
 
+Route::get('programs/leader/{id}',[ProgramsController::class,'getProgramsByLeader']);
 Route::get('programs/{id}',[ProgramsController::class, 'getProgramById']);
 Route::get('programs/search/{query}',[ProgramsController::class, 'searchPrograms']);
 Route::get('programs/filter/{filterBy}/{direction}',[ProgramsController::class, 'filterPrograms']);

@@ -2,23 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { Chart } from 'angular-highcharts';
 import { AuthService } from '../../services/auth.service';
-import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
-import * as more from 'highcharts/highcharts-more.src';
-import * as exporting from 'highcharts/modules/exporting.src';  
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  template: `
-  <button (click)="add()">Add Point!</button>
-  <div [chart]="chart"></div>`
+  template: ` <button (click)="add()">Add Point!</button>
+    <div [chart]="chart"></div>`,
 })
 export class DashboardComponent implements OnInit {
-  constructor(private backend: BackendService, private auth: AuthService,) {}
+  constructor(private backend: BackendService, private auth: AuthService) {}
 
   isAdmin = false;
   programs: any[] = [];
+  searchValue: any;
   notification: any;
   public loggedIn: boolean = false;
 
@@ -26,8 +23,12 @@ export class DashboardComponent implements OnInit {
   leadPrograms: any[] = [];
   memberPrograms: any[] = [];
   exmoas: any[] = [];
-
+  leaderChoices: any;
+  leaderValue: any;
   ngOnInit(): void {
+    this.backend.allUsers().subscribe({
+      next: (data: any) => (this.leaderChoices = data),
+    });
     this.backend.programs().subscribe({
       next: (data) => (this.programs = Object.values(data)),
     });
@@ -57,6 +58,17 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  search() {
+    this.backend.searchProgram(this.searchValue).subscribe({
+      next: (data) => (this.programs = Object.values(data)),
+    });
+  }
+  filterByLeader() {
+    this.backend.filterByLeader(this.leaderValue).subscribe({
+      next: (data) => (this.programs = Object.values(data)),
+    });
+  }
+
   notify(boolean: Boolean): any {
     const announcement = document.getElementById('announcement');
     if (!boolean) {
@@ -74,12 +86,12 @@ export class DashboardComponent implements OnInit {
   }
   chart = new Chart({
     chart: {
-      type: 'line'
+      type: 'line',
     },
     title: {
-      text: 'Linechart'
+      text: 'Linechart',
     },
-    xAxis:{
+    xAxis: {
       categories: [
         'Jan',
         'Feb',
@@ -93,27 +105,24 @@ export class DashboardComponent implements OnInit {
         'Oct',
         'Nov',
         'Dec',
-      ]
+      ],
     },
-    yAxis:{
+    yAxis: {
       title: {
-        text: 'Sample'
-      }
+        text: 'Sample',
+      },
     },
-    series:[
+    series: [
       {
-        name: "Sample",
-        type: "line",
-        data: [1,2,3,4,5,6,7,8,9,10,11,12]
-
-      }
-    ]
+        name: 'Sample',
+        type: 'line',
+        data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      },
+    ],
   });
 
   // add point to chart serie
   add() {
     this.chart.addPoint(Math.floor(Math.random() * 10));
   }
-
 }
-

@@ -44,19 +44,23 @@ class ProgramsController extends Controller
     }
 
     public function searchPrograms($query){
-        if(!auth()->user()){
-            return response()->json(['message'=>'You must login']);
-        }
-        $program = Program::select('*')->where('title','like','%'.$query.'%')
-        ->orWhere('place','like','%'.$query.'%')
-        ->orWhere('lead','like','%'.$query.'%')->get();
+    if (!auth()->check()) {
+        return response()->json(['message' => 'You must log in']);
+    }
 
-        if(is_null($program)){
-            return response()->json(['message'=>'Query not found']);
-        }
-        return response()->json(Program::select('*')->where('title','like','%'.$query.'%')
-        ->orWhere('place','like','%'.$query.'%')
-        ->orWhere('lead','like','%'.$query.'%')->get());
+    $programs = Program::with('leader')
+        ->where('title', 'like', '%' . $query . '%')
+        ->orWhere('place', 'like', '%' . $query . '%')
+        ->orWhereHas('leader', function ($q) use ($query) {
+            $q->where('name', 'like', '%' . $query . '%');
+        })
+        ->get();
+
+    if ($programs->isEmpty()) {
+        return response()->json(['message' => 'No matching programs found']);
+    }
+
+    return response()->json($programs);
     }
 
     public function filterPrograms($filterBy, $direction){
@@ -112,6 +116,19 @@ class ProgramsController extends Controller
         $program->delete();
 
         return response()->json(['message'=>'Deleted Successfully']);
+    }
+
+    public function getProgramsByLeader($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $program = DB::table('programs')
+        ->where('leaderId', '=', $id)
+        ->get();
+        if(is_null($program)){
+            return response()->json(['message'=>'Query not found']);
+        }
+        return response()->json($program);
     }
 
     // //ProgramMembersModel
