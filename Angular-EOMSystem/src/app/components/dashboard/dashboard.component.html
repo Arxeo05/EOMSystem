@@ -2,39 +2,40 @@
   <app-side-nav></app-side-nav>
   <div class="container" *ngIf="isAdmin">
     <div class="container1">
-      <div class="container"></div>
+      <div class="con1">
       <input
+        class="form-control"
         type="search"
         name="search"
         id="search"
         [(ngModel)]="searchValue"
       />
-      <button (click)="search()">Search</button>
-
-      <label for="leaderId">Program Lead</label>
-      <select
-        class="form-control"
-        id="leaderId"
-        name="leaderId"
-        [(ngModel)]="leaderValue"
-        requred
-      >
-        <option [ngValue]="null" [disabled]="true">
-          Select Program Leader
-        </option>
-        <option *ngFor="let leader of leaderChoices" value="{{ leader.id }}">
-          {{ leader.name }}
-        </option>
-      </select>
-      <button id="leaderFilter" name="leaderFilter" (click)="filterByLeader()">
-        Filter By Leader
-      </button>
-
+      <button class="btn btn-primary" id="searchbtn" (click)="search()">Search</button>
+        <label for="leaderId" id="lead">Program Lead</label>
+        <select
+          class="form-control"
+          id="leaderId"
+          name="leaderId"
+          [(ngModel)]="leaderValue"
+          required
+        >
+          <option [ngValue]="null" [disabled]="true">
+            Select Program Leader
+          </option>
+          <option *ngFor="let leader of leaderChoices" value="{{ leader.id }}">
+            {{ leader.name }}
+          </option>
+        </select>
+          <button class="btn btn-primary" id="leaderFilter" name="leaderFilter" (click)="filterByLeader()">
+            Filter
+          </button>
+      </div>
       <h5>All Programs</h5>
       <div class="con">
         <button class="btn btn-primary" routerLink="/create-program">
           Add Program
         </button>
+       
       </div>
       <div class="card-container">
         <div class="card" *ngFor="let program of programs">
@@ -96,10 +97,12 @@
   </div>
   <!-- faculty dashboard -->
   <div class="container" *ngIf="!isAdmin">
-    <input type="search" name="search" id="search" [(ngModel)]="searchValue" />
-    <button (click)="search()">Search</button>
+    <div class="con">
+    <input type="search" name="search" id="search" class="srch" [(ngModel)]="searchValue" />
+    <button (click)="search()" class="btn btn-primary" id="searchbtn2">Search</button>
+  </div>
     <h5>Programs you lead</h5>
-    <div class="con"></div>
+    <div class="con1"></div>
     <div class="card-container">
       <div class="card" *ngFor="let program of leadPrograms">
         <div class="card-body">
