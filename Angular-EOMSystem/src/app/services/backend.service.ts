@@ -99,6 +99,24 @@ export class BackendService implements OnInit {
       }
     );
   }
+  searchProgram(data: any) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/programs/search/${data}`, {
+      headers,
+    });
+  }
+  filterByLeader(id: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/programs/leader/${id}`, {
+      headers,
+    });
+  }
   programsById(id: number) {
     const headers = new HttpHeaders().set(
       'Authorization',

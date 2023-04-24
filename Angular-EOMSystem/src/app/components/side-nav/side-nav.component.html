@@ -2,7 +2,7 @@
   <div class="profile-container">
     <a routerLink="/profile">
       <img src="#" alt="Profile">
-      
+
     </a>
   </div>
   <hr>
@@ -108,15 +108,15 @@
   <div class="nav-items">
     <div class="nav-item">
       <a routerLink="/dashboard">
-      <fa-icon [icon]="faDashboard"></fa-icon>
-      <span>Dashboard</span>
+        <fa-icon [icon]="faDashboard"></fa-icon>
+        <span>Dashboard</span>
       </a>
     </div>
-    <div class="nav-item">
+    <div class="nav-item" *ngIf="loggedIn ? (isAdmin ? true : false) : false">
       <a routerLink="/create-program">
-      <fa-icon [icon]="faBook"></fa-icon>
-      <span>Create Programs</span>
-    </a>
+        <fa-icon [icon]="faBook"></fa-icon>
+        <span>Create Programs</span>
+      </a>
     </div>
   </div>
 </aside>

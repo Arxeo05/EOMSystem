@@ -15,8 +15,7 @@ export class NavbarComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private token: TokenService,
-    private backend: BackendService,
-    private cdr: ChangeDetectorRef
+    private backend: BackendService
   ) {}
 
   ngOnInit() {
