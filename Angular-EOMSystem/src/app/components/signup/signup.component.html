@@ -12,8 +12,11 @@
       <div class="mb-3">
         <form #registerForm="ngForm" (ngSubmit)="signupUser()">
           <div class="row">
+            <div class="alert alert-danger" role="alert" [hidden]="!error.name">
+              {{ error.name }}
+            </div>
             <div class="col mb-3">
-              <label for="name" class="form-label">Name</label>
+              <label for="name" class="form-label" id="name">Name</label>
               <input
                 type="text"
                 class="form-control"
@@ -23,12 +26,8 @@
                 required
               />
             </div>
-            <div class="alert alert-danger" role="alert" [hidden]="!error.name">
-              {{ error.name }}
-            </div>
-            <div class="col mb-3"></div>
             <div class="mb-3">
-              <label for="birth" class="form-label">Birthday</label>
+              <label for="birth" class="form-label" id="birthday">Birthday</label>
               <input
                 type="date"
                 class="form-control"
@@ -46,7 +45,7 @@
               {{ error.birthday }}
             </div>
             <div class="mb-3">
-              <label for="college" class="form-label">College</label>
+              <label for="college" class="form-label" id="college">College</label>
               <input
                 type="text"
                 class="form-control"
@@ -64,7 +63,7 @@
               {{ error.college }}
             </div>
             <div class="mb-3">
-              <label for="department" class="form-label">Department</label>
+              <label for="department" class="form-label" id="department">Department</label>
               <input
                 type="text"
                 class="form-control"
@@ -82,7 +81,7 @@
               {{ error.department }}
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
+              <label for="email" class="form-label" id="email">Email address</label>
               <input
                 type="email"
                 class="form-control"
@@ -101,7 +100,7 @@
             </div>
             <div class="col mb-3"></div>
             <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
+              <label for="password" class="form-label" id="pass">Password</label>
               <input
                 type="password"
                 class="form-control"
@@ -112,7 +111,7 @@
               />
             </div>
             <div class="col mb-3">
-              <label for="cpassword" class="form-label">Confirm Password</label>
+              <label for="cpassword" class="form-label" id="cpass">Confirm Password</label>
               <input
                 type="password"
                 class="form-control"
@@ -130,7 +129,7 @@
               {{ error.password }}
             </div>
             <div class="mb-3">
-              <label for="photo" class="form-label">Photo</label>
+              <label for="photo" class="form-label" id="photo">Photo</label>
               <input
                 type="file"
                 class="form-control"

@@ -8,6 +8,79 @@
 .card-header{
     border-style: none;
 }
+form{
+    position: relative;
+
+}
+
+form input{
+    width: 100%;
+    padding: 15px 15px 7px;
+}
+form label#name{
+    position: absolute;
+    left: 15px;
+    top: 5px;
+    font-size: 12px;
+    color: black;
+ }
+form label#birthday{
+    position: absolute;
+    left: 15px;
+    top: 65px;
+    font-size: 12px;
+    color: black;
+ }
+form label#college{
+    position: absolute;
+    left: 15px;
+    top: 130px;
+    font-size: 12px;
+    color: black;
+ }
+form label#department{
+    position: absolute;
+    left: 15px;
+    top: 195px;
+    font-size: 12px;
+    color: black;
+ }
+form label#email{
+    position: absolute;
+    left: 15px;
+    top: 260px;
+    font-size: 12px;
+    color: black;
+ }
+form label#pass{
+    position: absolute;
+    left: 15px;
+    top: 340px;
+    font-size: 12px;
+    color: black;
+ }
+form label#cpass{
+    position: absolute;
+    left: 15px;
+    top: 400px;
+    font-size: 12px;
+    color: black;
+ }
+form label#photo{
+    position: absolute;
+    left: 15px;
+    top: 458px;
+    font-size: 12px;
+    color: black;
+ }
+
+ form input:focus{
+    border: 2px solid blueviolet;
+ }
+
+ form input:focus ~ label{
+    top: 6px;
+ }
 @media (max-width: 850px){
     img{
         width: 20%;

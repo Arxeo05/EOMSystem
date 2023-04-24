@@ -1,14 +1,51 @@
 .card{
     height: 100vh;
-    color: white;
+
 
 }
 .card-header{
     border-style: none;
 }
-p{
-    margin-top: 10px;
+span{
+    padding: 10px 0 0;
+    color: white;
 }
+form{
+    position: relative;
+
+}
+
+form input{
+    width: 100%;
+    padding: 23px 15px 7px;
+}
+form label#email{
+    position: absolute;
+    left: 15px;
+    top: 5px;
+    font-size: 12px;
+    color: black;
+ }
+form label#pass{
+    position: absolute;
+    left: 15px;
+    top: 75px;
+    font-size: 12px;
+    color: black;
+ }
+
+
+ form input:focus{
+    border: 2px solid blueviolet;
+ }
+
+ form input:focus ~ label{
+    top: 6px;
+ }
+ h6{
+    color: white;
+    top: 5rem;
+ }
 @media (max-width: 750px){
     .card{
         font-size: 10px;

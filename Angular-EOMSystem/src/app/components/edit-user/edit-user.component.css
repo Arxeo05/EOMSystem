@@ -1,0 +1,60 @@
+.container1{
+    background-color: white;
+    height: 100vh;
+}
+.card{
+    padding: 10px;
+}
+form{
+    position: relative;
+
+}
+
+form input{
+    width: 100%;
+    padding: 23px 15px 7px;
+}
+form label#name{
+    position: absolute;
+    left: 15px;
+    top: 5px;
+    font-size: 12px;
+ }
+form label#birthday{
+    position: absolute;
+    left: 15px;
+    top: 75px;
+    font-size: 12px;
+ }
+form label#college{
+    position: absolute;
+    left: 15px;
+    top: 145px;
+    font-size: 12px;
+ }
+form label#department{
+    position: absolute;
+    left: 15px;
+    top: 217px;
+    font-size: 12px;
+ }
+form label#email{
+    position: absolute;
+    left: 15px;
+    top: 290px;
+    font-size: 12px;
+ }
+form label#photo{
+    position: absolute;
+    left: 15px;
+    top: 428px;
+    font-size: 12px;
+ }
+
+ form input:focus{
+    border: 2px solid blueviolet;
+ }
+
+ form input:focus ~ label{
+    top: 6px;
+ }

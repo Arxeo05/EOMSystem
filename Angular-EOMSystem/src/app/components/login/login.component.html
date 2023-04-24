@@ -2,15 +2,15 @@
   <div class="card bg-dark">
     <div class="card-header">
       <img src="../../../assets/images/bsulogo.png" style="width:20%; height:auto; max-width:300px;"/>
-      <br><h6 class="p-2">Log-In</h6>
+      <br />
+      <br />
+      <h6 class="p-2">Log-In</h6>
     </div>
     <div class="card-body">
       <form #loginForm="ngForm" (ngSubmit)="submitLogin()">
-        <div class="alert alert-danger" role="alert" [hidden]="!error">
-          {{ error }}
-        </div>
+   
         <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
+          <label for="email" class="form-label" id="email">Email address</label>
           <input
             type="email"
             class="form-control"
@@ -21,7 +21,7 @@
           />
         </div>
         <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
+          <label for="password" class="form-label" id="pass">Password</label>
           <input
             type="password"
             class="form-control"
@@ -39,8 +39,13 @@
           Log-In
         </button>
       </form>
-      <p>Need an account?</p>
-      <a routerLink="/signup">Register</a>
+      <br />
+      <span>Need an account? <a routerLink="/signup">Register</a></span>
+      <br />
+      <br />
+      <div class="alert alert-danger" role="alert" [hidden]="!error">
+        {{ error }}
+      </div>
     </div>
   </div>
 </div>
