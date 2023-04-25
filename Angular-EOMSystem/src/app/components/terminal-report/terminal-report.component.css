@@ -1,9 +1,15 @@
 .container{
     background-color: aliceblue;
     padding: 20px 10px 10px;
+    margin: 20px;
     border-radius: 20px;
-    height: 100vh;
 }
+
 th{
     background-color: rgb(216, 216, 217);
 }
+
+.flex-container {
+  display: flex;
+}
+
