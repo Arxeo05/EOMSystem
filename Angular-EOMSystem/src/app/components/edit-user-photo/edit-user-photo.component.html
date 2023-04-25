@@ -1,0 +1,20 @@
+<form #userForm="ngForm" (ngSubmit)="editUser()">
+  <div class="mb-3">
+    <label for="photo" class="form-label" id="photo">Photo</label>
+    <input
+      type="file"
+      class="form-control"
+      id="photo"
+      name="photo"
+      [(ngModel)]="form.photo"
+      required
+      (change)="onFileChange($event)"
+    />
+  </div>
+  <div class="alert alert-danger" role="alert" [hidden]="!error.photo">
+    {{ error.photo }}
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">
+    Submit
+  </button>
+</form>

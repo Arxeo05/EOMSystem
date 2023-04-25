@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditUserComponent implements OnInit {
   formValues: any;
+  photoUrl: string = '';
   public form = {
     name: '',
     birthday: '',
@@ -30,18 +31,21 @@ export class EditUserComponent implements OnInit {
         this.form.email = this.formValues[0].email;
         this.form.status = this.formValues[0].status;
         this.form.photo = this.formValues[0].photo;
+
+        this.backend.userPhoto(this.formValues[0].photo).subscribe({
+          next: (data) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(data);
+            reader.onloadend = () => {
+              this.photoUrl = reader.result as string;
+            };
+          },
+        });
       },
     });
   }
 
   id = Number(this.route.snapshot.paramMap.get('id'));
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      this.form.photo = event.target.files[0];
-    } else {
-      this.form.photo = null;
-    }
-  }
   error: any = [];
   editUser() {
     const formData = new FormData();
@@ -51,9 +55,6 @@ export class EditUserComponent implements OnInit {
     formData.append('department', this.form.department);
     formData.append('email', this.form.email);
     formData.append('status', this.form.status);
-    if (this.form.photo) {
-      formData.append('photo', this.form.photo);
-    }
 
     return this.backend.editUser(formData, this.id).subscribe({
       next: (data) => console.log(data),

@@ -24,6 +24,7 @@ import { RoleGuardGuard } from './role-guard.guard';
 import { AddFlowComponent } from './components/add-flow/add-flow.component';
 import { TerminalReportComponent } from './components/terminal-report/terminal-report.component';
 import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
+import { EditUserPhotoComponent } from './components/edit-user-photo/edit-user-photo.component';
 
 function logGuard() {
   const token = inject(TokenService);
@@ -134,6 +135,11 @@ const routes: Routes = [
   {
     path: 'user/all-users/edit-user/:id',
     component: EditUserComponent,
+    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+  },
+  {
+    path: 'user/all-users/edit-user/:id/user-photo',
+    component: EditUserPhotoComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
   {

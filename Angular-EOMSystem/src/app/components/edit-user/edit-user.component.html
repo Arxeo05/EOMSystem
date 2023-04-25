@@ -6,6 +6,17 @@
     </div>
     <div class="card-body">
       <div class="mb-3">
+        <div class="profile-container">
+          <div class="profile">
+            <img
+              [src]="photoUrl"
+              alt="Profile"
+              class="circular-image"
+              title="Change Display Photo"
+              routerLink="user-photo"
+            />
+          </div>
+        </div>
         <form #userForm="ngForm" (ngSubmit)="editUser()">
           <div class="row">
             <div class="col mb-3">
@@ -24,7 +35,9 @@
             </div>
             <div class="col mb-3"></div>
             <div class="mb-3">
-              <label for="birth" class="form-label" id="birthday">Birthday</label>
+              <label for="birth" class="form-label" id="birthday"
+                >Birthday</label
+              >
               <input
                 type="date"
                 class="form-control"
@@ -42,7 +55,9 @@
               {{ error.birthday }}
             </div>
             <div class="mb-3">
-              <label for="college" class="form-label" id="college">College</label>
+              <label for="college" class="form-label" id="college"
+                >College</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -60,7 +75,9 @@
               {{ error.college }}
             </div>
             <div class="mb-3">
-              <label for="department" class="form-label" id="department">Department</label>
+              <label for="department" class="form-label" id="department"
+                >Department</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -78,7 +95,9 @@
               {{ error.department }}
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label" id="email">Email address</label>
+              <label for="email" class="form-label" id="email"
+                >Email address</label
+              >
               <input
                 type="email"
                 class="form-control"
@@ -107,25 +126,6 @@
                 <option value="pending">Pending</option>
                 <option value="accepted">Accepted</option>
               </select>
-            </div>
-            <div class="mb-3">
-              <label for="photo" class="form-label" id="photo">Photo</label>
-              <input
-                type="file"
-                class="form-control"
-                id="photo"
-                name="photo"
-                [(ngModel)]="form.photo"
-                required
-                (change)="onFileChange($event)"
-              />
-            </div>
-            <div
-              class="alert alert-danger"
-              role="alert"
-              [hidden]="!error.photo"
-            >
-              {{ error.photo }}
             </div>
           </div>
           <button
