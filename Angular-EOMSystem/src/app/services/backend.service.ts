@@ -283,6 +283,18 @@ export class BackendService implements OnInit {
       { headers }
     );
   }
+  editUserPhoto(data: any, id: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    return this.http.post<any>(
+      `http://127.0.0.1:8000/api/user/edit-photo/${id}`,
+      data,
+      { headers }
+    );
+  }
   deleteUser(id: number) {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('token'))

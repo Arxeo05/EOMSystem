@@ -96,6 +96,7 @@ Route::post('login', [AuthController::class,'login']);
 Route::post('user/update-password/{id}',[AuthController::class,'updateUserPassword']);
 Route::get('user/{id}',[AuthController::class,'getUserById']);
 Route::post('user/edit/{id}',[AuthController::class, 'editUser']);
+Route::post('user/edit-photo/{id}',[AuthController::class, 'editUserPhoto']);
 Route::post('user/delete/{id}',[AuthController::class, 'deleteUser']);
 Route::get('users',[AuthController::class,'getUsers']);
 Route::post('me', [AuthController::class, 'me']);

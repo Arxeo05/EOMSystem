@@ -47,6 +47,23 @@ class AuthController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
+        $user = User::find($id);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->birthday = $request->input('birthday');
+        $user->college = $request->input('college');
+        $user->department = $request->input('department');
+        $user->status = $request->input('status');
+        $user->save();
+
+        return response()->json(['message'=>'Account Updated']);
+    }
+
+    public function editUserPhoto(Request $request,$id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
         $request->validate([
             'photo'=>'required|max:1999'
         ]);
@@ -67,17 +84,8 @@ class AuthController extends Controller
         }else{
             return 'error';
         }
-
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->birthday = $request->input('birthday');
-        $user->college = $request->input('college');
-        $user->department = $request->input('department');
-        $user->status = $request->input('status');
         $user->photo = $fileNameToStore;
         $user->save();
-
-        return response()->json(['message'=>'Account Updated']);
     }
 
     public function updateUserPassword(Request $request, $id){

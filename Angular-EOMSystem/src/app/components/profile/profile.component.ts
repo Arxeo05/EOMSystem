@@ -14,7 +14,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.backend.me().subscribe({
       next: (data) => {
-        console.log(data);
         this.infos = Object.values(data);
         this.backend.userPhoto(data[0].photo).subscribe({
           next: (data) => {
