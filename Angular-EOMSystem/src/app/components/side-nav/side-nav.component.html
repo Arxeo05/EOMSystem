@@ -118,5 +118,12 @@
         <span>Create Programs</span>
       </a>
     </div>
+
+    <div class="nav-item" *ngIf="loggedIn ? (isAdmin ? true : false) : false">
+      <a routerLink="/generate-report">
+        <fa-icon [icon]="faBook"></fa-icon>
+        <span>Generate Reports</span>
+      </a>
+    </div>
   </div>
 </aside>

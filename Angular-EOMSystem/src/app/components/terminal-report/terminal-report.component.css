@@ -1,8 +1,14 @@
+.content-container {
+  background-color: rgb(218, 218, 218);
+  padding: 20px;
+}
+
 .container{
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
     padding: 20px 10px 10px;
     margin: 20px;
     border-radius: 20px;
+    box-shadow: 5px 5px 5px #939393;
 }
 
 th{

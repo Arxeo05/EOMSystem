@@ -25,6 +25,7 @@ import { AddFlowComponent } from './components/add-flow/add-flow.component';
 import { TerminalReportComponent } from './components/terminal-report/terminal-report.component';
 import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
 import { EditUserPhotoComponent } from './components/edit-user-photo/edit-user-photo.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 function logGuard() {
   const token = inject(TokenService);
@@ -65,6 +66,11 @@ const routes: Routes = [
   {
     path: 'create-program',
     component: CreateProgramComponent,
+    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+  },
+  {
+    path: 'generate-report',
+    component: ReportsComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
   {
