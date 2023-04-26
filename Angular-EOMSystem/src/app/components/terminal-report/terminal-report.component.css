@@ -1,9 +1,21 @@
-.container{
-    background-color: aliceblue;
-    padding: 20px 10px 10px;
-    border-radius: 20px;
-    height: 100vh;
+.content-container {
+  background-color: rgb(218, 218, 218);
+  padding: 20px;
 }
+
+.container{
+    background-color: rgb(255, 255, 255);
+    padding: 20px 10px 10px;
+    margin: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #939393;
+}
+
 th{
     background-color: rgb(216, 216, 217);
 }
+
+.flex-container {
+  display: flex;
+}
+

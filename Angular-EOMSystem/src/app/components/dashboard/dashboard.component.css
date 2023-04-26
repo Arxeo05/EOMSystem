@@ -1,35 +1,9 @@
-.announcement {
-  display: inline-block;
-  height: 100%;
-  text-align: center;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.84);
-  color: white;
-  font-family: Arial, sans;
-  margin: 0;
-  padding: 10px;
-  vertical-align: middle;
-  font-size: 0.8em;
-}
-
-.announcement a {
-  color: #ccc;
-  text-decoration: none;
-}
-
-.announcement span{
-  text-decoration: underline;
-}
-.announcement span:hover{
-  color: red;
-}
 .content {
   display: flex;
   background-color: rgb(246, 244, 244);
   height: 100vh;
 
 }
-
 
 .container {
   border-radius: 10px;

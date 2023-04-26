@@ -1,0 +1,56 @@
+.content {
+  display: flex;
+  background-color: rgb(207, 207, 207);
+}
+
+h3 {
+  margin: 20px 0 20px 0;
+}
+
+.moa-container, .faculty-container {
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  margin-left: 10px;
+  background-color: white;
+  box-shadow: 5px 5px 5px #939393;
+  padding: 20px;
+}
+
+.active-container {
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  margin-left: 10px;
+  background-color: rgb(121, 245, 121);
+  box-shadow: 5px 5px 5px #939393;
+  padding: 20px;
+}
+
+.expired-container {
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  margin-left: 10px;
+  background-color: rgb(245, 121, 121);
+  box-shadow: 5px 5px 5px #939393;
+  padding: 20px;
+}
+
+.perfaculty-container {
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  margin-left: 10px;
+  background-color: rgb(250, 250, 250);
+  box-shadow: 5px 5px 5px #939393;
+  padding: 20px;
+}
+
+.filter-container {
+  display: flex;
+}
+
+.generate {
+  margin-top: 15px;
+}

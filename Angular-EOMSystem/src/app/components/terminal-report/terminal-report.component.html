@@ -1,4 +1,11 @@
-<div class="container" id="myHtmlElement" style="margin: auto; width: 50%">
+<div class="content-container">
+
+<button class="btn btn-primary" (click)="onGeneratePDF()" style="margin-top: 20px;">
+  Download Report
+</button>
+
+<section class="flex-container" id="myHtmlElement">
+<div class="container">
   <h6 id="header" style="text-align: center; font-weight: bolder">
     Extension Communty Involvment Terminal Report
   </h6>
@@ -53,9 +60,36 @@
       </table>
     </div>
   </div>
-  <button class="btn btn-primary" (click)="onGeneratePDF()">
-    Download Report
-  </button>
 </div>
 
-
+<div class="container">
+  <div *ngFor="let program of programs">
+    <div>
+      <p style="font-size: 12px">
+        <b>Additional Details: </b>
+      </p>
+      <p> {{ program.additionalDetail }}</p>
+      <p style="font-size: 12px">
+        <b>Prepared By: </b>
+      </p>
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Signature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let member of programMembers">
+              <td>{{ member.name }}</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+</div>
