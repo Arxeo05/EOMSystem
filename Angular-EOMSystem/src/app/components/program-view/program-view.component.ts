@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-program-view',
   templateUrl: './program-view.component.html',
@@ -16,11 +16,7 @@ export class ProgramViewComponent implements AfterViewInit {
   programFiles: any[] = [];
   isAdmin: boolean = false;
 
-  constructor(
-    private backend: BackendService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private backend: BackendService, private route: ActivatedRoute) {}
   ngAfterViewInit(): void {
     this.backend.userRole().subscribe((data: { role: number }) => {
       if (data.role === 1) {

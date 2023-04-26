@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-partner',
@@ -19,7 +20,11 @@ export class AddPartnerComponent {
     startPartnership: '',
     endPartnership: '',
   };
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       this.form.MoaFile = event.target.files[0];
@@ -42,7 +47,21 @@ export class AddPartnerComponent {
     formData.append('endPartnership', this.form.endPartnership);
 
     return this.backend.addPartner(formData, this.id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+        (this.form.name = ''),
+          (this.form.address = ''),
+          (this.form.contactPerson = ''),
+          (this.form.contactNumber = ''),
+          (this.form.MoaFile = null),
+          (this.form.startPartnership = ''),
+          (this.form.endPartnership = ''),
+          this.router
+            .navigateByUrl('/', { skipLocationChange: true })
+            .then(() => {
+              this.router.navigate([this.router.url]);
+            });
+      },
       error: (error) => {
         this.handleError(error);
       },
@@ -50,5 +69,8 @@ export class AddPartnerComponent {
   }
   handleError(error: any) {
     this.error = error.error.errors;
+  }
+  cancelStep() {
+    this.router.navigateByUrl(`program/${this.id}/add-participant`);
   }
 }

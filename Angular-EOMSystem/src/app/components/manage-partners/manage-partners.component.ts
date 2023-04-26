@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'app-manage-partners',

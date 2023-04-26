@@ -17,10 +17,12 @@ export class DashboardComponent implements OnInit {
   programs: any[] = [];
   searchValue: any;
   notification: any;
-  public loggedIn: boolean = false;
+  loggedIn: boolean = false;
+  loading: boolean = true;
 
   //faculty properties
   leadPrograms: any[] = [];
+  searchedPrograms: any[] = [];
   memberPrograms: any[] = [];
   exmoas: any[] = [];
   leaderChoices: any;
@@ -56,11 +58,12 @@ export class DashboardComponent implements OnInit {
         this.isAdmin = true;
       }
     });
+    this.loading = false;
   }
 
   search() {
     this.backend.searchProgram(this.searchValue).subscribe({
-      next: (data) => (this.programs = Object.values(data)),
+      next: (data) => (this.searchedPrograms = Object.values(data)),
     });
   }
   filterByLeader() {

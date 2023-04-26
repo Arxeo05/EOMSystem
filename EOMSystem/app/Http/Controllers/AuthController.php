@@ -139,15 +139,17 @@ class AuthController extends Controller
         return response()->json($user);
     }
 
-    public function pendingUsers(){
-
-        if(auth()->user()->role == '1'){
-            return 'error';
+    public function filterUser($data){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
         }
-        $user = DB::table('users')
-        ->where('status', '=', 'pending')
+        $users = DB::table('users')
+        ->where('status', '=', $data)->where('role','=',0)
         ->get();
-        return response()->json($user);
+        if(is_null($users)){
+            return response()->json(['message'=>'Query not found']);
+        }
+        return response()->json($users);
     }
 
     public function signup(Request $request){

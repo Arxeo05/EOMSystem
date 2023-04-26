@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-program',
   templateUrl: './create-program.component.html',
@@ -17,17 +18,22 @@ export class CreateProgramComponent implements OnInit {
 
   leaderChoices: any;
 
-  constructor(private backend: BackendService) {}
+  constructor(private backend: BackendService, private router: Router) {}
   error: any[] = [];
   ngOnInit(): void {
     this.backend.allUsers().subscribe({
-      next: (data: any) => (this.leaderChoices = data),
+      next: (data: any) => {
+        this.leaderChoices = data;
+      },
     });
   }
   createProgram() {
     console.log(this.form);
     this.backend.createProgram(this.form).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+        this.router.navigateByUrl(`program/${data}/add-member`);
+      },
       error: (error) => this.handleError(error),
     });
   }

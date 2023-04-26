@@ -93,13 +93,28 @@ const routes: Routes = [
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
   {
+    path: 'program/:id/add-member',
+    component: AddMemberComponent,
+    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+  },
+  {
     path: 'dashboard/program/:id/add-member',
     component: AddMemberComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
   {
+    path: 'program/:id/add-partner',
+    component: AddPartnerComponent,
+    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+  },
+  {
     path: 'dashboard/program/:id/add-partner',
     component: AddPartnerComponent,
+    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+  },
+  {
+    path: 'program/:id/add-participant',
+    component: AddParticipantComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
   {
@@ -113,8 +128,18 @@ const routes: Routes = [
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
   {
+    path: 'program/:id/add-flow',
+    component: AddFlowComponent,
+    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+  },
+  {
     path: 'dashboard/program/:id/add-flow',
     component: AddFlowComponent,
+    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+  },
+  {
+    path: 'program/:id/add-file',
+    component: AddFileComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
   {

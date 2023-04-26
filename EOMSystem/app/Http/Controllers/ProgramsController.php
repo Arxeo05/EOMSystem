@@ -82,8 +82,16 @@ class ProgramsController extends Controller
             'leaderId'=>'required',
             'additionalDetail'=>'required',
         ]);
-        $program = Program::create($request->all());
-        return response()->json($program);
+        $program = new Program;
+        $program->title = $request->title;
+        $program->startDate = $request->startDate;
+        $program->endDate = $request->endDate;
+        $program->place = $request->place;
+        $program->leaderId = $request->leaderId;
+        $program->additionalDetail = $request->additionalDetail;
+        $program->save();
+        $pid = $program->id;
+        return response()->json($pid);
     }
 
     public function editProgram(Request $request, $id){
@@ -565,4 +573,29 @@ class ProgramsController extends Controller
 
         return response()->json($results);
     }
+    public function acceptedUsersCount(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $users = DB::table('users')
+        ->where('status', '=', 'accepted')->where('role','=',0)
+        ->count();
+        if(is_null($users)){
+            return response()->json(['message'=>'Query not found']);
+        }
+        return response()->json($users);
+    }
+    public function pendingUsersCount(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $users = DB::table('users')
+        ->where('status', '=', 'pending')->where('role','=',0)
+        ->count();
+        if(is_null($users)){
+            return response()->json(['message'=>'Query not found']);
+        }
+        return response()->json($users);
+    }
+
 }

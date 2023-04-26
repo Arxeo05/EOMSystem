@@ -1,50 +1,68 @@
 <div class="container">
   <div class="con">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Birthday</th>
-        <th scope="col">College</th>
-        <th scope="col">Department</th>
-        <th scope="col">Status</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.birthday }}</td>
-        <td>{{ user.college }}</td>
-        <td>{{ user.department }}</td>
-        <td>{{ user.status }}</td>
-        <td>
-          <button
-            type="button"
-            class="btn btn-primary"
-            routerLink="edit-user/{{ user.id }}"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            routerLink="update-password/{{ user.id }}"
-          >
-            Set Password
-          </button>
-          <button
-            type="button"
-            class="btn btn-danger"
-            (click)="deleteUser(user.id)"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <label for="leaderId">User Status</label>
+    <select
+      class="form-control"
+      id="leaderId"
+      name="leaderId"
+      [(ngModel)]="userValue"
+      requred
+    >
+      <option [ngValue]="null" [disabled]="true">Select User Status</option>
+      <option value="accepted">Accepted</option>
+      <option value="pending">Pending</option>
+    </select>
+    <button id="leaderFilter" name="leaderFilter" (click)="filterByUser()">
+      Filter By Status
+    </button>
+    <button id="leaderFilter" name="leaderFilter" (click)="clearFilter()">
+      Clear Filter
+    </button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Birthday</th>
+          <th scope="col">College</th>
+          <th scope="col">Department</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.birthday }}</td>
+          <td>{{ user.college }}</td>
+          <td>{{ user.department }}</td>
+          <td>{{ user.status }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary"
+              routerLink="edit-user/{{ user.id }}"
+            >
+              Update
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              routerLink="update-password/{{ user.id }}"
+            >
+              Set Password
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteUser(user.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../services/backend.service';
-
 @Component({
   selector: 'app-add-file',
   templateUrl: './add-file.component.html',
   styleUrls: ['./add-file.component.css'],
 })
 export class AddFileComponent {
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
   public form = {
@@ -29,7 +32,15 @@ export class AddFileComponent {
     }
 
     return this.backend.addFile(formData, this.id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+        this.form.file = null;
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate([this.router.url]);
+          });
+      },
       error: (error) => {
         this.handleError(error);
       },
@@ -37,5 +48,8 @@ export class AddFileComponent {
   }
   handleError(error: any) {
     this.error = error.error.errors;
+  }
+  cancelStep() {
+    this.router.navigateByUrl(`dashboard/program/${this.id}`);
   }
 }

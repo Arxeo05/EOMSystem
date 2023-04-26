@@ -7,6 +7,9 @@
     <button class="btn btn-primary" routerLink="terminal-report">
       Terminal Report
     </button>
+    <button class="btn btn-primary" routerLink="add-member" *ngIf="isAdmin">
+      Add Items
+    </button>
     <table class="table">
       <thead>
         <tr>
@@ -24,9 +27,6 @@
       </tbody>
     </table>
 
-    <button class="btn btn-primary" routerLink="add-flow" *ngIf="isAdmin">
-      Add Flow
-    </button>
     <table class="table">
       <thead>
         <tr>
@@ -55,9 +55,6 @@
       </tbody>
     </table>
 
-    <button class="btn btn-primary" routerLink="add-member" *ngIf="isAdmin">
-      Add Member
-    </button>
     <table class="table">
       <thead>
         <tr>
@@ -81,14 +78,6 @@
         </tr>
       </tbody>
     </table>
-    <button
-      type="button"
-      class="btn btn-success"
-      routerLink="add-partner"
-      *ngIf="isAdmin"
-    >
-      Add Partner
-    </button>
     <table class="table">
       <thead>
         <tr>
@@ -140,14 +129,6 @@
         </tr>
       </tbody>
     </table>
-    <button
-      type="button"
-      class="btn btn-success"
-      routerLink="add-participant"
-      *ngIf="isAdmin"
-    >
-      Add Participant
-    </button>
     <table class="table">
       <thead>
         <tr>
@@ -181,14 +162,6 @@
         </tr>
       </tbody>
     </table>
-    <button
-      type="button"
-      class="btn btn-success"
-      routerLink="add-file"
-      *ngIf="isAdmin"
-    >
-      Add File
-    </button>
     <table class="table">
       <thead>
         <tr>

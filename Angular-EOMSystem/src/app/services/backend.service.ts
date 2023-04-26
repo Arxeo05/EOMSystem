@@ -262,6 +262,19 @@ export class BackendService implements OnInit {
   }
 
   //users
+
+  userByStatus(data: any) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(
+      `http://127.0.0.1:8000/api/users/filter/status/${data}`,
+      {
+        headers,
+      }
+    );
+  }
   allUsers() {
     const headers = new HttpHeaders().set(
       'Authorization',

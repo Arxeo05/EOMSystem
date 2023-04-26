@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../services/backend.service';
 @Component({
   selector: 'app-add-member',
@@ -12,7 +12,11 @@ export class AddMemberComponent implements OnInit {
   };
   memberChoices: any;
   id: number = 0;
-  constructor(private route: ActivatedRoute, private backend: BackendService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private backend: BackendService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.id = id;
@@ -23,9 +27,20 @@ export class AddMemberComponent implements OnInit {
 
   addMember() {
     this.backend.addMember(this.id, this.form).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+        this.form.userId = null;
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate([this.router.url]);
+          });
+      },
       error: (error) => this.handleError(error),
     });
   }
   handleError(error: any) {}
+  cancelStep() {
+    this.router.navigateByUrl(`program/${this.id}/add-partner`);
+  }
 }

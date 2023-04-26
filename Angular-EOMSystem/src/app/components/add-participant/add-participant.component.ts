@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../services/backend.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-participant',
@@ -8,7 +9,12 @@ import { BackendService } from '../../services/backend.service';
   styleUrls: ['./add-participant.component.css'],
 })
 export class AddParticipantComponent {
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  @ViewChild('myForm', { static: false }) myForm!: NgForm;
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
   public form = {
@@ -20,7 +26,15 @@ export class AddParticipantComponent {
     formData.append('name', this.form.name);
 
     return this.backend.addParticipant(formData, this.id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+        this.form.name = '';
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate([this.router.url]);
+          });
+      },
       error: (error) => {
         this.handleError(error);
       },
@@ -28,5 +42,8 @@ export class AddParticipantComponent {
   }
   handleError(error: any) {
     this.error = error.error.errors;
+  }
+  cancelStep() {
+    this.router.navigateByUrl(`program/${this.id}/add-flow`);
   }
 }

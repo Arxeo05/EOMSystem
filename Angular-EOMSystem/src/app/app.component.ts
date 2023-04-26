@@ -1,6 +1,4 @@
-import { Component, NgModule, OnInit } from '@angular/core';
-import { BackendService } from './services/backend.service';
-import Swal from 'sweetalert2';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -14,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'Angular-EOMSystem';
   notification = '';
   loggedIn = false;
+  loading = true;
 
   ngOnInit(): void {
     //subscribing to laravel notify function but it returns null value
@@ -27,5 +26,6 @@ export class AppComponent implements OnInit {
     this.auth.authStatus.subscribe((value) => {
       this.loggedIn = value;
     });
+    this.loading = false;
   }
 }

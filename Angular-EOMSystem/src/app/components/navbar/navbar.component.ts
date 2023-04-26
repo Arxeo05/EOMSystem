@@ -9,8 +9,9 @@ import { BackendService } from '../../services/backend.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  public loggedIn: boolean = false;
-  public isAdmin: boolean = false;
+  loggedIn: boolean = false;
+  isAdmin: boolean = false;
+  loading = true;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -26,6 +27,7 @@ export class NavbarComponent implements OnInit {
       if (data.role === 1) {
         this.isAdmin = true;
       }
+      this.loading = false;
     });
   }
   logout(event: MouseEvent) {

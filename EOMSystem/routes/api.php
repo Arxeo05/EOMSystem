@@ -90,7 +90,7 @@ Route::middleware('auth')->group( function(){
 
 });
 //UserModel routes
-Route::get('users/pending',[AuthController::class, 'pendingUsers']);
+Route::get('users/filter/status/{data}',[AuthController::class, 'filterUser']);
 Route::post('signup/',[AuthController::class, 'signup']);
 Route::post('login', [AuthController::class,'login']);
 Route::post('user/update-password/{id}',[AuthController::class,'updateUserPassword']);
@@ -128,6 +128,8 @@ Route::get('activeprograms/count',[ProgramsController::class,'upcomingProgramsCo
 Route::get('pastprograms/count',[ProgramsController::class,'pastProgramsCount']);
 Route::get('expiredmoa/count',[ProgramsController::class,'expiredMoaCount']);
 Route::get('activemoa/count',[ProgramsController::class,'activeMoaCount']);
+Route::get('acceptedusers/count',[ProgramsController::class,'acceptedUsersCount']);
+Route::get('pendingusers/count',[ProgramsController::class,'pendingUsersCount']);
 
 Route::group(['middleware' => 'api',], function ($router) {
     // Route::post('logout', 'AuthController@logout');
