@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../services/backend.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-add-file',
   templateUrl: './add-file.component.html',
@@ -10,7 +11,8 @@ export class AddFileComponent {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
-    private router: Router
+    public router: Router,
+    private location: Location
   ) {}
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
@@ -51,5 +53,8 @@ export class AddFileComponent {
   }
   cancelStep() {
     this.router.navigateByUrl(`dashboard/program/${this.id}`);
+  }
+  goBack() {
+    this.location.back();
   }
 }

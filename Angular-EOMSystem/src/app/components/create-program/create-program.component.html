@@ -37,7 +37,9 @@
             id="endDate"
             name="endDate"
             [(ngModel)]="form.endDate"
+            [min]="form.startDate"
             required
+            (ngModelChange)="validateDates()"
           />
         </div>
       </div>
@@ -73,7 +75,9 @@
       </div>
       <br />
       <div class="form-group">
-        <label for="additionalDetail" id="details">Additional Program Details</label>
+        <label for="additionalDetail" id="details"
+          >Additional Program Details</label
+        >
         <textarea
           class="form-control"
           id="additionalDetail"

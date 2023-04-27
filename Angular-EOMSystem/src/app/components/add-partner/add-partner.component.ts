@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-partner',
@@ -23,7 +24,8 @@ export class AddPartnerComponent {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
-    private router: Router
+    public router: Router,
+    private location: Location
   ) {}
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
@@ -72,5 +74,8 @@ export class AddPartnerComponent {
   }
   cancelStep() {
     this.router.navigateByUrl(`program/${this.id}/add-participant`);
+  }
+  goBack() {
+    this.location.back();
   }
 }

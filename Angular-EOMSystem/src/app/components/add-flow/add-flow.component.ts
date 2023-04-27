@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from 'src/app/services/backend.service';
@@ -11,7 +12,8 @@ export class AddFlowComponent {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
-    private router: Router
+    public router: Router,
+    private location: Location
   ) {}
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
@@ -33,6 +35,7 @@ export class AddFlowComponent {
     return this.backend.addFlow(data, this.id).subscribe({
       next: (data) => {
         console.log(data);
+        this.flows = [{ event: '', remarks: '', time: '' }];
         this.router
           .navigateByUrl('/', { skipLocationChange: true })
           .then(() => {
@@ -49,5 +52,8 @@ export class AddFlowComponent {
   }
   cancelStep() {
     this.router.navigateByUrl(`program/${this.id}/add-file`);
+  }
+  goBack() {
+    this.location.back();
   }
 }

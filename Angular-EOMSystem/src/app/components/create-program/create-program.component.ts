@@ -17,6 +17,7 @@ export class CreateProgramComponent implements OnInit {
   };
 
   leaderChoices: any;
+  invalidDates = false;
 
   constructor(private backend: BackendService, private router: Router) {}
   error: any[] = [];
@@ -39,5 +40,16 @@ export class CreateProgramComponent implements OnInit {
   }
   handleError(error: any) {
     this.error = error.error.errors;
+  }
+  validateDates() {
+    const startDate = this.form.startDate
+      ? new Date(this.form.startDate)
+      : null;
+    const endDate = this.form.endDate ? new Date(this.form.endDate) : null;
+    if (startDate && endDate && startDate > endDate) {
+      this.invalidDates = true;
+    } else {
+      this.invalidDates = false;
+    }
   }
 }

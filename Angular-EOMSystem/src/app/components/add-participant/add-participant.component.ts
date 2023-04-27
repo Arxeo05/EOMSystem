@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../services/backend.service';
 import { NgForm } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-participant',
@@ -13,7 +14,8 @@ export class AddParticipantComponent {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
-    private router: Router
+    public router: Router,
+    private location: Location
   ) {}
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
@@ -45,5 +47,8 @@ export class AddParticipantComponent {
   }
   cancelStep() {
     this.router.navigateByUrl(`program/${this.id}/add-flow`);
+  }
+  goBack() {
+    this.location.back();
   }
 }

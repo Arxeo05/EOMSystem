@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../services/backend.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-add-member',
   templateUrl: './add-member.component.html',
@@ -15,7 +16,8 @@ export class AddMemberComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private backend: BackendService,
-    private router: Router
+    public router: Router,
+    private location: Location
   ) {}
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -42,5 +44,8 @@ export class AddMemberComponent implements OnInit {
   handleError(error: any) {}
   cancelStep() {
     this.router.navigateByUrl(`program/${this.id}/add-partner`);
+  }
+  goBack() {
+    this.location.back();
   }
 }

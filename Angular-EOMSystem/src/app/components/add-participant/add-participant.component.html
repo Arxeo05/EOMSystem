@@ -34,7 +34,18 @@
             Submit
           </button>
         </form>
-        <button class="btn btn-danger" (click)="cancelStep()">Skip</button>
+        <div class="button-container">
+          <button
+            (click)="cancelStep()"
+            class="btn btn-secondary"
+            *ngIf="!router.url.includes('dashboard')"
+          >
+            Next Step
+          </button>
+        </div>
+        <div class="button-container" *ngIf="router.url.includes('dashboard')">
+          <a (click)="goBack()" class="btn btn-danger">Back</a>
+        </div>
       </div>
     </div>
   </div>

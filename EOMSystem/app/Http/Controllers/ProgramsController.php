@@ -76,8 +76,8 @@ class ProgramsController extends Controller
         }
         $request->validate([
             'title'=>'required',
-            'startDate'=>'required',
-            'endDate'=>'required',
+            'startDate'=>'required|date',
+            'endDate'=>'required|date|after_or_equal:startDate',
             'place'=>'required',
             'leaderId'=>'required',
             'additionalDetail'=>'required',
