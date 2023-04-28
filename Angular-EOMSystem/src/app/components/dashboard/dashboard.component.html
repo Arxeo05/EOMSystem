@@ -4,67 +4,81 @@
     <div class="container1">
       <div class="con1">
         <button (click)="search()">
-          <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
-            <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
+          <svg
+            width="17"
+            height="16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby="search"
+          >
+            <path
+              d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+              stroke="currentColor"
+              stroke-width="1.333"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
         </button>
-      <input
-        class=" input"
-        type="search"
-        name="search"
-        id="search"
-        [(ngModel)]="searchValue"
-        (input)="onSearchInputChange()"
-        placeholder="Search something..."
-      />
-    </div>
-    <div class="con2 float-end">
-      <button (click)="search()">Search</button>
-
-      <label for="leaderId">Program Lead</label>
-      <select
-        class="form-control"
-        id="leaderId"
-        name="leaderId"
-        [(ngModel)]="leaderValue"
-        requred
-      >
-          Select Program Leader
-      </select>
-        <option *ngFor="let leader of leaderChoices" value="{{ leader.id }}">
-          {{ leader.name }}
-        </option>
-      <button id="leaderFilter" name="leaderFilter" (click)="filterByLeader()">
-        Filter By Leader
-      </button>
-
-      <h5>All Programs</h5>
-      <div class="con">
-        <button class="btn btn-primary" routerLink="/create-program">
-          Add Program
-        </button>
-      </div>
-      <div class="card-container">
+        <input
+          class="input"
+          type="search"
+          name="search"
+          id="search"
+          [(ngModel)]="searchValue"
+          (input)="onSearchInputChange()"
+          placeholder="Search something..."
+        />
       </div>
       <div class="con2 float-end">
-        <label for="leaderId" id="lead">Program Lead</label>
+        <button (click)="search()">Search</button>
+
+        <label for="leaderId">Program Lead</label>
         <select
           class="form-control"
           id="leaderId"
           name="leaderId"
           [(ngModel)]="leaderValue"
-          required
+          requred
         >
+          Select Program Leader
         </select>
-      </div>
-      <h5>All Programs</h5>
-      <div class="con">
-        <button class="btn btn-primary" routerLink="/create-program">
-          Add Program
+        <option *ngFor="let leader of leaderChoices" value="{{ leader.id }}">
+          {{ leader.name }}
+        </option>
+        <button
+          id="leaderFilter"
+          name="leaderFilter"
+          (click)="filterByLeader()"
+        >
+          Filter By Leader
         </button>
-       
-      </div> 
-      <!-- <div class="card-container">
+
+        <h5>All Programs</h5>
+        <div class="con">
+          <button class="btn btn-primary" routerLink="/create-program">
+            Add Program
+          </button>
+        </div>
+        <div class="card-container"></div>
+        <div class="con2 float-end">
+          <label for="leaderId" id="lead">Program Lead</label>
+          <select
+            class="form-control"
+            id="leaderId"
+            name="leaderId"
+            [(ngModel)]="leaderValue"
+            required
+          ></select>
+        </div>
+        <h5>All Programs</h5>
+        <div class="con">
+          <button class="btn btn-primary" routerLink="/create-program">
+            Add Program
+          </button>
+        </div>
+        <!-- <div class="card-container">
         <div class="card" *ngFor="let program of programs">
           <div class="card-body">
             <div class="img-container">
@@ -96,22 +110,25 @@
                 </button>
             </div>
             </div>
-            
+
           </li>
           <br>
         </ol>
       </div> -->
-      
-    <div class="container3" *ngIf="loggedIn ? (isAdmin ? true : false) : false">
-      <div class="card-container">
-        <div class="card-body">
-          <div class="chart" [chart]="chart"></div>
+
+        <div
+          class="container3"
+          *ngIf="loggedIn ? (isAdmin ? true : false) : false"
+        >
+          <div class="card-container">
+            <div class="card-body">
+              <div class="chart" [chart]="chart"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    </div>
-    </div> -->
-
+  </div>
   <!-- faculty dashboard -->
   <div class="container" *ngIf="!isAdmin && !loading">
     <h5>Programs you lead</h5>

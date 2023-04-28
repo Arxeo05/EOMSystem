@@ -91,7 +91,7 @@ class ProgramsController extends Controller
         $program->additionalDetail = $request->additionalDetail;
         $program->save();
         $pid = $program->id;
-        return response()->json($pid);
+        return response()->json($pid, ['message'=>'Program Created']);
     }
 
     public function editProgram(Request $request, $id){
@@ -100,7 +100,7 @@ class ProgramsController extends Controller
         }
         $program = Program::find($id);
         $program->update($request->all());
-        return response()->json($program,200);
+        return response()->json($program,['message'=>'Program Edited']);
     }
 
     public function deleteProgram($id){
@@ -123,7 +123,7 @@ class ProgramsController extends Controller
 
         $program->delete();
 
-        return response()->json(['message'=>'Deleted Successfully']);
+        return response()->json(['message'=>'Program Deleted']);
     }
 
     public function getProgramsByLeader($id){
@@ -167,7 +167,7 @@ class ProgramsController extends Controller
     public function deleteMember($pid,$uid){
         $member = DB::table('member_programs')->where('programId','=',$pid)
         ->where('memberId','=',$uid)->delete();
-        return response()->json(['message'=>'Record Deleted']);
+        return response()->json(['message'=>'Member Deleted']);
     }
 
     //ProgramPartnerModel
@@ -271,6 +271,8 @@ class ProgramsController extends Controller
             $file->startPartnership = $request->input('startPartnership');
             $file->endPartnership = $request->input('endPartnership');
             $file->save();
+
+            return response()->json(['message'=>'Partner Updated']);
     }
 
     public function deletePartner($id){
@@ -314,6 +316,8 @@ class ProgramsController extends Controller
             $file->startPartnership = $request->input('startPartnership');
             $file->endPartnership = $request->input('endPartnership');
             $file->save();
+
+            return response()->json(['message'=>'Partner Updted']);
     }
 
      //ProgramParticipantModel
@@ -367,14 +371,14 @@ class ProgramsController extends Controller
         }
         $participant = ProgramParticipants::find($id);
         $participant->update($request->all());
-        return response()->json($participant,200);
+        return response()->json($participant,['message'=>'Participant Updated']);
     }
 
     public function deleteParticipant($id){
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
-        return ProgramParticipants::destroy($id);
+        return response()->jsom(['message'=>'PArticipant Deleted']);
     }
 
     //Program flow
@@ -383,7 +387,7 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
-        return ProgramFlow::destroy($id);
+        return response()->jsom(['message'=>'Flow Deleted']);
     }
     public function getFlowByProgram($pid){
         if(!auth()->user()){
@@ -493,6 +497,7 @@ class ProgramsController extends Controller
         $file->title = $fileName;
         $file->file = $fileNameToStore;
         $file->save();
+        return response()->json(['message'=>'File Updated']);
     }
 
     public function deleteFile($id){
