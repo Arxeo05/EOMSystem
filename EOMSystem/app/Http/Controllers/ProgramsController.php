@@ -151,15 +151,16 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $request->validate([
-            'userId'=>'required',
+            'members.*.memberId'=>'required',
         ]);
-
-        $memberProgram = new member_program;
-
-        $memberProgram->memberId = $request->input('userId');
-        $memberProgram->programId = $pid;
-        $memberProgram->save();
-
+        $members = $request->input('members',[]);
+        foreach ($members as $member) {
+                $memberId = $member['memberId'];
+                $newMember = new member_program();
+                $newMember->memberId = $memberId;
+                $newMember->programId = $pid;
+                $newMember->save();
+                }
         return response()->json('Success');
     }
 
@@ -321,13 +322,16 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $request->validate([
-            'name'=>'required',
+            'participants.*.name'=>'required',
         ]);
-        $participant = new ProgramParticipants;
-        $participant->name = $request->input('name');
-        $participant->programId = $pid;
-        $participant->save();
-
+        $participants = $request->input('participants',[]);
+        foreach ($participants as $participant) {
+            $name = $participant['name'];
+            $newParticipant = new ProgramParticipants();
+            $newParticipant->name = $name;
+            $newParticipant->programId = $pid;
+            $newParticipant->save();
+            }
         return response()->json(['message'=>'Participant Added']);
     }
 

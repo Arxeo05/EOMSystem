@@ -1,11 +1,11 @@
 <form #memberForm="ngForm" (ngSubmit)="addMember()">
-  <div class="form-group">
+  <div class="form-group" *ngFor="let member of members; let i = index">
     <label for="leaderId">Program Member</label>
     <select
       class="form-control"
-      id="userId"
-      name="userId"
-      [(ngModel)]="form.userId"
+      id="memberId"
+      name="memberId"
+      [(ngModel)]="member.memberId"
       requred
     >
       <option [ngValue]="null" [disabled]="true">Select Program Member</option>
@@ -13,7 +13,9 @@
         {{ member.name }}
       </option>
     </select>
+    <button type="button" (click)="removeUser(i)" *ngIf="i > 0">Remove</button>
   </div>
+  <button type="button" (click)="addUser()">Add Item</button>
   <div class="button-container">
     <button type="submit" class="btn btn-primary">Add Member</button>
   </div>

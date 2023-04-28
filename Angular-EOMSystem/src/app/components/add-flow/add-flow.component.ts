@@ -36,11 +36,7 @@ export class AddFlowComponent {
       next: (data) => {
         console.log(data);
         this.flows = [{ event: '', remarks: '', time: '' }];
-        this.router
-          .navigateByUrl('/', { skipLocationChange: true })
-          .then(() => {
-            this.router.navigate([this.router.url]);
-          });
+        this.router.navigateByUrl(`program/${this.id}/add-file`);
       },
       error: (error) => {
         this.handleError(error);

@@ -8,9 +8,8 @@ import { Location } from '@angular/common';
   styleUrls: ['./add-member.component.css'],
 })
 export class AddMemberComponent implements OnInit {
-  public form = {
-    userId: null,
-  };
+  error: any = [];
+  members: any[] = [{ memberId: '' }];
   memberChoices: any;
   id: number = 0;
   constructor(
@@ -27,16 +26,23 @@ export class AddMemberComponent implements OnInit {
     });
   }
 
+  addUser() {
+    this.members.push({ memberId: '' });
+  }
+
+  removeUser(index: number) {
+    this.members.splice(index, 1);
+  }
+
   addMember() {
-    this.backend.addMember(this.id, this.form).subscribe({
+    const data = {
+      members: this.members,
+    };
+    this.backend.addMember(this.id, data).subscribe({
       next: (data) => {
         console.log(data);
-        this.form.userId = null;
-        this.router
-          .navigateByUrl('/', { skipLocationChange: true })
-          .then(() => {
-            this.router.navigate([this.router.url]);
-          });
+        this.members = [{ memberId: '' }];
+        this.router.navigateByUrl(`program/${this.id}/add-partner`);
       },
       error: (error) => this.handleError(error),
     });

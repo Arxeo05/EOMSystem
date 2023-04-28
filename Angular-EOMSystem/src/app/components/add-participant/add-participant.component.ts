@@ -19,23 +19,18 @@ export class AddParticipantComponent {
   ) {}
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
-  public form = {
-    name: '',
-  };
+  participants: any[] = [{ name: '' }];
 
   addParticipant() {
-    const formData = new FormData();
-    formData.append('name', this.form.name);
+    const data = {
+      participants: this.participants,
+    };
 
-    return this.backend.addParticipant(formData, this.id).subscribe({
+    return this.backend.addParticipant(data, this.id).subscribe({
       next: (data) => {
         console.log(data);
-        this.form.name = '';
-        this.router
-          .navigateByUrl('/', { skipLocationChange: true })
-          .then(() => {
-            this.router.navigate([this.router.url]);
-          });
+        this.participants = [{ name: '' }];
+        this.router.navigateByUrl(`program/${this.id}/add-flow`);
       },
       error: (error) => {
         this.handleError(error);
@@ -50,5 +45,12 @@ export class AddParticipantComponent {
   }
   goBack() {
     this.location.back();
+  }
+  addUser() {
+    this.participants.push({ memberId: '' });
+  }
+
+  removeUser(index: number) {
+    this.participants.splice(index, 1);
   }
 }

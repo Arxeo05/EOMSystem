@@ -58,11 +58,7 @@ export class AddPartnerComponent {
           (this.form.MoaFile = null),
           (this.form.startPartnership = ''),
           (this.form.endPartnership = ''),
-          this.router
-            .navigateByUrl('/', { skipLocationChange: true })
-            .then(() => {
-              this.router.navigate([this.router.url]);
-            });
+          this.router.navigateByUrl(`program/${this.id}/add-participant`);
       },
       error: (error) => {
         this.handleError(error);
