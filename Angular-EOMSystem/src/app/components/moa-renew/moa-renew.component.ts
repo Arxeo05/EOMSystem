@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { SwalService } from 'src/app/services/swal.service';
 @Component({
   selector: 'app-moa-renew',
   templateUrl: './moa-renew.component.html',
@@ -16,7 +17,8 @@ export class MoaRenewComponent {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private swal: SwalService
   ) {}
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
@@ -37,8 +39,11 @@ export class MoaRenewComponent {
     }
 
     return this.backend.renewPartner(formData, this.id).subscribe({
-      next: (data: any) => console.log(data),
+      next: (data: any) => {
+        this.swal.swalSucces("Moa Renewed Successfully");
+        console.log(data);},
       error: (error: any) => {
+        this.swal.swalError('Something Went Wrong');
         this.handleError(error);
       },
     });

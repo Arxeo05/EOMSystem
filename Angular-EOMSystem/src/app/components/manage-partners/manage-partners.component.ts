@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-manage-partners',
@@ -23,7 +24,8 @@ export class ManagePartnersComponent implements OnInit {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private swal: SwalService
   ) {}
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
@@ -63,8 +65,11 @@ export class ManagePartnersComponent implements OnInit {
     }
 
     return this.backend.updatePartner(formData, this.id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        this.swal.swalSucces('Edit Successful;')
+        console.log(data);},
       error: (error) => {
+        this.swal.swalError('Something Went Wrong');
         this.handleError(error);
       },
     });
