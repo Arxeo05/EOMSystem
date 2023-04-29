@@ -3,6 +3,7 @@ import { BackendService } from '../../services/backend.service';
 import { TokenService } from '../../services/token.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { SwalService } from 'src/app/services/swal.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,14 +19,21 @@ export class LoginComponent {
     private backend: BackendService,
     private token: TokenService,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private swal: SwalService
   ) {}
 
   error: any = null;
   submitLogin() {
     return this.backend.login(this.form).subscribe({
-      next: (data) => this.handleResponse(data),
-      error: (error) => this.handleError(error),
+      next: (data) => {
+        this.handleResponse(data);
+        this.swal.swalSucces('Login Successful');
+      },
+      error: (error) => {
+        this.handleError(error);
+        this.swal.swalError('Something Went Wrong');
+      },
     });
   }
 

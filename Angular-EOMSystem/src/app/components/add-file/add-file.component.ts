@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../services/backend.service';
 import { Location } from '@angular/common';
+import { SwalService } from 'src/app/services/swal.service';
 @Component({
   selector: 'app-add-file',
   templateUrl: './add-file.component.html',
@@ -12,7 +13,8 @@ export class AddFileComponent {
     private backend: BackendService,
     private route: ActivatedRoute,
     public router: Router,
-    private location: Location
+    private location: Location,
+    private swal: SwalService
   ) {}
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
@@ -37,6 +39,7 @@ export class AddFileComponent {
       next: (data) => {
         console.log(data);
         this.form.file = null;
+        this.swal.swalSucces('File Added Successfully');
         this.router
           .navigateByUrl('/', { skipLocationChange: true })
           .then(() => {
@@ -44,6 +47,7 @@ export class AddFileComponent {
           });
       },
       error: (error) => {
+        this.swal.swalError('Something Went Wrong');
         this.handleError(error);
       },
     });

@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from 'src/app/services/backend.service';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-add-flow',
@@ -13,7 +14,8 @@ export class AddFlowComponent {
     private backend: BackendService,
     private route: ActivatedRoute,
     public router: Router,
-    private location: Location
+    private location: Location,
+    private swal: SwalService
   ) {}
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
@@ -36,9 +38,11 @@ export class AddFlowComponent {
       next: (data) => {
         console.log(data);
         this.flows = [{ event: '', remarks: '', time: '' }];
+        this.swal.swalSucces('Flow Added Successfully');
         this.router.navigateByUrl(`program/${this.id}/add-file`);
       },
       error: (error) => {
+        this.swal.swalError('Something Went Wrong');
         this.handleError(error);
       },
     });

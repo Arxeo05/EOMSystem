@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { Router } from '@angular/router';
+import { SwalService } from 'src/app/services/swal.service';
 @Component({
   selector: 'app-create-program',
   templateUrl: './create-program.component.html',
@@ -19,7 +20,10 @@ export class CreateProgramComponent implements OnInit {
   leaderChoices: any;
   invalidDates = false;
 
-  constructor(private backend: BackendService, private router: Router) {}
+  constructor(
+    private backend: BackendService,
+    private router: Router,
+    private swal: SwalService) {}
   error: any[] = [];
   ngOnInit(): void {
     this.backend.allUsers().subscribe({
@@ -33,9 +37,13 @@ export class CreateProgramComponent implements OnInit {
     this.backend.createProgram(this.form).subscribe({
       next: (data) => {
         console.log(data);
+        this.swal.swalSucces('Extension Program Created Successfuly');
         this.router.navigateByUrl(`program/${data}/add-member`);
       },
-      error: (error) => this.handleError(error),
+      error: (error) => {
+        this.swal.swalError('Something Went Wrong');
+        this.handleError(error);
+      },
     });
   }
   handleError(error: any) {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { Chart } from 'angular-highcharts';
 import { AuthService } from '../../services/auth.service';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,10 @@ import { AuthService } from '../../services/auth.service';
     <div [chart]="chart"></div>`,
 })
 export class DashboardComponent implements OnInit {
-  constructor(private backend: BackendService, private auth: AuthService) {}
+  constructor(
+    private backend: BackendService,
+    private auth: AuthService,
+    private swal: SwalService) {}
 
   isAdmin = false;
   programs: any[] = [];

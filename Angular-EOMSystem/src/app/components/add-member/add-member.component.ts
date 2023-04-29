@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../services/backend.service';
 import { Location } from '@angular/common';
+import { SwalService } from 'src/app/services/swal.service';
 @Component({
   selector: 'app-add-member',
   templateUrl: './add-member.component.html',
@@ -16,7 +17,8 @@ export class AddMemberComponent implements OnInit {
     private route: ActivatedRoute,
     private backend: BackendService,
     public router: Router,
-    private location: Location
+    private location: Location,
+    private swal: SwalService
   ) {}
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -42,9 +44,13 @@ export class AddMemberComponent implements OnInit {
       next: (data) => {
         console.log(data);
         this.members = [{ memberId: '' }];
+        this.swal.swalSucces('Member Added Successfully');
         this.router.navigateByUrl(`program/${this.id}/add-partner`);
       },
-      error: (error) => this.handleError(error),
+      error: (error) => {
+        this.swal.swalError('Something Went Wrong');
+        this.handleError(error);
+      },
     });
   }
   handleError(error: any) {}

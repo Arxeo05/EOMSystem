@@ -3,6 +3,7 @@ import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-add-partner',
@@ -25,7 +26,8 @@ export class AddPartnerComponent {
     private backend: BackendService,
     private route: ActivatedRoute,
     public router: Router,
-    private location: Location
+    private location: Location,
+    private swal: SwalService
   ) {}
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
@@ -58,9 +60,11 @@ export class AddPartnerComponent {
           (this.form.MoaFile = null),
           (this.form.startPartnership = ''),
           (this.form.endPartnership = ''),
+          this.swal.swalSucces('Partner Added Successfully');
           this.router.navigateByUrl(`program/${this.id}/add-participant`);
       },
       error: (error) => {
+        this.swal.swalError('Something Went Wrong');
         this.handleError(error);
       },
     });

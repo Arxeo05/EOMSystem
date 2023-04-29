@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../services/backend.service';
 import { NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-add-participant',
@@ -15,7 +16,8 @@ export class AddParticipantComponent {
     private backend: BackendService,
     private route: ActivatedRoute,
     public router: Router,
-    private location: Location
+    private location: Location,
+    private swal: SwalService
   ) {}
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
@@ -30,9 +32,11 @@ export class AddParticipantComponent {
       next: (data) => {
         console.log(data);
         this.participants = [{ name: '' }];
+        this.swal.swalSucces('Participant Added Successfully');
         this.router.navigateByUrl(`program/${this.id}/add-flow`);
       },
       error: (error) => {
+        this.swal.swalError('Something Went Wrong');
         this.handleError(error);
       },
     });
