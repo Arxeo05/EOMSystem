@@ -32,7 +32,6 @@ export class LoginComponent {
       },
       error: (error) => {
         this.handleError(error);
-        this.swal.swalError('Something Went Wrong');
       },
     });
   }
