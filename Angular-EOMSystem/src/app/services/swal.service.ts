@@ -11,7 +11,7 @@ export class SwalService {
   swalSucces(message: string) {
     Swal.fire({
       icon: 'success',
-      title: 'Welcome',
+      title: 'Success',
       text: message
     });
   }

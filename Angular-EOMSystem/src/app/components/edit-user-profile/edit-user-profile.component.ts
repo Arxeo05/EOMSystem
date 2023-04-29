@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-edit-user-profile',
@@ -16,7 +17,9 @@ export class EditUserProfileComponent implements OnInit {
     email: '',
     photo: null,
   };
-  constructor(private backend: BackendService) {}
+  constructor(
+    private backend: BackendService,
+    private swal: SwalService) {}
   ngOnInit(): void {
     this.backend.me().subscribe({
       next: (data) => {
@@ -52,8 +55,12 @@ export class EditUserProfileComponent implements OnInit {
     }
 
     return this.backend.editUserprofile(formData).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        this.swal.swalSucces("Edit Successful");
+        console.log(data);
+      },
       error: (error) => {
+        this.swal.swalError('Something Went Wrong');
         this.handleError(error);
       },
     });

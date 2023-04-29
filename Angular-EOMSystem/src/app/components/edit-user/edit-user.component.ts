@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute } from '@angular/router';
+import { SwalService } from 'src/app/services/swal.service';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -18,7 +19,10 @@ export class EditUserComponent implements OnInit {
     status: '',
     photo: null,
   };
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+    private swal: SwalService) {}
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.backend.userById(id).subscribe({
@@ -57,8 +61,11 @@ export class EditUserComponent implements OnInit {
     formData.append('status', this.form.status);
 
     return this.backend.editUser(formData, this.id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        this.swal.swalSucces('Edit Successful');
+        console.log(data);},
       error: (error) => {
+        this.swal.swalError('Something Went Wrong');
         this.handleError(error);
       },
     });

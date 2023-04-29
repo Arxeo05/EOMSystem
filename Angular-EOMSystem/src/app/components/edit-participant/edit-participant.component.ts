@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { BackendService } from '../../services/backend.service';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-edit-participant',
@@ -16,7 +17,8 @@ export class EditParticipantComponent implements OnInit {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private swal: SwalService
   ) {}
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -35,8 +37,11 @@ export class EditParticipantComponent implements OnInit {
     formData.append('name', this.form.name);
 
     return this.backend.editParticipant(formData, this.id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        this.swal.swalSucces('Edit Successful');
+        console.log(data);},
       error: (error) => {
+        this.swal.swalError('Something Went Wrong');
         this.handleError(error);
       },
     });

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute } from '@angular/router';
+import { SwalService } from 'src/app/services/swal.service';
 @Component({
   selector: 'app-edit-program',
   templateUrl: './edit-program.component.html',
@@ -16,7 +17,10 @@ export class EditProgramComponent implements OnInit {
     leaderId: null,
     additionalDetail: null,
   };
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+    private swal: SwalService) {}
   ngOnInit(): void {
     this.backend.allUsers().subscribe({
       next: (data: any) => (this.leaderChoices = data),
@@ -39,8 +43,12 @@ export class EditProgramComponent implements OnInit {
   editProgram() {
     console.log(this.form);
     this.backend.editProgram(this.form, this.id).subscribe({
-      next: (data) => console.log(data),
-      error: (error) => this.handleError(error),
+      next: (data) => {
+        this.swal.swalSucces('Edit Successful');
+        console.log(data);},
+      error: (error) => {
+        this.swal.swalError('Something Went Wrong');
+        this.handleError(error);},
     });
   }
   handleError(error: any) {}

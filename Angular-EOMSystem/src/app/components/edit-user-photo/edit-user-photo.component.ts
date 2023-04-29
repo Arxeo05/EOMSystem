@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute } from '@angular/router';
+import { SwalService } from 'src/app/services/swal.service';
 @Component({
   selector: 'app-edit-user-photo',
   templateUrl: './edit-user-photo.component.html',
   styleUrls: ['./edit-user-photo.component.css'],
 })
 export class EditUserPhotoComponent {
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+    private swal: SwalService) {}
   public form = {
     photo: null,
   };
@@ -28,8 +32,11 @@ export class EditUserPhotoComponent {
     }
 
     return this.backend.editUserPhoto(formData, this.id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        this.swal.swalSucces('Edit Successful');
+        console.log(data);},
       error: (error) => {
+        this.swal.swalError('Something Went Wrong')
         this.handleError(error);
       },
     });
