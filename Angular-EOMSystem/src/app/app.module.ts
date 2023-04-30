@@ -36,7 +36,6 @@ import * as more from 'highcharts/highcharts-more.src';
 import * as exporting from 'highcharts/modules/exporting.src';
 import { EditUserPhotoComponent } from './components/edit-user-photo/edit-user-photo.component';
 import { ReportsComponent } from './components/reports/reports.component';
-import { AdminProgramsComponent } from './compoents/admin-programs/admin-programs.component';
 import { ActiveMoaReport } from './components/reports/activemoareports.component';
 import { ExpiredMoaReport } from './components/reports/expiredmoareports.component';
 
@@ -69,9 +68,8 @@ import { ExpiredMoaReport } from './components/reports/expiredmoareports.compone
     EditUserProfileComponent,
     EditUserPhotoComponent,
     ReportsComponent,
-    AdminProgramsComponent,
     ActiveMoaReport,
-    ExpiredMoaReport
+    ExpiredMoaReport,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +80,9 @@ import { ExpiredMoaReport } from './components/reports/expiredmoareports.compone
     FontAwesomeModule,
     ChartModule,
   ],
-  providers: [{ provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting ] }],
+  providers: [
+    { provide: HIGHCHARTS_MODULES, useFactory: () => [more, exporting] },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
