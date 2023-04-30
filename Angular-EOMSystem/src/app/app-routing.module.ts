@@ -26,6 +26,8 @@ import { TerminalReportComponent } from './components/terminal-report/terminal-r
 import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
 import { EditUserPhotoComponent } from './components/edit-user-photo/edit-user-photo.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { ProgramsComponent } from './components/programs/programs.component';
+
 
 function logGuard() {
   const token = inject(TokenService);
@@ -71,6 +73,11 @@ const routes: Routes = [
   {
     path: 'generate-report',
     component: ReportsComponent,
+    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+  },
+  {
+    path: 'programs',
+    component: ProgramsComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
   {

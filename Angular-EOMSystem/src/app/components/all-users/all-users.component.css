@@ -5,8 +5,15 @@
 }
 .con{
   background-color: white;
+  width: 100%;
+  padding: 20px;
 }
 button{
   display: inline-flex;
   margin-right: 10px;
+}
+select{
+  width: 20%;
+  display: inline-flex;
+  left: 500px;
 }

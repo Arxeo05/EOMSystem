@@ -1,7 +1,8 @@
 <div class="content">
   <app-side-nav></app-side-nav>
   <div class="con">
-    <label for="leaderId">User Status</label>
+    <label for="leaderId"><h3>User Status</h3></label>
+    <div>
     <select
       class="form-control"
       id="leaderId"
@@ -13,10 +14,13 @@
       <option value="accepted">Accepted</option>
       <option value="pending">Pending</option>
     </select>
-    <button id="leaderFilter" name="leaderFilter" (click)="filterByUser()">
+    <br />
+    </div>
+    <br />
+    <button class="btn btn-primary" id="leaderFilter" name="leaderFilter" (click)="filterByUser()">
       Filter By Status
     </button>
-    <button id="leaderFilter" name="leaderFilter" (click)="clearFilter()">
+    <button class="btn btn-primary" id="leaderFilter" name="leaderFilter" (click)="clearFilter()">
       Clear Filter
     </button>
     <table class="table">

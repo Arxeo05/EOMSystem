@@ -3,6 +3,7 @@ import { BackendService } from '../../services/backend.service';
 import { Chart } from 'angular-highcharts';
 import { AuthService } from '../../services/auth.service';
 import { SwalService } from 'src/app/services/swal.service';
+import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'app-dashboard',
@@ -122,43 +123,47 @@ export class DashboardComponent implements OnInit {
   }
   chart = new Chart({
     chart: {
-      type: 'line',
+      plotShadow: false,
+      type: 'pie',
     },
-    title: {
-      text: 'Linechart',
-    },
-    xAxis: {
-      categories: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sept',
-        'Oct',
-        'Nov',
-        'Dec',
-      ],
-    },
-    yAxis: {
-      title: {
-        text: 'Sample',
-      },
-    },
-    series: [
-      {
-        name: 'Sample',
-        type: 'line',
-        data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      },
-    ],
-  });
-
-  // add point to chart serie
-  add() {
-    this.chart.addPoint(Math.floor(Math.random() * 10));
-  }
+    title : {
+      text: 'Browser market shares at a specific website, 2014'   
+   },
+   tooltip : {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+   },
+   plotOptions : {
+      pie: {
+         allowPointSelect: true,
+         cursor: 'pointer',
+         dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
+            style: {
+               color:
+               'black'
+            }
+         }
+      }
+   },
+   series : [{
+      type: 'pie',
+      name: 'Browser share',
+      data: [
+         ['Firefox',   45.0],
+         ['IE',       26.8],
+         {
+            name: 'Chrome',
+            y: 12.8,
+            sliced: true,
+            selected: true
+         },
+         ['Safari',    8.5],
+         ['Opera',     6.2],
+         ['Others',      0.7]
+      ]
+   }]
+  })
 }
+  // add point to chart serie
+
