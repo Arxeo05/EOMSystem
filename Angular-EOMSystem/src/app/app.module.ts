@@ -81,7 +81,9 @@ import { ProgramsComponent } from './components/programs/programs.component';
     FontAwesomeModule,
     ChartModule,
   ],
-  providers: [{ provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting ] }],
+  providers: [
+    { provide: HIGHCHARTS_MODULES, useFactory: () => [more, exporting] },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

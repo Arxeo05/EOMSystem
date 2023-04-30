@@ -22,13 +22,6 @@ export class BackendService implements OnInit {
   signup(data: any): Observable<any> {
     return this.http.post<any>('http://127.0.0.1:8000/api/signup', data);
   }
-  //laravel notify function at ProgramsController.php
-  // notify(): Observable<any> {
-  //   return this.http.get<any>(
-  //     'http://127.0.0.1:8000/api/notify',
-  //     this.httpOptions
-  //   );
-  // }
   login(data: any): Observable<any> {
     return this.http.post<any>(
       'http://127.0.0.1:8000/api/login',
@@ -551,6 +544,26 @@ export class BackendService implements OnInit {
       'Bearer ' + localStorage.getItem('token')
     );
     return this.http.get(`http://127.0.0.1:8000/api/partners/count`, {
+      headers,
+    });
+  }
+  //reports
+  programPartnersWithActiveMoa() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/partners/active-moa', {
+      headers,
+    });
+  }
+
+  programPartnersWithExpiredMoa() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/partners/expired-moa', {
       headers,
     });
   }

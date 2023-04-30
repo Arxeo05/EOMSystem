@@ -634,5 +634,40 @@ class ProgramsController extends Controller
         return response()->json($partners);
     }
 
+    //for generate reports
+    public function getAllActivePartners() {
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $currentDate = Carbon::now();
+        $results = ProgramPartners::where('endPartnership', '>', $currentDate
+        ->toDateString())
+        ->orderBy('id', 'desc')
+        ->get();
 
+        if($results->count() > 0) {
+            return response()->json($results);
+        } else {
+            return response()->json($results);
+        }
+    }
+
+    public function getAllExpiredPartners() {
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        } else {
+            $currentDate = Carbon::now();
+            $results = ProgramPartners::whereDate('endPartnership', '<', $currentDate
+            ->toDateString())
+            ->orderBy('id', 'desc')
+            ->get();
+
+            if($results->count() > 0) {
+                return response()->json($results);
+            } else {
+                return response()->json($results);
+            }
+
+        }
+    }
 }

@@ -134,6 +134,10 @@ Route::get('acceptedusers/count',[ProgramsController::class,'acceptedUsersCount'
 Route::get('pendingusers/count',[ProgramsController::class,'pendingUsersCount']);
 Route::get('faculty/count',[ProgramsController::class,'facultyCount']);
 
+//for generate reports
+Route::get('partners/active-moa', [ProgramsController::class, 'getAllActivePartners']);
+Route::get('partners/expired-moa', [ProgramsController::class, 'getAllExpiredPartners']);
+
 Route::group(['middleware' => 'api',], function ($router) {
     // Route::post('logout', 'AuthController@logout');
     // Route::post('refresh', 'AuthController@refresh');
