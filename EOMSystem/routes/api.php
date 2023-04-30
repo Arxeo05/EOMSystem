@@ -49,6 +49,7 @@ Route::post('flow/delete/{id}',[ProgramsController::class, 'deleteFlow']);
 //Program-partners routes
 Route::post('partners/{pid}',[ProgramsController::class, 'addPartner']);
 Route::get('program-partner/{pid}',[ProgramsController::class, 'getPartnerByProgram']);
+Route::get('program-partners',[ProgramsController::class, 'getPartners']);
 Route::get('partner/{pid}',[ProgramsController::class, 'getPartnerById']);
 Route::post('partner/update/{id}',[ProgramsController::class, 'updatePartner']);
 Route::post('partner/delete/{id}',[ProgramsController::class, 'deletePartner']);
@@ -125,11 +126,13 @@ Route::get('/notify',[ProgramsController::class,'notify']);
 
 //for dashboard
 Route::get('activeprograms/count',[ProgramsController::class,'upcomingProgramsCount']);
+Route::get('partners/count',[ProgramsController::class,'partnersCount']);
 Route::get('pastprograms/count',[ProgramsController::class,'pastProgramsCount']);
 Route::get('expiredmoa/count',[ProgramsController::class,'expiredMoaCount']);
 Route::get('activemoa/count',[ProgramsController::class,'activeMoaCount']);
 Route::get('acceptedusers/count',[ProgramsController::class,'acceptedUsersCount']);
 Route::get('pendingusers/count',[ProgramsController::class,'pendingUsersCount']);
+Route::get('faculty/count',[ProgramsController::class,'facultyCount']);
 
 Route::group(['middleware' => 'api',], function ($router) {
     // Route::post('logout', 'AuthController@logout');

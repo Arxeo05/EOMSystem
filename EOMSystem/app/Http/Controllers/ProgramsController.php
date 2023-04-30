@@ -220,17 +220,16 @@ class ProgramsController extends Controller
         return response()->json($result);
     }
 
-    public function getPartnerById($id){
+    public function getPartners(){
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
-        $program = DB::table('program_partners')
-        ->where('id', '=', $id)
-        ->get();
-        if(is_null($program)){
+        $partners = DB::table('program_partners')->select('*')->get();
+
+        if(is_null($partners)){
             return response()->json(['message'=>'Query not found']);
         }
-        return response()->json($program);
+        return response()->json($partners);
     }
 
     public function updatePartner(Request $request, $id){
@@ -280,6 +279,10 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         return ProgramPartners::destroy($id);
+    }
+
+    public function allPartners(){
+
     }
 
     public function expiringMoa(){
@@ -606,5 +609,30 @@ class ProgramsController extends Controller
         }
         return response()->json($users);
     }
+
+    public function facultyCount(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $users = DB::table('users')
+        ->where('status', '=', 'accepted')->where('role','=',0)
+        ->count();
+        if(is_null($users)){
+            return response()->json(['message'=>'Query not found']);
+        }
+        return response()->json($users);
+    }
+
+    public function partnersCount(){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $partners = DB::table('program_partners')->count();
+        if(is_null($partners)){
+            return response()->json(['message'=>'Query not found']);
+        }
+        return response()->json($partners);
+    }
+
 
 }

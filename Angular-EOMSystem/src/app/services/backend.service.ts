@@ -181,6 +181,16 @@ export class BackendService implements OnInit {
     });
   }
 
+  allProgramPartners() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/program-partners`, {
+      headers,
+    });
+  }
+
   getPArticipantById(id: number) {
     const headers = new HttpHeaders().set(
       'Authorization',
@@ -503,6 +513,44 @@ export class BackendService implements OnInit {
       'Bearer ' + localStorage.getItem('token')
     );
     return this.http.get(`http://127.0.0.1:8000/api/memberof`, {
+      headers,
+    });
+  }
+
+  //dashboard
+  facultyCount() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/faculty/count`, {
+      headers,
+    });
+  }
+  pendingUsersCount() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/pendingusers/count`, {
+      headers,
+    });
+  }
+  activeProgramsCount() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/activeprograms/count`, {
+      headers,
+    });
+  }
+  partnersCount() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/partners/count`, {
       headers,
     });
   }

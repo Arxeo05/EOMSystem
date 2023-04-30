@@ -110,286 +110,305 @@
         </ol>
       </div> -->
 
-        <!-- 
+  <!--
             <div class="card-body">
               <div class="chart" [chart]="chart"></div>
             -->
 
- <div class="row mt-5"*ngIf="loggedIn ? (isAdmin ? true : false) : false">
+  <div class="row mt-5" *ngIf="loggedIn ? (isAdmin ? true : false) : false">
     <div class="col-12 mb-4 s">
       <h5>Dashboard</h5>
-       <div class="card bg-yellow-100 border-0 shadow">
-          <div class="card-header d-sm-flex flex-row align-items-center flex-0">
-             <div class="d-block mb-3 mb-sm-0">
-             <div class="d-flex ms-auto">Sample Chart</div>
+      <div class="card bg-yellow-100 border-0 shadow">
+        <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+          <div class="d-block mb-3 mb-sm-0">
+            <div class="d-flex ms-auto">Sample Chart</div>
           </div>
-          </div>
-          <div class="card-body p-2">
-             <!-- <div class="ct-chart-sales-value ct-double-octave ct-series-g a"></div> -->
-             <div class="chart" [chart]="chart"></div>
-          </div>
-       </div>
-    </div>
-    <div class="col-12 col-sm-6 col-xl-4 mb-4">
-       <div class="card border-0 shadow">
-          <div class="card-body">
-             <div class="row d-block d-xl-flex align-items-center">
-                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                   <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
-                      <svg class="icon icon-md" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                      </svg>
-                   </div>
-                   <div class="d-sm-none">
-                      <h2 class="h5">Faculty</h2>
-                      <h3 class="fw-extrabold mb-1"></h3>
-                   </div>
-                </div>
-                <div class="col-12 col-xl-7 px-xl-0">
-                   <div class="d-none d-sm-block">
-                      <h2 class="h5">Faculty</h2>
-                      <h3 class="fw-extrabold mb-1"></h3>
-                   </div>
-                   <small class="d-flex align-items-center">
-                   </small>
-                   <div class="small d-flex mt-1">
-                      <div><span class="text-success fw-bolder me-1">Sample Number</span></div>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
-    </div>
-    <div class="col-12 col-sm-6 col-xl-4 mb-4">
-       <div class="card border-0 shadow">
-          <div class="card-body">
-             <div class="row d-block d-xl-flex align-items-center">
-                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                   <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
-                      <svg class="icon icon-md" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                         <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
-                      </svg>
-                   </div>
-                   <div class="d-sm-none">
-                      <h2 class="fw-extrabold h5">Pending Accounts</h2>
-                      <h3 class="mb-1"></h3>
-                   </div>
-                </div>
-                <div class="col-12 col-xl-7 px-xl-0">
-                   <div class="d-none d-sm-block">
-                      <h2 class="h5">Pending Accounts</h2>
-                      <h3 class="fw-extrabold mb-1"></h3>
-                   </div>
-                   <small class="d-flex align-items-center">
-                   </small>
-                   <div class="small d-flex mt-1">
-                      <div><span class="text-danger fw-bolder me-1">Sample Numbers</span></div>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
-    </div>
-    <div class="col-12 col-sm-6 col-xl-4 mb-4">
-       <div class="card border-0 shadow">
-          <div class="card-body">
-             <div class="row d-block d-xl-flex align-items-center">
-                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                   <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
-                      <svg class="icon icon-md" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                         <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                      </svg>
-                   </div>
-                   <div class="d-sm-none">
-                      <h2 class="fw-extrabold h5">Extension Partners</h2>
-                      <h3 class="mb-1"></h3>
-                   </div>
-                </div>
-                <div class="col-12 col-xl-7 px-xl-0">
-                   <div class="d-none d-sm-block">
-                      <h2 class="h5">Extension Partners</h2>
-                      <h3 class="fw-extrabold mb-1"></h3>
-                   </div>
-                   <div class="small d-flex mt-1">
-                      <div><span class="text-success fw-bolder me-1">Sample Numbers</span></div>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
+        </div>
+        <div class="card-body p-2">
+          <!-- <div class="ct-chart-sales-value ct-double-octave ct-series-g a"></div> -->
+          <div class="chart" [chart]="chart"></div>
+        </div>
+      </div>
     </div>
     <div class="col-12 col-sm-6 col-xl-4 mb-4">
       <div class="card border-0 shadow">
-         <div class="card-body">
-            <div class="row d-block d-xl-flex align-items-center">
-               <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                  <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
-                     <svg class="icon icon-md" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                     </svg>
-                  </div>
-                  <div class="d-sm-none">
-                     <h2 class="fw-extrabold h5">Active Programs</h2>
-                     <h3 class="mb-1"></h3>
-                  </div>
-               </div>
-               <div class="col-12 col-xl-7 px-xl-0">
-                  <div class="d-none d-sm-block">
-                     <h2 class="h5">Active Programs</h2>
-                     <h3 class="fw-extrabold mb-1"></h3>
-                  </div>
-                  <div class="small d-flex mt-1">
-                     <div><span class="text-success fw-bolder me-1">Sample Numbers</span></div>
-                  </div>
-               </div>
+        <div class="card-body">
+          <div class="row d-block d-xl-flex align-items-center">
+            <div
+              class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center"
+            >
+              <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
+                <svg
+                  class="icon icon-md"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="d-sm-none">
+                <h2 class="h5">Faculty</h2>
+                <h3 class="fw-extrabold mb-1"></h3>
+              </div>
             </div>
-         </div>
-      </div>
-   </div>
- </div>
- <div class="row" *ngIf="isAdmin">
-    <div class="col-12 col-xl-8">
-       <div class="row">
-          <div class="col-12 mb-4">
-             <div class="card border-0 shadow">
-                <div class="card-header">
-                   <div class="row align-items-center">
-                      <div class="col">
-                         <h2 class="fs-5 fw-bold mb-0">Extension Partner</h2>
-                      </div>
-                      <div class="col text-end"><a href="#" class="btn btn-sm btn-primary">See all</a></div>
-                   </div>
+            <div class="col-12 col-xl-7 px-xl-0">
+              <div class="d-none d-sm-block">
+                <h2 class="h5">Faculty</h2>
+                <h3 class="fw-extrabold mb-1"></h3>
+              </div>
+              <small class="d-flex align-items-center"> </small>
+              <div class="small d-flex mt-1">
+                <div>
+                  <span class="text-success fw-bolder me-1">{{
+                    facultyCount
+                  }}</span>
                 </div>
-                <div class="table-responsive">
-                   <table class="table align-items-center table-flush">
-                      <thead class="thead-light">
-                         <tr>
-                            <th class="border-bottom" scope="col">Page name</th>
-                            <th class="border-bottom" scope="col">Page Views</th>
-                            <th class="border-bottom" scope="col">Page Value</th>
-                            <th class="border-bottom" scope="col">Bounce rate</th>
-                         </tr>
-                      </thead>
-                      <tbody>
-                         <tr>
-                            <th class="text-gray-900" scope="row">/demo/admin/index.html</th>
-                            <td class="fw-bolder text-gray-500">3,225</td>
-                            <td class="fw-bolder text-gray-500">$20</td>
-                            <td class="fw-bolder text-gray-500">
-                               <div class="d-flex">
-                                  <svg class="icon icon-xs text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                     <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                                  </svg>
-                                  42,55%
-                               </div>
-                            </td>
-                         </tr>
-                         <tr>
-                            <th class="text-gray-900" scope="row">/demo/admin/forms.html</th>
-                            <td class="fw-bolder text-gray-500">2,987</td>
-                            <td class="fw-bolder text-gray-500">0</td>
-                            <td class="fw-bolder text-gray-500">
-                               <div class="d-flex">
-                                  <svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                     <path fill-rule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                  </svg>
-                                  43,24%
-                               </div>
-                            </td>
-                         </tr>
-                         <tr>
-                            <th class="text-gray-900" scope="row">/demo/admin/util.html</th>
-                            <td class="fw-bolder text-gray-500">2,844</td>
-                            <td class="fw-bolder text-gray-500">294</td>
-                            <td class="fw-bolder text-gray-500">
-                               <div class="d-flex">
-                                  <svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                     <path fill-rule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                  </svg>
-                                  32,35%
-                               </div>
-                            </td>
-                         </tr>
-                         <tr>
-                            <th class="text-gray-900" scope="row">/demo/admin/validation.html</th>
-                            <td class="fw-bolder text-gray-500">2,050</td>
-                            <td class="fw-bolder text-gray-500">$147</td>
-                            <td class="fw-bolder text-gray-500">
-                               <div class="d-flex">
-                                  <svg class="icon icon-xs text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                     <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                                  </svg>
-                                  50,87%
-                               </div>
-                            </td>
-                         </tr>
-                         <tr>
-                            <th class="text-gray-900" scope="row">/demo/admin/modals.html</th>
-                            <td class="fw-bolder text-gray-500">1,483</td>
-                            <td class="fw-bolder text-gray-500">$19</td>
-                            <td class="fw-bolder text-gray-500">
-                               <div class="d-flex">
-                                  <svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                     <path fill-rule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                  </svg>
-                                  26,12%
-                               </div>
-                            </td>
-                         </tr>
-                      </tbody>
-                   </table>
-                </div>
-             </div>
+              </div>
+            </div>
           </div>
-       </div>
+        </div>
+      </div>
     </div>
- 
- </div>
- <!-- faculty dashboard -->
- <div class="container" *ngIf="!isAdmin && !loading">
-  <h5>Programs you lead</h5>
-  <div class="card-container">
-    <div class="card" *ngFor="let program of leadPrograms">
-      <div class="card-body">
-        <div class="img-container">
-          <img src="#" alt="image" />
+    <div class="col-12 col-sm-6 col-xl-4 mb-4">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <div class="row d-block d-xl-flex align-items-center">
+            <div
+              class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center"
+            >
+              <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                <svg
+                  class="icon icon-md"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <div class="d-sm-none">
+                <h2 class="fw-extrabold h5">Pending Accounts</h2>
+                <h3 class="mb-1"></h3>
+              </div>
+            </div>
+            <div class="col-12 col-xl-7 px-xl-0">
+              <div class="d-none d-sm-block">
+                <h2 class="h5">Pending Accounts</h2>
+                <h3 class="fw-extrabold mb-1"></h3>
+              </div>
+              <small class="d-flex align-items-center"> </small>
+              <div class="small d-flex mt-1">
+                <div>
+                  <span class="text-danger fw-bolder me-1">{{
+                    pendingUserCount
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <label class="title">{{ program.title }}</label>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-4 mb-4">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <div class="row d-block d-xl-flex align-items-center">
+            <div
+              class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center"
+            >
+              <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
+                <svg
+                  class="icon icon-md"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <div class="d-sm-none">
+                <h2 class="fw-extrabold h5">Extension Partners</h2>
+                <h3 class="mb-1"></h3>
+              </div>
+            </div>
+            <div class="col-12 col-xl-7 px-xl-0">
+              <div class="d-none d-sm-block">
+                <h2 class="h5">Extension Partners</h2>
+                <h3 class="fw-extrabold mb-1"></h3>
+              </div>
+              <div class="small d-flex mt-1">
+                <div>
+                  <span class="text-success fw-bolder me-1">{{
+                    partnersCount
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <button
-            class="btn btn-primary"
-            routerLink="/dashboard/program/{{ program.id }}"
-          >
-            View
-          </button>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-4 mb-4">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <div class="row d-block d-xl-flex align-items-center">
+            <div
+              class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center"
+            >
+              <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
+                <svg
+                  class="icon icon-md"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <div class="d-sm-none">
+                <h2 class="fw-extrabold h5">Active Programs</h2>
+                <h3 class="mb-1"></h3>
+              </div>
+            </div>
+            <div class="col-12 col-xl-7 px-xl-0">
+              <div class="d-none d-sm-block">
+                <h2 class="h5">Active Programs</h2>
+                <h3 class="fw-extrabold mb-1"></h3>
+              </div>
+              <div class="small d-flex mt-1">
+                <div>
+                  <span class="text-success fw-bolder me-1">{{
+                    activeProgramsCount
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div>
-    <h5>Programs you are member of</h5>
-  </div>
-  <div class="card-container">
-    <div class="card" *ngFor="let program of memberPrograms">
-      <div class="card-body">
-        <div class="img-container">
-          <img src="#" alt="image" />
-        </div>
-        <div>
-          <label class="title">{{ program.title }}</label>
-        </div>
-        <div>
-          <button
-            class="btn btn-primary"
-            routerLink="/dashboard/program/{{ program.id }}"
-          >
-            View
-          </button>
+  <div class="row" *ngIf="isAdmin">
+    <div class="col-12 col-xl-8">
+      <div class="row">
+        <div class="col-12 mb-4">
+          <div class="card border-0 shadow">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h2 class="fs-5 fw-bold mb-0">
+                    Extension Partner With Expiring Moa
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th class="border-bottom" scope="col">Partner Name</th>
+                    <th class="border-bottom" scope="col">Moa File</th>
+                    <th class="border-bottom" scope="col">
+                      Start of Partnership
+                    </th>
+                    <th class="border-bottom" scope="col">
+                      End of Partnership
+                    </th>
+                    <th class="border-bottom" scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let partner of exmoas">
+                    <th class="text-gray-900" scope="row">
+                      {{ partner.name }}
+                    </th>
+                    <td class="fw-bolder text-gray-500">
+                      {{ partner.MoaFile }}
+                    </td>
+                    <td class="fw-bolder text-gray-500">
+                      {{ partner.startPartnership }}
+                    </td>
+                    <td class="fw-bolder text-gray-500">
+                      {{ partner.endPartnership }}
+                    </td>
+                    <td>
+                      <button
+                        class="btn btn-primary"
+                        routerLink="/partner/renew/{{ partner.id }}"
+                      >
+                        Renew
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- faculty dashboard -->
+  <div class="container" *ngIf="!isAdmin && !loading">
+    <h5>Programs you lead</h5>
+    <div class="card-container">
+      <div class="card" *ngFor="let program of leadPrograms">
+        <div class="card-body">
+          <div class="img-container">
+            <img src="#" alt="image" />
+          </div>
+          <div>
+            <label class="title">{{ program.title }}</label>
+          </div>
+          <div>
+            <button
+              class="btn btn-primary"
+              routerLink="/dashboard/program/{{ program.id }}"
+            >
+              View
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h5>Programs you are member of</h5>
+    </div>
+    <div class="card-container">
+      <div class="card" *ngFor="let program of memberPrograms">
+        <div class="card-body">
+          <div class="img-container">
+            <img src="#" alt="image" />
+          </div>
+          <div>
+            <label class="title">{{ program.title }}</label>
+          </div>
+          <div>
+            <button
+              class="btn btn-primary"
+              routerLink="/dashboard/program/{{ program.id }}"
+            >
+              View
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

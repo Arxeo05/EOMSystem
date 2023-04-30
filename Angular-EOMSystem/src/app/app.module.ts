@@ -36,6 +36,7 @@ import * as more from 'highcharts/highcharts-more.src';
 import * as exporting from 'highcharts/modules/exporting.src';
 import { EditUserPhotoComponent } from './components/edit-user-photo/edit-user-photo.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { AdminProgramsComponent } from './compoents/admin-programs/admin-programs.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { ReportsComponent } from './components/reports/reports.component';
     EditUserProfileComponent,
     EditUserPhotoComponent,
     ReportsComponent,
+    AdminProgramsComponent,
   ],
   imports: [
     BrowserModule,

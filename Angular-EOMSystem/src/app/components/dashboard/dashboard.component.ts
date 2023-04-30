@@ -15,7 +15,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private backend: BackendService,
     private auth: AuthService,
-    private swal: SwalService) {}
+    private swal: SwalService
+  ) {}
 
   isAdmin = false;
   programs: any[] = [];
@@ -23,7 +24,10 @@ export class DashboardComponent implements OnInit {
   notification: any;
   loggedIn: boolean = false;
   loading: boolean = true;
-
+  facultyCount: number = 0;
+  pendingUserCount: number = 0;
+  activeProgramsCount: number = 0;
+  partnersCount: number = 0;
   //faculty properties
   leadPrograms: any[] = [];
   searchedPrograms: any[] = [];
@@ -32,6 +36,18 @@ export class DashboardComponent implements OnInit {
   leaderChoices: any;
   leaderValue: any;
   ngOnInit(): void {
+    this.backend.facultyCount().subscribe({
+      next: (data: any) => (this.facultyCount = data),
+    });
+    this.backend.partnersCount().subscribe({
+      next: (data: any) => (this.partnersCount = data),
+    });
+    this.backend.pendingUsersCount().subscribe({
+      next: (data: any) => (this.pendingUserCount = data),
+    });
+    this.backend.activeProgramsCount().subscribe({
+      next: (data: any) => (this.activeProgramsCount = data),
+    });
     this.backend.allUsers().subscribe({
       next: (data: any) => (this.leaderChoices = data),
     });
@@ -39,7 +55,10 @@ export class DashboardComponent implements OnInit {
       next: (data) => (this.programs = Object.values(data)),
     });
     this.backend.expiringMoa().subscribe({
-      next: (data) => (this.exmoas = Object.values(data)),
+      next: (data) => {
+        this.exmoas = Object.values(data);
+        console.log(data);
+      },
       error: (error) => console.log(error),
     });
     this.notify(true);
