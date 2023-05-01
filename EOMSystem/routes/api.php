@@ -114,7 +114,6 @@ Route::get('partners/expiredMoaFilterByDay', [ProgramsController::class, 'expire
 Route::get('partners/expiredMoaFilterByWeek', [ProgramsController::class, 'expiredMoaPerWeek']);
 Route::get('partners/expiredMoaFilterByMonth', [ProgramsController::class, 'expiredMoaPerMonth']);
 Route::get('partners/expiredMoaFilterByYear', [ProgramsController::class, 'expiredMoaPerYear']);
-Route::get('partners/getDate', [ProgramsController::class, 'getDate']);
 });
 Route::post('signup/',[AuthController::class, 'signup']);
 Route::post('login', [AuthController::class,'login']);
