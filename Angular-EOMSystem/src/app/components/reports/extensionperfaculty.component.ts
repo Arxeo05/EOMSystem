@@ -14,7 +14,7 @@ import { BackendService } from "src/app/services/backend.service";
               [(ngModel)]="leaderValue"
               requred
             >
-            <option *ngFor="let leader of leaderChoices" value="{{ leader.id }}" #leaderName>
+            <option *ngFor="let leader of leaderChoices" value="{{ leader.id }}" id="leaderName">
                 {{ leader.name }}
               </option>
             </select>
@@ -34,6 +34,7 @@ import { BackendService } from "src/app/services/backend.service";
     </button>
     <div id="extensionPerFacultyList">
       <h3>List of Extension Program per Faculty</h3>
+      <h4>Faculty: {{leaderName}}</h4>
       <div class="perfaculty-container">
         <table class="table">
           <thead>
@@ -138,6 +139,9 @@ export class ExtensionPerFaculty implements OnInit{
     });
   }
   filterByLeader() {
+    let getLeaderName = document.getElementById("leaderName")?.innerText;
+    this.leaderName = getLeaderName;
+    console.log(this.leaderName);
     this.backend.filterByLeader(this.leaderValue).subscribe({
       next: (data) => (this.programs = Object.values(data)),
     });
