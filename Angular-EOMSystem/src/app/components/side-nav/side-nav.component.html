@@ -133,7 +133,7 @@
   <a class="navbar-brand me-lg-5" [routerLink]="['']"
     ><img
       class="navbar-brand-dark"
-      src="assets/images/bsulogo.png"
+      src="assets/images/CICT-BSU-LOGO.png"
       alt="logo" />
     <img class="navbar-brand-light" src="assets/img/dark.svg" alt="logo"
   /></a>
@@ -159,21 +159,25 @@
   <div class="sidebar-inner px-4 pt-3">
     <ul class="nav flex-column pt-3 pt-md-0">
       <li class="nav-item mb-2">
-        <a [routerLink]="['']" class="nav-link d-flex align-items-center"
-          ><span class="sidebar-icon"
-            ><img
-              src="assets/images/bsulogo.png"
-              height="20"
-              width="20"
+        <br />
+        <img
+              src="assets/images/CICT-BSU-LOGO.png"
+              height="100"
+              width="100"
               alt="Logo"
-            /> </span
-          ><span class="mt-1 ms-1 sidebar-text" style="font-size: 10px"
-            >Extension Management System</span
+            />
+        <a [routerLink]="['']" class="nav-link d-flex align-items-center"
+          ><span class=""
+            > 
+            </span
+          >
+          <span class=" sidebar-text" style="font-size: 13px; color:#e2832a "
+            ><b>Extension Management System</b></span
           ></a
         >
       </li>
       <li class="nav-item" *ngIf="loggedIn ? (isAdmin ? true : false) : false">
-        <a routerLink="/dashboard" class="nav-link">
+        <a routerLink="/dashboard" class="nav-link collapsed d-flex">
           <span class="sidebar-icon">
             <svg
               class="icon icon-xs me-2"
@@ -189,8 +193,8 @@
         </a>
       </li>
       <li class="nav-item" *ngIf="!isAdmin && !loading">
-        <a routerLink="/dashboard" class="nav-link">
-          <span class="sidebar-icon">
+        <a routerLink="/dashboard" class="nav-link collapsed d-flex">
+          <span class="sidebar-icon ">
             <svg
               class="icon icon-xs me-2"
               fill="currentColor"
@@ -205,7 +209,7 @@
         </a>
       </li>
       <li class="nav-item " *ngIf="loggedIn ? (isAdmin ? true : false) : false">
-        <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-pages">
+        <span class="nav-link collapsed d-flex  align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-pages">
         <span>
           <span class="sidebar-icon">
             <svg
@@ -225,7 +229,7 @@
           <span class="sidebar-text">Programs</span>
           </span>
           <span class="link-arrow">
-            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" style="margin-left:10px;">
                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
             </svg>
          </span>
@@ -240,7 +244,7 @@
       
       <li class="nav-item">
         <a
-          class="nav-link"
+          class="nav-link collapsed d-flex"
           routerLink="/user/all-users"
           *ngIf="loggedIn ? (isAdmin ? true : false) : false"
         >
@@ -263,7 +267,7 @@
       </li>
       <li class="nav-item">
         <a
-          class="nav-link"
+          class="nav-link collapsed d-flex"
           routerLink="/generate-report"
           *ngIf="loggedIn ? (isAdmin ? true : false) : false"
         >

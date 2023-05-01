@@ -1,105 +1,105 @@
 <div class="content" *ngIf="isAdmin && !loading">
-    <app-side-nav></app-side-nav>
-    <div class="container">
-        <div class="form">
-            <a class="btn" (click)="search()">
-              <svg
-                width="17"
-                height="16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-labelledby="search"
-              >
-                <path
-                  d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
-                  stroke="currentColor"
-                  stroke-width="1.333"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-            </a>
-            <input
-              class="input"
-              type="search"
-              name="search"
-              id="search"
-              [(ngModel)]="searchValue"
-              (input)="onSearchInputChange()"
-              placeholder="Search something..."
-            />
-          </div>
-          <div class="con2">
-            <label class="fil" for="leaderId">Program Lead</label>
-            <select
-              class="form-control"
-              id="leaderId"
-              name="leaderId"
-              [(ngModel)]="leaderValue"
-              requred
+  <app-side-nav></app-side-nav>
+  <div class="container">
+      <div class="form">
+          <a class="btn" (click)="search()">
+            <svg
+              width="17"
+              height="16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-labelledby="search"
             >
-            <option *ngFor="let leader of leaderChoices" value="{{ leader.id }}">
-                {{ leader.name }}
-              </option>
-            </select>
+              <path
+                d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+                stroke="currentColor"
+                stroke-width="1.333"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+          </a>
+          <input
+            class="input"
+            type="search"
+            name="search"
+            id="search"
+            [(ngModel)]="searchValue"
+            (input)="onSearchInputChange()"
+            placeholder="Search something..."
+          />
+        </div>
+        <div class="con2">
+          <label class="fil" for="leaderId">Program Lead</label>
+          <select
+            class="form-control"
+            id="leaderId"
+            name="leaderId"
+            [(ngModel)]="leaderValue"
+            requred
+          >
+          <option *ngFor="let leader of leaderChoices" value="{{ leader.id }}">
+              {{ leader.name }}
+            </option>
+          </select>
 
-            <button
-              id="leaderFilter"
-              name="leaderFilter"
-              (click)="filterByLeader()"
-              style="width: 9em"
-            >
-              Filter By Leader
-            </button>
-            </div>
-<div class="card-container">
-    <hr />
-    <h5>PROGRAMS</h5>
-    <br />
-    <div class="card" *ngFor="let program of programs">
-        <div class="tools">
-            <div class="circle">
-              <span class="red box"></span>
-            </div>
-            <div class="circle">
-              <span class="yellow box"></span>
-            </div>
-            <div class="circle">
-              <span class="green box"></span>
-            </div>
-          </div>
-      <div class="card-body">
-        <div class="img-container">
-          <img src="#" alt="image" />
-        </div>
-        <div>
-          <label class="title">{{ program.title }}</label>
-        </div>
-        <div>
-          <div class="butcon">
           <button
-              class="learn-more"
-              routerLink="/dashboard/program/{{ program.id }}"
-            >
-              View
-            </button>
-            <button
-              class="learn-more"
-              routerLink="/dashboard/program/edit/{{ program.id }}"
-            >
-              Edit
-            </button>
-
-            <button
-              class="learn-more"
-              (click)="deleteProgram(program.id)"
-            >
-              Delete
-            </button>
+            id="leaderFilter"
+            name="leaderFilter"
+            (click)="filterByLeader()"
+            style="width: 9em"
+          >
+            Filter By Leader
+          </button>
+          </div>
+<div class="card-container">
+  <hr />
+  <h5><b>List of Programs</b></h5>
+  <br />
+  <div class="card" *ngFor="let program of programs">
+      <div class="tools">
+          <div class="circle">
+            <span class="red box"></span>
+          </div>
+          <div class="circle">
+            <span class="yellow box"></span>
+          </div>
+          <div class="circle">
+            <span class="green box"></span>
+          </div>
         </div>
-        </div>
+    <div class="card-body">
+      <div class="img-container">
+        <img src="#" alt="image" />
+      </div>
+      <div>
+        <label class="title">{{ program.title }}</label>
+      </div>
+      <div>
+        <div class="butcon">
+        <button
+            class="learn-more"
+            routerLink="/dashboard/program/{{ program.id }}"
+          >
+            View
+          </button>
+          <button
+            class="learn-more"
+            routerLink="/dashboard/program/edit/{{ program.id }}"
+          >
+            Edit
+          </button>
 
-    </div>
-    <br>
+          <button
+            class="learn-more"
+            (click)="deleteProgram(program.id)"
+          >
+            Delete
+          </button>
+      </div>
+      </div>
+
   </div>
+  <br>
+</div>
