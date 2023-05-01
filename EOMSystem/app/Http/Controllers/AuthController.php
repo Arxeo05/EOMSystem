@@ -233,6 +233,7 @@ class AuthController extends Controller
         $user->birthday = $request->input('birthday');
         $user->college = $request->input('college');
         $user->department = $request->input('department');
+        $user->password = $request->input('password');
         $user->photo = $fileNameToStore;
         $user->save();
 
