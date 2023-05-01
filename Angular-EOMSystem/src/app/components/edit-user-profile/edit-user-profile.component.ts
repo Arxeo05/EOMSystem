@@ -11,6 +11,7 @@ export class EditUserProfileComponent implements OnInit {
   profileValues: any;
   public form = {
     name: '',
+    password: '',
     birthday: '',
     college: '',
     department: '',
@@ -23,6 +24,7 @@ export class EditUserProfileComponent implements OnInit {
       next: (data) => {
         this.profileValues = Object.values(data);
         this.form.name = this.profileValues[0].name;
+        this.form.password = this.profileValues[0].password;
         this.form.birthday = this.profileValues[0].birthday;
         this.form.college = this.profileValues[0].college;
         this.form.department = this.profileValues[0].department;
@@ -44,6 +46,7 @@ export class EditUserProfileComponent implements OnInit {
   editUser() {
     const formData = new FormData();
     formData.append('name', this.form.name);
+    formData.append('password', this.form.password);
     formData.append('birthday', this.form.birthday);
     formData.append('college', this.form.college);
     formData.append('department', this.form.department);
