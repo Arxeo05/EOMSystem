@@ -38,6 +38,7 @@ import * as exporting from 'highcharts/modules/exporting.src';
 import { EditUserPhotoComponent } from './components/edit-user-photo/edit-user-photo.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ProgramsComponent } from './components/programs/programs.component';
+import { ExtensionPerFaculty } from './components/reports/extensionperfaculty.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ProgramsComponent } from './components/programs/programs.component';
     EditUserPhotoComponent,
     ReportsComponent,
     ProgramsComponent,
+    ExtensionPerFaculty,
   ],
   imports: [
     BrowserModule,

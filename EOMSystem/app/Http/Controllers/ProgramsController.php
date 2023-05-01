@@ -684,7 +684,7 @@ class ProgramsController extends Controller
                 ->get();
                 return response()->json($results);
             } else {
-                return response()->json("Not Found");
+                return response()->json();
             }
         }
     }
@@ -703,7 +703,7 @@ class ProgramsController extends Controller
                 ->get();
                 return response()->json($results);
             } else {
-                return response()->json("Not Found");
+                return response()->json();
             }
         }
     }
@@ -722,7 +722,7 @@ class ProgramsController extends Controller
                 ->get();
                 return response()->json($results);
             } else {
-                return response()->json("Not Found");
+                return response()->json();
             }
         }
     }
@@ -741,7 +741,7 @@ class ProgramsController extends Controller
                 ->get();
                 return response()->json($results);
             } else {
-                return response()->json("Not Found");
+                return response()->json();
             }
         }
     }
@@ -750,18 +750,17 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         } else {
+            $currentDate = Carbon::now()->toDateString();
             $dateFilter = Carbon::now()->toDateString();
-            $result = DB::table('program_partners')->select('*')
-            ->where('endPartnership', '=', $dateFilter)->count();
+            $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
             if ($result > 0) {
-                $currentDate = Carbon::now()->toDateString();
                 $results = DB::table('program_partners')->select('*')
                 ->where('endPartnership', '<=', $currentDate)
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);
             } else {
-                return response()->json("Not Found");
+                return response()->json();
             }
         }
     }
@@ -770,9 +769,9 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         } else {
+            $currentDate = Carbon::now()->toDateString();
             $dateFilter = Carbon::now()->addWeek(1)->toDateString();
-            $result = DB::table('program_partners')->select('*')
-            ->where('endPartnership', '<=', $dateFilter)->count();
+            $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
             if ($result > 0) {
                 $currentDate = Carbon::now()->toDateString();
                 $results = DB::table('program_partners')->select('*')
@@ -781,7 +780,7 @@ class ProgramsController extends Controller
                 ->get();
                 return response()->json($results);
             } else {
-                return response()->json("Not Found");
+                return response()->json();
             }
         }
     }
@@ -790,18 +789,17 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         } else {
+            $currentDate = Carbon::now()->toDateString();
             $dateFilter = Carbon::now()->addMonth(1)->toDateString();
-            $result = DB::table('program_partners')->select('*')
-            ->where('endPartnership', '<=', $dateFilter)->count();
+            $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
             if ($result > 0) {
-                $currentDate = Carbon::now()->toDateString();
                 $results = DB::table('program_partners')->select('*')
                 ->where('endPartnership', '<=', $currentDate)
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);
             } else {
-                return response()->json("Not Found");
+                return response()->json();
             }
         }
     }
@@ -810,18 +808,18 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         } else {
+
+            $currentDate = Carbon::now()->toDateString();
             $dateFilter = Carbon::now()->addYear(1)->toDateString();
-            $result = DB::table('program_partners')->select('*')
-            ->where('endPartnership', '<=', $dateFilter)->count();
+            $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
             if ($result > 0) {
-                $currentDate = Carbon::now()->toDateString();
                 $results = DB::table('program_partners')->select('*')
                 ->where('endPartnership', '<=', $currentDate)
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);
             } else {
-                return response()->json("Not Found");
+                return response()->json();
             }
         }
     }
