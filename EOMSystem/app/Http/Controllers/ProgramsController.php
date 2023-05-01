@@ -671,11 +671,10 @@ class ProgramsController extends Controller
     }
 
     public function activeMoaPerDay(){
-        $dateFilter = Carbon::now();
-        $result = DB::table('program_partners')->select('*')
-        ->where('endPartnership', '=', $dateFilter)->count();
+        $currentDate = Carbon::now()->toDateString();
+        $dateFilter = Carbon::now()->toDateString();
+        $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
         if ($result > 0) {
-            $currentDate = Carbon::now()->toDateString();
             $results = DB::table('program_partners')->select('*')
             ->where('endPartnership', '<=', $currentDate)
             ->orderBy('id', 'desc')
@@ -689,8 +688,7 @@ class ProgramsController extends Controller
     public function activeMoaPerWeek(){
         $currentDate = Carbon::now()->toDateString();
         $dateFilter = Carbon::now()->addWeek(1)->toDateString();
-        $result = DB::table('program_partners')->select('*')
-        ->where('endPartnership', '>=', $dateFilter)->count();
+        $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
         if ($result > 0) {
             $results = DB::table('program_partners')->select('*')
             ->where('endPartnership', '>=', $currentDate)
@@ -705,8 +703,7 @@ class ProgramsController extends Controller
     public function activeMoaPerMonth(){
         $currentDate = Carbon::now()->toDateString();
         $dateFilter = Carbon::now()->addMonth(1)->toDateString();
-        $result = DB::table('program_partners')->select('*')
-        ->where('endPartnership', '>=', $dateFilter)->count();
+        $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
         if ($result > 0) {
             $results = DB::table('program_partners')->select('*')
             ->where('endPartnership', '>=', $currentDate)
@@ -721,8 +718,7 @@ class ProgramsController extends Controller
     public function activeMoaPerYear(){
         $currentDate = Carbon::now()->toDateString();
         $dateFilter = Carbon::now()->addYear(1)->toDateString();
-        $result = DB::table('program_partners')->select('*')
-        ->where('endPartnership', '>=', $dateFilter)->count();
+        $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
         if ($result > 0) {
             $results = DB::table('program_partners')->select('*')
             ->where('endPartnership', '>=', $currentDate)
