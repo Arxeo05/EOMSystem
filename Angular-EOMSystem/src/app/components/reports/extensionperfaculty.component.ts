@@ -29,7 +29,7 @@ import { BackendService } from "src/app/services/backend.service";
             </button>
     </div>
     <button class="btn btn-primary generate">
-      Generate List
+      Download List
     </button>
     <h3>List of Extension per Faculty</h3>
     <div class="perfaculty-container">

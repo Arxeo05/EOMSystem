@@ -28,7 +28,7 @@ import { BackendService } from "src/app/services/backend.service";
       </button>
     </div>
     <button class="btn btn-primary generate" (click)="onGenerateExpiredMoaList()">
-      Generate List
+      Download List
     </button>
 
     <div class="expired-container" id="expiredMoaList">

@@ -28,7 +28,7 @@ import { BackendService } from "src/app/services/backend.service";
       </button>
     </div>
     <button class="btn btn-primary generate" (click)="onGenerateActiveMoaList()">
-      Generate List
+      Download List
     </button>
     <div class="active-container" id="activeMoaList">
       <h5>Active MOA</h5>
