@@ -1,5 +1,6 @@
 .content{
   background-color: aliceblue;
+  overflow-y: hidden;
 }
 .container{
   height: 100vh;

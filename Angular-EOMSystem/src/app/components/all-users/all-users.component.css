@@ -17,3 +17,11 @@ select{
   display: inline-flex;
   left: 500px;
 }
+
+.btn-create{
+  background-color: #e2832a;
+  color: white;
+  border: 0px;
+  border-radius: 3px;
+  padding: 7px;
+}

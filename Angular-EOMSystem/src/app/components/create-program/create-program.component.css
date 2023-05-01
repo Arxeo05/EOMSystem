@@ -90,15 +90,23 @@ form label#details{
   color: black;
 }
 
+.btn-create{
+  background-color: #e2832a;
+  color: white;
+  border: 0px;
+  border-radius: 3px;
+  padding: 7px;
+}
+
 
 form input:focus{
-  border: 2px solid blueviolet;
+  border: 2px solid #e2832a;
 }
 form select:focus{
-  border: 2px solid blueviolet;
+  border: 2px solid #e2832a;
 }
 form textarea:focus{
-  border: 2px solid blueviolet;
+  border: 2px solid #e2832a;
 }
 
 form input:focus ~ label{
