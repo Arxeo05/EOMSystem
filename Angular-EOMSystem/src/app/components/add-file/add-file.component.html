@@ -14,24 +14,23 @@
     />
   </div>
   <div class="button-container">
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="learn-more">Submit</button>
   </div>
   <div class="button-container">
     <a
-      class="btn btn-secondary"
+    class="learn-more"
       (click)="cancelStep()"
-      class="btn btn-secondary"
     >
       Next Step
     </a>
   </div>
   <div class="button-container">
-    <a class="btn btn-secondary" (click)="home()" class="btn btn-secondary">
+    <a class="learn-more" (click)="home()" >
       Home
     </a>
   </div>
   <div class="button-container" *ngIf="router.url.includes('dashboard')">
-    <a (click)="goBack()" class="btn btn-danger">Back</a>
+    <a (click)="goBack()" class="learn-more">Back</a>
   </div>
 </form>
   </div>
