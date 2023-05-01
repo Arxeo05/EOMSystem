@@ -17,7 +17,6 @@ import { AddFileComponent } from './components/add-file/add-file.component';
 import { EditFileComponent } from './components/edit-file/edit-file.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
-import { AnnouncementsComponent } from './components/announcements/announcements.component';
 import { MoaRenewComponent } from './components/moa-renew/moa-renew.component';
 import { UpdateUserPasswordComponent } from './components/update-user-password/update-user-password.component';
 import { RoleGuardGuard } from './role-guard.guard';
@@ -27,7 +26,6 @@ import { EditUserProfileComponent } from './components/edit-user-profile/edit-us
 import { EditUserPhotoComponent } from './components/edit-user-photo/edit-user-photo.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ProgramsComponent } from './components/programs/programs.component';
-
 
 function logGuard() {
   const token = inject(TokenService);
@@ -183,11 +181,6 @@ const routes: Routes = [
   {
     path: 'user/all-users/update-password/:id',
     component: UpdateUserPasswordComponent,
-    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
-  },
-  {
-    path: 'announcements',
-    component: AnnouncementsComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
 ];

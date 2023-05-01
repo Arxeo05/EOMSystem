@@ -66,8 +66,9 @@ export class ManagePartnersComponent implements OnInit {
 
     return this.backend.updatePartner(formData, this.id).subscribe({
       next: (data) => {
-        this.swal.swalSucces('Edit Successful;')
-        console.log(data);},
+        this.swal.swalSucces('Edit Successful;');
+        console.log(data);
+      },
       error: (error) => {
         this.swal.swalError('Something Went Wrong');
         this.handleError(error);

@@ -11,7 +11,8 @@ export class EditUserPhotoComponent {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
-    private swal: SwalService) {}
+    private swal: SwalService
+  ) {}
   public form = {
     photo: null,
   };
@@ -34,9 +35,10 @@ export class EditUserPhotoComponent {
     return this.backend.editUserPhoto(formData, this.id).subscribe({
       next: (data) => {
         this.swal.swalSucces('Edit Successful');
-        console.log(data);},
+        console.log(data);
+      },
       error: (error) => {
-        this.swal.swalError('Something Went Wrong')
+        this.swal.swalError('Something Went Wrong');
         this.handleError(error);
       },
     });

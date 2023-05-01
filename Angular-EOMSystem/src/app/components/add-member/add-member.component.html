@@ -20,13 +20,18 @@
     <button type="submit" class="btn btn-primary">Add Member</button>
   </div>
   <div class="button-container">
-    <button
+    <a
+      class="btn btn-secondary"
       (click)="cancelStep()"
       class="btn btn-secondary"
-      *ngIf="!router.url.includes('dashboard')"
     >
       Next Step
-    </button>
+    </a>
+  </div>
+  <div class="button-container">
+    <a class="btn btn-secondary" (click)="home()" class="btn btn-secondary">
+      Home
+    </a>
   </div>
   <div class="button-container" *ngIf="router.url.includes('dashboard')">
     <a (click)="goBack()" class="btn btn-danger">Back</a>

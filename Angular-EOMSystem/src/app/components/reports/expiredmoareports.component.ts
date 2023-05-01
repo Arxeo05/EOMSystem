@@ -6,23 +6,29 @@ import { BackendService } from "src/app/services/backend.service";
   selector: 'expired-moa',
   template: `
   <div class="filter-container">
-      <select class="form-control">
-        <option>
-          Extension Partner Name
+  <select class="form-control" id="sort" [(ngModel)]="filterValue">
+        <option default>
+          All
         </option>
-        <option>
-          Start Date
+        <option value="day">
+          Per Day
         </option>
-        <option>
-          End Date
+        <option value="week">
+          Per Week
+        </option>
+        <option value="month">
+          Per Month
+        </option>
+        <option value="year">
+          Per Year
         </option>
       </select>
-      <button class="btn btn-primary" id="leaderFilter" name="leaderFilter">
-        Sort
+      <button class="btn btn-primary" id="filterBy" name="filterBy" (click)="filterBy()">
+        Filter
       </button>
     </div>
     <button class="btn btn-primary generate" (click)="onGenerateExpiredMoaList()">
-      Generate List
+      Download List
     </button>
 
     <div class="expired-container" id="expiredMoaList">
@@ -76,8 +82,8 @@ export class ExpiredMoaReport implements OnInit{
   constructor(
     private backend: BackendService,) {}
 
-  partnersWithActiveMoa: any;
-  partnersWithExpiredMoa: any;
+  partnersWithExpiredMoa?: any;
+  filterValue: any;
 
   ngOnInit(): void {
     this.getProgramPartnersWithExpiredMoa();
@@ -86,9 +92,63 @@ export class ExpiredMoaReport implements OnInit{
   getProgramPartnersWithExpiredMoa() {
     this.backend.programPartnersWithExpiredMoa().subscribe({
       next: (data) => {
-        this.partnersWithExpiredMoa = data;
+        this.partnersWithExpiredMoa = Object.values(data);
       },
     });
+  }
+
+  filterByDay() {
+    this.backend.expiredMoaFilterByDay().subscribe ({
+      next: (data) => {
+        this.partnersWithExpiredMoa = Object.values(data);
+        console.log(this.partnersWithExpiredMoa);
+      }
+    })
+  }
+
+  filterByWeek() {
+    this.backend.expiredMoaFilterByWeek().subscribe ({
+      next: (data) => {
+        this.partnersWithExpiredMoa = Object.values(data);
+        console.log(this.partnersWithExpiredMoa);
+      }
+    })
+  }
+
+  filterByMonth() {
+    this.backend.expiredMoaFilterByMonth().subscribe ({
+      next: (data) => {
+        this.partnersWithExpiredMoa = Object.values(data);
+        console.log(this.partnersWithExpiredMoa);
+      }
+    })
+  }
+
+  filterByYear() {
+    this.backend.expiredMoaFilterByYear().subscribe ({
+      next: (data) => {
+        this.partnersWithExpiredMoa = Object.values(data);
+        console.log(this.partnersWithExpiredMoa);
+      }
+    })
+  }
+  filterBy() {
+    console.log (this.filterValue);
+    if (this.filterValue === undefined || "All") {
+      this.getProgramPartnersWithExpiredMoa();
+    }
+    if (this.filterValue === "day") {
+      this.filterByDay();
+    }
+    if (this.filterValue === "week") {
+      this.filterByDay();
+    }
+    if (this.filterValue === "month") {
+      this.filterByDay();
+    }
+    if (this.filterValue === "year") {
+      this.filterByYear();
+    }
   }
 
   async generateExpiredMoaPDF(htmlContent: string) {

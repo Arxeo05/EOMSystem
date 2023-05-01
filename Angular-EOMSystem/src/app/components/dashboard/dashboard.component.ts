@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { Chart } from 'angular-highcharts';
 import { AuthService } from '../../services/auth.service';
 import { SwalService } from 'src/app/services/swal.service';
-import * as Highcharts from 'highcharts';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,12 +12,17 @@ import * as Highcharts from 'highcharts';
   template: ` <button (click)="add()">Add Point!</button>
     <div [chart]="chart"></div>`,
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private backend: BackendService,
     private auth: AuthService,
     private swal: SwalService
   ) {}
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
 
   isAdmin = false;
   programs: any[] = [];
@@ -28,6 +33,7 @@ export class DashboardComponent implements OnInit {
   facultyCount: number = 0;
   pendingUserCount: number = 0;
   activeProgramsCount: number = 0;
+  completedProgramsCount: number = 0;
   partnersCount: number = 0;
   //faculty properties
   leadPrograms: any[] = [];
@@ -36,26 +42,49 @@ export class DashboardComponent implements OnInit {
   exmoas: any[] = [];
   leaderChoices: any;
   leaderValue: any;
+  subscriptions: Subscription[] = [];
+
+  data: any[] = [{ name: '', y: null }];
+
   ngOnInit(): void {
-    this.backend.facultyCount().subscribe({
-      next: (data: any) => (this.facultyCount = data),
+    const sub1 = this.backend.facultyCount().subscribe({
+      next: (data: any) => {
+        this.facultyCount = data;
+        this.data.push({ name: 'Faculty', y: data });
+      },
     });
-    this.backend.partnersCount().subscribe({
-      next: (data: any) => (this.partnersCount = data),
+    const sub2 = this.backend.partnersCount().subscribe({
+      next: (data: any) => {
+        this.partnersCount = data;
+        this.data.push({ name: 'Partners', y: data });
+      },
     });
-    this.backend.pendingUsersCount().subscribe({
-      next: (data: any) => (this.pendingUserCount = data),
+    const sub3 = this.backend.pendingUsersCount().subscribe({
+      next: (data: any) => {
+        this.pendingUserCount = data;
+        this.data.push({ name: 'Pending Users', y: data });
+      },
     });
-    this.backend.activeProgramsCount().subscribe({
-      next: (data: any) => (this.activeProgramsCount = data),
+    this.subscriptions.push(sub3);
+    const sub4 = this.backend.activeProgramsCount().subscribe({
+      next: (data: any) => {
+        this.activeProgramsCount = data;
+        this.data.push({ name: 'Active Programs', y: data });
+      },
     });
-    this.backend.allUsers().subscribe({
+    const sub5 = this.backend.pastProgramsCount().subscribe({
+      next: (data: any) => {
+        this.completedProgramsCount = data;
+        this.data.push({ name: 'Past Programs', y: data });
+      },
+    });
+    const sub6 = this.backend.allUsers().subscribe({
       next: (data: any) => (this.leaderChoices = data),
     });
-    this.backend.programs().subscribe({
+    const sub7 = this.backend.programs().subscribe({
       next: (data) => (this.programs = Object.values(data)),
     });
-    this.backend.expiringMoa().subscribe({
+    const sub8 = this.backend.expiringMoa().subscribe({
       next: (data) => {
         this.exmoas = Object.values(data);
         console.log(data);
@@ -63,44 +92,62 @@ export class DashboardComponent implements OnInit {
       error: (error) => console.log(error),
     });
     this.notify(true);
-    this.backend.userRole().subscribe((data: { role: number }) => {
+    const sub9 = this.backend.userRole().subscribe((data: { role: number }) => {
       if (data.role === 1) {
         this.isAdmin = true;
       }
     });
-    this.backend.programByLeader().subscribe((data) => {
+    const sub10 = this.backend.programByLeader().subscribe((data) => {
       this.leadPrograms = Object.values(data);
     });
-    this.backend.programBymember().subscribe((data) => {
+    const sub11 = this.backend.programBymember().subscribe((data) => {
       this.memberPrograms = Object.values(data);
     });
-    this.auth.authStatus.subscribe((value) => {
+    const sub12 = this.auth.authStatus.subscribe((value) => {
       this.loggedIn = value;
     });
-    this.backend.userRole().subscribe((data: { role: number }) => {
-      if (data.role === 1) {
-        this.isAdmin = true;
-      }
-    });
+    const sub13 = this.backend
+      .userRole()
+      .subscribe((data: { role: number }) => {
+        if (data.role === 1) {
+          this.isAdmin = true;
+        }
+      });
     this.loading = false;
+    this.subscriptions.push(sub1);
+    this.subscriptions.push(sub2);
+    this.subscriptions.push(sub3);
+    this.subscriptions.push(sub4);
+    this.subscriptions.push(sub5);
+    this.subscriptions.push(sub6);
+    this.subscriptions.push(sub7);
+    this.subscriptions.push(sub8);
+    this.subscriptions.push(sub9);
+    this.subscriptions.push(sub10);
+    this.subscriptions.push(sub11);
+    this.subscriptions.push(sub12);
+    this.subscriptions.push(sub13);
   }
 
   search() {
-    this.backend.searchProgram(this.searchValue).subscribe({
+    const sub14 = this.backend.searchProgram(this.searchValue).subscribe({
       next: (data) => (this.searchedPrograms = Object.values(data)),
     });
+    this.subscriptions.push(sub14);
   }
   filterByLeader() {
-    this.backend.filterByLeader(this.leaderValue).subscribe({
+    const sub15 = this.backend.filterByLeader(this.leaderValue).subscribe({
       next: (data) => (this.programs = Object.values(data)),
     });
+    this.subscriptions.push(sub15);
   }
 
   onSearchInputChange() {
     if (this.searchValue === '') {
-      this.backend.programs().subscribe({
+      const sub16 = this.backend.programs().subscribe({
         next: (data) => (this.programs = Object.values(data)),
       });
+      this.subscriptions.push(sub16);
     } else {
       this.search();
     }
@@ -116,54 +163,44 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteProgram(id: number) {
-    this.backend.deleteProgram(id).subscribe({
+    const sub17 = this.backend.deleteProgram(id).subscribe({
       next: (data) => console.log(data),
       error: (error) => console.log(error),
     });
+    this.subscriptions.push(sub17);
   }
+
   chart = new Chart({
     chart: {
       plotShadow: false,
       type: 'pie',
     },
-    title : {
-      text: 'Browser market shares at a specific website, 2014'   
-   },
-   tooltip : {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-   },
-   plotOptions : {
+    title: {
+      text: 'Browser market shares at a specific website, 2014',
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+    },
+    plotOptions: {
       pie: {
-         allowPointSelect: true,
-         cursor: 'pointer',
-         dataLabels: {
-            enabled: true,
-            format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
-            style: {
-               color:
-               'black'
-            }
-         }
-      }
-   },
-   series : [{
-      type: 'pie',
-      name: 'Browser share',
-      data: [
-         ['Firefox',   45.0],
-         ['IE',       26.8],
-         {
-            name: 'Chrome',
-            y: 12.8,
-            sliced: true,
-            selected: true
-         },
-         ['Safari',    8.5],
-         ['Opera',     6.2],
-         ['Others',      0.7]
-      ]
-   }]
-  })
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
+          style: {
+            color: 'black',
+          },
+        },
+      },
+    },
+    series: [
+      {
+        type: 'pie',
+        name: 'Browser share',
+        data: this.data,
+      },
+    ],
+  });
 }
-  // add point to chart serie
-
+// add point to chart serie

@@ -17,9 +17,7 @@ export class EditUserProfileComponent implements OnInit {
     email: '',
     photo: null,
   };
-  constructor(
-    private backend: BackendService,
-    private swal: SwalService) {}
+  constructor(private backend: BackendService, private swal: SwalService) {}
   ngOnInit(): void {
     this.backend.me().subscribe({
       next: (data) => {
@@ -56,7 +54,7 @@ export class EditUserProfileComponent implements OnInit {
 
     return this.backend.editUserprofile(formData).subscribe({
       next: (data) => {
-        this.swal.swalSucces("Edit Successful");
+        this.swal.swalSucces('Edit Successful');
         console.log(data);
       },
       error: (error) => {

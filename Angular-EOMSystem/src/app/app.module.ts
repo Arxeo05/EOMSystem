@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
+
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -24,7 +25,6 @@ import { AddFileComponent } from './components/add-file/add-file.component';
 import { EditFileComponent } from './components/edit-file/edit-file.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
-import { AnnouncementsComponent } from './components/announcements/announcements.component';
 import { MoaRenewComponent } from './components/moa-renew/moa-renew.component';
 import { UpdateUserPasswordComponent } from './components/update-user-password/update-user-password.component';
 import { AddFlowComponent } from './components/add-flow/add-flow.component';
@@ -39,6 +39,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { ProgramsComponent } from './components/programs/programs.component';
 import { ActiveMoaReport } from './components/reports/activemoareports.component';
 import { ExpiredMoaReport } from './components/reports/expiredmoareports.component';
+import { ExtensionPerFaculty } from './components/reports/extensionperfaculty.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { ExpiredMoaReport } from './components/reports/expiredmoareports.compone
     NavbarComponent,
     LoginComponent,
     SignupComponent,
+    ActiveMoaReport,
+    ExpiredMoaReport,
     ProfileComponent,
     SideNavComponent,
     DashboardComponent,
@@ -61,7 +64,6 @@ import { ExpiredMoaReport } from './components/reports/expiredmoareports.compone
     EditFileComponent,
     EditUserComponent,
     AllUsersComponent,
-    AnnouncementsComponent,
     MoaRenewComponent,
     UpdateUserPasswordComponent,
     AddFlowComponent,
@@ -73,6 +75,7 @@ import { ExpiredMoaReport } from './components/reports/expiredmoareports.compone
     
     ActiveMoaReport,
     ExpiredMoaReport,
+    ExtensionPerFaculty,
   ],
   imports: [
     BrowserModule,

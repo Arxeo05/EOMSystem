@@ -17,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::group(['middleware' => 'api',], function ($router) {
+    // Route::post('logout', 'AuthController@logout');
+    // Route::post('refresh', 'AuthController@refresh');
+
+});
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('programs',[ProgramsController::class, 'getPrograms']);
+
 Route::get('programLeader/{pid}',[AuthController::class,'programLeadr']);
 
 // Program related Routes
@@ -55,45 +65,15 @@ Route::post('partner/update/{id}',[ProgramsController::class, 'updatePartner']);
 Route::post('partner/delete/{id}',[ProgramsController::class, 'deletePartner']);
 Route::get('partner/moa/expiring',[ProgramsController::class, 'expiringMoa']);
 Route::post('partner/moa/renew/{id}',[ProgramsController::class, 'renewMoa']);
-Route::get('partner/moa/{filename}', function ($filename) {
-    $path = storage_path('app/public/moa_files/' . $filename);
-    if (!File::exists($path)) {
-        abort(404);
-    }
 
-    $file = File::get($path);
-    $type = File::mimeType($path);
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-    $response->header("Content-Disposition", "inline; filename=\"$filename\"");
-    return $response;
-});
 //Program-files routes
 Route::post('files/{pid}',[ProgramsController::class, 'addFile']);
 Route::get('file/{pid}',[ProgramsController::class, 'getFileByProgram']);
 Route::post('file/edit/{id}',[ProgramsController::class, 'updateFile']);
 Route::post('file/delete/{id}',[ProgramsController::class, 'deleteFile']);
-Route::get('files/{filename}', function ($filename) {
-    $path = storage_path('app/public/program_files/' . $filename);
-    if (!File::exists($path)) {
-        abort(404);
-    }
 
-    $file = File::get($path);
-    $type = File::mimeType($path);
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-    $response->header("Content-Disposition", "inline; filename=\"$filename\"");
-    return $response;
-});
-
-Route::middleware('auth')->group( function(){
-
-});
 //UserModel routes
 Route::get('users/filter/status/{data}',[AuthController::class, 'filterUser']);
-Route::post('signup/',[AuthController::class, 'signup']);
-Route::post('login', [AuthController::class,'login']);
 Route::post('user/update-password/{id}',[AuthController::class,'updateUserPassword']);
 Route::get('user/{id}',[AuthController::class,'getUserById']);
 Route::post('user/edit/{id}',[AuthController::class, 'editUser']);
@@ -103,18 +83,7 @@ Route::get('users',[AuthController::class,'getUsers']);
 Route::post('me', [AuthController::class, 'me']);
 Route::post('me/update-profile', [AuthController::class, 'updateProfile']);
 
-Route::get('user/photo/{filename}', function ($filename) {
-    $path = storage_path('app/public/userPhoto/' . $filename);
-    if (!File::exists($path)) {
-        return 'no image';
-    }
 
-    $file = File::get($path);
-    $type = File::mimeType($path);
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-    return $response;
-});
 
 Route::get('userRole',[AuthController::class,'userRole']);
 
@@ -137,14 +106,53 @@ Route::get('faculty/count',[ProgramsController::class,'facultyCount']);
 //for generate reports
 Route::get('partners/active-moa', [ProgramsController::class, 'getAllActivePartners']);
 Route::get('partners/expired-moa', [ProgramsController::class, 'getAllExpiredPartners']);
-
-Route::group(['middleware' => 'api',], function ($router) {
-    // Route::post('logout', 'AuthController@logout');
-    // Route::post('refresh', 'AuthController@refresh');
-
+Route::get('partners/activeMoaFilterByDay', [ProgramsController::class, 'activeMoaPerDay']);
+Route::get('partners/activeMoaFilterByWeek', [ProgramsController::class, 'activeMoaPerWeek']);
+Route::get('partners/activeMoaFilterByMonth', [ProgramsController::class, 'activeMoaPerMonth']);
+Route::get('partners/activeMoaFilterByYear', [ProgramsController::class, 'activeMoaPerYear']);
+Route::get('partners/expiredMoaFilterByDay', [ProgramsController::class, 'expiredMoaPerDay']);
+Route::get('partners/expiredMoaFilterByWeek', [ProgramsController::class, 'expiredMoaPerWeek']);
+Route::get('partners/expiredMoaFilterByMonth', [ProgramsController::class, 'expiredMoaPerMonth']);
+Route::get('partners/expiredMoaFilterByYear', [ProgramsController::class, 'expiredMoaPerYear']);
+Route::get('partners/getDate', [ProgramsController::class, 'getDate']);
 });
+Route::post('signup/',[AuthController::class, 'signup']);
+Route::post('login', [AuthController::class,'login']);
+Route::get('user/photo/{filename}', function ($filename) {
+    $path = storage_path('app/public/userPhoto/' . $filename);
+    if (!File::exists($path)) {
+        return 'no image';
+    }
 
-Route::group(['middleware' => 'jwt.auth'], function () {
-    Route::get('programs',[ProgramsController::class, 'getPrograms']);
+    $file = File::get($path);
+    $type = File::mimeType($path);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    return $response;
 });
+Route::get('partner/moa/{filename}', function ($filename) {
+    $path = storage_path('app/public/moa_files/' . $filename);
+    if (!File::exists($path)) {
+        abort(404);
+    }
 
+    $file = File::get($path);
+    $type = File::mimeType($path);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    $response->header("Content-Disposition", "inline; filename=\"$filename\"");
+    return $response;
+});
+Route::get('files/{filename}', function ($filename) {
+    $path = storage_path('app/public/program_files/' . $filename);
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    $response->header("Content-Disposition", "inline; filename=\"$filename\"");
+    return $response;
+});

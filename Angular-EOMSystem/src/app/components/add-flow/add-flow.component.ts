@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { BackendService } from 'src/app/services/backend.service';
 import { SwalService } from 'src/app/services/swal.service';
 
@@ -9,7 +10,7 @@ import { SwalService } from 'src/app/services/swal.service';
   templateUrl: './add-flow.component.html',
   styleUrls: ['./add-flow.component.css'],
 })
-export class AddFlowComponent {
+export class AddFlowComponent implements OnDestroy {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
@@ -17,6 +18,11 @@ export class AddFlowComponent {
     private location: Location,
     private swal: SwalService
   ) {}
+  ngOnDestroy(): void {
+    if (this.addFlowSub) {
+      this.addFlowSub.unsubscribe();
+    }
+  }
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
   flows: any[] = [{ event: '', remarks: '', time: '' }];
@@ -29,12 +35,13 @@ export class AddFlowComponent {
     this.flows.splice(index, 1);
   }
 
+  private addFlowSub: Subscription = new Subscription();
   onSubmit() {
     const data = {
       flows: this.flows,
     };
 
-    return this.backend.addFlow(data, this.id).subscribe({
+    this.addFlowSub = this.backend.addFlow(data, this.id).subscribe({
       next: (data) => {
         console.log(data);
         this.flows = [{ event: '', remarks: '', time: '' }];
@@ -55,5 +62,8 @@ export class AddFlowComponent {
   }
   goBack() {
     this.location.back();
+  }
+  home() {
+    this.router.navigateByUrl(`dashboard/program/${this.id}`);
   }
 }

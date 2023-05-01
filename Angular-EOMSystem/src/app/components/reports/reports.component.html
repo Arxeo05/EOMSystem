@@ -5,54 +5,7 @@
     <active-moa></active-moa>
     <expired-moa></expired-moa>
   </div>
-
   <div class="container faculty-container" id="extensionPerFacultyList">
-    <div class="filter-container">
-      <select class="form-control">
-        <option>
-          Per Day
-        </option>
-        <option>
-          Per Week
-        </option>
-        <option>
-          Per Month
-        </option>
-        <option>
-          Per Year
-        </option>
-      </select>
-      <button class="btn btn-primary" id="leaderFilter" name="leaderFilter">
-        Filter
-      </button>
-    </div>
-    <button class="btn btn-primary generate" (click)="onGenerateExtensionPerList()">
-      Generate List
-    </button>
-    <h3>List of Extension Partners per Faculty</h3>
-    <div class="perfaculty-container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Extension Partner</th>
-            <th scope="col">Faculty</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-          </tr>
-          <tr>
-            <td>Larry</td>
-            <td>the Bird</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <per-faculty></per-faculty>
   </div>
 </div>

@@ -22,7 +22,8 @@ export class EditUserComponent implements OnInit {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
-    private swal: SwalService) {}
+    private swal: SwalService
+  ) {}
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.backend.userById(id).subscribe({
@@ -63,7 +64,8 @@ export class EditUserComponent implements OnInit {
     return this.backend.editUser(formData, this.id).subscribe({
       next: (data) => {
         this.swal.swalSucces('Edit Successful');
-        console.log(data);},
+        console.log(data);
+      },
       error: (error) => {
         this.swal.swalError('Something Went Wrong');
         this.handleError(error);
