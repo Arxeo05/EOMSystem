@@ -12,11 +12,11 @@ export class EditUserProfileComponent implements OnInit {
   public form = {
     name: '',
     password: '',
-    birthday: '',
     college: '',
     department: '',
     email: '',
     photo: null,
+    birthday: ''
   };
   constructor(private backend: BackendService, private swal: SwalService) {}
   ngOnInit(): void {
@@ -24,11 +24,11 @@ export class EditUserProfileComponent implements OnInit {
       next: (data) => {
         this.profileValues = Object.values(data);
         this.form.name = this.profileValues[0].name;
-        this.form.password = this.profileValues[0].password;
         this.form.birthday = this.profileValues[0].birthday;
         this.form.college = this.profileValues[0].college;
         this.form.department = this.profileValues[0].department;
         this.form.email = this.profileValues[0].email;
+        this.form.password = this.profileValues[0].password;
       },
       error: (error) => {
         this.error = Object.values(error);
@@ -46,7 +46,6 @@ export class EditUserProfileComponent implements OnInit {
   editUser() {
     const formData = new FormData();
     formData.append('name', this.form.name);
-    formData.append('password', this.form.password);
     formData.append('birthday', this.form.birthday);
     formData.append('college', this.form.college);
     formData.append('department', this.form.department);
@@ -54,6 +53,7 @@ export class EditUserProfileComponent implements OnInit {
     if (this.form.photo) {
       formData.append('photo', this.form.photo);
     }
+    formData.append('password', this.form.password);
 
     return this.backend.editUserprofile(formData).subscribe({
       next: (data) => {

@@ -22,18 +22,7 @@
                 required
               />
             </div>
-            <div class="mb-3">
-              <label for="password" class="form-label" id="pass">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                name="password"
-                [(ngModel)]="form.password"
-                required
-              />
-            </div>
-            
+
             <div class="mb-3">
               <label for="birth" class="form-label" id="birthday">Birthday</label>
               <input
@@ -125,6 +114,25 @@
             >
               {{ error.photo }}
             </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label" id="pass">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                [(ngModel)]="form.password"
+                required
+              />
+            </div>
+            <div
+            class="alert alert-danger"
+            role="alert"
+            [hidden]="!error.password"
+          >
+            {{ error.password }}
+          </div>
           </div>
           <button
             type="submit"

@@ -54,6 +54,14 @@ form label#photo{
     font-size: 12px;
     color: black;
  }
+ 
+ form label#pass{
+  position: absolute;
+  left: 15px;
+  top: 385px;
+  font-size: 12px;
+  color: black;
+}
 
  form input:focus{
     border: 2px solid blueviolet;
@@ -77,14 +85,14 @@ form label#photo{
     margin: 5px;
     border-radius: 30px;
    }
-   
+
    button span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
    }
-   
+
    button span:after {
     content: '»';
     position: absolute;
@@ -93,11 +101,11 @@ form label#photo{
     right: -15px;
     transition: 0.5s;
    }
-   
+
    button:hover span {
     padding-right: 15px;
    }
-   
+
    button:hover span:after {
     opacity: 1;
     right: 0;
