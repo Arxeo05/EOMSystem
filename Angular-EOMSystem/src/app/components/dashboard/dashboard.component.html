@@ -415,7 +415,7 @@
   </div>
   <!-- faculty dashboard -->
   <div class="container" *ngIf="!isAdmin && !loading">
-    <h5 class="p-3">Programs you lead</h5>
+    <h5 class="p-3">Programs You lead</h5>
     <div class="card-container">
       <div class="card" *ngFor="let program of leadPrograms" id="cards">
         <div class="tools">
@@ -430,9 +430,9 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="img-container">
+          <!-- <div class="img-container">
             <img src="#" alt="image" />
-          </div>
+          </div> -->
           <div>
             <label class="title">{{ program.title }}</label>
           </div>

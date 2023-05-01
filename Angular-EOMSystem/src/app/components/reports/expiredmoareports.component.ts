@@ -63,7 +63,7 @@ import { BackendService } from "src/app/services/backend.service";
   margin-top: 10px;
   margin-bottom: 50px;
   margin-left: 10px;
-  background-color: rgb(245, 121, 121);
+  background-color: rgba(245, 121, 121, 0.3);
   box-shadow: 5px 5px 5px #939393;
   padding: 20px;
   }
