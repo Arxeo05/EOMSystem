@@ -1,0 +1,15 @@
+.content {
+    display: flex;
+    background-color: aliceblue;
+  }
+  
+  .container {
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    margin-left: 10px;
+    background-color: white;
+    box-shadow: 5px 5px 5px #939393;
+    padding: 20px;
+    height: 100vh;
+  }

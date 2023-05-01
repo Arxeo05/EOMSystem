@@ -1,4 +1,6 @@
-<div class="container1 d-flex align-items-end flex-column">
+<div class="content">
+  <app-side-nav></app-side-nav>
+  <div class="container">
   <div class="card">
     <div class="card-header">
       <br />
@@ -22,7 +24,6 @@
             <div class="alert alert-danger" role="alert" [hidden]="!error.name">
               {{ error.name }}
             </div>
-            <div class="col mb-3"></div>
             <div class="mb-3">
               <label for="address" class="form-label">Address</label>
               <input
@@ -168,4 +169,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
