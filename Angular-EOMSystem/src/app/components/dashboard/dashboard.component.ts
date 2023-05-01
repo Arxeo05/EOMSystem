@@ -176,7 +176,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       type: 'pie',
     },
     title: {
-      text: 'Browser market shares at a specific website, 2014',
+      text: '',
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',

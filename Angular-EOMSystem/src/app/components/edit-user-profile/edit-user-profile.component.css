@@ -1,0 +1,130 @@
+.content{
+    background-color: aliceblue;
+    height: 100vh;
+}
+form{
+    position: relative;
+
+}
+
+form input{
+    width: 100%;
+    padding: 15px 15px 7px;
+}
+form label#name{
+    position: absolute;
+    left: 15px;
+    top: 5px;
+    font-size: 12px;
+    color: black;
+ }
+form label#birthday{
+    position: absolute;
+    left: 15px;
+    top: 65px;
+    font-size: 12px;
+    color: black;
+ }
+form label#college{
+    position: absolute;
+    left: 15px;
+    top: 130px;
+    font-size: 12px;
+    color: black;
+ }
+form label#department{
+    position: absolute;
+    left: 15px;
+    top: 195px;
+    font-size: 12px;
+    color: black;
+ }
+form label#email{
+    position: absolute;
+    left: 15px;
+    top: 260px;
+    font-size: 12px;
+    color: black;
+ }
+
+form label#photo{
+    position: absolute;
+    left: 15px;
+    top: 315px;
+    font-size: 12px;
+    color: black;
+ }
+
+ form input:focus{
+    border: 2px solid blueviolet;
+ }
+
+ form input:focus ~ label{
+    top: 6px;
+ }
+ button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #3d405b;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 17px;
+    padding: 10px;
+    width: 130px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 30px;
+   }
+   
+   button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+   }
+   
+   button span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -15px;
+    transition: 0.5s;
+   }
+   
+   button:hover span {
+    padding-right: 15px;
+   }
+   
+   button:hover span:after {
+    opacity: 1;
+    right: 0;
+   }
+@media (max-width: 850px){
+    img{
+        width: 20%;
+    }
+    .card{
+        font-size: 10px;
+        width: 60vw;
+    }
+    .card-body{
+        margin-top: -20px;
+    }
+    .form-control{
+        height: 4vh;
+        width: 100%;
+    }
+    .btn{
+        height: 4vh;
+        font-size: 10px;
+    }
+    h6{
+        font-size: 11px;
+    }
+    p{
+        margin-top: -10px;
+    }
+}

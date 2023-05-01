@@ -25,6 +25,7 @@ export class SideNavComponent {
     private token: TokenService,
     private backend: BackendService
   ) {}
+  loading: boolean = true;
 
   ngOnInit() {
     this.auth.authStatus.subscribe((value) => {
@@ -35,5 +36,6 @@ export class SideNavComponent {
         this.isAdmin = true;
       }
     });
+    this.loading = false;
   }
 }

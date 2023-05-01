@@ -1,3 +1,96 @@
 .content{
   background-color: aliceblue;
 }
+.container{
+  height: 100vh;
+}
+
+button {
+  --color: #0077ff;
+  font-family: inherit;
+  display: inline-block;
+  width: 6em;
+  height: 2.6em;
+  line-height: 2.5em;
+  overflow: hidden;
+  margin: 20px;
+  font-size: 17px;
+  z-index: 1;
+  color: var(--color);
+  border: 2px solid var(--color);
+  border-radius: 6px;
+  position: relative;
+}
+
+button::before {
+  position: absolute;
+  content: "";
+  background: var(--color);
+  width: 150px;
+  height: 200px;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+button:hover {
+  color: white;
+}
+
+button:before {
+  top: 100%;
+  left: 100%;
+  transition: .3s all;
+}
+
+button:hover::before {
+  top: -30px;
+  left: -30px;
+}
+ .card {
+  width: 300px;
+  height: 400px;
+  margin: 4px 8px 4px;
+  background-color: #F8FBFE;
+  border-radius: 8px;
+  z-index: 1;
+  display: inline-flex;
+ }
+ 
+ .tools {
+  display: flex;
+  align-items: center;
+  padding: 9px;
+ }
+ 
+ .circle {
+  padding: 0 4px;
+ }
+ 
+ .box {
+  display: inline-block;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  padding: 1px;
+  border-radius: 50%;
+ }
+ 
+ .red {
+  background-color: #ff605c;
+ }
+ 
+ .yellow {
+  background-color: #ffbd44;
+ }
+ 
+ .green {
+  background-color: #00ca4e;
+ }
+ .fil{
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 5px;
+  background-color: white;
+ }
+ /* From uiverse.io by @satyamchaudharydev */
+/* removing default style of button */

@@ -119,11 +119,6 @@
     <div class="col-12 mb-4 s">
       <h5>Dashboard</h5>
       <div class="card bg-yellow-100 border-0 shadow">
-        <div class="card-header d-sm-flex flex-row align-items-center flex-0">
-          <div class="d-block mb-3 mb-sm-0">
-            <div class="d-flex ms-auto">Sample Chart</div>
-          </div>
-        </div>
         <div class="card-body p-2">
           <!-- <div class="ct-chart-sales-value ct-double-octave ct-series-g a"></div> -->
           <div class="chart" [chart]="chart"></div>
@@ -420,9 +415,20 @@
   </div>
   <!-- faculty dashboard -->
   <div class="container" *ngIf="!isAdmin && !loading">
-    <h5>Programs you lead</h5>
+    <h5 class="p-3">Programs you lead</h5>
     <div class="card-container">
       <div class="card" *ngFor="let program of leadPrograms">
+        <div class="tools">
+          <div class="circle">
+            <span class="red box"></span>
+          </div>
+          <div class="circle">
+            <span class="yellow box"></span>
+          </div>
+          <div class="circle">
+            <span class="green box"></span>
+          </div>
+        </div>
         <div class="card-body">
           <div class="img-container">
             <img src="#" alt="image" />
@@ -432,7 +438,7 @@
           </div>
           <div>
             <button
-              class="btn btn-primary"
+            class="learn-more"
               routerLink="/dashboard/program/{{ program.id }}"
             >
               View
@@ -442,10 +448,21 @@
       </div>
     </div>
     <div>
-      <h5>Programs you are member of</h5>
+      <h5 class="p-3">Programs you are member of</h5>
     </div>
     <div class="card-container">
       <div class="card" *ngFor="let program of memberPrograms">
+        <div class="tools">
+          <div class="circle">
+            <span class="red box"></span>
+          </div>
+          <div class="circle">
+            <span class="yellow box"></span>
+          </div>
+          <div class="circle">
+            <span class="green box"></span>
+          </div>
+        </div>
         <div class="card-body">
           <div class="img-container">
             <img src="#" alt="image" />
@@ -455,7 +472,7 @@
           </div>
           <div>
             <button
-              class="btn btn-primary"
+            class="learn-more"
               routerLink="/dashboard/program/{{ program.id }}"
             >
               View
