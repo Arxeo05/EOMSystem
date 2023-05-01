@@ -6,23 +6,29 @@ import { BackendService } from "src/app/services/backend.service";
   selector: 'active-moa',
   template: `
   <div class="filter-container">
-      <select class="form-control" id="sort">
-        <option>
-          Extension Partner Name
+      <select class="form-control" id="sort" [(ngModel)]="filterValue">
+        <option default>
+          All
         </option>
-        <option>
-          Start Date
+        <option value="day">
+          Per Day
         </option>
-        <option>
-          End Date
+        <option value="week">
+          Per Week
+        </option>
+        <option value="month">
+          Per Month
+        </option>
+        <option value="year">
+          Per Year
         </option>
       </select>
-      <button class="btn btn-primary" id="leaderFilter" name="leaderFilter" (click)="sortBy()">
-        Sort
+      <button class="btn btn-primary" id="filterBy" name="filterBy" (click)="filterBy()">
+        Filter
       </button>
     </div>
     <button class="btn btn-primary generate" (click)="onGenerateActiveMoaList()">
-      Generate List
+      Download List
     </button>
     <div class="active-container" id="activeMoaList">
       <h5>Active MOA</h5>
@@ -35,7 +41,7 @@ import { BackendService } from "src/app/services/backend.service";
           </tr>
         </thead>
         <tbody>
-          <tr *ngIf="partnersWithActiveMoa.length < 1">
+          <tr *ngIf="partnersWithActiveMoa.length < 1 || null">
             <td colspan="3">No Active Moa</td>
           </tr>
         </tbody>
@@ -75,8 +81,8 @@ export class ActiveMoaReport implements OnInit{
   constructor(
     private backend: BackendService,) {}
 
-  partnersWithActiveMoa: any;
-  partnersWithExpiredMoa: any;
+  partnersWithActiveMoa?: any;
+  filterValue: any;
 
   ngOnInit(): void {
     this.getProgramPartnersWithActiveMoa();
@@ -89,6 +95,60 @@ export class ActiveMoaReport implements OnInit{
         console.log(this.partnersWithActiveMoa)
       },
     });
+  }
+
+  filterByDay() {
+    this.backend.activeMoaFilterByDay().subscribe ({
+      next: (data) => {
+        this.partnersWithActiveMoa = Object.values(data);
+        console.log(this.partnersWithActiveMoa);
+      }
+    })
+  }
+
+  filterByWeek() {
+    this.backend.activeMoaFilterByWeek().subscribe ({
+      next: (data) => {
+        this.partnersWithActiveMoa = Object.values(data);
+        console.log(this.partnersWithActiveMoa);
+      }
+    })
+  }
+
+  filterByMonth() {
+    this.backend.activeMoaFilterByMonth().subscribe ({
+      next: (data) => {
+        this.partnersWithActiveMoa = Object.values(data);
+        console.log(this.partnersWithActiveMoa);
+      }
+    })
+  }
+
+  filterByYear() {
+    this.backend.activeMoaFilterByYear().subscribe ({
+      next: (data) => {
+        this.partnersWithActiveMoa = Object.values(data);
+        console.log(this.partnersWithActiveMoa);
+      }
+    })
+  }
+  filterBy() {
+    console.log (this.filterValue);
+    if (this.filterValue === undefined || "All") {
+      this.getProgramPartnersWithActiveMoa();
+    }
+    if (this.filterValue === "day") {
+      this.filterByDay();
+    }
+    if (this.filterValue === "week") {
+      this.filterByDay();
+    }
+    if (this.filterValue === "month") {
+      this.filterByDay();
+    }
+    if (this.filterValue === "year") {
+      this.filterByYear();
+    }
   }
 
   async generateActiveMoaPDF(htmlContent: string) {
@@ -122,7 +182,5 @@ export class ActiveMoaReport implements OnInit{
     }
   }
 
-  sortBy() {
 
-  }
 }
