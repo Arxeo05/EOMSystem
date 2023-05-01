@@ -5,9 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-programs',
   templateUrl: './programs.component.html',
-  styleUrls: ['./programs.component.css']
+  styleUrls: ['./programs.component.css'],
 })
-export class ProgramsComponent implements AfterViewInit{
+export class ProgramsComponent implements AfterViewInit {
   programs: any[] = [];
   programLeader: any;
   programMembers: any;
@@ -19,11 +19,10 @@ export class ProgramsComponent implements AfterViewInit{
   loading: boolean = true;
   searchValue: any;
   searchedPrograms: any[] = [];
- leaderValue: any;
- leaderChoices: any;
- leadPrograms: any[] = [];
- memberPrograms: any[] = [];
-  
+  leaderValue: any;
+  leaderChoices: any;
+  leadPrograms: any[] = [];
+  memberPrograms: any[] = [];
 
   constructor(private backend: BackendService, private route: ActivatedRoute) {}
   ngAfterViewInit(): void {
@@ -48,7 +47,6 @@ export class ProgramsComponent implements AfterViewInit{
     this.programParticipant(id);
     this.programFile(id);
     this.programFlow(id);
-    
   }
   programsById(id: number): void {
     this.backend.programsById(id).subscribe({
@@ -70,7 +68,6 @@ export class ProgramsComponent implements AfterViewInit{
       next: (data) => (this.programs = Object.values(data)),
     });
   }
-  
 
   programFlow(pid: number) {
     this.backend.programFlow(pid).subscribe({
@@ -87,7 +84,6 @@ export class ProgramsComponent implements AfterViewInit{
     this.backend.programs().subscribe({
       next: (data) => (this.programs = Object.values(data)),
     });
-    
   }
 
   moaFile: string = '';
@@ -162,7 +158,6 @@ export class ProgramsComponent implements AfterViewInit{
       error: (error) => console.log(error),
     });
   }
- 
 
   onSearchInputChange() {
     if (this.searchValue === '') {
@@ -174,6 +169,3 @@ export class ProgramsComponent implements AfterViewInit{
     }
   }
 }
-
-
-

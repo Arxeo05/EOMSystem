@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('member_programs', function (Blueprint $table) {
             $table->unsignedBigInteger('programId');
             $table->foreign('programId')->references('id')->on('programs')->onDelete('cascade');
-            $table->unsignedBigInteger('memberId');
-            $table->foreign('memberId')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('memberId')->nullable();
+            $table->foreign('memberId')->references('id')->on('users')->onDelete('set null');
         });
     }
 

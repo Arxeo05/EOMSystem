@@ -60,4 +60,7 @@ export class AddMemberComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+  home() {
+    this.router.navigateByUrl(`dashboard/program/${this.id}`);
+  }
 }

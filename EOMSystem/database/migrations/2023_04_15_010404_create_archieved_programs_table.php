@@ -19,8 +19,8 @@ return new class extends Migration
             $table->date('startDate');
             $table->date('endDate');
             $table->string('place');
-            $table->unsignedBigInteger('leaderId');
-            $table->foreign('leaderId')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('leaderId')->nullable();
+            $table->foreign('leaderId')->references('id')->on('users')->onDelete('set null');
             $table->longText('additionalDetail');
         });
     }

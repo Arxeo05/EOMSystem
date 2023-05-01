@@ -61,4 +61,7 @@ export class AddFileComponent {
   goBack() {
     this.location.back();
   }
+  home() {
+    this.router.navigateByUrl(`dashboard/program/${this.id}`);
+  }
 }

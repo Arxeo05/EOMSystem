@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ActiveMoaReport } from './components/reports/activemoareports.component';
+import { ExpiredMoaReport } from './components/reports/expiredmoareports.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -24,7 +26,6 @@ import { AddFileComponent } from './components/add-file/add-file.component';
 import { EditFileComponent } from './components/edit-file/edit-file.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
-import { AnnouncementsComponent } from './components/announcements/announcements.component';
 import { MoaRenewComponent } from './components/moa-renew/moa-renew.component';
 import { UpdateUserPasswordComponent } from './components/update-user-password/update-user-password.component';
 import { AddFlowComponent } from './components/add-flow/add-flow.component';
@@ -36,7 +37,6 @@ import * as more from 'highcharts/highcharts-more.src';
 import * as exporting from 'highcharts/modules/exporting.src';
 import { EditUserPhotoComponent } from './components/edit-user-photo/edit-user-photo.component';
 import { ReportsComponent } from './components/reports/reports.component';
-import { AdminProgramsComponent } from './compoents/admin-programs/admin-programs.component';
 import { ProgramsComponent } from './components/programs/programs.component';
 
 @NgModule({
@@ -45,6 +45,8 @@ import { ProgramsComponent } from './components/programs/programs.component';
     NavbarComponent,
     LoginComponent,
     SignupComponent,
+    ActiveMoaReport,
+    ExpiredMoaReport,
     ProfileComponent,
     SideNavComponent,
     DashboardComponent,
@@ -60,7 +62,6 @@ import { ProgramsComponent } from './components/programs/programs.component';
     EditFileComponent,
     EditUserComponent,
     AllUsersComponent,
-    AnnouncementsComponent,
     MoaRenewComponent,
     UpdateUserPasswordComponent,
     AddFlowComponent,
@@ -68,9 +69,7 @@ import { ProgramsComponent } from './components/programs/programs.component';
     EditUserProfileComponent,
     EditUserPhotoComponent,
     ReportsComponent,
-    AdminProgramsComponent,
     ProgramsComponent,
-    
   ],
   imports: [
     BrowserModule,

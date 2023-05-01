@@ -23,8 +23,10 @@ export class CreateProgramComponent implements OnInit {
   constructor(
     private backend: BackendService,
     private router: Router,
-    private swal: SwalService) {}
+    private swal: SwalService
+  ) {}
   error: any[] = [];
+
   ngOnInit(): void {
     this.backend.allUsers().subscribe({
       next: (data: any) => {

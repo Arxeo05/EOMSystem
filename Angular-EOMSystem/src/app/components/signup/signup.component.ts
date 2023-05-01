@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { SwalService } from 'src/app/services/swal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -21,8 +22,9 @@ export class SignupComponent {
 
   constructor(
     private backend: BackendService,
+    private router: Router,
     private swal: SwalService
-    ) {}
+  ) {}
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       this.form.photo = event.target.files[0];
@@ -46,8 +48,9 @@ export class SignupComponent {
 
     return this.backend.signup(formData).subscribe({
       next: (data) => {
-        this.swal.swalInfo('Waiting For Verification')
-        console.log(data)
+        this.swal.swalInfo('Waiting For Verification');
+        this.router.navigateByUrl(`login`);
+        console.log(data);
       },
       error: (error) => {
         this.handleError(error);

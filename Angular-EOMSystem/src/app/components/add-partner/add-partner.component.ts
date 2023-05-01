@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
 import { SwalService } from 'src/app/services/swal.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-partner',
   templateUrl: './add-partner.component.html',
   styleUrls: ['./add-partner.component.css'],
 })
-export class AddPartnerComponent {
+export class AddPartnerComponent implements OnDestroy {
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
   public form = {
@@ -29,6 +30,11 @@ export class AddPartnerComponent {
     private location: Location,
     private swal: SwalService
   ) {}
+  ngOnDestroy(): void {
+    if (this.partnerSub) {
+      this.partnerSub.unsubscribe();
+    }
+  }
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       this.form.MoaFile = event.target.files[0];
@@ -36,7 +42,7 @@ export class AddPartnerComponent {
       this.form.MoaFile = null;
     }
   }
-
+  private partnerSub: Subscription = new Subscription();
   addPartner() {
     const formData = new FormData();
     formData.append('name', this.form.name);
@@ -50,7 +56,7 @@ export class AddPartnerComponent {
     formData.append('startPartnership', this.form.startPartnership);
     formData.append('endPartnership', this.form.endPartnership);
 
-    return this.backend.addPartner(formData, this.id).subscribe({
+    this.partnerSub = this.backend.addPartner(formData, this.id).subscribe({
       next: (data) => {
         console.log(data);
         (this.form.name = ''),
@@ -61,7 +67,7 @@ export class AddPartnerComponent {
           (this.form.startPartnership = ''),
           (this.form.endPartnership = ''),
           this.swal.swalSucces('Partner Added Successfully');
-          this.router.navigateByUrl(`program/${this.id}/add-participant`);
+        this.router.navigateByUrl(`program/${this.id}/add-participant`);
       },
       error: (error) => {
         this.swal.swalError('Something Went Wrong');
@@ -77,5 +83,8 @@ export class AddPartnerComponent {
   }
   goBack() {
     this.location.back();
+  }
+  home() {
+    this.router.navigateByUrl(`dashboard/program/${this.id}`);
   }
 }

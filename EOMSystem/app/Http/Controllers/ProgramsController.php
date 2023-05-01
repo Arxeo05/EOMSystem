@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ArchievedPartners;
 use App\Models\Program;
 use App\Models\member_program;
 use App\Models\ProgramFiles;
@@ -91,7 +92,7 @@ class ProgramsController extends Controller
         $program->additionalDetail = $request->additionalDetail;
         $program->save();
         $pid = $program->id;
-        return response()->json($pid, ['message'=>'Program Created']);
+        return response()->json($pid);
     }
 
     public function editProgram(Request $request, $id){
@@ -117,12 +118,11 @@ class ProgramsController extends Controller
         $aprogram->endDate = $program->endDate;
         $aprogram->place = $program->place;
         $aprogram->leaderId = $program->leaderId;
-        $aprogram->flow = $program->flow;
         $aprogram->additionalDetail = $program->additionalDetail;
-        $aprogram->save();
 
-        $program->delete();
-
+        if($aprogram->save()){
+            $program->delete();
+        }
         return response()->json(['message'=>'Program Deleted']);
     }
 
@@ -161,7 +161,7 @@ class ProgramsController extends Controller
                 $newMember->programId = $pid;
                 $newMember->save();
                 }
-        return response()->json('Success');
+        return response()->json(['message'=>'Success']);
     }
 
     public function deleteMember($pid,$uid){

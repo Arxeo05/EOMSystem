@@ -538,6 +538,15 @@ export class BackendService implements OnInit {
       headers,
     });
   }
+  pastProgramsCount() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(`http://127.0.0.1:8000/api/activeprograms/count`, {
+      headers,
+    });
+  }
   partnersCount() {
     const headers = new HttpHeaders().set(
       'Authorization',

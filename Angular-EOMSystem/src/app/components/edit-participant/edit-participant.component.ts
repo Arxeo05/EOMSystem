@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { BackendService } from '../../services/backend.service';
 import { SwalService } from 'src/app/services/swal.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-participant',
@@ -32,14 +33,16 @@ export class EditParticipantComponent implements OnInit {
   id = Number(this.route.snapshot.paramMap.get('id'));
 
   error: any = [];
+  private editSub: Subscription = new Subscription();
   editParticipant() {
     const formData = new FormData();
     formData.append('name', this.form.name);
 
-    return this.backend.editParticipant(formData, this.id).subscribe({
+    this.editSub = this.backend.editParticipant(formData, this.id).subscribe({
       next: (data) => {
         this.swal.swalSucces('Edit Successful');
-        console.log(data);},
+        console.log(data);
+      },
       error: (error) => {
         this.swal.swalError('Something Went Wrong');
         this.handleError(error);

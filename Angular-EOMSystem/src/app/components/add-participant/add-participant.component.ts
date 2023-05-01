@@ -1,16 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../services/backend.service';
 import { NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
 import { SwalService } from 'src/app/services/swal.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-participant',
   templateUrl: './add-participant.component.html',
   styleUrls: ['./add-participant.component.css'],
 })
-export class AddParticipantComponent {
+export class AddParticipantComponent implements OnDestroy {
   @ViewChild('myForm', { static: false }) myForm!: NgForm;
   constructor(
     private backend: BackendService,
@@ -19,16 +20,22 @@ export class AddParticipantComponent {
     private location: Location,
     private swal: SwalService
   ) {}
+  ngOnDestroy(): void {
+    if (this.partSub) {
+      this.partSub.unsubscribe();
+    }
+  }
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
   participants: any[] = [{ name: '' }];
 
+  private partSub: Subscription = new Subscription();
   addParticipant() {
     const data = {
       participants: this.participants,
     };
 
-    return this.backend.addParticipant(data, this.id).subscribe({
+    this.partSub = this.backend.addParticipant(data, this.id).subscribe({
       next: (data) => {
         console.log(data);
         this.participants = [{ name: '' }];
@@ -49,6 +56,9 @@ export class AddParticipantComponent {
   }
   goBack() {
     this.location.back();
+  }
+  home() {
+    this.router.navigateByUrl(`dashboard/program/${this.id}`);
   }
   addUser() {
     this.participants.push({ memberId: '' });

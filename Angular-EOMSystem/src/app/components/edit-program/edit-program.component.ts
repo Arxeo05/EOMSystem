@@ -20,7 +20,8 @@ export class EditProgramComponent implements OnInit {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
-    private swal: SwalService) {}
+    private swal: SwalService
+  ) {}
   ngOnInit(): void {
     this.backend.allUsers().subscribe({
       next: (data: any) => (this.leaderChoices = data),
@@ -45,10 +46,12 @@ export class EditProgramComponent implements OnInit {
     this.backend.editProgram(this.form, this.id).subscribe({
       next: (data) => {
         this.swal.swalSucces('Edit Successful');
-        console.log(data);},
+        console.log(data);
+      },
       error: (error) => {
         this.swal.swalError('Something Went Wrong');
-        this.handleError(error);},
+        this.handleError(error);
+      },
     });
   }
   handleError(error: any) {}

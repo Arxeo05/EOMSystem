@@ -12,7 +12,8 @@ export class EditFileComponent {
   constructor(
     private backend: BackendService,
     private route: ActivatedRoute,
-    private swal: SwalService) {}
+    private swal: SwalService
+  ) {}
   id = Number(this.route.snapshot.paramMap.get('id'));
   error: any = [];
   public form = {
@@ -34,8 +35,9 @@ export class EditFileComponent {
 
     return this.backend.editFile(formData, this.id).subscribe({
       next: (data) => {
-        this.swal.swalSucces("Update Successful");
-        console.log(data);},
+        this.swal.swalSucces('Update Successful');
+        console.log(data);
+      },
       error: (error) => {
         this.swal.swalError('Something Went Wrong');
         this.handleError(error);
