@@ -543,7 +543,7 @@ export class BackendService implements OnInit {
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    return this.http.get(`http://127.0.0.1:8000/api/activeprograms/count`, {
+    return this.http.get(`http://127.0.0.1:8000/api/pastprograms/count`, {
       headers,
     });
   }
@@ -582,9 +582,12 @@ export class BackendService implements OnInit {
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    return this.http.get('http://127.0.0.1:8000/api/partners/activeMoaFilterByDay', {
-      headers,
-    });
+    return this.http.get(
+      'http://127.0.0.1:8000/api/partners/activeMoaFilterByDay',
+      {
+        headers,
+      }
+    );
   }
 
   activeMoaFilterByWeek() {
@@ -592,9 +595,12 @@ export class BackendService implements OnInit {
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    return this.http.get('http://127.0.0.1:8000/api/partners/activeMoaFilterByWeek', {
-      headers,
-    });
+    return this.http.get(
+      'http://127.0.0.1:8000/api/partners/activeMoaFilterByWeek',
+      {
+        headers,
+      }
+    );
   }
 
   activeMoaFilterByMonth() {
@@ -602,9 +608,12 @@ export class BackendService implements OnInit {
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    return this.http.get('http://127.0.0.1:8000/api/partners/activeMoaFilterByMonth', {
-      headers,
-    });
+    return this.http.get(
+      'http://127.0.0.1:8000/api/partners/activeMoaFilterByMonth',
+      {
+        headers,
+      }
+    );
   }
 
   activeMoaFilterByYear() {
@@ -612,9 +621,12 @@ export class BackendService implements OnInit {
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    return this.http.get('http://127.0.0.1:8000/api/partners/activeMoaFilterByYear', {
-      headers,
-    });
+    return this.http.get(
+      'http://127.0.0.1:8000/api/partners/activeMoaFilterByYear',
+      {
+        headers,
+      }
+    );
   }
 
   expiredMoaFilterByDay() {
@@ -622,9 +634,12 @@ export class BackendService implements OnInit {
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    return this.http.get('http://127.0.0.1:8000/api/partners/expiredMoaFilterByDay', {
-      headers,
-    });
+    return this.http.get(
+      'http://127.0.0.1:8000/api/partners/expiredMoaFilterByDay',
+      {
+        headers,
+      }
+    );
   }
 
   expiredMoaFilterByWeek() {
@@ -632,9 +647,12 @@ export class BackendService implements OnInit {
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    return this.http.get('http://127.0.0.1:8000/api/partners/expiredMoaFilterByWeek', {
-      headers,
-    });
+    return this.http.get(
+      'http://127.0.0.1:8000/api/partners/expiredMoaFilterByWeek',
+      {
+        headers,
+      }
+    );
   }
 
   expiredMoaFilterByMonth() {
@@ -642,9 +660,12 @@ export class BackendService implements OnInit {
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    return this.http.get('http://127.0.0.1:8000/api/partners/expiredMoaFilterByMonth', {
-      headers,
-    });
+    return this.http.get(
+      'http://127.0.0.1:8000/api/partners/expiredMoaFilterByMonth',
+      {
+        headers,
+      }
+    );
   }
 
   expiredMoaFilterByYear() {
@@ -652,8 +673,11 @@ export class BackendService implements OnInit {
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    return this.http.get('http://127.0.0.1:8000/api/partners/expiredMoaFilterByYear', {
-      headers,
-    });
+    return this.http.get(
+      'http://127.0.0.1:8000/api/partners/expiredMoaFilterByYear',
+      {
+        headers,
+      }
+    );
   }
 }
