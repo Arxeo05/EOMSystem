@@ -27,15 +27,15 @@
             <div class="alert alert-danger" role="alert" [hidden]="!error.name">
               {{ error.name }}
             </div>
-            <button type="button" (click)="removeUser(i)" *ngIf="i > 0">
+            <button class="learn-more" type="button" (click)="removeUser(i)" *ngIf="i > 0">
               Remove
             </button>
           </div>
-          <button type="button" (click)="addUser()">Add Item</button>
+          <button class="learn-more" type="button" (click)="addUser()">Add Item</button>
           <br>
           <button
             type="submit"
-            class="btn btn-primary"
+            class="learn-more"
             [disabled]="!partnerForm.valid"
           >
             Submit
@@ -43,24 +43,22 @@
         </form>
         <div class="button-container">
           <a
-            class="btn btn-secondary"
+          class="learn-more"
             (click)="cancelStep()"
-            class="btn btn-secondary"
           >
             Next Step
           </a>
         </div>
         <div class="button-container">
           <a
-            class="btn btn-secondary"
+          class="learn-more"
             (click)="home()"
-            class="btn btn-secondary"
           >
             Home
           </a>
         </div>
         <div class="button-container" *ngIf="router.url.includes('dashboard')">
-          <a (click)="goBack()" class="btn btn-danger">Back</a>
+          <a (click)="goBack()" class="learn-more">Back</a>
         </div>
       </div>
     </div>
