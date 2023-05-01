@@ -17,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::group(['middleware' => 'api',], function ($router) {
+    // Route::post('logout', 'AuthController@logout');
+    // Route::post('refresh', 'AuthController@refresh');
+
+});
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('programs',[ProgramsController::class, 'getPrograms']);
+
 Route::get('programLeader/{pid}',[AuthController::class,'programLeadr']);
 
 // Program related Routes
@@ -86,14 +96,8 @@ Route::get('files/{filename}', function ($filename) {
     $response->header("Content-Disposition", "inline; filename=\"$filename\"");
     return $response;
 });
-
-Route::middleware('auth')->group( function(){
-
-});
 //UserModel routes
 Route::get('users/filter/status/{data}',[AuthController::class, 'filterUser']);
-Route::post('signup/',[AuthController::class, 'signup']);
-Route::post('login', [AuthController::class,'login']);
 Route::post('user/update-password/{id}',[AuthController::class,'updateUserPassword']);
 Route::get('user/{id}',[AuthController::class,'getUserById']);
 Route::post('user/edit/{id}',[AuthController::class, 'editUser']);
@@ -103,18 +107,7 @@ Route::get('users',[AuthController::class,'getUsers']);
 Route::post('me', [AuthController::class, 'me']);
 Route::post('me/update-profile', [AuthController::class, 'updateProfile']);
 
-Route::get('user/photo/{filename}', function ($filename) {
-    $path = storage_path('app/public/userPhoto/' . $filename);
-    if (!File::exists($path)) {
-        return 'no image';
-    }
 
-    $file = File::get($path);
-    $type = File::mimeType($path);
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-    return $response;
-});
 
 Route::get('userRole',[AuthController::class,'userRole']);
 
@@ -146,14 +139,18 @@ Route::get('partners/expiredMoaFilterByWeek', [ProgramsController::class, 'expir
 Route::get('partners/expiredMoaFilterByMonth', [ProgramsController::class, 'expiredMoaPerMonth']);
 Route::get('partners/expiredMoaFilterByYear', [ProgramsController::class, 'expiredMoaPerYear']);
 Route::get('partners/getDate', [ProgramsController::class, 'getDate']);
-
-Route::group(['middleware' => 'api',], function ($router) {
-    // Route::post('logout', 'AuthController@logout');
-    // Route::post('refresh', 'AuthController@refresh');
-
 });
+Route::post('signup/',[AuthController::class, 'signup']);
+Route::post('login', [AuthController::class,'login']);
+Route::get('user/photo/{filename}', function ($filename) {
+    $path = storage_path('app/public/userPhoto/' . $filename);
+    if (!File::exists($path)) {
+        return 'no image';
+    }
 
-Route::group(['middleware' => 'jwt.auth'], function () {
-    Route::get('programs',[ProgramsController::class, 'getPrograms']);
+    $file = File::get($path);
+    $type = File::mimeType($path);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    return $response;
 });
-
