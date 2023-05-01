@@ -1,7 +1,7 @@
 <div class="content">
   <app-side-nav></app-side-nav>
   <div class="con">
-    <label for="leaderId"><h3>User Status</h3></label>
+    <label for="leaderId"><h5><b>User Status</b></h5></label>
     <div>
     <select
       class="form-control"
@@ -17,12 +17,13 @@
     <br />
     </div>
     <br />
-    <button class="btn btn-primary" id="leaderFilter" name="leaderFilter" (click)="filterByUser()">
+    <button class="btn btn-create" id="leaderFilter" name="leaderFilter" (click)="filterByUser()">
       Filter By Status
     </button>
-    <button class="btn btn-primary" id="leaderFilter" name="leaderFilter" (click)="clearFilter()">
+    <button class="btn btn-create" id="leaderFilter" name="leaderFilter" (click)="clearFilter()">
       Clear Filter
     </button>
+    <br><br>
     <table class="table">
       <thead>
         <tr>
