@@ -1,13 +1,28 @@
 .card{
-    height: 100vh;
+    height: 90vh;
     color: white;
     width: 40vw;
     font-size: 0.9rem;
+    margin-right:30%;
+    margin-left:50%;
+    margin-top: 3%;
+    background-color: black;
+    background-color: rgb(0, 0, 0, .80);
 
 }
 .card-header{
     border-style: none;
 }
+
+#system-title{
+    color: #e2832a;
+}
+
+.pt-4{
+    margin-top: -30px !important;
+    color:white;
+}
+
 form{
     position: relative;
 
@@ -16,53 +31,54 @@ form{
 form input{
     width: 100%;
     padding: 15px 15px 7px;
+    border: 2px solid #3d405b
 }
 form label#name{
     position: absolute;
     left: 15px;
-    top: 5px;
+    top: 3px;
     font-size: 12px;
     color: black;
  }
 form label#birthday{
     position: absolute;
     left: 15px;
-    top: 65px;
+    top: 68px;
     font-size: 12px;
     color: black;
  }
 form label#college{
     position: absolute;
     left: 15px;
-    top: 130px;
+    top: 134px;
     font-size: 12px;
     color: black;
  }
 form label#department{
     position: absolute;
     left: 15px;
-    top: 195px;
+    top: 200px;
     font-size: 12px;
     color: black;
  }
 form label#email{
     position: absolute;
     left: 15px;
-    top: 260px;
+    top: 266px;
     font-size: 12px;
     color: black;
  }
 form label#pass{
     position: absolute;
     left: 15px;
-    top: 340px;
+    top: 333px;
     font-size: 12px;
     color: black;
  }
 form label#cpass{
     position: absolute;
     left: 15px;
-    top: 400px;
+    top: 398px;
     font-size: 12px;
     color: black;
  }
@@ -71,11 +87,21 @@ form label#photo{
     left: 15px;
     top: 458px;
     font-size: 12px;
-    color: black;
+    color: white;
+ }
+
+ form input#photo{
+    width: 90%;
+    margin-left: 10%;
+ }
+
+ form #photo{
+    font-size: 12px;
+    color: #e2832a;
  }
 
  form input:focus{
-    border: 2px solid blueviolet;
+    border: 2px solid #e2832a;
  }
 
  form input:focus ~ label{
@@ -121,29 +147,52 @@ form label#photo{
     opacity: 1;
     right: 0;
    }
-@media (max-width: 850px){
-    img{
-        width: 20%;
-    }
+   button:hover{
+    background-color: #e2832a;
+   }
+@media (max-width: 750px){
     .card{
-        font-size: 10px;
+
         width: 60vw;
+        margin-right: 20%;
+        margin-top:5%;
+        
     }
-    .card-body{
-        margin-top: -20px;
-    }
-    .form-control{
-        height: 4vh;
-        width: 100%;
-    }
+
+    form input#photo{
+        width: 85%;
+        margin-left: 15%;
+     }
+
     .btn{
         height: 4vh;
         font-size: 10px;
     }
-    h6{
-        font-size: 11px;
+
+}
+
+@media (max-width: 450px){
+    .card{
+        margin-right: 0%;
+        margin-top:0%;
+        width: 100vw;
+        height: 200vh;
+        
     }
-    p{
-        margin-top: -10px;
+
+    form input#photo{
+        width: 85%;
+        margin-left: 15%;
+     }
+
+     .form-control{
+        min-height: 5vh;
+        width: 100%;
     }
+
+    .btn{
+        height: 4vh;
+        font-size: 10px;
+    }
+
 }
