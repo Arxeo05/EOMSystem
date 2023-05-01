@@ -49,6 +49,8 @@ h3 {
 
 .filter-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .generate {

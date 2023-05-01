@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import jsPDF from 'jspdf';
 import { BackendService } from "src/app/services/backend.service";
 
@@ -13,7 +14,7 @@ import { BackendService } from "src/app/services/backend.service";
               [(ngModel)]="leaderValue"
               requred
             >
-            <option *ngFor="let leader of leaderChoices" value="{{ leader.id }}">
+            <option *ngFor="let leader of leaderChoices" value="{{ leader.id }}" #leaderName>
                 {{ leader.name }}
               </option>
             </select>
@@ -25,36 +26,39 @@ import { BackendService } from "src/app/services/backend.service";
               (click)="filterByLeader()"
               style="width: 9em"
             >
-              Filter By Leader
+              Filter By Faculty
             </button>
     </div>
-    <button class="btn btn-primary generate">
+    <button class="btn btn-primary generate" (click)="onGenerateExtensionPerList()">
       Download List
     </button>
-    <h3>List of Extension per Faculty</h3>
-    <div class="perfaculty-container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Extension Partner</th>
-            <th scope="col">Faculty</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-          </tr>
-          <tr>
-            <td>Larry</td>
-            <td>the Bird</td>
-          </tr>
-        </tbody>
-      </table>
+    <div id="extensionPerFacultyList">
+      <h3>List of Extension Program per Faculty</h3>
+      <div class="perfaculty-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Extension Program</th>
+              <th scope="col">Location</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="programs.length < 1">
+              <td colspan="4">No Extension Found</td>
+            </tr>
+          </tbody>
+          <tfoot *ngFor="let program of programs">
+            <tr>
+              <td>{{program.title}}</td>
+              <td>{{program.place}}</td>
+              <td>{{program.startDate}}</td>
+              <td>{{program.endDate}}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
   `,
   styles: [`
@@ -88,17 +92,64 @@ import { BackendService } from "src/app/services/backend.service";
 })
 export class ExtensionPerFaculty implements OnInit{
 
-  constructor(private backend: BackendService) {}
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute) {}
 
   programs: any[] = [];
+  programLeader: any;
+  programMembers: any;
+  programPartners: any;
+  isAdmin = false;
+  loading: boolean = true;
   leaderValue: any;
   leaderChoices: any;
+  leadPrograms: any[] = [];
+  leaderName:any;
 
   ngOnInit(): void {
+
   }
 
+  ngAfterViewInit(): void {
+    this.backend.userRole().subscribe((data: { role: number }) => {
+      if (data.role === 1) {
+        this.isAdmin = true;
+      }
+      this.loading = false;
+    });
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.programsById(id);
+
+    this.backend.programLeader(id).subscribe({
+      next: (data) => {
+        (this.programLeader = data);
+        console.log(this.programLeader);
+      },
+    });
+    this.backend.allUsers().subscribe({
+      next: (data: any) => (this.leaderChoices = data),
+    });
+    this.programPartner(id);
+  }
+  programsById(id: number): void {
+    this.backend.programsById(id).subscribe({
+      next: (data) => (this.programs = Object.values(data)),
+    });
+  }
   filterByLeader() {
     this.backend.filterByLeader(this.leaderValue).subscribe({
+      next: (data) => (this.programs = Object.values(data)),
+    });
+  }
+
+  programPartner(pid: number) {
+    this.backend.programPartners(pid).subscribe({
+      next: (data) => {
+        this.programPartners = Object.values(data);
+      },
+    });
+    this.backend.programs().subscribe({
       next: (data) => (this.programs = Object.values(data)),
     });
   }
