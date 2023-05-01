@@ -576,4 +576,84 @@ export class BackendService implements OnInit {
       headers,
     });
   }
+
+  activeMoaFilterByDay() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/partners/activeMoaFilterByDay', {
+      headers,
+    });
+  }
+
+  activeMoaFilterByWeek() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/partners/activeMoaFilterByWeek', {
+      headers,
+    });
+  }
+
+  activeMoaFilterByMonth() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/partners/activeMoaFilterByMonth', {
+      headers,
+    });
+  }
+
+  activeMoaFilterByYear() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/partners/activeMoaFilterByYear', {
+      headers,
+    });
+  }
+
+  expiredMoaFilterByDay() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/partners/expiredMoaFilterByDay', {
+      headers,
+    });
+  }
+
+  expiredMoaFilterByWeek() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/partners/expiredMoaFilterByWeek', {
+      headers,
+    });
+  }
+
+  expiredMoaFilterByMonth() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/partners/expiredMoaFilterByMonth', {
+      headers,
+    });
+  }
+
+  expiredMoaFilterByYear() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get('http://127.0.0.1:8000/api/partners/expiredMoaFilterByYear', {
+      headers,
+    });
+  }
 }

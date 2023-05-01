@@ -137,6 +137,15 @@ Route::get('faculty/count',[ProgramsController::class,'facultyCount']);
 //for generate reports
 Route::get('partners/active-moa', [ProgramsController::class, 'getAllActivePartners']);
 Route::get('partners/expired-moa', [ProgramsController::class, 'getAllExpiredPartners']);
+Route::get('partners/activeMoaFilterByDay', [ProgramsController::class, 'activeMoaPerDay']);
+Route::get('partners/activeMoaFilterByWeek', [ProgramsController::class, 'activeMoaPerWeek']);
+Route::get('partners/activeMoaFilterByMonth', [ProgramsController::class, 'activeMoaPerMonth']);
+Route::get('partners/activeMoaFilterByYear', [ProgramsController::class, 'activeMoaPerYear']);
+Route::get('partners/expiredMoaFilterByDay', [ProgramsController::class, 'expiredMoaPerDay']);
+Route::get('partners/expiredMoaFilterByWeek', [ProgramsController::class, 'expiredMoaPerWeek']);
+Route::get('partners/expiredMoaFilterByMonth', [ProgramsController::class, 'expiredMoaPerMonth']);
+Route::get('partners/expiredMoaFilterByYear', [ProgramsController::class, 'expiredMoaPerYear']);
+Route::get('partners/getDate', [ProgramsController::class, 'getDate']);
 
 Route::group(['middleware' => 'api',], function ($router) {
     // Route::post('logout', 'AuthController@logout');
