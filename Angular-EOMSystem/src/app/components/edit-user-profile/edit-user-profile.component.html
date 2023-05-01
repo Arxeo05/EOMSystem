@@ -2,7 +2,7 @@
   <app-side-nav></app-side-nav>
     <div class="card-header">
       <br />
-      <h3 class="p-3">Edit User</h3>
+      <h3 class="p-3">Edit Profile</h3>
     </div>
     <div class="card-body">
       <div class="mb-3">
@@ -22,6 +22,18 @@
                 required
               />
             </div>
+            <div class="mb-3">
+              <label for="password" class="form-label" id="pass">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                [(ngModel)]="form.password"
+                required
+              />
+            </div>
+            
             <div class="mb-3">
               <label for="birth" class="form-label" id="birthday">Birthday</label>
               <input
