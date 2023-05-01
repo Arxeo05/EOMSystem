@@ -65,37 +65,13 @@ Route::post('partner/update/{id}',[ProgramsController::class, 'updatePartner']);
 Route::post('partner/delete/{id}',[ProgramsController::class, 'deletePartner']);
 Route::get('partner/moa/expiring',[ProgramsController::class, 'expiringMoa']);
 Route::post('partner/moa/renew/{id}',[ProgramsController::class, 'renewMoa']);
-Route::get('partner/moa/{filename}', function ($filename) {
-    $path = storage_path('app/public/moa_files/' . $filename);
-    if (!File::exists($path)) {
-        abort(404);
-    }
 
-    $file = File::get($path);
-    $type = File::mimeType($path);
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-    $response->header("Content-Disposition", "inline; filename=\"$filename\"");
-    return $response;
-});
 //Program-files routes
 Route::post('files/{pid}',[ProgramsController::class, 'addFile']);
 Route::get('file/{pid}',[ProgramsController::class, 'getFileByProgram']);
 Route::post('file/edit/{id}',[ProgramsController::class, 'updateFile']);
 Route::post('file/delete/{id}',[ProgramsController::class, 'deleteFile']);
-Route::get('files/{filename}', function ($filename) {
-    $path = storage_path('app/public/program_files/' . $filename);
-    if (!File::exists($path)) {
-        abort(404);
-    }
 
-    $file = File::get($path);
-    $type = File::mimeType($path);
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-    $response->header("Content-Disposition", "inline; filename=\"$filename\"");
-    return $response;
-});
 //UserModel routes
 Route::get('users/filter/status/{data}',[AuthController::class, 'filterUser']);
 Route::post('user/update-password/{id}',[AuthController::class,'updateUserPassword']);
@@ -152,5 +128,31 @@ Route::get('user/photo/{filename}', function ($filename) {
     $type = File::mimeType($path);
     $response = Response::make($file, 200);
     $response->header("Content-Type", $type);
+    return $response;
+});
+Route::get('partner/moa/{filename}', function ($filename) {
+    $path = storage_path('app/public/moa_files/' . $filename);
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    $response->header("Content-Disposition", "inline; filename=\"$filename\"");
+    return $response;
+});
+Route::get('files/{filename}', function ($filename) {
+    $path = storage_path('app/public/program_files/' . $filename);
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    $response->header("Content-Disposition", "inline; filename=\"$filename\"");
     return $response;
 });
