@@ -5,58 +5,64 @@ import { BackendService } from "src/app/services/backend.service";
 @Component({
   selector: 'active-moa',
   template: `
-  <div class="filter-container">
-      <select class="form-control" id="sort" [(ngModel)]="filterValue">
-        <option default>
-          All
-        </option>
-        <option value="day">
-          Per Day
-        </option>
-        <option value="week">
-          Per Week
-        </option>
-        <option value="month">
-          Per Month
-        </option>
-        <option value="year">
-          Per Year
-        </option>
-      </select>
-      <button class="btn" style="background-color: #e2832a; color: white; border: 0px;border-radius: 3px; padding: 7px;" id="filterBy" name="filterBy" (click)="filterBy()">
-        Filter
+  <div class="body">
+    <div class="filter-container">
+        <select class="form-control" id="sort" [(ngModel)]="filterValue">
+          <option default>
+            All
+          </option>
+          <option value="day">
+            Per Day
+          </option>
+          <option value="week">
+            Per Week
+          </option>
+          <option value="month">
+            Per Month
+          </option>
+          <option value="year">
+            Per Year
+          </option>
+        </select>
+        <button class="btn" style="background-color: #e2832a; color: white; border: 0px;border-radius: 3px; padding: 7px;" id="filterBy" name="filterBy" (click)="filterBy()">
+          Filter
+        </button>
+      </div>
+      <button class="btn btn-primary generate" (click)="onGenerateActiveMoaList()">
+        <b>Download List</b>
       </button>
-    </div>
-    <button class="btn btn-primary generate" (click)="onGenerateActiveMoaList()">
-      Download List
-    </button>
-    <div class="active-container" id="activeMoaList">
-      <h5>Active MOA</h5>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Extension Partner</th>
-            <th scope="col">Start Date</th>
-            <th scope="col">Expiration Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngIf="partnersWithActiveMoa.length < 1 || null">
-            <td colspan="3">No Active Moa</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr *ngFor="let activeMoa of partnersWithActiveMoa">
-            <td>{{activeMoa.name}}</td>
-            <td>{{activeMoa.startPartnership}}</td>
-            <td>{{activeMoa.endPartnership}}</td>
-          </tr>
-        </tfoot>
-      </table>
+      <div class="active-container" id="activeMoaList">
+        <h5>List of Partners with Active MOA</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Extension Partner</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">Expiration Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="partnersWithActiveMoa.length < 1 || null">
+              <td colspan="3">No Active Moa</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr *ngFor="let activeMoa of partnersWithActiveMoa">
+              <td>{{activeMoa.name}}</td>
+              <td>{{activeMoa.startPartnership}}</td>
+              <td>{{activeMoa.endPartnership}}</td>
+            </tr>
+          </tfoot>
+        </table>
 
-    </div>
+      </div>
+  </div>
   `,
   styles: [`
+  .body {
+    margin: 0 100px 100px 100px;
+  }
+
   .active-container {
   border-radius: 10px;
   margin-top: 10px;

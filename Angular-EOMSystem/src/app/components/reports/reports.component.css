@@ -7,6 +7,13 @@ h3 {
   margin: 20px 0 20px 0;
 }
 
+.report-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .moa-container, .faculty-container {
   border-radius: 10px;
   margin-top: 10px;
@@ -15,6 +22,11 @@ h3 {
   background-color: white;
   box-shadow: 5px 5px 5px #939393;
   padding: 20px;
+}
+
+.moa-container {
+  display: flex;
+  justify-content: center;
 }
 
 .active-container {

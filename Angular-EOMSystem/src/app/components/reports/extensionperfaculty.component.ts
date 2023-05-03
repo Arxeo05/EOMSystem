@@ -31,7 +31,7 @@ import { BackendService } from "src/app/services/backend.service";
             </button>
     </div>
     <button class="btn btn-primary generate" (click)="onGenerateExtensionPerList()">
-      Download List
+      <b>Download List</b>
     </button>
     <div id="extensionPerFacultyList">
       <h3>List of Extension Program per Faculty</h3>

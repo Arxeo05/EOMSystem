@@ -5,6 +5,7 @@ import { BackendService } from "src/app/services/backend.service";
 @Component({
   selector: 'expired-moa',
   template: `
+  <div class="body">
   <div class="filter-container">
   <select class="form-control" id="sort" [(ngModel)]="filterValue">
         <option default>
@@ -56,8 +57,14 @@ import { BackendService } from "src/app/services/backend.service";
         </tfoot>
       </table>
     </div>
+  </div>
   `,
   styles: [`
+
+  .body {
+    margin: 0 100px 100px 100px;
+  }
+
   .expired-container {
   border-radius: 10px;
   margin-top: 10px;
