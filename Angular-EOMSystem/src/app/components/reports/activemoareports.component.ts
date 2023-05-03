@@ -60,7 +60,7 @@ import { BackendService } from "src/app/services/backend.service";
   `,
   styles: [`
   .body {
-    margin: 0 100px 100px 100px;
+    margin: 0 50px 100px 100px;
   }
 
   .active-container {

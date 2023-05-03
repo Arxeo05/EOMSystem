@@ -33,7 +33,7 @@ import { BackendService } from "src/app/services/backend.service";
     </button>
 
     <div class="expired-container" id="expiredMoaList">
-      <h5>Expired MOA</h5>
+      <h5>List of Partners with Expired MOA</h5>
       <div></div>
       <table class="table">
         <thead>
@@ -62,7 +62,7 @@ import { BackendService } from "src/app/services/backend.service";
   styles: [`
 
   .body {
-    margin: 0 100px 100px 100px;
+    margin: 0 100px 100px 50px;
   }
 
   .expired-container {
