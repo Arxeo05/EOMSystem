@@ -56,17 +56,17 @@ button:hover::before {
   z-index: 1;
   display: inline-flex;
  }
- 
+
  .tools {
   display: flex;
   align-items: center;
   padding: 9px;
  }
- 
+
  .circle {
   padding: 0 4px;
  }
- 
+
  .box {
   display: inline-block;
   align-items: center;
@@ -75,15 +75,15 @@ button:hover::before {
   padding: 1px;
   border-radius: 50%;
  }
- 
+
  .red {
   background-color: #ff605c;
  }
- 
+
  .yellow {
   background-color: #ffbd44;
  }
- 
+
  .green {
   background-color: #00ca4e;
  }
