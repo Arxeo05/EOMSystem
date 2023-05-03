@@ -141,10 +141,10 @@ export class ExpiredMoaReport implements OnInit{
       this.filterByDay();
     }
     if (this.filterValue === "week") {
-      this.filterByDay();
+      this.filterByWeek();
     }
     if (this.filterValue === "month") {
-      this.filterByDay();
+      this.filterByMonth();
     }
     if (this.filterValue === "year") {
       this.filterByYear();

@@ -583,7 +583,7 @@ export class BackendService implements OnInit {
       'Bearer ' + localStorage.getItem('token')
     );
     return this.http.get(
-      'http://127.0.0.1:8000/api/partners/activeMoaFilterByDay',
+      'http://localhost:8000/api/partners/activeMoaFilterByDay',
       {
         headers,
       }
@@ -596,7 +596,7 @@ export class BackendService implements OnInit {
       'Bearer ' + localStorage.getItem('token')
     );
     return this.http.get(
-      'http://127.0.0.1:8000/api/partners/activeMoaFilterByWeek',
+      'http://localhost:8000/api/partners/activeMoaFilterByWeek',
       {
         headers,
       }
@@ -609,7 +609,7 @@ export class BackendService implements OnInit {
       'Bearer ' + localStorage.getItem('token')
     );
     return this.http.get(
-      'http://127.0.0.1:8000/api/partners/activeMoaFilterByMonth',
+      'http://localhost:8000/api/partners/activeMoaFilterByMonth',
       {
         headers,
       }
@@ -622,7 +622,7 @@ export class BackendService implements OnInit {
       'Bearer ' + localStorage.getItem('token')
     );
     return this.http.get(
-      'http://127.0.0.1:8000/api/partners/activeMoaFilterByYear',
+      'http://localhost:8000/api/partners/activeMoaFilterByYear',
       {
         headers,
       }

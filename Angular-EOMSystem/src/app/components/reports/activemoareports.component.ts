@@ -102,7 +102,6 @@ export class ActiveMoaReport implements OnInit{
     this.backend.activeMoaFilterByDay().subscribe ({
       next: (data) => {
         this.partnersWithActiveMoa = Object.values(data);
-        console.log(this.partnersWithActiveMoa);
       }
     })
   }
@@ -142,10 +141,10 @@ export class ActiveMoaReport implements OnInit{
       this.filterByDay();
     }
     if (this.filterValue === "week") {
-      this.filterByDay();
+      this.filterByWeek();
     }
     if (this.filterValue === "month") {
-      this.filterByDay();
+      this.filterByMonth();
     }
     if (this.filterValue === "year") {
       this.filterByYear();

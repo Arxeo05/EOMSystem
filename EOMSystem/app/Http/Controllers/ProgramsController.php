@@ -675,11 +675,13 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         } else {
             $currentDate = Carbon::now()->toDateString();
-            $dateFilter = Carbon::now()->toDateString();
-            $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
+            $dateFilter = Carbon::now()->addDay(1)->toDateString();
+            $result = DB::table('program_partners')->select('*')
+            ->where('endPartnership', '>', $currentDate)
+            ->orderBy('id', 'desc')
+            ->count();
             if ($result > 0) {
-                $results = DB::table('program_partners')->select('*')
-                ->where('endPartnership', '<=', $currentDate)
+                $results = ProgramPartners::whereBetween('endPartnership', [$dateFilter, $dateFilter])
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);
@@ -693,12 +695,14 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         } else {
-            $currentDate = Carbon::now()->toDateString();
+            $currentDate = Carbon::now()->addDay(1)->toDateString();
             $dateFilter = Carbon::now()->addWeek(1)->toDateString();
-            $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
+            $result = DB::table('program_partners')->select('*')
+            ->where('endPartnership', '>', $currentDate)
+            ->orderBy('id', 'desc')
+            ->count();
             if ($result > 0) {
-                $results = DB::table('program_partners')->select('*')
-                ->where('endPartnership', '>=', $currentDate)
+                $results = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);
@@ -712,12 +716,14 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         } else {
-            $currentDate = Carbon::now()->toDateString();
+            $currentDate = Carbon::now()->addDay(1)->toDateString();
             $dateFilter = Carbon::now()->addMonth(1)->toDateString();
-            $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
+            $result = DB::table('program_partners')->select('*')
+            ->where('endPartnership', '>', $currentDate)
+            ->orderBy('id', 'desc')
+            ->count();
             if ($result > 0) {
-                $results = DB::table('program_partners')->select('*')
-                ->where('endPartnership', '>=', $currentDate)
+                $results = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);
@@ -731,12 +737,14 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         } else {
-            $currentDate = Carbon::now()->toDateString();
+            $currentDate = Carbon::now()->addDay(1)->toDateString();
             $dateFilter = Carbon::now()->addYear(1)->toDateString();
-            $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
+            $result = DB::table('program_partners')->select('*')
+            ->where('endPartnership', '>', $currentDate)
+            ->orderBy('id', 'desc')
+            ->count();
             if ($result > 0) {
-                $results = DB::table('program_partners')->select('*')
-                ->where('endPartnership', '>=', $currentDate)
+                $results = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);
