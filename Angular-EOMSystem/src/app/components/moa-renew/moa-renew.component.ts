@@ -38,6 +38,17 @@ export class MoaRenewComponent {
       formData.append('MoaFile', this.form.MoaFile);
     }
 
+    const startDate = new Date(this.form.startPartnership)
+    const endDate = new Date(this.form.endPartnership)
+
+    let timeDifference = endDate.getTime() - startDate.getTime();
+    let daysBefore = timeDifference / (1000 * 3600 * 24);
+    let roundedDays = Math.round(daysBefore);
+
+    if(roundedDays < 365) {
+      this.swal.swalError("Partnership Duration Must Be At Least A Year. Try Again?");
+    }
+
     return this.backend.renewPartner(formData, this.id).subscribe({
       next: (data: any) => {
         this.swal.swalSucces("Moa Renewed Successfully");

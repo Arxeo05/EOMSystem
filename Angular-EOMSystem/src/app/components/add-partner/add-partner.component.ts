@@ -56,24 +56,35 @@ export class AddPartnerComponent implements OnDestroy {
     formData.append('startPartnership', this.form.startPartnership);
     formData.append('endPartnership', this.form.endPartnership);
 
-    this.partnerSub = this.backend.addPartner(formData, this.id).subscribe({
-      next: (data) => {
-        console.log(data);
-        (this.form.name = ''),
-          (this.form.address = ''),
-          (this.form.contactPerson = ''),
-          (this.form.contactNumber = ''),
-          (this.form.MoaFile = null),
-          (this.form.startPartnership = ''),
-          (this.form.endPartnership = ''),
-          this.swal.swalSucces('Partner Added Successfully');
-        this.router.navigateByUrl(`program/${this.id}/add-participant`);
-      },
-      error: (error) => {
-        this.swal.swalError('Something Went Wrong');
-        this.handleError(error);
-      },
-    });
+    const startDate = new Date(this.form.startPartnership)
+    const endDate = new Date(this.form.endPartnership)
+
+    let timeDifference = endDate.getTime() - startDate.getTime();
+    let daysBefore = timeDifference / (1000 * 3600 * 24);
+    let roundedDays = Math.round(daysBefore);
+
+    if(roundedDays < 365) {
+      this.swal.swalError("Partnership Duration Must Be At Least A Year. Try Again?");
+    } else {
+      this.partnerSub = this.backend.addPartner(formData, this.id).subscribe({
+        next: (data) => {
+          console.log(data);
+          (this.form.name = ''),
+            (this.form.address = ''),
+            (this.form.contactPerson = ''),
+            (this.form.contactNumber = ''),
+            (this.form.MoaFile = null),
+            (this.form.startPartnership = ''),
+            (this.form.endPartnership = ''),
+            this.swal.swalSucces('Partner Added Successfully');
+          this.router.navigateByUrl(`program/${this.id}/add-participant`);
+        },
+        error: (error) => {
+          this.swal.swalError('Something Went Wrong');
+          this.handleError(error);
+        },
+      });
+    }
   }
   handleError(error: any) {
     this.error = error.error.errors;
