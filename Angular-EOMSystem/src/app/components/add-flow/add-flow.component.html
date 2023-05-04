@@ -12,27 +12,26 @@
     <label>Time:</label>
     <input type="time" name="time" [(ngModel)]="flow.time" />
 
-    <button type="button" (click)="removeUser(i)" *ngIf="i > 0">Remove</button>
+    <button type="button" (click)="removeUser(i)" *ngIf="i > 0" class="learn-more">Remove</button>
   </div>
 
-  <button type="button" (click)="addUser()">Add Item</button>
-  <button type="submit">Submit</button>
+  <button type="button" (click)="addUser()" class="learn-more" >Add Item</button>
+  <button type="submit" class="learn-more" >Submit</button>
   <div class="button-container">
     <a
-      class="btn btn-secondary"
       (click)="cancelStep()"
-      class="btn btn-secondary"
+      class="learn-more"
     >
       Next Step
     </a>
   </div>
   <div class="button-container">
-    <a class="btn btn-secondary" (click)="home()" class="btn btn-secondary">
+    <a class="btn btn-secondary" (click)="home()" class="learn-more">
       Home
     </a>
   </div>
   <div class="button-container" *ngIf="router.url.includes('dashboard')">
-    <a (click)="goBack()" class="btn btn-danger">Back</a>
+    <a (click)="goBack()" class="learn-more">Back</a>
   </div>
 </form>
   </div>

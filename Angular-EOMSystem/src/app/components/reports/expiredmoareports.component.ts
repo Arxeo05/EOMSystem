@@ -5,6 +5,7 @@ import { BackendService } from "src/app/services/backend.service";
 @Component({
   selector: 'expired-moa',
   template: `
+  <div class="body">
   <div class="filter-container">
   <select class="form-control" id="sort" [(ngModel)]="filterValue">
         <option default>
@@ -32,7 +33,7 @@ import { BackendService } from "src/app/services/backend.service";
     </button>
 
     <div class="expired-container" id="expiredMoaList">
-      <h5>Expired MOA</h5>
+      <h5>List of Partners with Expired MOA</h5>
       <div></div>
       <table class="table">
         <thead>
@@ -56,14 +57,20 @@ import { BackendService } from "src/app/services/backend.service";
         </tfoot>
       </table>
     </div>
+  </div>
   `,
   styles: [`
+
+  .body {
+    margin: 0 100px 100px 50px;
+  }
+
   .expired-container {
   border-radius: 10px;
   margin-top: 10px;
   margin-bottom: 50px;
   margin-left: 10px;
-  background-color: rgb(245, 121, 121);
+  background-color: rgba(245, 121, 121, 0.3);
   box-shadow: 5px 5px 5px #939393;
   padding: 20px;
   }
@@ -141,10 +148,10 @@ export class ExpiredMoaReport implements OnInit{
       this.filterByDay();
     }
     if (this.filterValue === "week") {
-      this.filterByDay();
+      this.filterByWeek();
     }
     if (this.filterValue === "month") {
-      this.filterByDay();
+      this.filterByMonth();
     }
     if (this.filterValue === "year") {
       this.filterByYear();
