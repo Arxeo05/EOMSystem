@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Program;
-use Illuminate\Support\Facades\Redis;
 
 class AuthController extends Controller
 {

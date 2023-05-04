@@ -21,25 +21,27 @@ export class AddFileComponent {
   public form = {
     file: null,
   };
+  public files: any[] = [];
+
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
-      this.form.file = event.target.files[0];
-    } else {
-      this.form.file = null;
+      for (let i = 0; i < event.target.files.length; i++) {
+        this.files.push(event.target.files[i]);
+      }
     }
   }
 
   addFile() {
     const formData = new FormData();
-    if (this.form.file) {
-      formData.append('file', this.form.file);
+    for (let i = 0; i < this.files.length; i++) {
+      formData.append('file[]', this.files[i], this.files[i].name);
     }
 
     return this.backend.addFile(formData, this.id).subscribe({
       next: (data) => {
         console.log(data);
-        this.form.file = null;
-        this.swal.swalSucces('File Added Successfully');
+        this.files = [];
+        this.swal.swalSucces('Files Added Successfully');
         this.router
           .navigateByUrl('/', { skipLocationChange: true })
           .then(() => {
@@ -52,6 +54,7 @@ export class AddFileComponent {
       },
     });
   }
+
   handleError(error: any) {
     this.error = error.error.errors;
   }

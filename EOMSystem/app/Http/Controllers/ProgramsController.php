@@ -431,31 +431,35 @@ class ProgramsController extends Controller
     }
 
     //Program Files
-    public function addFile(Request $request,$pid){
+    public function addFile(Request $request, $pid){
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
-        $file = new ProgramFiles;
 
         $request->validate([
-            'file'=>'required|mimes:pdf,docx|max:1999'
+            'file.*'=>'required|mimes:pdf,docx|max:1999'
         ]);
 
-        if($request->hasFile('file')){
-            $fileNameWithExt = $request->file('file')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('file')->getClientOriginalExtension();
-            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('file')->storeAs('public/program_files',$fileNameToStore);
-        }else{
-            return response()->json('Problem uploading file');
+        foreach ($request->file('file') as $file) {
+            $fileModel = new ProgramFiles;
+
+            if($file->isValid()){
+                $fileNameWithExt = $file->getClientOriginalName();
+                $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                $extension = $file->getClientOriginalExtension();
+                $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+                $path = $file->storeAs('public/program_files',$fileNameToStore);
+            }else{
+                return response()->json(['message'=>'Problem uploading file']);
+            }
+
+            $fileModel->title = $fileName;
+            $fileModel->programId = $pid;
+            $fileModel->file = $fileNameToStore;
+            $fileModel->save();
         }
 
-        $file->title = $fileName;
-        $file->programId = $pid;
-        $file->file = $fileNameToStore;
-        $file->save();
-        return response()->json(['message'=>'File Added']);
+        return response()->json(['message'=>'Files Added']);
     }
 
     public function getFileByProgram($pid){
