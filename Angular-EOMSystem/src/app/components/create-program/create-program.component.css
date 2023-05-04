@@ -1,6 +1,7 @@
 .content {
   display: flex;
   background-color: aliceblue;
+  height: 100vh;
 }
 
 .container {

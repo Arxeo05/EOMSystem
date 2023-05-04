@@ -1,4 +1,8 @@
+<div class="cssload-container" *ngIf="loading1 && loggedIn">
+  <div class="loader" *ngIf="loading1 && loggedIn"></div>
+</div>
 <section class="content" *ngIf="!loading && loggedIn">
+ 
   <app-side-nav></app-side-nav>
   <!-- <div class="container" *ngIf="isAdmin">
     <div class="container1">
@@ -414,6 +418,7 @@
     </div>
   </div>
   <!-- faculty dashboard -->
+
   <div class="container" *ngIf="!isAdmin && !loading">
     <h5 class="p-3">Programs You lead</h5>
     <div class="card-container">

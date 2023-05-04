@@ -18,6 +18,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private swal: SwalService
   ) {}
+  setLoading(loading: boolean) {
+    this.loading = loading;
+  }
+
+  getLoading(): boolean {
+    return this.loading;
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
@@ -30,6 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   notification: any;
   loggedIn: boolean = false;
   loading: boolean = true;
+  loading1: boolean = true;
   facultyCount: number = 0;
   pendingUserCount: number = 0;
   activeProgramsCount: number = 0;
@@ -114,6 +123,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       });
     this.loading = false;
+    setTimeout(() => {  
+      /** spinner ends after 5 seconds */  
+      this.loading1=false;  
+  }, 8000);  
     this.subscriptions.push(sub1);
     this.subscriptions.push(sub2);
     this.subscriptions.push(sub3);
