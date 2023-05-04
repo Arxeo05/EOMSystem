@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import jsPDF from 'jspdf';
+import { Location } from '@angular/common';
 import { OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-terminal-report',
@@ -10,7 +11,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./terminal-report.component.css'],
 })
 export class TerminalReportComponent implements OnInit {
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+    public router: Router,
+    private location: Location,
+    ) {}
   programs: any;
   programMembers: any;
   programParticipants: any;
@@ -71,5 +77,9 @@ export class TerminalReportComponent implements OnInit {
     } else {
       console.error('Element with ID "myHtmlElement" not found.');
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

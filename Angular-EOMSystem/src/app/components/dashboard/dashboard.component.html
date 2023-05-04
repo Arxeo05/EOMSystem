@@ -2,7 +2,7 @@
   <div class="loader" *ngIf="loading1 && loggedIn"></div>
 </div>
 <section class="content" *ngIf="!loading && loggedIn">
- 
+
   <app-side-nav></app-side-nav>
   <!-- <div class="container" *ngIf="isAdmin">
     <div class="container1">
@@ -401,12 +401,11 @@
                       </div>
                     </td>
                     <td>
-                      <button
-                        class="btn btn-primary"
+                      <a
                         routerLink="/partner/renew/{{ partner.id }}"
                       >
                         Renew
-                      </button>
+                      </a>
                     </td>
                   </tr>
                 </tbody>
@@ -435,9 +434,6 @@
           </div>
         </div>
         <div class="card-body">
-          <!-- <div class="img-container">
-            <img src="#" alt="image" />
-          </div> -->
           <div>
             <label class="title">{{ program.title }}</label>
           </div>
@@ -456,7 +452,7 @@
       <h5 class="p-3">Programs you are member of</h5>
     </div>
     <div class="card-container">
-      <div class="card" *ngFor="let program of memberPrograms">
+      <div class="card" *ngFor="let program of memberPrograms" id="cards">
         <div class="tools">
           <div class="circle">
             <span class="red box"></span>
@@ -469,9 +465,6 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="img-container">
-            <img src="#" alt="image" />
-          </div>
           <div>
             <label class="title">{{ program.title }}</label>
           </div>

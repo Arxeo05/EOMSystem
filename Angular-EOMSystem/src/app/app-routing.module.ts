@@ -101,7 +101,7 @@ const routes: Routes = [
   {
     path: 'dashboard/program/:id/terminal-report',
     component: TerminalReportComponent,
-    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+    canActivate: [() => inject(TokenService).loggedIn()],
   },
   {
     path: 'program/:id/add-member',

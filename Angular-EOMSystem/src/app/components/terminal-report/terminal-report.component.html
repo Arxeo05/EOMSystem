@@ -1,9 +1,10 @@
 <div class="content-container">
-
-<button class="btn btn-primary" (click)="onGeneratePDF()" style="margin-top: 20px;">
-  Download Report
-</button>
-
+  <div class="button-container" *ngIf="router.url.includes('dashboard')">
+    <a (click)="goBack()" class="learn-more">Back</a>
+    <button class="btn btn-primary" (click)="onGeneratePDF()" style="margin-top: 20px; margin-bottom: 20px;">
+      Download Report
+    </button>
+  </div>
 <section class="flex-container" id="myHtmlElement">
 <div class="container">
   <h6 id="header" style="text-align: center; font-weight: bolder">
