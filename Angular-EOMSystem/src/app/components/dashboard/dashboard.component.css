@@ -5,7 +5,7 @@
 .container{
 }
 
-a {
+button {
   --color: #0077ff;
   font-family: inherit;
   display: inline-block;
@@ -22,7 +22,7 @@ a {
   position: relative;
 }
 
-a::before {
+button::before {
   position: absolute;
   content: "";
   background: var(--color);
@@ -32,17 +32,17 @@ a::before {
   border-radius: 50%;
 }
 
-a:hover {
+button:hover {
   color: white;
 }
 
-a:before {
+button:before {
   top: 100%;
   left: 100%;
   transition: .3s all;
 }
 
-a:hover::before {
+button:hover::before {
   top: -30px;
   left: -30px;
 }

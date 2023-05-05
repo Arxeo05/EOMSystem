@@ -18,6 +18,10 @@ th{
 .flex-container {
   display: flex;
 }
+/* 
+.waves {
+  margin-top: -200px;
+} */
 
 .button-container {
   display: flex;
@@ -25,6 +29,7 @@ th{
 }
 
 a {
+  text-decoration: none;
   --color: #0077ff;
   font-family: inherit;
   display: inline-block;
