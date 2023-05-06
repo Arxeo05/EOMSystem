@@ -15,13 +15,34 @@ th{
     background-color: rgb(216, 216, 217);
 }
 
+/* #myHtmlElement1 {
+  background-image: url("../../../assets/images/waves.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
 .flex-container {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-/* 
+.logo-container {
+  text-align: left;
+  background-image: url("../../../assets/images/hexagon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.logo {
+  height: 100px;
+}
+
 .waves {
-  margin-top: -200px;
-} */
+  width: 100%;
+  height: 250px;
+}
 
 .button-container {
   display: flex;

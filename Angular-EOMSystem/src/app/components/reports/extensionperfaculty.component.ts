@@ -1,11 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import html2canvas from "html2canvas";
 import jsPDF from 'jspdf';
 import { BackendService } from "src/app/services/backend.service";
 
 @Component({
   selector: 'per-faculty',
   template: `
+  <div class="body">
   <div class="filter-container">
     <select
               class="form-control"
@@ -30,13 +32,16 @@ import { BackendService } from "src/app/services/backend.service";
               Filter By Faculty
             </button>
     </div>
-    <button class="btn btn-primary generate" (click)="onGenerateExtensionPerList()">
+    <button class="btn btn-primary generate" (click)="onGeneratePDF()">
       <b>Download List</b>
     </button>
-    <div id="extensionPerFacultyList">
-      <h3>List of Extension Program per Faculty</h3>
+    <div class="perfaculty-container">
       <h4>Faculty: {{leaderName}}</h4>
-      <div class="perfaculty-container">
+      <div id="extensionPerFacultyList">
+      <div class="logo-container">
+      <img src="assets/images/bsulogo.png" class="logo">
+      </div>
+      <h3>List of Extension Program per Faculty</h3>
         <table class="table">
           <thead>
             <tr>
@@ -60,10 +65,19 @@ import { BackendService } from "src/app/services/backend.service";
             </tr>
           </tfoot>
         </table>
+        <div>
+          <img src="assets/images/waves.png" class="waves">
+        </div>
       </div>
+    </div>
     </div>
   `,
   styles: [`
+
+  .body{
+    margin: 50px;
+  }
+
   .content {
   display: flex;
   background-color: aliceblue;
@@ -78,7 +92,6 @@ import { BackendService } from "src/app/services/backend.service";
   margin-top: 10px;
   margin-bottom: 50px;
   margin-left: 10px;
-  background-color: rgb(250, 250, 250);
   box-shadow: 5px 5px 5px #939393;
   padding: 20px;
   }
@@ -90,6 +103,22 @@ import { BackendService } from "src/app/services/backend.service";
   .generate {
     margin-top: 15px;
   }
+
+  .logo-container {
+  text-align: left;
+  background-image: url("../../../assets/images/hexagon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.logo {
+  height: 100px;
+}
+
+.waves {
+  width: 100%;
+  height: 250px;
+}
   `]
 })
 export class ExtensionPerFaculty implements OnInit{
@@ -159,34 +188,47 @@ export class ExtensionPerFaculty implements OnInit{
     });
   }
 
-  async generateExtensionPerFacultyPDF(htmlContent: string) {
-    const doc = new jsPDF({
-      orientation: 'p',
-      unit: 'mm',
-      format: 'a4',
-      putOnlyUsedFonts: true,
-    });
+  // async generateExtensionPerFacultyPDF(htmlContent: string) {
+  //   const doc = new jsPDF({
+  //     orientation: 'p',
+  //     unit: 'mm',
+  //     format: 'a4',
+  //     putOnlyUsedFonts: true,
+  //   });
 
-    await doc.html(htmlContent, {
-      callback: function (doc) {
-        doc.save('extensions-list.pdf');
-      },
-      margin: [15, 15, 15, 15],
-      autoPaging: 'text',
-      x: 0,
-      y: 0,
-      width: 190,
-      windowWidth: 600,
-    });
-  }
+  //   await doc.html(htmlContent, {
+  //     callback: function (doc) {
+  //       doc.save('extensions-list.pdf');
+  //     },
+  //     margin: [15, 15, 15, 15],
+  //     autoPaging: 'text',
+  //     x: 0,
+  //     y: 0,
+  //     width: 190,
+  //     windowWidth: 600,
+  //   });
+  // }
 
-  onGenerateExtensionPerList() {
-    const element = document.getElementById('extensionPerFacultyList');
-    if (element) {
-      const htmlContent = element.innerHTML;
-      this.generateExtensionPerFacultyPDF(htmlContent);
-    } else {
-      console.error('Element with ID "extensionPerFacultyList" not found.');
-    }
+  // onGenerateExtensionPerList() {
+  //   const element = document.getElementById('extensionPerFacultyList');
+  //   if (element) {
+  //     const htmlContent = element.innerHTML;
+  //     this.generateExtensionPerFacultyPDF(htmlContent);
+  //   } else {
+  //     console.error('Element with ID "extensionPerFacultyList" not found.');
+  //   }
+  // }
+
+  public onGeneratePDF(): void {
+    let DATA: any = document.getElementById('extensionPerFacultyList');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 210;
+      let fileHeight = 300;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('extensions-list.pdf');
+    });
   }
 }

@@ -14,49 +14,16 @@ h3 {
   justify-content: center;
   align-items: center;
 }
-.moa-container, .faculty-container {
-  border-radius: 10px;
-  margin-top: 10px;
-  margin-bottom: 50px;
-  margin-left: 10px;
-  background-color: white;
-  box-shadow: 5px 5px 5px #939393;
-  padding: 20px;
+.active-moa-container {
+  width: 100%;
 }
 
-.moa-container {
-  display: flex;
-  justify-content: center;
+.expired-moa-container {
+  width: 100%;
 }
 
-.active-container {
-  border-radius: 10px;
-  margin-top: 10px;
-  margin-bottom: 50px;
-  margin-left: 10px;
-  background-color: rgb(121, 245, 121);
-  box-shadow: 5px 5px 5px #939393;
-  padding: 20px;
-}
-
-.expired-container {
-  border-radius: 10px;
-  margin-top: 10px;
-  margin-bottom: 50px;
-  margin-left: 10px;
-  background-color: rgb(245, 121, 121);
-  box-shadow: 5px 5px 5px #939393;
-  padding: 20px;
-}
-
-.perfaculty-container {
-  border-radius: 10px;
-  margin-top: 10px;
-  margin-bottom: 50px;
-  margin-left: 10px;
-  background-color: rgb(250, 250, 250);
-  box-shadow: 5px 5px 5px #939393;
-  padding: 20px;
+.faculty-container {
+  width: 100%;
 }
 
 .filter-container {

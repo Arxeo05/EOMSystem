@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import html2canvas from "html2canvas";
 import jsPDF from 'jspdf';
 import { BackendService } from "src/app/services/backend.service";
 
@@ -28,10 +29,14 @@ import { BackendService } from "src/app/services/backend.service";
           Filter
         </button>
       </div>
-      <button class="btn btn-primary generate" (click)="onGenerateActiveMoaList()">
+      <button class="btn btn-primary generate" (click)="onGeneratePDF()">
         <b>Download List</b>
       </button>
-      <div class="active-container" id="activeMoaList">
+      <div class="active-container">
+        <div id="activeMoaList">
+        <div class="logo-container">
+        <img src="assets/images/bsulogo.png" class="logo">
+        </div>
         <h5>List of Partners with Active MOA</h5>
         <table class="table">
           <thead>
@@ -54,13 +59,15 @@ import { BackendService } from "src/app/services/backend.service";
             </tr>
           </tfoot>
         </table>
-
+        <div>
+          <img src="assets/images/waves.png" class="waves">
+        </div>
+        </div>
       </div>
-  </div>
   `,
   styles: [`
   .body {
-    margin: 0 50px 100px 100px;
+    margin: 50px;
   }
 
   .active-container {
@@ -68,7 +75,6 @@ import { BackendService } from "src/app/services/backend.service";
   margin-top: 10px;
   margin-bottom: 50px;
   margin-left: 10px;
-  background-color: rgba(121, 245, 121, 0.3);
   box-shadow: 5px 5px 5px #939393;
   padding: 20px;
   }
@@ -80,6 +86,22 @@ import { BackendService } from "src/app/services/backend.service";
   .generate {
   margin-top: 15px;
   }
+
+  .logo-container {
+  text-align: left;
+  background-image: url("../../../assets/images/hexagon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.logo {
+  height: 100px;
+}
+
+.waves {
+  width: 100%;
+  height: 250px;
+}
   `]
 })
 
@@ -157,35 +179,48 @@ export class ActiveMoaReport implements OnInit{
     }
   }
 
-  async generateActiveMoaPDF(htmlContent: string) {
-    const doc = new jsPDF({
-      orientation: 'p',
-      unit: 'mm',
-      format: 'a4',
-      putOnlyUsedFonts: true,
-    });
+  // async generateActiveMoaPDF(htmlContent: string) {
+  //   const doc = new jsPDF({
+  //     orientation: 'p',
+  //     unit: 'mm',
+  //     format: 'a4',
+  //     putOnlyUsedFonts: true,
+  //   });
 
-    await doc.html(htmlContent, {
-      callback: function (doc) {
-        doc.save('active-moa-list.pdf');
-      },
-      margin: [15, 15, 15, 15],
-      autoPaging: 'text',
-      x: 0,
-      y: 0,
-      width: 190,
-      windowWidth: 600,
-    });
-  }
+  //   await doc.html(htmlContent, {
+  //     callback: function (doc) {
+  //       doc.save('active-moa-list.pdf');
+  //     },
+  //     margin: [15, 15, 15, 15],
+  //     autoPaging: 'text',
+  //     x: 0,
+  //     y: 0,
+  //     width: 190,
+  //     windowWidth: 600,
+  //   });
+  // }
 
-  onGenerateActiveMoaList() {
-    const element = document.getElementById('activeMoaList');
-    if (element) {
-      const htmlContent = element.innerHTML;
-      this.generateActiveMoaPDF(htmlContent);
-    } else {
-      console.error('Element with ID "activeMoaList" not found.');
-    }
+  // onGenerateActiveMoaList() {
+  //   const element = document.getElementById('activeMoaList');
+  //   if (element) {
+  //     const htmlContent = element.innerHTML;
+  //     this.generateActiveMoaPDF(htmlContent);
+  //   } else {
+  //     console.error('Element with ID "activeMoaList" not found.');
+  //   }
+  // }
+
+  public onGeneratePDF(): void {
+    let DATA: any = document.getElementById('activeMoaList');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 210;
+      let fileHeight = 300;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('active-moa-list.pdf');
+    });
   }
 
 
