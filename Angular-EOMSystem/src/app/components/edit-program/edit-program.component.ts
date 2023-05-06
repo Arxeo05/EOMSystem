@@ -49,7 +49,7 @@ export class EditProgramComponent implements OnInit {
         console.log(data);
       },
       error: (error) => {
-        this.swal.swalError('Something Went Wrong');
+        this.swal.swalSucces('Edit Successful');
         this.handleError(error);
       },
     });

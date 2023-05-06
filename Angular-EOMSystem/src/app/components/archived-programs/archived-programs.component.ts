@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BackendService } from 'src/app/services/backend.service';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-archived-programs',
@@ -24,7 +25,10 @@ export class ArchivedProgramsComponent implements AfterViewInit {
   leadPrograms: any[] = [];
   memberPrograms: any[] = [];
 
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+    private swal: SwalService) {}
   ngAfterViewInit(): void {
     this.backend.userRole().subscribe((data: { role: number }) => {
       if (data.role === 1) {
@@ -58,6 +62,7 @@ export class ArchivedProgramsComponent implements AfterViewInit {
     this.backend.recoverProgram(id).subscribe({
       next: (data) => {
         console.log(data);
+        this.swal.swalSucces("Program Successfully Recovered")
         location.reload();
       },
     });

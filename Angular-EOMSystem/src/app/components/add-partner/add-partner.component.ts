@@ -64,7 +64,7 @@ export class AddPartnerComponent implements OnDestroy {
     let roundedDays = Math.round(daysBefore);
 
     if(roundedDays < 365) {
-      this.swal.swalError("Partnership Duration Must Be At Least A Year. Try Again?");
+      this.swal.swalWarning("Partnership Duration Must Be At Least A Year. Try Again?");
     } else {
       this.partnerSub = this.backend.addPartner(formData, this.id).subscribe({
         next: (data) => {

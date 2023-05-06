@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { Subscription } from 'rxjs';
+import { SwalService } from 'src/app/services/swal.service';
 @Component({
   selector: 'app-archived-users',
   templateUrl: './archived-users.component.html',
@@ -10,7 +11,9 @@ export class ArchivedUsersComponent implements OnInit, OnDestroy {
   userValue: any;
   userChoices: any;
   users: any[] = [];
-  constructor(private backend: BackendService) {}
+  constructor(
+    private backend: BackendService,
+    private swal: SwalService) {}
   ngOnDestroy(): void {
     if (this.userSub) {
       this.userSub.unsubscribe();
@@ -37,6 +40,7 @@ export class ArchivedUsersComponent implements OnInit, OnDestroy {
   recoverUser(id: number) {
     this.deleteSub = this.backend.recoverUser(id).subscribe({
       next: (data) => {
+        this.swal.swalSucces("User Recovered Successfully")
         console.log(data);
         location.reload();
       },

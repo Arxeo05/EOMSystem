@@ -709,139 +709,19 @@ class ProgramsController extends Controller
         }
     }
 
-    public function activeMoaPerDay(){
-        if(!auth()->user()){
-            return response()->json(['message'=>'You must login']);
-        } else {
-            $currentDate = Carbon::now()->toDateString();
-            $dateFilter = Carbon::now()->addDay(1)->toDateString();
-            $result = DB::table('program_partners')->select('*')
-            ->where('endPartnership', '>', $currentDate)->where('archived', '=', 0)
-            ->orderBy('id', 'desc')
-            ->count();
-            if ($result > 0) {
-                $results = ProgramPartners::whereBetween('endPartnership', [$dateFilter, $dateFilter])
-                ->orderBy('id', 'desc')
-                ->get();
-                return response()->json($results);
-            } else {
-                return response()->json();
-            }
-        }
-    }
-
-    public function activeMoaPerWeek(){
-        if(!auth()->user()){
-            return response()->json(['message'=>'You must login']);
-        } else {
-            $currentDate = Carbon::now()->addDay(1)->toDateString();
-            $dateFilter = Carbon::now()->addWeek(1)->toDateString();
-            $result = DB::table('program_partners')->select('*')
-            ->where('endPartnership', '>', $currentDate)->where('archived', '=', 0)
-            ->orderBy('id', 'desc')
-            ->count();
-            if ($result > 0) {
-                $results = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])
-                ->orderBy('id', 'desc')
-                ->get();
-                return response()->json($results);
-            } else {
-                return response()->json();
-            }
-        }
-    }
-
-    public function activeMoaPerMonth(){
-        if(!auth()->user()){
-            return response()->json(['message'=>'You must login']);
-        } else {
-            $currentDate = Carbon::now()->addDay(1)->toDateString();
-            $dateFilter = Carbon::now()->addMonth(1)->toDateString();
-            $result = DB::table('program_partners')->select('*')
-            ->where('endPartnership', '>', $currentDate)->where('archived', '=', 0)
-            ->orderBy('id', 'desc')
-            ->count();
-            if ($result > 0) {
-                $results = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])
-                ->orderBy('id', 'desc')
-                ->get();
-                return response()->json($results);
-            } else {
-                return response()->json();
-            }
-        }
-    }
-
     public function activeMoaPerYear(){
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         } else {
             $currentDate = Carbon::now()->addDay(1)->toDateString();
-            $dateFilter = Carbon::now()->addYear(1)->toDateString();
+            $dateFilter = Carbon::now()->addYear(2)->toDateString();
             $result = DB::table('program_partners')->select('*')
             ->where('endPartnership', '>', $currentDate)->where('archived', '=', 0)
             ->orderBy('id', 'desc')
             ->count();
             if ($result > 0) {
                 $results = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])
-                ->orderBy('id', 'desc')
-                ->get();
-                return response()->json($results);
-            } else {
-                return response()->json();
-            }
-        }
-    }
-
-    public function expiredMoaPerDay(){
-        if(!auth()->user()){
-            return response()->json(['message'=>'You must login']);
-        } else {
-            $currentDate = Carbon::now()->toDateString();
-            $dateFilter = Carbon::now()->toDateString();
-            $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
-            if ($result > 0) {
-                $results = DB::table('program_partners')->select('*')
-                ->where('endPartnership', '<=', $currentDate)->where('archived', '=', 0)
-                ->orderBy('id', 'desc')
-                ->get();
-                return response()->json($results);
-            } else {
-                return response()->json();
-            }
-        }
-    }
-
-    public function expiredMoaPerWeek(){
-        if(!auth()->user()){
-            return response()->json(['message'=>'You must login']);
-        } else {
-            $currentDate = Carbon::now()->toDateString();
-            $dateFilter = Carbon::now()->addWeek(1)->toDateString();
-            $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
-            if ($result > 0) {
-                $currentDate = Carbon::now()->toDateString();
-                $results = DB::table('program_partners')->select('*')
-                ->where('endPartnership', '<=', $currentDate)->where('archived', '=', 0)
-                ->orderBy('id', 'desc')
-                ->get();
-                return response()->json($results);
-            } else {
-                return response()->json();
-            }
-        }
-    }
-
-    public function expiredMoaPerMonth(){
-        if(!auth()->user()){
-            return response()->json(['message'=>'You must login']);
-        } else {
-            $currentDate = Carbon::now()->toDateString();
-            $dateFilter = Carbon::now()->addMonth(1)->toDateString();
-            $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
-            if ($result > 0) {
-                $results = DB::table('program_partners')->select('*')
-                ->where('endPartnership', '<=', $currentDate)->where('archived', '=', 0)
+                ->where('archived', '=', 0)
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);

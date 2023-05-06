@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { Subscription } from 'rxjs';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-all-users',
@@ -10,7 +11,9 @@ import { Subscription } from 'rxjs';
 export class AllUsersComponent implements OnDestroy, OnInit {
   userValue: any;
   userChoices: any;
-  constructor(private backend: BackendService) {}
+  constructor(
+    private backend: BackendService,
+    private swal: SwalService) {}
   ngOnDestroy(): void {
     if (this.userSub) {
       this.userSub.unsubscribe();
@@ -38,7 +41,11 @@ export class AllUsersComponent implements OnDestroy, OnInit {
   }
   deleteUser(id: number) {
     this.deleteSub = this.backend.deleteUser(id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data)
+        this.swal.swalWarning("User Archieved Successfully")
+        location.reload();
+      },
       error: (error) => console.log(error),
     });
   }

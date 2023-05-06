@@ -1,0 +1,27 @@
+.content {
+  display: flex;
+  background-color: aliceblue;
+  height: 100vh;
+}
+.con{
+  background-color: white;
+  width: 100%;
+  padding: 20px;
+}
+button{
+  display: inline-flex;
+  margin-right: 10px;
+}
+select{
+  width: 20%;
+  display: inline-flex;
+  left: 500px;
+}
+
+.btn-create{
+  background-color: #e2832a;
+  color: white;
+  border: 0px;
+  border-radius: 3px;
+  padding: 7px;
+}

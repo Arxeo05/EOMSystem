@@ -12,15 +12,6 @@ import { BackendService } from "src/app/services/backend.service";
         <option default>
           All
         </option>
-        <option value="day">
-          Per Day
-        </option>
-        <option value="week">
-          Per Week
-        </option>
-        <option value="month">
-          Per Month
-        </option>
         <option value="year">
           Per Year
         </option>

@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute } from '@angular/router';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-programs',
@@ -24,7 +25,10 @@ export class ProgramsComponent implements AfterViewInit {
   leadPrograms: any[] = [];
   memberPrograms: any[] = [];
 
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+    private swal: SwalService) {}
   ngAfterViewInit(): void {
     this.backend.userRole().subscribe((data: { role: number }) => {
       if (data.role === 1) {
@@ -155,10 +159,14 @@ export class ProgramsComponent implements AfterViewInit {
   deleteProgram(id: number) {
     this.backend.deleteProgram(id).subscribe({
       next: (data) => {
+        this.swal.swalWarning("Program Successfully Archived")
         console.log(data);
         location.reload();
       },
-      error: (error) => console.log(error),
+      error: (error) => {
+        this.swal.swalError("Something Went Wrong");
+        console.log(error);
+      }
     });
   }
 
