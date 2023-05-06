@@ -4,10 +4,20 @@
     <h4 id="title">{{ program.title }}</h4>
 
     <br />
-    <button class="btn btn-primary" routerLink="terminal-report">
+    <button
+      class="btn btn-primary"
+      routerLink="terminal-report"
+      *ngIf="!router.url.includes('archives')"
+    >
       Terminal Report
     </button>
-    <button class="btn btn-primary" routerLink="add-member" *ngIf="isAdmin">Add Items</button>
+    <button
+      class="btn btn-primary"
+      routerLink="add-member"
+      *ngIf="isAdmin && !router.url.includes('archives')"
+    >
+      Add Items
+    </button>
     <table class="table">
       <thead>
         <tr>
@@ -34,7 +44,7 @@
           <th scope="col">Event</th>
           <th scope="col">Remarks</th>
           <th scope="col">Time</th>
-          <th scope="col">Action</th>
+          <th scope="col" *ngIf="!router.url.includes('archives')">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -42,7 +52,7 @@
           <td>{{ flow.event }}</td>
           <td>{{ flow.remarks }}</td>
           <td>{{ flow.time }}</td>
-          <td>
+          <td *ngIf="!router.url.includes('archives')">
             <button
               type="button"
               class="btn btn-danger"
@@ -63,13 +73,13 @@
       <thead>
         <tr>
           <th scope="col">Program Members</th>
-          <th scope="col">Action</th>
+          <th scope="col" *ngIf="!router.url.includes('archives')">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let member of programMembers">
           <td>{{ member.name }}</td>
-          <td>
+          <td *ngIf="!router.url.includes('archives')">
             <button
               type="button"
               class="btn btn-danger"
@@ -96,7 +106,7 @@
           <th scope="col">Moa File</th>
           <th scope="col">Start of partnership</th>
           <th scope="col">End of partnership</th>
-          <th scope="col">Action</th>
+          <th scope="col" *ngIf="!router.url.includes('archives')">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -116,7 +126,7 @@
           <td>{{ partner.startPartnership }}</td>
           <td>{{ partner.endPartnership }}</td>
 
-          <td>
+          <td *ngIf="!router.url.includes('archives')">
             <button
               type="button"
               class="btn btn-primary"
@@ -149,13 +159,13 @@
       <thead>
         <tr>
           <th scope="col">Participants</th>
-          <th scope="col">Action</th>
+          <th scope="col" *ngIf="!router.url.includes('archives')">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let participant of programParticipants">
           <td>{{ participant.name }}</td>
-          <td>
+          <td *ngIf="!router.url.includes('archives')">
             <button
               type="button"
               class="btn btn-primary"
@@ -187,7 +197,7 @@
         <tr>
           <th scope="col">File Names</th>
           <th scope="col">Files</th>
-          <th scope="col">Action</th>
+          <th scope="col" *ngIf="!router.url.includes('archives')">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -203,7 +213,7 @@
               >{{ file.file }}</a
             >
           </td>
-          <td>
+          <td *ngIf="!router.url.includes('archives')">
             <button
               type="button"
               class="btn btn-primary"

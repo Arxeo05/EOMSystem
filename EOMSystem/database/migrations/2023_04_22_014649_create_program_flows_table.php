@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('remarks');
             $table->time('time');
             $table->timestamps();
+            $table->boolean('archived')->default(false);
         });
     }
 

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer('role')->default('0');
             $table->string('status')->default('pending');
             $table->string('photo');
+            $table->boolean('archived')->default(false);
         });
     }
 

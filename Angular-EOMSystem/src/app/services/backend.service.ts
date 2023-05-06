@@ -680,4 +680,70 @@ export class BackendService implements OnInit {
       }
     );
   }
+
+  //archives
+  archivedPrograms() {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+      .set('Content-Type', 'application/json');
+    return this.http.get(`http://127.0.0.1:8000/api/archives/programs/`, {
+      headers,
+    });
+  }
+  searchArchiveProgram(data: any) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(
+      `http://127.0.0.1:8000/api/archives/programs/search/${data}`,
+      {
+        headers,
+      }
+    );
+  }
+  filterArchiveProgramByLeader(id: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http.get(
+      `http://127.0.0.1:8000/api/archives/programs/leader/${id}`,
+      {
+        headers,
+      }
+    );
+  }
+  recoverProgram(id: number) {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+      .set('Content-Type', 'application/json');
+    return this.http.post(
+      `http://127.0.0.1:8000/api/archives/programs/recover/${id}`,
+      null,
+      {
+        headers,
+      }
+    );
+  }
+  archivedUsers() {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+      .set('Content-Type', 'application/json');
+    return this.http.get(`http://127.0.0.1:8000/api/archives/users/`, {
+      headers,
+    });
+  }
+  recoverUser(id: number) {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+      .set('Content-Type', 'application/json');
+    return this.http.post(
+      `http://127.0.0.1:8000/api/archives/users/recover/${id}`,
+      null,
+      {
+        headers,
+      }
+    );
+  }
 }

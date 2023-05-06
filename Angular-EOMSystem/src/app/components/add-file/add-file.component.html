@@ -1,7 +1,6 @@
 <div class="content">
   <app-side-nav></app-side-nav>
   <div class="container">
-<<<<<<< HEAD
     <form #fileForm="ngForm" (ngSubmit)="addFile()">
       <div class="form-group">
         <label for="file">Program File</label>
@@ -34,39 +33,5 @@
         <a (click)="goBack()" class="btn btn-danger">Back</a>
       </div>
     </form>
-=======
-<form #fileForm="ngForm" (ngSubmit)="addFile()">
-  <div class="form-group">
-    <label for="file">Program File</label>
-    <input
-      type="file"
-      id="file"
-      name="file"
-      [(ngModel)]="form.file"
-      required
-      (change)="onFileChange($event)"
-    />
-  </div>
-  <div class="button-container">
-    <button type="submit" class="learn-more">Submit</button>
-  </div>
-  <div class="button-container">
-    <a
-    class="learn-more"
-      (click)="cancelStep()"
-    >
-      Next Step
-    </a>
-  </div>
-  <div class="button-container">
-    <a class="learn-more" (click)="home()" >
-      Home
-    </a>
-  </div>
-  <div class="button-container" *ngIf="router.url.includes('dashboard')">
-    <a (click)="goBack()" class="learn-more">Back</a>
-  </div>
-</form>
->>>>>>> 78fa99a7ddc5e5dab1f689dcd3cd8cc638f455dc
   </div>
 </div>

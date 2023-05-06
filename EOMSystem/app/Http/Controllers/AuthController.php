@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\member_program;
 use App\Models\Program;
 
 class AuthController extends Controller
@@ -106,13 +107,18 @@ class AuthController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $user = User::findOrFail($id);
-        $fileName = $user->photo;
-        $file_path = public_path('storage/userPhoto/'.$fileName);
 
-        unlink($file_path);
-        $user->delete();
+        $user->archived = true;
+        $user->save();
 
-        return User::destroy($id);
+        // update foreign key references to user
+        Program::where('leaderId', $id)->update(['leaderId' => null]);
+        $programIds = $user->programs->pluck('id')->toArray();
+        member_program::whereIn('programId', $programIds)
+        ->where('memberId', $id)
+        ->update(['archived' => true]);
+
+        return response()->json(['message'=>'User Archived']);
     }
 
     public function getUsers(){
@@ -121,6 +127,7 @@ class AuthController extends Controller
         }
         $users = DB::table('users')
         ->where('role', '=', '0')
+        ->where('archived', '=', 0)
         ->get();
         return response()->json($users);
     }
@@ -130,7 +137,7 @@ class AuthController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $user = DB::table('users')
-        ->where('id', '=', $id)
+        ->where('id', '=', $id)->where('archived', '=', 0)
         ->get();
         if(is_null($user)){
             return response()->json(['message'=>'Query not found']);
@@ -143,7 +150,7 @@ class AuthController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $users = DB::table('users')
-        ->where('status', '=', $data)->where('role','=',0)
+        ->where('status', '=', $data)->where('role','=',0)->where('archived', '=', 0)
         ->get();
         if(is_null($users)){
             return response()->json(['message'=>'Query not found']);
@@ -245,6 +252,33 @@ class AuthController extends Controller
         }
         $user = auth()->user()->role;
         return response()->json(['role'=>$user]);
+    }
+
+    //Archives
+    public function archivedUsers(){
+        if(Auth::check()){
+            $users = DB::table('users')
+            ->where('archived', '=', 1)
+            ->get();
+            return response()->json($users);
+        }
+        return response()->json(['message'=>'You must login']);
+    }
+    public function recoverUser($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+
+        $user = User::findOrFail($id);
+        $user->archived = false;
+        $user->save();
+
+        $programIds = $user->programs->pluck('id')->toArray();
+        member_program::whereIn('programId', $programIds)
+        ->where('memberId', $id)
+        ->update(['archived' => false]);
+
+        return response()->json(['message'=>'User Recovered']);
     }
 
     /**

@@ -114,6 +114,14 @@ Route::get('partners/expiredMoaFilterByDay', [ProgramsController::class, 'expire
 Route::get('partners/expiredMoaFilterByWeek', [ProgramsController::class, 'expiredMoaPerWeek']);
 Route::get('partners/expiredMoaFilterByMonth', [ProgramsController::class, 'expiredMoaPerMonth']);
 Route::get('partners/expiredMoaFilterByYear', [ProgramsController::class, 'expiredMoaPerYear']);
+
+//Archives
+Route::get('archives/programs',[ProgramsController::class, 'archivedPrograms']);
+Route::get('archives/programs/search/{query}',[ProgramsController::class, 'searchArchivePrograms']);
+Route::get('archives/programs/leader/{id}',[ProgramsController::class,'getArchiveProgramsByLeader']);
+Route::post('archives/programs/recover/{id}',[ProgramsController::class, 'recoverPRogram']);
+Route::get('archives/users',[AuthController::class, 'archivedUsers']);
+Route::post('archives/users/recover/{id}',[AuthController::class, 'recoverUser']);
 });
 Route::post('signup/',[AuthController::class, 'signup']);
 Route::post('login', [AuthController::class,'login']);

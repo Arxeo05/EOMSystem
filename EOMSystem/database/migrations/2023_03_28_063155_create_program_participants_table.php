@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('programId')->references('id')->on('programs')->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
+            $table->boolean('archived')->default(false);
         });
     }
 

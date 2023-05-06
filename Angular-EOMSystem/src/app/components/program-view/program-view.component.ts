@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-program-view',
@@ -18,7 +18,11 @@ export class ProgramViewComponent implements AfterViewInit, OnDestroy {
   isAdmin: boolean = false;
   subscriptions: Subscription[] = [];
 
-  constructor(private backend: BackendService, private route: ActivatedRoute) {}
+  constructor(
+    private backend: BackendService,
+    private route: ActivatedRoute,
+    public router: Router
+  ) {}
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
@@ -126,31 +130,46 @@ export class ProgramViewComponent implements AfterViewInit, OnDestroy {
 
   deleteMember(pid: number, uid: number) {
     const sub11 = this.backend.deleteMember(pid, uid).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+        location.reload();
+      },
     });
     this.subscriptions.push(sub11);
   }
   deletePartner(id: number) {
     const sub12 = this.backend.deletePartner(id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+        location.reload();
+      },
     });
     this.subscriptions.push(sub12);
   }
   deleteParticipant(id: number) {
     const sub13 = this.backend.deleteParticipant(id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+        location.reload();
+      },
     });
     this.subscriptions.push(sub13);
   }
   deleteFlow(id: number) {
     const sub14 = this.backend.deleteFlow(id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+        location.reload();
+      },
     });
     this.subscriptions.push(sub14);
   }
   deleteFile(id: number) {
     const sub15 = this.backend.deleteFile(id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+        location.reload();
+      },
     });
     this.subscriptions.push(sub15);
   }

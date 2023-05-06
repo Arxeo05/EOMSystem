@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('leaderId')->nullable();
             $table->foreign('leaderId')->references('id')->on('users')->onDelete('set null');
             $table->longText('additionalDetail');
+            $table->boolean('archived')->default(false);
         });
     }
 

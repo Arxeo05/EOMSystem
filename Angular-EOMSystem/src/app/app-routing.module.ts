@@ -26,6 +26,8 @@ import { EditUserProfileComponent } from './components/edit-user-profile/edit-us
 import { EditUserPhotoComponent } from './components/edit-user-photo/edit-user-photo.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ProgramsComponent } from './components/programs/programs.component';
+import { ArchivedProgramsComponent } from './components/archived-programs/archived-programs.component';
+import { ArchivedUsersComponent } from './components/archived-users/archived-users.component';
 
 function logGuard() {
   const token = inject(TokenService);
@@ -64,6 +66,11 @@ const routes: Routes = [
     canActivate: [() => inject(TokenService).loggedIn()],
   },
   {
+    path: 'archives/programs',
+    component: ArchivedProgramsComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
     path: 'create-program',
     component: CreateProgramComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
@@ -80,6 +87,11 @@ const routes: Routes = [
   },
   {
     path: 'dashboard/program/:id',
+    component: ProgramViewComponent,
+    canActivate: [() => inject(TokenService).loggedIn()],
+  },
+  {
+    path: 'dashboard/archives/program/:id',
     component: ProgramViewComponent,
     canActivate: [() => inject(TokenService).loggedIn()],
   },
@@ -166,6 +178,11 @@ const routes: Routes = [
   {
     path: 'user/all-users',
     component: AllUsersComponent,
+    canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+  },
+  {
+    path: 'archives/users',
+    component: ArchivedUsersComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
   },
   {

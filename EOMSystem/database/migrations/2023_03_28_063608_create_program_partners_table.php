@@ -25,6 +25,7 @@ return new class extends Migration
             $table->date('startPartnership');
             $table->date('endPartnership');
             $table->timestamps();
+            $table->boolean('archived')->default(false);
         });
     }
 

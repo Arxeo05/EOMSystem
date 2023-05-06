@@ -41,6 +41,8 @@ import { ActiveMoaReport } from './components/reports/activemoareports.component
 import { ExpiredMoaReport } from './components/reports/expiredmoareports.component';
 import { ExtensionPerFaculty } from './components/reports/extensionperfaculty.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { ArchivedProgramsComponent } from './components/archived-programs/archived-programs.component';
+import { ArchivedUsersComponent } from './components/archived-users/archived-users.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     ActiveMoaReport,
     ExpiredMoaReport,
     ExtensionPerFaculty,
+    ArchivedProgramsComponent,
+    ArchivedUsersComponent,
   ],
   imports: [
     BrowserModule,

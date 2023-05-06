@@ -17,7 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('programId');
             $table->foreign('programId')->references('id')->on('programs')->onDelete('cascade');
             $table->unsignedBigInteger('memberId')->nullable();
-            $table->foreign('memberId')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('memberId')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('archived')->default(false);
+
+            $table->primary(['programId', 'memberId']);
         });
     }
 

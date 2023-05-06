@@ -1,0 +1,72 @@
+<div class="content">
+  <app-side-nav></app-side-nav>
+  <div class="con">
+    <label for="leaderId"
+      ><h5><b>User Status</b></h5></label
+    >
+    <div>
+      <select
+        class="form-control"
+        id="leaderId"
+        name="leaderId"
+        [(ngModel)]="userValue"
+        requred
+      >
+        <option [ngValue]="null" [disabled]="true">Select User Status</option>
+        <option value="accepted">Accepted</option>
+        <option value="pending">Pending</option>
+      </select>
+      <br />
+    </div>
+    <br />
+    <button
+      class="btn btn-create"
+      id="leaderFilter"
+      name="leaderFilter"
+      (click)="filterByUser()"
+    >
+      Filter By Status
+    </button>
+    <button
+      class="btn btn-create"
+      id="leaderFilter"
+      name="leaderFilter"
+      (click)="clearFilter()"
+    >
+      Clear Filter
+    </button>
+    <br /><br />
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Birthday</th>
+          <th scope="col">College</th>
+          <th scope="col">Department</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.birthday }}</td>
+          <td>{{ user.college }}</td>
+          <td>{{ user.department }}</td>
+          <td>{{ user.status }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="recoverUser(user.id)"
+            >
+              Recover
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

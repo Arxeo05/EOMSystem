@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ArchievedPartners;
 use App\Models\Program;
 use App\Models\member_program;
 use App\Models\ProgramFiles;
 use App\Models\ProgramParticipants;
 use App\Models\ProgramPartners;
-use App\Models\ArchievedPrograms;
 use App\Models\ProgramFlow;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +23,9 @@ class ProgramsController extends Controller
 
     public function getPrograms(){
         if(Auth::check()){
-            $program = Program::all();
+            $program = DB::table('programs')
+            ->where('archived', '=', 0)
+            ->get();
             return response()->json($program);
         }
         return response()->json(['message'=>'You must login']);
@@ -49,7 +49,7 @@ class ProgramsController extends Controller
         return response()->json(['message' => 'You must log in']);
     }
 
-    $programs = Program::with('leader')
+    $programs = Program::with('leader')->where('archived', '=', 0)
         ->where('title', 'like', '%' . $query . '%')
         ->orWhere('place', 'like', '%' . $query . '%')
         ->orWhereHas('leader', function ($q) use ($query) {
@@ -108,22 +108,37 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
+        $program = Program::find($id);
+        $program->archived = true;
 
-        $program =Program::find($id);
+        if($program->save()){
 
-        $aprogram = new ArchievedPrograms;
-        $aprogram->id = $program->id;
-        $aprogram->title = $program->title;
-        $aprogram->startDate = $program->startDate;
-        $aprogram->endDate = $program->endDate;
-        $aprogram->place = $program->place;
-        $aprogram->leaderId = $program->leaderId;
-        $aprogram->additionalDetail = $program->additionalDetail;
-
-        if($aprogram->save()){
-            $program->delete();
+            foreach ($program->members as $member) {
+                $program->members()->updateExistingPivot($member->id, ['archived' => true]);
+            }
+            $partners = ProgramPartners::where('programId', $id)->get();
+            foreach($partners as $partner){
+                $partner->archived = true;
+                $partner->save();
+            }
+            $participants = ProgramParticipants::where('programId', $id)->get();
+            foreach($participants as $participant){
+                $participant->archived = true;
+                $participant->save();
+            }
+            $files = ProgramFiles::where('programId', $id)->get();
+            foreach($files as $file){
+                $file->archived = true;
+                $file->save();
+            }
+            $flows = ProgramFlow::where('programId', $id)->get();
+            foreach($flows as $flow){
+                $flow->archived = true;
+                $flow->save();
+            }
+        }else{
+            return response()->json(['message'=>'Error Deleting Item']);
         }
-        return response()->json(['message'=>'Program Deleted']);
     }
 
     public function getProgramsByLeader($id){
@@ -131,7 +146,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $program = DB::table('programs')
-        ->where('leaderId', '=', $id)
+        ->where('leaderId', '=', $id)->where('archived', '=', 0)
         ->get();
         if(is_null($program)){
             return response()->json(['message'=>'Query not found']);
@@ -142,10 +157,13 @@ class ProgramsController extends Controller
     // //ProgramMembersModel
     public function getMemberByProgram($pid){
         $program = Program::find($pid);
-
-        $members = $program->members()->get();
+        $members = $program->members()
+                          ->wherePivot('archived', false)
+                          ->get();
         return response()->json($members);
     }
+
+
     public function addMember(Request $request, $pid){
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
@@ -165,8 +183,11 @@ class ProgramsController extends Controller
     }
 
     public function deleteMember($pid,$uid){
-        $member = DB::table('member_programs')->where('programId','=',$pid)
-        ->where('memberId','=',$uid)->delete();
+        $member = DB::table('member_programs')
+          ->where('programId', '=', $pid)
+          ->where('memberId', '=', $uid)
+          ->update(['archived' => true]);
+
         return response()->json(['message'=>'Member Deleted']);
     }
 
@@ -212,7 +233,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $result = DB::table('program_partners')
-        ->where('programId', '=', $pid)
+        ->where('programId', '=', $pid)->where('archived', '=', 0)
         ->get();
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);
@@ -224,7 +245,7 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
-        $partners = DB::table('program_partners')->select('*')->get();
+        $partners = DB::table('program_partners')->where('archived', '=', 0)->get();
 
         if(is_null($partners)){
             return response()->json(['message'=>'Query not found']);
@@ -278,18 +299,20 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
-        return ProgramPartners::destroy($id);
+        $member = DB::table('program_partners')
+          ->where('id', '=', $id)
+          ->update(['archived' => true]);
+
+          return response()->json(['message'=>'Partner Deleted']);
     }
 
-    public function allPartners(){
-
-    }
-
-    public function expiringMoa(){
+    public function expiringMoa() {
         $today = Carbon::now()->toDateString();
         $expiration = Carbon::now()->addDay(30)->toDateString();
-        return ProgramPartners::whereBetween('endPartnership', [$today, $expiration])->get();
+        return ProgramPartners::whereBetween('endPartnership', [$today, $expiration])
+            ->where('archived', 0)->get();
     }
+
 
     public function renewMoa(Request $request, $id){
         if(!auth()->user()){
@@ -347,7 +370,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $result = DB::table('program_participants')
-        ->where('programId', '=', $pid)
+        ->where('programId', '=', $pid)->where('archived', '=', 0)
         ->get();
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);
@@ -360,7 +383,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $result = DB::table('program_participants')
-        ->where('id', '=', $id)
+        ->where('id', '=', $id)->where('archived', '=', 0)
         ->get();
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);
@@ -381,6 +404,9 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
+        $participant = DB::table('program_participants')
+          ->where('id', '=', $id)
+          ->update(['archived' => true]);
         return response()->jsom(['message'=>'PArticipant Deleted']);
     }
 
@@ -390,6 +416,9 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
+        $flow = DB::table('program_flows')
+          ->where('id', '=', $id)
+          ->update(['archived' => true]);
         return response()->jsom(['message'=>'Flow Deleted']);
     }
     public function getFlowByProgram($pid){
@@ -397,7 +426,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $result = DB::table('program_flows')
-        ->where('programId', '=', $pid)
+        ->where('programId', '=', $pid)->where('archived', '=', 0)
         ->get();
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);
@@ -467,7 +496,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $result = DB::table('program_files')
-        ->where('programId', '=', $pid)
+        ->where('programId', '=', $pid)->where('archived', '=', 0)
         ->get();
         if(is_null($result)){
             return response()->json(['message'=>'Query not found']);
@@ -512,13 +541,13 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $file = ProgramFiles::findOrFail($id);
-        $file_name = $file->file;
-        $file_path = public_path('storage/program_files/'.$file_name);
 
-        unlink($file_path);
-        $file->delete();
+        $file->archived = true;
+        $file->save();
+
         return response()->json(['message'=>$file->file.' deleted.']);
     }
+
 
     //should access the name of the user and pass that name to the notification
     public function notify(Request $request) {
@@ -532,25 +561,31 @@ class ProgramsController extends Controller
         $user = auth()->user();
         if ($user) {
             $userId = $user->id;
-            $leaderOf = DB::table('programs')
+            $leaderOf = DB::table('programs')->where('archived', '=', 0)
             ->where('leaderId', '=', $userId)->get();
             return response()->json($leaderOf);
         } else {
             return response()->json(['message'=>'You must login']);
         }
     }
-    public function programsByMember(){
 
-        $user = auth()->user();
-        if ($user) {
-            $userId = $user->id;
-            $member = User::find($userId);
-            $programs = $member->programs()->get();
-            return response()->json($programs);
-        } else {
-            return response()->json(['message'=>'You must login']);
-        }
+    public function programsByMember(){
+    $user = auth()->user();
+
+    if (!$user) {
+        return response()->json(['message' => 'You must log in']);
     }
+
+    $userId = $user->id;
+    $member = User::find($userId);
+
+    $programs = $member->programs()
+        ->wherePivot('archived', false)
+        ->get();
+
+    return response()->json($programs);
+    }
+
 
     //for dashboard
     public function upcomingProgramsCount(){
@@ -558,7 +593,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $currentDate = Carbon::now();
-        $results = Program::whereDate('endDate', '>', $currentDate->toDateString())->count();
+        $results = Program::whereDate('endDate', '>', $currentDate->toDateString())->where('archived', '=', 0)->count();
 
         return response()->json($results);
     }
@@ -567,7 +602,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $currentDate = Carbon::now();
-        $results = Program::whereDate('endDate', '<', $currentDate->toDateString())->count();
+        $results = Program::whereDate('endDate', '<', $currentDate->toDateString())->where('archived', '=', 0)->count();
 
         return response()->json($results);
     }
@@ -576,7 +611,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $currentDate = Carbon::now();
-        $results = ProgramPartners::whereDate('endPartnership', '<', $currentDate->toDateString())->count();
+        $results = ProgramPartners::whereDate('endPartnership', '<', $currentDate->toDateString())->where('archived', '=', 0)->count();
 
         return response()->json($results);
     }
@@ -585,7 +620,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $currentDate = Carbon::now();
-        $results = ProgramPartners::whereDate('endPartnership', '>', $currentDate->toDateString())->count();
+        $results = ProgramPartners::whereDate('endPartnership', '>', $currentDate->toDateString())->where('archived', '=', 0)->count();
 
         return response()->json($results);
     }
@@ -594,7 +629,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $users = DB::table('users')
-        ->where('status', '=', 'accepted')->where('role','=',0)
+        ->where('status', '=', 'accepted')->where('role','=',0)->where('archived', '=', 0)
         ->count();
         if(is_null($users)){
             return response()->json(['message'=>'Query not found']);
@@ -606,7 +641,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $users = DB::table('users')
-        ->where('status', '=', 'pending')->where('role','=',0)
+        ->where('status', '=', 'pending')->where('role','=',0)->where('archived', '=', 0)
         ->count();
         if(is_null($users)){
             return response()->json(['message'=>'Query not found']);
@@ -619,7 +654,7 @@ class ProgramsController extends Controller
             return response()->json(['message'=>'You must login']);
         }
         $users = DB::table('users')
-        ->where('status', '=', 'accepted')->where('role','=',0)
+        ->where('status', '=', 'accepted')->where('role','=',0)->where('archived', '=', 0)
         ->count();
         if(is_null($users)){
             return response()->json(['message'=>'Query not found']);
@@ -631,7 +666,7 @@ class ProgramsController extends Controller
         if(!auth()->user()){
             return response()->json(['message'=>'You must login']);
         }
-        $partners = DB::table('program_partners')->count();
+        $partners = DB::table('program_partners')->where('archived', '=', 0)->count();
         if(is_null($partners)){
             return response()->json(['message'=>'Query not found']);
         }
@@ -645,7 +680,7 @@ class ProgramsController extends Controller
         }
         $currentDate = Carbon::now();
         $result = DB::table('program_partners')
-        ->where('endPartnership', '>', $currentDate)
+        ->where('endPartnership', '>', $currentDate)->where('archived', '=', 0)
         ->orderBy('id', 'desc')
         ->get();
 
@@ -662,7 +697,7 @@ class ProgramsController extends Controller
         } else {
         $currentDate = Carbon::now();
         $result = DB::table('program_partners')
-        ->where('endPartnership', '<', $currentDate)
+        ->where('endPartnership', '<', $currentDate)->where('archived', '=', 0)
         ->orderBy('id', 'desc')
         ->get();
 
@@ -681,7 +716,7 @@ class ProgramsController extends Controller
             $currentDate = Carbon::now()->toDateString();
             $dateFilter = Carbon::now()->addDay(1)->toDateString();
             $result = DB::table('program_partners')->select('*')
-            ->where('endPartnership', '>', $currentDate)
+            ->where('endPartnership', '>', $currentDate)->where('archived', '=', 0)
             ->orderBy('id', 'desc')
             ->count();
             if ($result > 0) {
@@ -702,7 +737,7 @@ class ProgramsController extends Controller
             $currentDate = Carbon::now()->addDay(1)->toDateString();
             $dateFilter = Carbon::now()->addWeek(1)->toDateString();
             $result = DB::table('program_partners')->select('*')
-            ->where('endPartnership', '>', $currentDate)
+            ->where('endPartnership', '>', $currentDate)->where('archived', '=', 0)
             ->orderBy('id', 'desc')
             ->count();
             if ($result > 0) {
@@ -723,7 +758,7 @@ class ProgramsController extends Controller
             $currentDate = Carbon::now()->addDay(1)->toDateString();
             $dateFilter = Carbon::now()->addMonth(1)->toDateString();
             $result = DB::table('program_partners')->select('*')
-            ->where('endPartnership', '>', $currentDate)
+            ->where('endPartnership', '>', $currentDate)->where('archived', '=', 0)
             ->orderBy('id', 'desc')
             ->count();
             if ($result > 0) {
@@ -744,7 +779,7 @@ class ProgramsController extends Controller
             $currentDate = Carbon::now()->addDay(1)->toDateString();
             $dateFilter = Carbon::now()->addYear(1)->toDateString();
             $result = DB::table('program_partners')->select('*')
-            ->where('endPartnership', '>', $currentDate)
+            ->where('endPartnership', '>', $currentDate)->where('archived', '=', 0)
             ->orderBy('id', 'desc')
             ->count();
             if ($result > 0) {
@@ -767,7 +802,7 @@ class ProgramsController extends Controller
             $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
             if ($result > 0) {
                 $results = DB::table('program_partners')->select('*')
-                ->where('endPartnership', '<=', $currentDate)
+                ->where('endPartnership', '<=', $currentDate)->where('archived', '=', 0)
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);
@@ -787,7 +822,7 @@ class ProgramsController extends Controller
             if ($result > 0) {
                 $currentDate = Carbon::now()->toDateString();
                 $results = DB::table('program_partners')->select('*')
-                ->where('endPartnership', '<=', $currentDate)
+                ->where('endPartnership', '<=', $currentDate)->where('archived', '=', 0)
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);
@@ -806,7 +841,7 @@ class ProgramsController extends Controller
             $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
             if ($result > 0) {
                 $results = DB::table('program_partners')->select('*')
-                ->where('endPartnership', '<=', $currentDate)
+                ->where('endPartnership', '<=', $currentDate)->where('archived', '=', 0)
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);
@@ -826,13 +861,90 @@ class ProgramsController extends Controller
             $result = ProgramPartners::whereBetween('endPartnership', [$currentDate, $dateFilter])->count();
             if ($result > 0) {
                 $results = DB::table('program_partners')->select('*')
-                ->where('endPartnership', '<=', $currentDate)
+                ->where('endPartnership', '<=', $currentDate)->where('archived', '=', 0)
                 ->orderBy('id', 'desc')
                 ->get();
                 return response()->json($results);
             } else {
                 return response()->json();
             }
+        }
+    }
+
+    //Archives
+    public function archivedPrograms(){
+        if(Auth::check()){
+            $program = DB::table('programs')
+            ->where('archived', '=', 1)
+            ->get();
+            return response()->json($program);
+        }
+        return response()->json(['message'=>'You must login']);
+    }
+    public function searchArchivePrograms($query){
+        if (!auth()->check()) {
+            return response()->json(['message' => 'You must log in']);
+        }
+        $programs = Program::with('leader')->where('archived', '=', 1)
+            ->where('title', 'like', '%' . $query . '%')
+            ->orWhere('place', 'like', '%' . $query . '%')
+            ->orWhereHas('leader', function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->get();
+
+        if ($programs->isEmpty()) {
+            return response()->json(['message' => 'No matching programs found']);
+        }
+        return response()->json($programs);
+    }
+    public function getArchiveProgramsByLeader($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $program = DB::table('programs')
+        ->where('leaderId', '=', $id)->where('archived', '=', 1)
+        ->get();
+        if(is_null($program)){
+            return response()->json(['message'=>'Query not found']);
+        }
+        return response()->json($program);
+    }
+    public function recoverProgram($id){
+        if(!auth()->user()){
+            return response()->json(['message'=>'You must login']);
+        }
+        $program = Program::find($id);
+        $program->archived = false;
+
+        if($program->save()){
+
+            foreach ($program->members as $member) {
+                $program->members()->updateExistingPivot($member->id, ['archived' => false]);
+            }
+            $partners = ProgramPartners::where('programId', $id)->get();
+            foreach($partners as $partner){
+                $partner->archived = false;
+                $partner->save();
+            }
+            $participants = ProgramParticipants::where('programId', $id)->get();
+            foreach($participants as $participant){
+                $participant->archived = false;
+                $participant->save();
+            }
+            $files = ProgramFiles::where('programId', $id)->get();
+            foreach($files as $file){
+                $file->archived = false;
+                $file->save();
+            }
+            $flows = ProgramFlow::where('programId', $id)->get();
+            foreach($flows as $flow){
+                $flow->archived = false;
+                $flow->save();
+            }
+            return response()->json(['message'=>'Recovered Successfully']);
+        }else{
+            return response()->json(['message'=>'Error Recovering Item']);
         }
     }
 }

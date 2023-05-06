@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -60,7 +60,7 @@ export class ProgramsComponent implements AfterViewInit {
   }
   search() {
     this.backend.searchProgram(this.searchValue).subscribe({
-      next: (data) => (this.searchedPrograms = Object.values(data)),
+      next: (data) => (this.programs = Object.values(data)),
     });
   }
   filterByLeader() {
@@ -154,7 +154,10 @@ export class ProgramsComponent implements AfterViewInit {
   }
   deleteProgram(id: number) {
     this.backend.deleteProgram(id).subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+        location.reload();
+      },
       error: (error) => console.log(error),
     });
   }
