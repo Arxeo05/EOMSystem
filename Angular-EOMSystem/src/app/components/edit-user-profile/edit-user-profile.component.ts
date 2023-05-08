@@ -1,13 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { SwalService } from 'src/app/services/swal.service';
-
+import { NgForm } from '@angular/forms';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-user-profile',
   templateUrl: './edit-user-profile.component.html',
   styleUrls: ['./edit-user-profile.component.css'],
 })
-export class EditUserProfileComponent implements OnInit {
+export class EditUserProfileComponent implements AfterViewInit {
+  @ViewChild('userForm') myForm!: NgForm;
+
+  canLeave = false;
+  submit = false;
+
   profileValues: any;
   public form = {
     name: '',
@@ -16,10 +22,10 @@ export class EditUserProfileComponent implements OnInit {
     department: '',
     email: '',
     photo: null,
-    birthday: ''
+    birthday: '',
   };
   constructor(private backend: BackendService, private swal: SwalService) {}
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.backend.me().subscribe({
       next: (data) => {
         this.profileValues = Object.values(data);
@@ -34,6 +40,11 @@ export class EditUserProfileComponent implements OnInit {
         this.error = Object.values(error);
       },
     });
+    if (this.myForm) {
+      this.myForm.valueChanges!.subscribe(() => {
+        this.canLeave = this.myForm.dirty!;
+      });
+    }
   }
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
@@ -44,6 +55,7 @@ export class EditUserProfileComponent implements OnInit {
   }
   error: any = [];
   editUser() {
+    this.submit = true;
     const formData = new FormData();
     formData.append('name', this.form.name);
     formData.append('birthday', this.form.birthday);
@@ -68,5 +80,20 @@ export class EditUserProfileComponent implements OnInit {
   }
   handleError(error: any) {
     this.error = error.error.errors;
+  }
+  canleaveGuard() {
+    if (this.canLeave && !this.submit) {
+      return Swal.fire({
+        title: 'Are you sure you want to leave?',
+        text: 'You have unsaved changes.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, leave',
+        cancelButtonText: 'Cancel',
+      }).then((result) => {
+        return result.isConfirmed;
+      });
+    }
+    return true;
   }
 }

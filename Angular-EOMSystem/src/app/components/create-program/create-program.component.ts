@@ -1,13 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { Router } from '@angular/router';
 import { SwalService } from 'src/app/services/swal.service';
+import { NgForm } from '@angular/forms';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-create-program',
   templateUrl: './create-program.component.html',
   styleUrls: ['./create-program.component.css'],
 })
-export class CreateProgramComponent implements OnInit {
+export class CreateProgramComponent implements AfterViewInit {
+  @ViewChild('programForm') myForm!: NgForm;
+
+  canLeave = false;
+  submit = false;
+
   public form = {
     title: null,
     startDate: null,
@@ -27,15 +34,21 @@ export class CreateProgramComponent implements OnInit {
   ) {}
   error: any[] = [];
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.backend.allUsers().subscribe({
       next: (data: any) => {
         this.leaderChoices = data;
       },
     });
+    if (this.myForm) {
+      this.myForm.valueChanges!.subscribe(() => {
+        this.canLeave = this.myForm.dirty!;
+      });
+    }
   }
   createProgram() {
     console.log(this.form);
+    this.submit = true;
     this.backend.createProgram(this.form).subscribe({
       next: (data) => {
         console.log(data);
@@ -61,5 +74,32 @@ export class CreateProgramComponent implements OnInit {
     } else {
       this.invalidDates = false;
     }
+  }
+  // canleaveGuard() {
+  //   if (this.canLeave && !this.submit) {
+  //     const res = confirm('Leave and lose unsaved data?');
+  //     if (res) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
+
+  canleaveGuard() {
+    if (this.canLeave && !this.submit) {
+      return Swal.fire({
+        title: 'Are you sure you want to leave?',
+        text: 'You have unsaved changes.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, leave',
+        cancelButtonText: 'Cancel',
+      }).then((result) => {
+        return result.isConfirmed;
+      });
+    }
+    return true;
   }
 }

@@ -1,13 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { ActivatedRoute } from '@angular/router';
 import { SwalService } from 'src/app/services/swal.service';
+import { NgForm } from '@angular/forms';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-program',
   templateUrl: './edit-program.component.html',
   styleUrls: ['./edit-program.component.css'],
 })
-export class EditProgramComponent implements OnInit {
+export class EditProgramComponent implements AfterViewInit {
+  @ViewChild('programForm') myForm!: NgForm;
+
+  canLeave = false;
+  submit = false;
   formValues: any;
   public form = {
     title: null,
@@ -22,7 +28,7 @@ export class EditProgramComponent implements OnInit {
     private route: ActivatedRoute,
     private swal: SwalService
   ) {}
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.backend.allUsers().subscribe({
       next: (data: any) => (this.leaderChoices = data),
     });
@@ -38,11 +44,17 @@ export class EditProgramComponent implements OnInit {
         this.form.additionalDetail = this.formValues[0].additionalDetail;
       },
     });
+    if (this.myForm) {
+      this.myForm.valueChanges!.subscribe(() => {
+        this.canLeave = this.myForm.dirty!;
+      });
+    }
   }
   leaderChoices: any;
   id = Number(this.route.snapshot.paramMap.get('id'));
   editProgram() {
     console.log(this.form);
+    this.submit = true;
     this.backend.editProgram(this.form, this.id).subscribe({
       next: (data) => {
         this.swal.swalSucces('Edit Successful');
@@ -55,4 +67,19 @@ export class EditProgramComponent implements OnInit {
     });
   }
   handleError(error: any) {}
+  canleaveGuard() {
+    if (this.canLeave && !this.submit) {
+      return Swal.fire({
+        title: 'Are you sure you want to leave?',
+        text: 'You have unsaved changes.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, leave',
+        cancelButtonText: 'Cancel',
+      }).then((result) => {
+        return result.isConfirmed;
+      });
+    }
+    return true;
+  }
 }

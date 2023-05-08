@@ -59,6 +59,9 @@ const routes: Routes = [
     path: 'profile/edit-profile',
     component: EditUserProfileComponent,
     canActivate: [() => inject(TokenService).loggedIn()],
+    canDeactivate: [
+      (component: EditUserProfileComponent) => component.canleaveGuard(),
+    ],
   },
   {
     path: 'dashboard',
@@ -74,6 +77,9 @@ const routes: Routes = [
     path: 'create-program',
     component: CreateProgramComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+    canDeactivate: [
+      (component: CreateProgramComponent) => component.canleaveGuard(),
+    ],
   },
   {
     path: 'generate-report',
@@ -99,11 +105,17 @@ const routes: Routes = [
     path: 'dashboard/program/edit/:id',
     component: EditProgramComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+    canDeactivate: [
+      (component: EditProgramComponent) => component.canleaveGuard(),
+    ],
   },
   {
     path: 'dashboard/program/:id/manage-partners',
     component: ManagePartnersComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+    canDeactivate: [
+      (component: ManagePartnersComponent) => component.canleaveGuard(),
+    ],
   },
   {
     path: 'partner/renew/:id',
@@ -129,6 +141,9 @@ const routes: Routes = [
     path: 'program/:id/add-partner',
     component: AddPartnerComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+    canDeactivate: [
+      (component: AddPartnerComponent) => component.canleaveGuard(),
+    ],
   },
   {
     path: 'dashboard/program/:id/add-partner',
@@ -149,6 +164,9 @@ const routes: Routes = [
     path: 'dashboard/program/:id/edit-participant',
     component: EditParticipantComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+    canDeactivate: [
+      (component: EditParticipantComponent) => component.canleaveGuard(),
+    ],
   },
   {
     path: 'program/:id/add-flow',
@@ -189,6 +207,9 @@ const routes: Routes = [
     path: 'user/all-users/edit-user/:id',
     component: EditUserComponent,
     canActivate: [() => inject(TokenService).loggedIn(), RoleGuardGuard],
+    canDeactivate: [
+      (component: EditUserComponent) => component.canleaveGuard(),
+    ],
   },
   {
     path: 'user/all-users/edit-user/:id/user-photo',
