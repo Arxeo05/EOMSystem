@@ -1,17 +1,115 @@
 .content {
-    display: flex;
-    background-color: rgb(246, 244, 244);
-    height: 100vh;
-  
-  }
-  .container{
-    display: flex;
-    align-items: space-between;
-    flex-direction: column;
-    margin-left: 10px;
-    border-radius: 50px;
-    padding: 10px;
-  }
-  label{
-    justify-content: flex-start;
-  }
+  display: flex;
+  background-color: aliceblue;
+  height: 100vh;
+}
+
+.container {
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  margin-left: 10px;
+  background-color: white;
+  box-shadow: 5px 5px 5px #939393;
+  padding: 20px;
+}
+
+.date-container {
+  display: flex;
+}
+
+.participants-container {
+  display: flex;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+h3{
+  margin-bottom: 30px;
+}
+form{
+  position: relative;
+
+}
+
+form input{
+  width: 100%;
+  padding: 23px 15px 7px;
+}
+form select{
+  width: 100%;
+  padding: 23px 15px 7px;
+  margin-top: 20px;
+}
+form textarea{
+  width: 100%;
+  padding: 23px 15px 7px;
+}
+form label#title{
+  position: absolute;
+  left: 15px;
+  top: 5px;
+  font-size: 12px;
+  color: black;
+}
+form label#start{
+  position: absolute;
+  left: 15px;
+  top: 85px;
+  font-size: 12px;
+  color: black;
+}
+form label#end{
+  position: absolute;
+  left: 180px;
+  top: 85px;
+  font-size: 12px;
+  color: black;
+}
+form label#place{
+  position: absolute;
+  left: 15px;
+  top: 155px;
+  font-size: 12px;
+  color: black;
+}
+form label#lead{
+  position: absolute;
+  left: 15px;
+  top: 230px;
+  font-size: 12px;
+  color: black;
+}
+form label#details{
+  position: absolute;
+  left: 15px;
+  top: 305px;
+  font-size: 12px;
+  color: black;
+}
+
+.btn-create{
+  background-color: #e2832a;
+  color: white;
+  border: 0px;
+  border-radius: 3px;
+  padding: 7px;
+}
+
+
+form input:focus{
+  border: 2px solid #e2832a;
+}
+form select:focus{
+  border: 2px solid #e2832a;
+}
+form textarea:focus{
+  border: 2px solid #e2832a;
+}
+
+form input:focus ~ label{
+  top: 6px;
+}

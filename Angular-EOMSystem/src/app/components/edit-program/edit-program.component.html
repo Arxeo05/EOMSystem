@@ -5,7 +5,7 @@
 
     <form #programForm="ngForm" (ngSubmit)="editProgram()">
       <div class="form-group">
-        <label for="title">Extension Program Title</label>
+        <label for="title" id="title">Extension Program Title</label>
         <input
           type="text"
           class="form-control"
@@ -18,7 +18,7 @@
       <br />
       <div class="date-container">
         <div class="form-group">
-          <label for="startDate">Start Date</label>
+          <label for="startDate" id="start">Start Date</label>
           <input
             type="date"
             class="form-control"
@@ -29,7 +29,7 @@
           />
         </div>
         <div class="form-group">
-          <label for="endDate">End Date</label>
+          <label for="endDate" id="end">End Date</label>
           <input
             type="date"
             class="form-control"
@@ -42,7 +42,7 @@
       </div>
       <br />
       <div class="form-group">
-        <label for="place">Place</label>
+        <label for="place" id="place">Place</label>
         <input
           type="text"
           class="form-control"
@@ -53,7 +53,7 @@
         />
       </div>
       <div class="form-group">
-        <label for="leaderId">Program Lead</label>
+        <label for="leaderId" id="lead">Program Lead</label>
         <select
           class="form-control"
           id="leaderId"
@@ -71,7 +71,7 @@
       </div>
       <br />
       <div class="form-group">
-        <label for="additionalDetail">Additional Program Details</label>
+        <label for="additionalDetail" id="details">Additional Program Details</label>
         <textarea
           class="form-control"
           id="additionalDetail"
