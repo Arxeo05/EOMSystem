@@ -43,6 +43,9 @@ import { ExtensionPerFaculty } from './components/reports/extensionperfaculty.co
 import { AuthInterceptor } from './services/auth.interceptor';
 import { ArchivedProgramsComponent } from './components/archived-programs/archived-programs.component';
 import { ArchivedUsersComponent } from './components/archived-users/archived-users.component';
+import { FontSizeControlComponent } from './components/content-management/font-size-controller.component';
+import { ThemeControlComponent } from './components/content-management/theme-controller.component';
+import { ChangeLogoComponent } from './components/content-management/change-logo.compoenent';
 
 @NgModule({
   declarations: [
@@ -75,12 +78,14 @@ import { ArchivedUsersComponent } from './components/archived-users/archived-use
     EditUserPhotoComponent,
     ReportsComponent,
     ProgramsComponent,
-
     ActiveMoaReport,
     ExpiredMoaReport,
     ExtensionPerFaculty,
     ArchivedProgramsComponent,
     ArchivedUsersComponent,
+    FontSizeControlComponent,
+    ThemeControlComponent,
+    ChangeLogoComponent,
   ],
   imports: [
     BrowserModule,
