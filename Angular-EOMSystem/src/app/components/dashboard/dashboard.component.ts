@@ -124,7 +124,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
     this.loading = false;
     setTimeout(() => {  
-      /** spinner ends after 5 seconds */  
+      /** spinner ends after 8 seconds */  
       this.loading1=false;  
   }, 8000);  
     this.subscriptions.push(sub1);

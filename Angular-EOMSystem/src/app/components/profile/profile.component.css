@@ -93,35 +93,35 @@ form input{
 form label#name{
   position: absolute;
   left: 65px;
-  top: 143px;
+  top: 130px;
   font-size: 12px;
   color: black;
 }
 form label#email{
   position: absolute;
   left: 62px;
-  top: 215px;
+  top: 195px;
   font-size: 12px;
   color: black;
 }
 form label#college{
   position: absolute;
   left: 69px;
-  top: 285px;
+  top: 262px;
   font-size: 12px;
   color: black;
 }
 form label#department{
   position: absolute;
   left: 80px;
-  top: 357px;
+  top: 327px;
   font-size: 12px;
   color: black;
 }
 form label#birthday{
   position: absolute;
   left: 70px;
-  top: 430px;
+  top: 392px;
   font-size: 12px;
   color: black;
 }

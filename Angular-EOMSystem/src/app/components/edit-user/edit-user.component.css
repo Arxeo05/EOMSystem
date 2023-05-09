@@ -1,6 +1,13 @@
+.content {
+  display: flex;
+  background-color: rgb(246, 244, 244);
+  height: 100vh;
+
+}
 .container1 {
   background-color: white;
   height: 100vh;
+  display: flex;
 }
 .card {
   padding: 10px;
